@@ -34,7 +34,7 @@
                 android:id="@+id/texttt"
                 android:layout_gravity="center_horizontal" />
 
-            <com.llkj.players.view.view.multilayer.MultilayerChooseView
+            <com.base.feima.baseproject.view.multilayer.MultilayerChooseView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sample_multilayerChooseView" />

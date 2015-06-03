@@ -140,7 +140,7 @@ public class FileUtils {
      * @throws RuntimeException if an error occurs while operator FileWriter
      */
     public static boolean writeFile(String filePath, List<String> contentList, boolean append) {
-        if (ListUtils.isEmpty(contentList)) {
+        if (contentList==null) {
             return false;
         }
 

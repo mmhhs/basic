@@ -4,11 +4,14 @@ package com.base.feima.baseproject.base;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.base.feima.baseproject.task.BaseTask;
-import com.base.feima.baseproject.manager.TaskManager;
+import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.manager.ScreenManager;
+import com.base.feima.baseproject.manager.TaskManager;
+import com.base.feima.baseproject.task.BaseTask;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
 
 
 public abstract class BaseActivity extends Activity{
@@ -103,6 +106,10 @@ public abstract class BaseActivity extends Activity{
 	public void setTaskTag(String taskTag) {
 		this.taskTag = taskTag;
 	}
-	
-	
+
+    @Optional
+    @OnClick(R.id.base_title_back)
+    public void onBack(){
+        finish();
+    }
 }

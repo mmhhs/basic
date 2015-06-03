@@ -4,9 +4,9 @@
      <!-- 底部导航相关 -->
      <color name="navi_bottom_text_on">#ff646f</color>
      <color name="navi_bottom_text_off">#b4b4b4</color>
-     <color name="navi_bottom_line">#ff646f</color>
+     <color name="navi_bottom_line">#d4d46f</color>
      <!-- 标题背景颜色 -->
-     <color name="title_color">#ff646f</color>
+     <color name="title_color">#d5d46f</color>
      <!-- 背景颜色 -->
      <color name="bg_grey">#fafafa</color>
     <!-- 线条颜色 -->
@@ -26,7 +26,7 @@
      <color name="white">#ffffff</color>
      <color name="black">#000000</color>
      <color name="clear">#00000000</color>
-     <color name="transparent">#e0000000</color>
+     <color name="transparent">#90000000</color>
     <!--pullable-->
      <color name="base_pullable_bottom_gray">#aaaaaa</color>
      <color name="base_pullable_top_light_blue">#6593cb</color>

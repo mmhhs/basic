@@ -52,17 +52,6 @@ public class StringUtils {
         return (str == null || str.length() == 0);
     }
 
-    /**
-     * compare two string
-     * 
-     * @param actual
-     * @param expected
-     * @return
-     * @see ObjectUtils#isEquals(Object, Object)
-     */
-    public static boolean isEquals(String actual, String expected) {
-        return ObjectUtils.isEquals(actual, expected);
-    }
 
     /**
      * get length of CharSequence
