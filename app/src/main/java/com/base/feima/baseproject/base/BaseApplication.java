@@ -1,13 +1,15 @@
 package com.base.feima.baseproject.base;
 
 
-import com.base.feima.baseproject.tool.image.UILApplication;
+import android.app.Application;
 
-public class BaseApplication extends UILApplication {
+import com.base.feima.baseproject.image.FrescoUtils;
+
+public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        FrescoUtils.init(this);
     }
 }

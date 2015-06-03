@@ -3,9 +3,10 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:id="@+id/base_adapter_choose_images_preview_imageView" />
+        layout="@layout/base_fresco_sample" />
+
+
 </LinearLayout>

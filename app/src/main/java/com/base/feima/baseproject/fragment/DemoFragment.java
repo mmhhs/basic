@@ -1,6 +1,7 @@
 package com.base.feima.baseproject.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseFragment;
+import com.base.feima.baseproject.view.chooseimages.ChooseImagesSampleActivity;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DemoFragment extends BaseFragment{
     public View rootView;
@@ -49,6 +52,11 @@ public class DemoFragment extends BaseFragment{
     @Override
     public void initData() {
 
+    }
+
+    @OnClick(R.id.buttonbbb)
+    public void setChooseImagesIntent(){
+        startActivity(new Intent(getActivity(), ChooseImagesSampleActivity.class));
     }
 
 }

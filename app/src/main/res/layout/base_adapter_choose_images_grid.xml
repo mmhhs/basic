@@ -8,12 +8,11 @@
         android:layout_height="80dp"
         android:id="@+id/base_adapter_choose_images_grid_layout">
 
-        <ImageView
+        <include
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher"
-            android:id="@+id/base_adapter_choose_images_grid_content" />
+            layout="@layout/base_fresco_sample_small" />
+
 
         <ImageView
             android:layout_width="match_parent"

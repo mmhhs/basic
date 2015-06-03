@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.image.FrescoUtils;
+import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.tool.ImageTools;
-import com.base.feima.baseproject.tool.OptionTools;
 import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
     public Context context;
     private List<String> list;
     private int itemWidth = 0;
-    private ImageLoader imageLoader = ImageLoader.getInstance();
     private IOnItemClickListener iOnItemClickListener;
 
     public ChooseImagesSampleAdapter(Context context, List<String> list,int screenWidth) {
@@ -71,7 +70,8 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
         if (position==(list.size())){
             viewHolder.contentImage.setImageResource(R.drawable.base_shape_choose_images);
         }else {
-            imageLoader.displayImage("file://"+list.get(position),viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
+//            imageLoader.displayImage("file://"+list.get(position),viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
+            FrescoUtils.displayImage(viewHolder.contentImage, "file://" + list.get(position));
         }
         final int p = position;
         viewHolder.containLayout.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +86,8 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
     }
 
     public final static class ViewHolder {
-        @InjectView(R.id.base_adapter_choose_images_grid_content)
-        public ImageView contentImage;
+        @InjectView(R.id.base_fresco_sample_imageView)
+        public InstrumentedDraweeView contentImage;
         @InjectView(R.id.base_adapter_choose_images_grid_selector)
         public ImageView selectorImage;
         @InjectView(R.id.base_adapter_choose_images_grid_checkBox)

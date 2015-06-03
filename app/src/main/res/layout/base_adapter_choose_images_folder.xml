@@ -11,13 +11,11 @@
         android:background="@drawable/base_choose_images_folder"
         android:gravity="center_vertical"
         android:id="@+id/base_adapter_choose_images_folder_layout">
-        <ImageView
+        <include
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/base_adapter_choose_images_folder_imageView"
-            android:layout_margin="15dp" />
-
+            android:layout_margin="15dp"
+            layout="@layout/base_fresco_sample_small" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"

@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.tool.OptionTools;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.base.feima.baseproject.image.FrescoUtils;
+import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.tool.ImageTools;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ import butterknife.InjectView;
 public class SelectItemAdapter extends BaseAdapter{
     public Context context;
     private List<SelectItemModel> list;
-    private ImageLoader imageLoader = ImageLoader.getInstance();
     private IOnItemClickListener iOnItemClickListener;
 
     public SelectItemAdapter(Context context, List<SelectItemModel> list) {
@@ -64,8 +63,9 @@ public class SelectItemAdapter extends BaseAdapter{
         viewHolder.nameText.setText(itemModel.getItemName());
         viewHolder.icon.setVisibility(View.GONE);
         if (itemModel.getItemIcon()!=null&&!itemModel.getItemIcon().isEmpty()){
-            imageLoader.displayImage(itemModel.getItemIcon(),viewHolder.icon, OptionTools.getBaseOptions(context));
+//            imageLoader.displayImage(itemModel.getItemIcon(),viewHolder.icon, OptionTools.getBaseOptions(context));
             viewHolder.icon.setVisibility(View.VISIBLE);
+            FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageTools.dip2px(context,25), ImageTools.dip2px(context,25));
         }
         if (itemModel.getItemIconId()>0){
             viewHolder.icon.setBackgroundResource(itemModel.getItemIconId());
@@ -97,8 +97,8 @@ public class SelectItemAdapter extends BaseAdapter{
         public LinearLayout layout;
         @InjectView(R.id.base_adapter_select_item_text)
         public TextView nameText;
-        @InjectView(R.id.base_adapter_select_item_icon)
-        public ImageView icon;
+        @InjectView(R.id.base_fresco_sample_imageView)
+        public InstrumentedDraweeView icon;
 
         public ViewHolder(View convertView) {
             ButterKnife.inject(this, convertView);

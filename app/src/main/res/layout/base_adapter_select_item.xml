@@ -18,6 +18,12 @@
             android:layout_marginRight="10dp"
             android:id="@+id/base_adapter_select_item_icon" />
 
+        <include
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            layout="@layout/base_fresco_sample" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

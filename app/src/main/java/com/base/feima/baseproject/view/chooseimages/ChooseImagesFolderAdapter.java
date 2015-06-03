@@ -11,8 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.tool.OptionTools;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.base.feima.baseproject.image.FrescoUtils;
+import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.tool.ImageTools;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ import butterknife.InjectView;
 public class ChooseImagesFolderAdapter extends BaseAdapter{
     public Context context;
     private List<ImageBean> list;
-    private ImageLoader imageLoader = ImageLoader.getInstance();
 
     public ChooseImagesFolderAdapter(Context context, List<ImageBean> list) {
         this.context = context;
@@ -62,7 +62,8 @@ public class ChooseImagesFolderAdapter extends BaseAdapter{
         ImageBean imageBean = list.get(position);
         viewHolder.nameText.setText(imageBean.getFolderName());
         viewHolder.countText.setText(imageBean.getImageCounts()+context.getString(R.string.choose_images_unit));
-        imageLoader.displayImage("file://"+imageBean.getTopImagePath(),viewHolder.topImage, OptionTools.getNoDiscOptions(context));
+//        imageLoader.displayImage("file://"+imageBean.getTopImagePath(),viewHolder.topImage, OptionTools.getNoDiscOptions(context));
+        FrescoUtils.displayImage(viewHolder.topImage, "file://" +imageBean.getTopImagePath(), ImageTools.dip2px(context,80), ImageTools.dip2px(context,80));
         if (imageBean.getSelected()){
             viewHolder.selectImage.setVisibility(View.VISIBLE);
         }else {
@@ -74,8 +75,8 @@ public class ChooseImagesFolderAdapter extends BaseAdapter{
     }
 
     public final static class ViewHolder {
-        @InjectView(R.id.base_adapter_choose_images_folder_imageView)
-        public ImageView topImage;
+        @InjectView(R.id.base_fresco_sample_imageView)
+        public InstrumentedDraweeView topImage;
         @InjectView(R.id.base_adapter_choose_images_folder_select)
         public ImageView selectImage;
         @InjectView(R.id.base_adapter_choose_images_folder_name)
