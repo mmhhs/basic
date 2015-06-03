@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/base_choose_images_pop_preview_layout"
+        android:background="@color/choose_images_bg"
+        >
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/base_choose_images_pop_preview_viewPager"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_bar_height_top"
+            layout="@layout/base_choose_images_title" />
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_bar_height_bottom"
+            layout="@layout/base_choose_images_footer"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+</LinearLayout>

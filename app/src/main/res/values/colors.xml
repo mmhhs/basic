@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>  
+     <color name="tools_box_bg">#ff333332</color>
+     <!-- 底部导航相关 -->
+     <color name="navi_bottom_text_on">#ff646f</color>
+     <color name="navi_bottom_text_off">#b4b4b4</color>
+     <color name="navi_bottom_line">#ff646f</color>
+     <!-- 标题背景颜色 -->
+     <color name="title_color">#ff646f</color>
+     <!-- 背景颜色 -->
+     <color name="bg_grey">#fafafa</color>
+    <!-- 线条颜色 -->
+    <color name="line_color">#e6e6e6</color>
+
+     
+     <!-- 文字颜色 -->
+     <color name="text_deep">#5a5a5a</color>
+     <color name="text_deepgrey">#969696</color>
+     <color name="text_lightgrey">#b8b8b8</color>
+     <!-- 编辑框颜色 -->
+     <color name="edit_bg">#f8f8f8</color>
+     
+
+     <!-- 普通颜色 -->
+     <color name="grey">#b4b4b4</color>
+     <color name="white">#ffffff</color>
+     <color name="black">#000000</color>
+     <color name="clear">#00000000</color>
+     <color name="transparent">#e0000000</color>
+    <!--pullable-->
+     <color name="base_pullable_bottom_gray">#aaaaaa</color>
+     <color name="base_pullable_top_light_blue">#6593cb</color>
+    <!--ultimate-->
+    <color name="green">#ff34a350</color>
+    <color name="red">#ffc93437</color>
+    <color name="yellow">#fff7d23e</color>
+    <color name="blue">#ff375bf1</color>
+    <!--put_effect-->
+     <color name="base_put_on">#00000000</color>
+     <color name="base_put_off">#40000000</color>
+
+    <!-- 多图片选择 -->
+    <color name="choose_images_transparent">#e0000000</color>
+    <color name="choose_images_bg">#181818</color>
+    <color name="choose_images_title_bg">#22292c</color>
+    <color name="choose_images_done_on">#45c01a</color>
+    <color name="choose_images_done_off">#337523</color>
+    <color name="choose_images_text">#cfcfcf</color>
+    <color name="choose_images_line">#14191a</color>
+
+
+</resources>

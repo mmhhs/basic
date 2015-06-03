@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+    <com.widget.ultimate.ui.VerticalSwipeRefreshLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_height="fill_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ultimate_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.widget.ultimate.ui.VerticalSwipeRefreshLayout>
+
+    <com.widget.ultimate.ui.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/floatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:addButtonColorNormal="#ffffff"
+        fab:addButtonColorPressed="#f1f1f1"
+        fab:addButtonPlusIconColor="#808080"
+        fab:colorPressed="#f1f1f1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp">
+        <com.widget.ultimate.ui.floatingactionbutton.AddFloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|bottom"
+            fab:plusIconColor="#808080"
+            fab:colorNormal="#ffffff"
+          />
+
+        <com.widget.ultimate.ui.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:icon="@drawable/base_ultimate_floating_action_button_ic_fab_star"
+            fab:colorNormal="#ff5f9a"
+            fab:colorPressed="#ec407a"/>
+
+    </com.widget.ultimate.ui.floatingactionbutton.FloatingActionsMenu>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<com.widget.pulltorefresh.pullable.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include layout="@layout/base_pullable_refresh_head" />
+    <!-- 支持所有实现Pullable接口的View -->
+
+    <com.widget.pulltorefresh.pullable.PullableListView
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:divider="@color/base_pullable_bottom_gray"
+        android:dividerHeight="1dp" />
+
+    <include layout="@layout/base_pullable_load_more" />
+
+</com.widget.pulltorefresh.pullable.PullToRefreshLayout>

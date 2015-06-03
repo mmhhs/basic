@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+    <string-array name="base_error_key">
+        <item>1000</item>
+        <item>1001</item>
+    </string-array>
+    
+        <string-array name="base_error_vaule">
+        <item>操作成功</item>
+        <item>操作失败</item>
+    </string-array>
+    
+    <string-array name="sex">
+        <item>男</item>
+        <item>女</item>        
+    </string-array>
+    
+
+        
+    
+</resources>

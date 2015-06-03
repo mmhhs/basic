@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:id="@+id/pop_error_container"    
+    android:orientation="vertical" >
+
+    
+
+    <LinearLayout
+        android:id="@+id/pop_error_linear"    
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+        
+        <ImageView 
+             android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/base_pop_error"
+            />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/base_pop_item_margin"
+        android:orientation="vertical" >               
+        <TextView
+            android:id="@+id/pop_error_item1"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/base_pop_text_item2"
+        android:textColor="@color/text_deepgrey"
+        android:text="@string/pop_item3"/>
+
+
+        <TextView
+            android:id="@+id/pop_error_item2"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/base_pop_text_item2"
+        android:textColor="@color/text_deepgrey"
+        android:text="@string/pop_item4" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+    
+    
+
+</LinearLayout>

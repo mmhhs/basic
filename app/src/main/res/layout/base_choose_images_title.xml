@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_bar_height_top"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:id="@+id/base_choose_images_title_layout"
+    android:background="@color/choose_images_title_bg"
+    >
+
+    <LinearLayout
+        android:id="@+id/base_title_back"
+        android:orientation="vertical"
+        android:layout_width="@dimen/navigation_bar_height_top"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/base_put_effect"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/base_choose_images_back" />
+    </LinearLayout>
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="25dp"
+        android:background="@color/choose_images_line"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_images_image"
+        style="@style/base_style_textview_white_18"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/base_choose_images_title_index" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/base_choose_images_title_delete"
+        android:orientation="vertical"
+        android:layout_width="@dimen/navigation_bar_height_top"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/base_put_effect"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/base_choose_images_delete" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/base_style_textview_choose_images_text_14"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:text="@string/choose_images_done"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/base_shape_choose_images"
+        android:id="@+id/base_choose_images_title_done" />
+</LinearLayout>

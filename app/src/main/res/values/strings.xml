@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BaseProject</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    
+    
+    
+    <!-- 以下是base中用到的 -->
+    <!-- net -->
+    <string name="net_tip">网络无法连接，查看下吧!</string>
+    <!-- task -->
+    <string name="task_item1">连接服务器异常，请稍后再试！</string>
+    <string name="task_item2">正在加载</string>
+    <string name="task_item3">正在提交</string>
+    <string name="task_item4">更新成功</string>
+    <string name="task_item5">操作成功</string>
+    <string name="task_item6">提交</string>
+    <!-- popupwindow 相关 -->
+	<string name="pop_item1">正在加载</string>
+	<string name="pop_item2">网络不给力，查看下吧！</string>
+	<string name="pop_item3">未获取到内容</string>
+	<string name="pop_item4">请点击页面重试</string>
+	<string name="pop_item5">操作</string>
+	<!-- dialog -->
+    <string name="dialog_item0">提示</string>
+    <string name="dialog_item1">确定</string>
+    <string name="dialog_item2">取消</string>
+    <string name="dialog_item4">您确定拨打电话吗？</string>
+    <string name="dialog_item5">您还没有登录，请先登录吧</string>
+    <string name="dialog_item6">检查更新</string>
+    <string name="dialog_item7">您当前有新版本，是否更新？</string>
+    <!-- pulltorefreshlayout -->
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+    
+    <string name="navi_item1">首页1</string>
+    <string name="navi_item2">首页2</string>
+    <string name="navi_item3">首页3</string>
+    <string name="navi_item4">首页4</string>
+    <string name="navi_item5">首页5</string>
+    <!-- 多图片选择 -->
+    <string name="choose_images_all">所有图片</string>
+    <string name="choose_images_query">查询图库</string>
+    <string name="choose_images_sd">SD卡不存在或者正在使用USB连接</string>
+    <string name="choose_images_max">最多能选择图片个数为</string>
+    <string name="choose_images_delete">确定删除该图片？</string>
+    <string name="choose_images_image">图片</string>
+    <string name="choose_images_unit">张</string>
+    <string name="choose_images_done">完成</string>
+    <string name="choose_images_preview">预览</string>
+    <string name="choose_images_choose">选择</string>
+
+</resources>

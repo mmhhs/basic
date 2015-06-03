@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/base_choose_images_pop_folder_layout"
+    android:orientation="vertical">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/base_style_listview"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="@dimen/navigation_bar_height_bottom"
+        android:id="@+id/base_choose_images_pop_folder_listView" />
+</LinearLayout>

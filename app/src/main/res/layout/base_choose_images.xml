@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+    <include layout="@layout/base_choose_images_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/choose_images_bg">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/base_choose_images_gridView"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:numColumns="3"
+            android:horizontalSpacing="1dp"
+            android:verticalSpacing="1dp"
+            />
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_bar_height_bottom"
+            layout="@layout/base_choose_images_footer"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_bar_height_bottom"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:id="@+id/base_choose_images_footer_layout"
+    android:background="@color/choose_images_transparent"
+    >
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="1/1"
+        style="@style/base_style_textview_choose_images_text_16"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        android:minWidth="70dp"
+        android:background="@drawable/base_choose_images_folder_bg"
+        android:id="@+id/base_choose_images_footer_folder" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_images_choose"
+        android:visibility="gone"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="40dp"
+        android:button="@drawable/base_choose_images_folder_check"
+        style="@style/base_style_textview_choose_images_text_16"
+        android:id="@+id/base_choose_images_footer_choose" />
+
+    <TextView
+        android:background="@drawable/base_put_effect"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:text="@string/choose_images_preview"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="15dp"
+        style="@style/base_style_textview_choose_images_text_16"
+        android:id="@+id/base_choose_images_footer_preview" />
+</LinearLayout>
