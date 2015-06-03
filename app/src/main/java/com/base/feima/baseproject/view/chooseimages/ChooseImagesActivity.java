@@ -168,7 +168,8 @@ public class ChooseImagesActivity extends BaseActivity {
         Cursor mCursor = mContentResolver.query(mImageUri, null,
                 MediaStore.Images.Media.MIME_TYPE + "=? or "
                         + MediaStore.Images.Media.MIME_TYPE + "=?",
-                new String[] { "image/jpeg", "image/png" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");
+                new String[] { "image/jpeg" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");
+//                new String[] { "image/jpeg", "image/png" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");不支持PNG
 		allImageList.add("takePhoto");
         while (mCursor.moveToNext()) {
             //获取图片的路径

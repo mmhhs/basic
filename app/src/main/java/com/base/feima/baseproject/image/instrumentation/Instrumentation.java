@@ -54,10 +54,13 @@ public class Instrumentation {
     mState = ImageRequestState.NOT_STARTED;
   }
 
+
   public void init(final String tag, final PerfListener perfListener) {
     mTag = Preconditions.checkNotNull(tag);
     mPerfListener = Preconditions.checkNotNull(perfListener);
   }
+
+
 
   public void onStart() {
     Preconditions.checkNotNull(mTag);
@@ -67,7 +70,8 @@ public class Instrumentation {
     }
     mStartTime = System.currentTimeMillis();
     mFinishTime = 0;
-    mPerfListener.reportStart();
+      if (mPerfListener!=null)
+        mPerfListener.reportStart();
     mState = ImageRequestState.STARTED;
     FLog.i(TAG, "Image [%s]: loading started...", mTag);
   }
@@ -77,16 +81,19 @@ public class Instrumentation {
     mState = ImageRequestState.SUCCESS;
     mFinishTime = System.currentTimeMillis();
     final long elapsedTime = mFinishTime - mStartTime;
-    mPerfListener.reportSuccess(elapsedTime);
+      if (mPerfListener!=null)
+        mPerfListener.reportSuccess(elapsedTime);
     FLog.i(TAG, "Image [%s]: loaded after %d ms", mTag, elapsedTime);
   }
 
   public void onFailure() {
+
     Preconditions.checkState(mState == ImageRequestState.STARTED);
     mState = ImageRequestState.FAILURE;
     mFinishTime = System.currentTimeMillis();
     final long elapsedTime = mFinishTime - mStartTime;
-    mPerfListener.reportFailure(elapsedTime);
+      if (mPerfListener!=null)
+         mPerfListener.reportFailure(elapsedTime);
     FLog.i(TAG, "Image [%s]: failed after %d ms", mTag, elapsedTime);
   }
 
@@ -97,7 +104,8 @@ public class Instrumentation {
     mState = ImageRequestState.CANCELLATION;
     mFinishTime = System.currentTimeMillis();
     final long elapsedTime = mFinishTime - mStartTime;
-    mPerfListener.reportCancellation(elapsedTime);
+      if (mPerfListener!=null)
+        mPerfListener.reportCancellation(elapsedTime);
     FLog.i(TAG, "Image [%s]: cancelled after %d ms", mTag, elapsedTime);
   }
 

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.image.FrescoUtils;
 import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.image.instrumentation.PerfListener;
 import com.base.feima.baseproject.tool.ImageTools;
 import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
 
@@ -71,6 +72,7 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
             viewHolder.contentImage.setImageResource(R.drawable.base_shape_choose_images);
         }else {
 //            imageLoader.displayImage("file://"+list.get(position),viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
+            viewHolder.contentImage.initInstrumentation(list.get(position), PerfListener.getInstance());
             FrescoUtils.displayImage(viewHolder.contentImage, "file://" + list.get(position));
         }
         final int p = position;

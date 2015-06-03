@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.image.FrescoUtils;
 import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.image.instrumentation.PerfListener;
 import com.base.feima.baseproject.tool.ImageTools;
 
 import java.util.List;
@@ -63,6 +64,7 @@ public class ChooseImagesFolderAdapter extends BaseAdapter{
         viewHolder.nameText.setText(imageBean.getFolderName());
         viewHolder.countText.setText(imageBean.getImageCounts()+context.getString(R.string.choose_images_unit));
 //        imageLoader.displayImage("file://"+imageBean.getTopImagePath(),viewHolder.topImage, OptionTools.getNoDiscOptions(context));
+        viewHolder.topImage.initInstrumentation(imageBean.getTopImagePath(), PerfListener.getInstance());
         FrescoUtils.displayImage(viewHolder.topImage, "file://" +imageBean.getTopImagePath(), ImageTools.dip2px(context,80), ImageTools.dip2px(context,80));
         if (imageBean.getSelected()){
             viewHolder.selectImage.setVisibility(View.VISIBLE);

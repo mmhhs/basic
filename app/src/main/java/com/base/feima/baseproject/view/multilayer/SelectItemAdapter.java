@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.image.FrescoUtils;
 import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.image.instrumentation.PerfListener;
 import com.base.feima.baseproject.tool.ImageTools;
 
 import java.util.List;
@@ -65,7 +66,8 @@ public class SelectItemAdapter extends BaseAdapter{
         if (itemModel.getItemIcon()!=null&&!itemModel.getItemIcon().isEmpty()){
 //            imageLoader.displayImage(itemModel.getItemIcon(),viewHolder.icon, OptionTools.getBaseOptions(context));
             viewHolder.icon.setVisibility(View.VISIBLE);
-            FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageTools.dip2px(context,25), ImageTools.dip2px(context,25));
+            viewHolder.icon.initInstrumentation(itemModel.getItemIcon(), PerfListener.getInstance());
+            FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageTools.dip2px(context, 25), ImageTools.dip2px(context,25));
         }
         if (itemModel.getItemIconId()>0){
             viewHolder.icon.setBackgroundResource(itemModel.getItemIconId());

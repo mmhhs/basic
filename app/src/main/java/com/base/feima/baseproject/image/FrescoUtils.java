@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
+import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.common.ResizeOptions;
@@ -48,7 +49,8 @@ public class FrescoUtils{
 
     public static void init(Context context){
         Fresco.initialize(context, ConfigConstants.getImagePipelineConfig(context));
-
+        FLog.setMinimumLoggingLevel(FLog.WARN);
+        Drawables.init(context.getResources());
     }
 
     public static void shutDown(){

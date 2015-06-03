@@ -85,6 +85,7 @@ public class InstrumentedDraweeView extends SimpleDraweeView implements Instrume
     mInstrumentation.init(tag, perfListener);
   }
 
+
   @Override
   public void onDraw(final Canvas canvas) {
     super.onDraw(canvas);

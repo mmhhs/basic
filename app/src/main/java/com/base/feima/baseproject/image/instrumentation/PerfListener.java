@@ -22,6 +22,14 @@ public class PerfListener {
   private long mCancelledRequests;
   private long mFailedRequests;
 
+    private static PerfListener perfListener;
+
+    public static  PerfListener getInstance(){
+        if (perfListener==null){
+            perfListener = new PerfListener();
+        }
+        return perfListener;
+    }
   public PerfListener() {
     mSumOfWaitTime = 0;
     mStartedRequests = 0;
