@@ -17,7 +17,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class PopActivity extends BaseActivity {
+public class SampleMultilayerActivity extends BaseActivity {
     @InjectView(R.id.sample_multilayerChooseView)
     public MultilayerChooseView multilayerChooseView;
     private List<SelectMenuModel> selectMenuModelList = new ArrayList<SelectMenuModel>();

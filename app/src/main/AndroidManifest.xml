@@ -24,7 +24,7 @@
         <activity android:name="com.widget.sample.SampleUltimateActivity"
             android:screenOrientation="portrait"
             ></activity>
-        <activity android:name="com.base.feima.baseproject.view.multilayer.PopActivity"
+        <activity android:name=".view.multilayer.SampleMultilayerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
