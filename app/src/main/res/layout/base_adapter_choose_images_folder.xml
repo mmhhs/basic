@@ -15,7 +15,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="15dp"
-            layout="@layout/base_fresco_sample_small" />
+            layout="@layout/base_fresco_centercrop" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"

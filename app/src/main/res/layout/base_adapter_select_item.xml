@@ -22,7 +22,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            layout="@layout/base_fresco_sample" />
+            layout="@layout/base_fresco_fitcenter" />
 
         <TextView
             android:layout_width="match_parent"

@@ -1,4 +1,5 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -133,5 +134,27 @@
         <item name="android:textColor">@color/choose_images_text</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <!--<style name="base_style_fresco_fitXY">-->
+        <!--<item name="fresco:fadeDuration">100</item>-->
+        <!--<item name="fresco:actualImageScaleType">centerCrop</item>-->
+        <!--<item name="fresco:placeholderImage">@color/grey</item>-->
+        <!--<item name="fresco:placeholderImageScaleType">fitXY</item>-->
+        <!--<item name="fresco:failureImage">@color/red</item>-->
+        <!--<item name="fresco:failureImageScaleType">fitXY</item>-->
+        <!--<item name="fresco:retryImage">@color/green</item>-->
+        <!--<item name="fresco:retryImageScaleType">fitXY</item>-->
+    <!--</style>-->
+
+    <!--<style name="base_style_fresco_fitCenter">-->
+        <!--<item name="fresco:fadeDuration">100</item>-->
+        <!--<item name="fresco:actualImageScaleType">fitCenter</item>-->
+        <!--<item name="fresco:placeholderImage">@color/grey</item>-->
+        <!--<item name="fresco:placeholderImageScaleType">fitCenter</item>-->
+        <!--<item name="fresco:failureImage">@color/red</item>-->
+        <!--<item name="fresco:failureImageScaleType">fitCenter</item>-->
+        <!--<item name="fresco:retryImage">@color/green</item>-->
+        <!--<item name="fresco:retryImageScaleType">fitCenter</item>-->
+    <!--</style>-->
 
 </resources>
