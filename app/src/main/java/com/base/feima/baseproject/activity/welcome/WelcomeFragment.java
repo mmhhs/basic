@@ -26,7 +26,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
     public View rootView;
     @InjectView(R.id.fragment_wel_view)
     public ViewPager mViewPager;
-    @InjectView(R.id.fragment_wel_pageIndicatorView)
+    @InjectView(R.id.base_fragment_wel_pageIndicatorView)
     public PageIndicatorView mPageIndicatorView;
 	private ViewPagerAdapter adapter1;
 	private List<Integer> imgList = new ArrayList<Integer>();

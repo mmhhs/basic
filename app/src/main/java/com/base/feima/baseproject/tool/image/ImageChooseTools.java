@@ -31,12 +31,11 @@ public class ImageChooseTools implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 510488826187140949L;
-	private final static String tag = "ImageChooseTools";
 	public static final int PHOTO_WITH_CAMERA = 116;	
 	public static final int CHOOSE_PICTURE = 117;
 	public static final int PHOTO_PICKED_WITH_CROP = 118;
-	public static final int SCALE_WIDTH = 720;
-	public static final int SCALE_HEIGHT = 1280;
+    public static final int SCALE_WIDTH = BaseConstant.SCALE_WIDTH;
+    public static final int SCALE_HEIGHT = BaseConstant.SCALE_HEIGHT;
 	private static  String imagePathFolder = BaseConstant.IMAGETAMPPATH;
 	private static Uri imageUri;
 	private  String imageUrl = "";

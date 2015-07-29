@@ -27,12 +27,11 @@ import java.io.IOException;
 
 
 public class ImageChooseFragmentTools{
-	private final static String tag = "ImageChooseFragmentTools";
 	public static final int PHOTO_WITH_CAMERA = 116;	
 	public static final int CHOOSE_PICTURE = 117;
 	public static final int PHOTO_PICKED_WITH_CROP = 118;
-	public static final int SCALE_WIDTH = 720;
-	public static final int SCALE_HEIGHT = 1280;
+	public static final int SCALE_WIDTH = BaseConstant.SCALE_WIDTH;
+	public static final int SCALE_HEIGHT = BaseConstant.SCALE_HEIGHT;
 	private static  String imagePathFolder = BaseConstant.IMAGETAMPPATH;
 	private static Uri imageUri;
 	private  String imageUrl = "";

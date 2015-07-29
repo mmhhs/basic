@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:id="@+id/base_pop_list_contain"
+    style="@style/base_pop_background"
+    android:orientation="vertical" >
+
+    
+
+    <LinearLayout
+        android:layout_width="@dimen/base_pop_width"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical" >
+        
+        <TextView
+        android:id="@+id/base_pop_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_pop_title_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/base_pop_title_margin"
+        android:textSize="@dimen/base_pop_text_title"
+        android:textColor="@color/title_color"
+        android:text="@string/pop_item5" />
+        
+        <View 
+            android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/title_color"
+        android:layout_marginLeft="@dimen/base_pop_line_margin"
+        android:layout_marginRight="@dimen/base_pop_line_margin"
+            />
+
+        <ListView 
+            android:id="@+id/base_pop_list_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_pop_line_margin"
+        android:layout_marginRight="@dimen/base_pop_line_margin"
+        android:divider="@color/line_color"
+        android:dividerHeight="1dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@drawable/base_style_selector"
+            ></ListView>
+        
+    </LinearLayout>
+
+</LinearLayout>

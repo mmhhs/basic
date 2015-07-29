@@ -84,7 +84,7 @@ public abstract class BaseActivity extends Activity{
      */
 	public void finishSelf(){
 		try {
-			screenManager.finishActivity(this);
+			screenManager.closeActivity(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,8 +108,8 @@ public abstract class BaseActivity extends Activity{
 	}
 
     @Optional
-    @OnClick(R.id.base_title_back)
+    @OnClick(R.id.base_ui_title_back_layout)
     public void onBack(){
-        finish();
+        finishSelf();
     }
 }

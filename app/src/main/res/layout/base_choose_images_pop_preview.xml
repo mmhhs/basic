@@ -25,5 +25,11 @@
             layout="@layout/base_choose_images_footer"
             android:layout_alignParentBottom="true"
             />
+        <com.player.supertoys.project.view.PageIndicatorView
+            android:id="@+id/base_choose_images_pop_preview_pageIndicatorView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
 </LinearLayout>

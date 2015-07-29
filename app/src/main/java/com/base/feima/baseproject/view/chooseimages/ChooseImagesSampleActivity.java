@@ -19,9 +19,10 @@ import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseActivity;
+import com.base.feima.baseproject.listener.IOnItemClickListener;
+import com.base.feima.baseproject.listener.IOnSureListener;
 import com.base.feima.baseproject.tool.PublicTools;
 import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
-import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -125,7 +126,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.base_choose_images_pop_preview_viewPager);
         final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
         final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
-        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_title_back);
+        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_ui_title_back_layout);
         RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         final LinearLayout deleteLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_delete);
@@ -192,21 +193,21 @@ public class ChooseImagesSampleActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 popupwindowTool.showSureWindow(context,gridView,"",context.getString(R.string.choose_images_delete));
-                popupwindowTool.setOnSureClickListener(new PopupwindowTool.OnSureClickListener() {
+                popupwindowTool.setiOnSureListener(new IOnSureListener() {
                     @Override
-                    public void onClick(int position) {
+                    public void onSureClick() {
                         chooseImageList.remove(imageIndex);
                         chooseImagesSampleAdapter.notifyDataSetChanged();
                         chooseImagesPreviewAdapter.notifyDataSetChanged();
-                        if (chooseImageList.size()==0){
+                        if (chooseImageList.size() == 0) {
                             popupWindow.dismiss();
-                        }else {
-                            if ((imageIndex)<chooseImageList.size()){
+                        } else {
+                            if ((imageIndex) < chooseImageList.size()) {
 
-                            }else {
-                                imageIndex = imageIndex-1;
+                            } else {
+                                imageIndex = imageIndex - 1;
                             }
-                            indexText.setText(""+(imageIndex+1)+"/"+chooseImageList.size());
+                            indexText.setText("" + (imageIndex + 1) + "/" + chooseImageList.size());
                             viewPager.setCurrentItem(imageIndex);
                         }
 

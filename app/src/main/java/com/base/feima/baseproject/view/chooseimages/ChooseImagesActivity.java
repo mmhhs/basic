@@ -25,11 +25,13 @@ import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseActivity;
+import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
+import com.base.feima.baseproject.listener.IOnDialogResultListener;
+import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.task.ShowDialogTask;
 import com.base.feima.baseproject.tool.PublicTools;
 import com.base.feima.baseproject.tool.image.ImageChooseTools;
 import com.base.feima.baseproject.util.BaseConstant;
-import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -94,7 +96,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
     public void queryData(){
         ShowDialogTask task = new ShowDialogTask(this,taskTag,gridView,getString(R.string.choose_images_query),true);
-        task.setOnBackgroundListener(new ShowDialogTask.OnBackgroundListener() {
+        task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
             @Override
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
                 BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
@@ -107,11 +109,21 @@ public class ChooseImagesActivity extends BaseActivity {
                 return taskResult;
             }
         });
-        task.setOnOKListener(new ShowDialogTask.OnOKListener() {
+        task.setiOnDialogResultListener(new IOnDialogResultListener() {
             @Override
             public void onOK(ShowDialogTask showDialogTask) {
                 folderImageBeanList = subGroupOfImage(mGruopMap);
                 setFolderShow(0);
+            }
+
+            @Override
+            public void onError(ShowDialogTask showDialogTask) {
+
+            }
+
+            @Override
+            public void onDone(ShowDialogTask showDialogTask) {
+
             }
         });
         task.execute();
@@ -328,7 +340,7 @@ public class ChooseImagesActivity extends BaseActivity {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.base_choose_images_pop_preview_viewPager);
         final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
         final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
-        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_title_back);
+        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_ui_title_back_layout);
         RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         TextView previewText = (TextView) view.findViewById(R.id.base_choose_images_footer_preview);

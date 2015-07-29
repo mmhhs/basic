@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.base.feima.baseproject.model.user.UserModel;
 import com.base.feima.baseproject.model.user.UserResult;
-import com.base.feima.baseproject.net.Httpclient;
-import com.base.feima.baseproject.tool.PublicTools;
+import com.base.feima.baseproject.util.net.Httpclient;
+import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.util.JacksonUtil;
 import com.j256.ormlite.dao.Dao;
 
@@ -42,7 +42,7 @@ public class DownloadTask implements Runnable{
 			JacksonUtil json = JacksonUtil.getInstance();
 			UserResult res = json.readValue(result, UserResult.class);
 			if(res!=null){
-				if(PublicTools.judgeResult(context, "" + res.getResult())){
+				if(ResultTools.judgeResult(context, "" + res.getCode())){
 					UserModel userModel = res.getData();
 					userModel.setUser_id(fieldId);
 					try {

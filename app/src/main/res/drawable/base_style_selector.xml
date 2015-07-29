@@ -3,13 +3,13 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item 
         android:state_pressed="true"   
-        android:drawable="@color/grey" />
+        android:drawable="@color/selector_off" />
     <item  
         android:state_focused="true"  
-        android:drawable="@color/grey" />
+        android:drawable="@color/selector_off" />
     <item          
         android:state_selected="true" 
-        android:drawable="@color/grey" />
+        android:drawable="@color/selector_off" />
     <item  
-        android:drawable="@color/white" />
+        android:drawable="@color/selector_on" />
 </selector>

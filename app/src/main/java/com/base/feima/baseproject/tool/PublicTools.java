@@ -4,69 +4,41 @@ import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Handler;
-import android.view.View;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
-import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool.OnSureClickListener;
-import com.base.feima.baseproject.util.BaseConstant;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 public class PublicTools{
 	public static String tag = "PublicTools";
 
 
     /**
-     * 电话对话框
+     * 拨打电话
      * @param context
      */
-    public static void showPhoneWindow(final Context context,final String tel,View view){
-        PopupwindowTool popupwindowTool = new PopupwindowTool();
-        popupwindowTool.setOnSureClickListener(new OnSureClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));
-                context.startActivity(intent);
-            }
-        });
-        popupwindowTool.showSureWindow(context,view,"",context.getResources().getString(R.string.dialog_item4),true,true,false,0);
+    public static void call(final Context context,final String tel){
+        try {
+            Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));
+            context.startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-	
 
-	/**
-	 * 显示未登录提示
-	 * @param activity
-	 * @param view
-	 */
-	public static void showLoginPopupwindow(final Activity activity,View view){
-		PopupwindowTool popupwindowTool = PopupwindowTool.getInstancePopupwindowTool();
-		popupwindowTool.showSureWindow(activity, view, activity.getResources().getString(R.string.dialog_item0), activity.getResources().getString(R.string.dialog_item5),
-				true, true, false, R.style.base_anim_alpha);
-		popupwindowTool.setOnSureClickListener(new OnSureClickListener(){
-
-			@Override
-			public void onClick(int position) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-	}
-		
 		
 	
 	/**
@@ -89,45 +61,7 @@ public class PublicTools{
 	      activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 	}
 
-	/**
-	 * 判断网络返回结果
-	 * @param result
-	 * @return
-	 */
-	public static boolean judgeResult(Context context, String result){
-		String[] codeArray = context.getResources().getStringArray(R.array.base_error_key);
-		if(result.equals(codeArray[0])||result.equals(codeArray[1])){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	/**
-	 * 判断网络返回结果
-	 * @param result
-	 * @return
-	 */
-	public static String judgeResult2(Context context, String result){
-		String msg = "";
-		try {
-			String[] codeArray = context.getResources().getStringArray(R.array.base_error_key);
-			String[] errorArray = context.getResources().getStringArray(R.array.base_error_vaule);
-			for(int i=0;i<codeArray.length;i++){
-				if(result.equals(codeArray[i])){
-					msg = errorArray[i];
-					break;
-				}
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}finally{
-			return msg;
-		}
-		
-		
-	}	
+
 	
 	/**
 	 * 隐藏键盘
@@ -166,111 +100,9 @@ public class PublicTools{
         }, delay);
     }
 
-    /**
-     * 保留digit位小数 方式1
-     * @param num 目标数字
-     * @param digit 几位小数
-     * @return
-     */
-	public static double storePoint(double num,int digit){
-		double result = 0;
-		try{
-            BigDecimal bd = new BigDecimal(num);
-            bd = bd.setScale(digit,BigDecimal.ROUND_HALF_UP);
-			result = bd.doubleValue();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			return result;
-		}
-	}
 
-    /**
-     * 保留digit位小数 方式1
-     * @param num 目标数字
-     * @param digit 几位小数
-     * @return
-     */
-    public static String storePointString(double num,int digit){
-        String result = "";
-        try{
-            BigDecimal bd = new BigDecimal(num);
-            bd = bd.setScale(digit,BigDecimal.ROUND_HALF_UP);
-            result = String.valueOf(bd.doubleValue());
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            return result;
-        }
-    }
-	
-	/**
-	 * 保留2位小数 方式2
-	 * @param num
-	 * @return
-	 */
-	public static String storePoint2(double num){
-		String result = "";
-		try{
-			java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#0.00");
-			result = df.format(num);
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			return result;
-		}
-		
-	}
 
-    /**
-     * 保留小数 方式3
-     * @param num
-     * @param digit
-     * @return
-     */
-    public static String storePoint3(double num,int digit){
-        String result = "";
-        try{
-            NumberFormat nf = NumberFormat.getNumberInstance();
-            nf.setMaximumFractionDigits(digit);
-            result = nf.format(num);
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            return result;
-        }
 
-    }
-
-    /**
-     * 将每三个数字加上逗号处理（通常使用金额方面的编辑）
-     */
-    public static String formatMoney(String money){
-        String result = "";
-        try {
-            String[] strs = money.split("\\.");
-            String reverseStr = new StringBuilder(strs[0]).reverse().toString();
-            String strTemp = "";
-            for (int i=0; i<reverseStr.length(); i++) {
-                if (i*3+3 > reverseStr.length()){
-                    strTemp += reverseStr.substring(i*3,reverseStr.length());
-                    break;
-                }
-                strTemp += reverseStr.substring(i*3, i*3+3)+",";
-            }
-            if (strTemp.endsWith(",")) {
-                strTemp = strTemp.substring(0, strTemp.length()-1);
-            }
-            result = new StringBuilder(strTemp).reverse().toString();
-            if (strs.length>1){
-                result+= "."+strs[1];
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            return result;
-        }
-    }
 	
 	/**
 	 * 获取状态栏高度
@@ -374,56 +206,7 @@ public class PublicTools{
 		
 	}
 	
-	/**
-	 * 判断百度地图是否定位成功
-	 * @param longtitude
-	 * @return
-	 */
-	public static boolean judgeLocation(double longtitude){
-		boolean result = false;
-		try {
-			String lon = String.valueOf(longtitude);
-			if(lon.contains("e")||lon.contains("E")){
-				result=false;
-			}else{
-				result = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}finally{
-			return result;
-		}
-	}
-	
-//	/**
-//	 * 百度地图计算距离--若要使用，需要导入百度地图相关jar包
-//	 * @param context
-//	 * @param targetLat
-//	 * @param targetLon
-//	 * @return
-//	 */
-//	public static String caculateDistance(Context context,String targetLat,String targetLon){
-//		String result = "0.01";
-//		try {
-//			//我的纬度
-//			double latF = Double.parseDouble(SharedUtil.getLat(context));
-//			//我的经度
-//			double lonF = Double.parseDouble(SharedUtil.getLng(context));
-//			double lat = Double.parseDouble(targetLat);
-//			double lon = Double.parseDouble(targetLon);
-//			LatLng p1 = new LatLng(latF,lonF);
-//			LatLng p2 = new LatLng(lat,lon);
-//			double distance = DistanceUtil.getDistance(p1, p2);
-//			result = storeTwoPosition(distance/1000);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}finally{
-//			return ""+result;
-//		}
-//		
-//	}
+
 
 	
 	/**
@@ -448,27 +231,19 @@ public class PublicTools{
 		int sysVersion = VERSION.SDK_INT;  
 		return sysVersion;
 	}
-	
 
-	
-	/**
-	 * 获取头像正确路径
-	 * @return
-	 */
-	public static String judgeImageUrl(String head) {
-		String resultString = "";
-		try {
-			if (head.startsWith("http")) {
-				resultString = head;
-			} else {
-				resultString = BaseConstant.SERVICE_HOST_IP_LAN_IMG+head;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			return resultString;
-		}
-	}
+
+    /**
+     * 获取设备Id和手机品牌以“_”分隔
+     * @param context
+     * @return
+     */
+    public static String getDeviceId(Context context){
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String result = ""+tm.getDeviceId()+"_"+ Build.BRAND;
+        return result;
+    }
+
 	
 	/**
 	 * 获取版本号
@@ -513,6 +288,58 @@ public class PublicTools{
         Uri content_url = Uri.parse(url);
         intent.setData(content_url);
         context.startActivity(intent);
+    }
+
+    /**
+     * 设置刷新颜色
+     * @param swipeRefreshLayout
+     */
+    public static void setSwipeRefreshColor(SwipeRefreshLayout swipeRefreshLayout){
+        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+    }
+
+    /**
+     * 结束刷新
+     * @param swipeRefreshLayout
+     */
+    public static void setSwipeRefreshFinish(SwipeRefreshLayout swipeRefreshLayout){
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    /**
+     * 安装
+     *
+     * @param context
+     *            接收外部传进来的context
+     */
+    public static void install(Context context,String storePath) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(new File(storePath)),
+                    "application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 获取本地apk文件的版本号
+     * @param context
+     * @param storePath
+     * @return
+     */
+    public static int getApkVersionCode(Context context,String storePath){
+        int versionCode = 1;
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(storePath, PackageManager.GET_ACTIVITIES);
+        ApplicationInfo appInfo = null;
+        if (info != null) {
+            appInfo = info.applicationInfo;
+            versionCode = info.versionCode;
+        }
+        return versionCode;
     }
 
 }

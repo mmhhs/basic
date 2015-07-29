@@ -23,6 +23,7 @@
         fab:addButtonColorPressed="#f1f1f1"
         fab:addButtonPlusIconColor="#808080"
         fab:colorPressed="#f1f1f1"
+        android:visibility="gone"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"

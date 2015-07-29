@@ -9,7 +9,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/base_title_back"
+        android:id="@+id/base_ui_title_back_layout"
         android:orientation="vertical"
         android:layout_width="@dimen/navigation_bar_height_top"
         android:layout_height="match_parent"

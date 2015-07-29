@@ -8,27 +8,27 @@
     >
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:indeterminateDrawable="@drawable/base_progress_rotate_loading_360"
-        android:indeterminateDuration="1400"
+        android:indeterminateDuration="1000"
         android:visibility="gone"
-        android:indeterminate="false"
+        android:indeterminate="true"
         />
 
     <com.widget.spin.ProgressWheel5
         android:id="@+id/base_ultimate_load_more_progress_wheel"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         wheel:matProg_barColor="#5588FF"
         wheel:matProg_progressIndeterminate="true"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         />
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="0dp"
         layout="@layout/base_end_bottom"
         android:id="@+id/base_ultimate_load_more_end" />
 

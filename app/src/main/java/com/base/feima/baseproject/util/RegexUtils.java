@@ -39,16 +39,11 @@ public final class RegexUtils {
 	 * (\\+\\d+)?1[3458]\\d{9}$
 	 */
 	public static boolean checkMobile(String mobile) {
-		String regex = "(\\+\\d+)?1[3458]\\d{9}$";
+		String regex = "(\\+\\d+)?1[123456789]\\d{9}$";
 		return Pattern.matches(regex,mobile);
 	}
 	
-	//^(\(0\d{2,3}\)|0\d{2,3}-|\s)?\d{7,8}$)|(^((\+86)|(86))?(1)\d{10}$
-	public static boolean checkMobile2(String mobile) {	 
-		String regex = "^(\\(0\\d{2,3}\\)|0\\d{2,3}-|\\s)?\\d{7,8}$)";
-		return Pattern.matches(regex,mobile);
-	}
-	
+
 	/**
 	 * 验证固定电话号码
 	 * @param phone 电话号码，格式：国家（地区）电话代码 + 区号（城市代码） + 电话号码，如：+8602085588447

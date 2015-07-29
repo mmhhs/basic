@@ -5,88 +5,93 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.listener.IOnLoadBackgroundListener;
+import com.base.feima.baseproject.listener.IOnLoadResultListener;
+import com.base.feima.baseproject.listener.IOnTryClickListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.net.HttpUtil;
-import com.base.feima.baseproject.net.Httpclient;
+import com.base.feima.baseproject.util.net.HttpUtil;
+import com.base.feima.baseproject.util.net.Httpclient;
 import com.base.feima.baseproject.tool.PublicTools;
+import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.tool.popupwindow.ViewTool;
-import com.base.feima.baseproject.tool.popupwindow.ViewTool.OnTryClickListener;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.JacksonUtil;
+import com.base.feima.baseproject.util.StringUtils;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
+    //显示相关
+    public final static int NET_ERROR = 6;//没有网络
+    public int netFlag =0;//网络标识
 	public boolean showLoad = false;
-	public ViewTool viewTool;
-	public Context context;
-	public View contentView;
-	public LinearLayout loadView;
-	public OnTryClickListener onTryClickListener;
-	public String loadsString = "";
-	public String httpUrl = "";
-	public Map<String, Object> argMap;
-	public final static int POST = 1;
-	public final static int GET = 2;
-	public final static int PUT = 3;
-	public final static int UPLOAD = 4;
-	public final static int UPLOADS = 5;
-	public final static int NET_ERROR = 6;
-	public int accessType;
-	public String errorMsg;
-	public String resultsString = null;	
-	public List<File> fileList;
-	public String keyString = "Filedata";
-	public String keyString2 = "Filedata[]";
-	public int taskFlag=0;
+	public ViewTool viewTool;//视图管理
+	public Context context;//上下文
+	public View contentView;//内容界面
+	public LinearLayout loadView;//加载界面
+	public String loadString = "";//加载文字
+    //访问相关
+    public int accessType;//访问方式
+	public String httpUrl = "";//网络路径
+	public Map<String, Object> argMap;//参数
+    public List<File> fileList;//上传文件列表
+    public String keyString = "Filedata";//上传文件键值
+    //返回值相关
+	public String errorMsg;//错误信息
+	public String resultsString = null;	//返回值
+    public boolean loginInvalid = false;//登录失效
+
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowLoadTask";
+    public IOnTryClickListener iOnTryClickListener;//重试监听
+    private IOnLoadBackgroundListener iOnLoadBackgroundListener;
+    private IOnLoadResultListener iOnLoadResultListener;
 	
 	/**
 	 * 本地处理耗时线程
-	 * @param context 上下文
-	 * @param contentView 内容视图 
-	 * @param loadView 加载视图 
-	 * @param loadsString 显示文字
-	 * @param showLoad 是否显示loadview 若显示，则contentView，loadView不能为空
+	 * @param context           上下文
+	 * @param contentView       内容视图
+	 * @param loadView          加载视图
+	 * @param loadString        显示文字
+	 * @param showLoad          是否显示loadview 若显示，则contentView，loadView不能为空
 	 */
-	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadsString,boolean showLoad,OnTryClickListener onTryClickListener){
+	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener){
 		this.context = context;
+        this.tagString = tagString;
 		this.contentView = contentView;
-		this.loadsString = loadsString;
+        this.loadView = loadView;
+		this.loadString = loadString;
 		this.showLoad = showLoad;
-		this.loadView = loadView;
-		this.onTryClickListener = onTryClickListener;
-		viewTool = new ViewTool();
-		this.tagString = tagString;
+		this.iOnTryClickListener = iOnTryClickListener;
+        viewTool = new ViewTool();
 	}
 	
 	/**
 	 * 网络加载线程
-	 * @param context 上下文
-	 * @param contentView 内容视图 
-	 * @param loadView 加载视图 
-	 * @param loadsString 显示文字
-	 * @param showLoad 是否显示loadview 若显示，则contentView，loadView不能为空
-	 * @param httpUrl 访问路径
-	 * @param argMap 参数集合
-	 * @param accessType 访问方式
+	 * @param context           上下文
+	 * @param contentView       内容视图
+	 * @param loadView          加载视图
+	 * @param loadString        显示文字
+	 * @param showLoad          是否显示loadview 若显示，则contentView，loadView不能为空
+	 * @param httpUrl           访问路径
+	 * @param argMap            参数集合
+	 * @param accessType        访问方式
 	 */
-	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadsString,boolean showLoad,OnTryClickListener onTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
-		this.context = context;
-		this.contentView = contentView;
-		this.loadsString = loadsString;
-		this.showLoad = showLoad;
-		this.onTryClickListener = onTryClickListener;
-		this.loadView = loadView;		
+	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
+        this.context = context;
+        this.tagString = tagString;
+        this.contentView = contentView;
+        this.loadView = loadView;
+        this.loadString = loadString;
+        this.showLoad = showLoad;
+        this.iOnTryClickListener = iOnTryClickListener;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
 		this.accessType = accessType;
-		viewTool = new ViewTool();
-		this.tagString = tagString;
+        viewTool = new ViewTool();
 	}
 	
 	@Override
@@ -94,17 +99,17 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	{	
 		try {
 			addTask();
-			if(loadsString.isEmpty()){
-				loadsString = context.getResources().getString(R.string.pop_item1);
+			if(StringUtils.isEmpty(loadString)){
+				loadString = context.getResources().getString(R.string.pop_item1);
 			}
 			if(!HttpUtil.isnet(context)){
-				taskFlag = NET_ERROR;
+				netFlag = NET_ERROR;
 				if (showLoad) {
 					if(contentView==null||loadView==null){
 						return;
 					}
 					viewTool.addErrorView(context, context.getResources().getString(R.string.pop_item2),
-							contentView, loadView, onTryClickListener);
+							contentView, loadView, iOnTryClickListener);
 				}else {
 					PublicTools.addToast(context, context.getResources().getString(R.string.net_tip));
 				}
@@ -113,9 +118,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 					if(contentView==null||loadView==null){
 						return;
 					}
-					viewTool.addLoadView(context, loadsString, contentView, loadView);
+					viewTool.addLoadView(context, loadString, contentView, loadView);
 				}
-				
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,66 +130,66 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
 		//不访问网络的情况
-		if(httpUrl.isEmpty()){
+		if(StringUtils.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
 		}
-		if (taskFlag==NET_ERROR) {
+        //无网络情况
+		if (netFlag == NET_ERROR) {
 			return taskResult;
 		}
 		switch (accessType) {
-		case POST:
-			try {
-				resultsString = Httpclient.POSTMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case PUT:
-			try {
-				resultsString = Httpclient.PUTMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-			break;
-		case GET:
-			try {
-				resultsString = Httpclient.GETMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case UPLOAD:
-			try {
-				resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case UPLOADS:
-			try {
-				resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString2);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		default:
-			break;
+            case TaskConstant.POST:
+                try {
+                    resultsString = Httpclient.POSTMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.PUT:
+                try {
+                    resultsString = Httpclient.PUTMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.GET:
+                try {
+                    resultsString = Httpclient.GETMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.UPLOAD:
+                try {
+                    resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.UPLOADS:
+                try {
+                    resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
 		}
-		if(resultsString==null){				
+		if(StringUtils.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
-			if (onBackgroundListener==null) {
-				onBackgroundListener = defaultBackgroundListener;				
+			if (iOnLoadBackgroundListener==null) {
+                iOnLoadBackgroundListener = defaultBackgroundListener;
 			}
 			taskResult = doOnBackgroundListener(this);
 		}
-				
 		return taskResult;
 	}
 	
@@ -193,7 +197,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public void onPostExecute(TaskResult result)
 	{
 		try {
-			if (taskFlag==NET_ERROR) {
+			if (netFlag == NET_ERROR) {
 				return;
 			}
 			if(showLoad){
@@ -202,27 +206,34 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+        if (iOnLoadResultListener!=null){
+            iOnLoadResultListener.onDone(this);
+        }
 		switch(result){			
 		case OK:					
-			doOnOKListener(this);
+			if (iOnLoadResultListener!=null){
+                iOnLoadResultListener.onOK(this);
+            }
 			break;
 		case ERROR:
 			if (showLoad) {
 				viewTool.addErrorView(context, context.getResources().getString(R.string.pop_item3),
-						contentView, loadView, onTryClickListener);
+						contentView, loadView, iOnTryClickListener);
 			}
-			doOnERRORListener(this);				
+			if (iOnLoadResultListener!=null){
+                iOnLoadResultListener.onError(this);
+            }
+            dealLoginInvalid();
 			break;
 		case CANCELLED:
 			if (showLoad) {
 				viewTool.addErrorView(context, context.getResources().getString(R.string.task_item1),
-						contentView, loadView, onTryClickListener);
+						contentView, loadView, iOnTryClickListener);
 			}			
 			break;
 		default:
 			break;
 		}
-		doOnDoneListener(this);
 		cancelTask();
 	}
 	
@@ -233,94 +244,20 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public void cancelTask(){
 		taskManager.cancelOneTasks(this);
 	}
-	
-	private OnBackgroundListener onBackgroundListener;
-	
-	public interface OnBackgroundListener{
-		public TaskResult onBackground(ShowLoadTask showDialogTask);
-	}	
 
-	/**
-	 * 后台执行代码-解析接口或处理耗时事件
-	 * @param onBackgroundClickListener
-	 */
-	public void setOnBackgroundListener(
-			OnBackgroundListener onBackgroundClickListener) {
-		this.onBackgroundListener = onBackgroundClickListener;
-	}
 
-	private TaskResult doOnBackgroundListener(ShowLoadTask showDialogTask){
+	private TaskResult doOnBackgroundListener(ShowLoadTask showLoadTask){
 		TaskResult taskResult = TaskResult.NOTHING;
-		if(onBackgroundListener!=null){
-			taskResult = this.onBackgroundListener.onBackground(showDialogTask);
+		if(iOnLoadBackgroundListener!=null){
+			taskResult = this.iOnLoadBackgroundListener.onBackground(showLoadTask);
 		}		
 		return taskResult;
-	}
-	
-	private OnLoadOKListener onOKListener;
-	
-	public interface OnLoadOKListener{
-		public void onOK(ShowLoadTask showLoadTask);
-	}	
-	/**
-	 * 成功处理
-	 * @param onOKListener
-	 */
-	public void setOnOKListener(
-			OnLoadOKListener onOKListener) {
-		this.onOKListener = onOKListener;
-	}
-
-	private void doOnOKListener(ShowLoadTask showLoadTask){
-		if(onOKListener!=null){
-			this.onOKListener.onOK(showLoadTask);
-		}		
-	}
-	
-	private OnERRORListener onERRORListener;
-	
-	public interface OnERRORListener{
-		public void onERROR(ShowLoadTask showLoadTask);
-	}	
-	/**
-	 * 错误处理
-	 * @param onERRORListener
-	 */
-	public void setOnERRORListener(
-			OnERRORListener onERRORListener) {
-		this.onERRORListener = onERRORListener;
-	}
-
-	private void doOnERRORListener(ShowLoadTask showLoadTask){
-		if(onERRORListener!=null){
-			this.onERRORListener.onERROR(showLoadTask);
-		}		
-	}
-	
-	private OnDoneListener onDoneListener;
-	
-	public interface OnDoneListener{
-		public void onDone(ShowLoadTask showLoadTask);
-	}	
-	/**
-	 * 结束处理
-	 * @param onERRORListener
-	 */
-	public void setOnDoneListener(
-			OnDoneListener onDoneListener) {
-		this.onDoneListener = onDoneListener;
-	}
-
-	private void doOnDoneListener(ShowLoadTask showLoadTask){
-		if(onDoneListener!=null){
-			this.onDoneListener.onDone(showLoadTask);
-		}		
 	}
 	
 	/**
 	 * 默认后台解析返回结果
 	 */
-	private OnBackgroundListener defaultBackgroundListener = new OnBackgroundListener(){
+	private IOnLoadBackgroundListener defaultBackgroundListener = new IOnLoadBackgroundListener(){
 
 		@Override
 		public TaskResult onBackground(ShowLoadTask showLoadTask) {
@@ -329,68 +266,51 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(PublicTools.judgeResult(context, "" + res.getResult())){
+				if(ResultTools.judgeResult(context, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{					
 					taskResult = TaskResult.ERROR;
-					errorMsg = PublicTools.judgeResult2(context, "" + res.getResult());
+					errorMsg = res.getMsg();
+                    judgeLoginInvalid(""+res.getCode());
 				}
 			}else{
 				taskResult = TaskResult.CANCELLED;
 			}	
 			return taskResult;
 		}
-		
 	};
 
-	
-	public boolean isShowLoad() {
-		return showLoad;
-	}
+    public void setiOnTryClickListener(IOnTryClickListener iOnTryClickListener) {
+        this.iOnTryClickListener = iOnTryClickListener;
+    }
 
-	public void setShowLoad(boolean showLoad) {
-		this.showLoad = showLoad;
-	}
+    public void setiOnLoadBackgroundListener(IOnLoadBackgroundListener iOnLoadBackgroundListener) {
+        this.iOnLoadBackgroundListener = iOnLoadBackgroundListener;
+    }
 
-	public View getContentView() {
-		return contentView;
-	}
+    public void setiOnLoadResultListener(IOnLoadResultListener iOnLoadResultListener) {
+        this.iOnLoadResultListener = iOnLoadResultListener;
+    }
 
-	public void setContentView(View contentView) {
-		this.contentView = contentView;
-	}
+    /**
+     * 判断登录失效
+     */
+    public void judgeLoginInvalid(String code){
+        if (ResultTools.judgeLoginInvalid(context, "" + code)){
+            loginInvalid = true;
+        }else {
+            loginInvalid = false;
+        }
+    }
 
-	public LinearLayout getLoadView() {
-		return loadView;
-	}
+    /**
+     * 处理登录失效
+     */
+    public void dealLoginInvalid(){
+        if (loginInvalid){
 
-	public void setLoadView(LinearLayout loadView) {
-		this.loadView = loadView;
-	}
-
-	public String getLoadsString() {
-		return loadsString;
-	}
-
-	public void setLoadsString(String loadsString) {
-		this.loadsString = loadsString;
-	}
-
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
-
-	public String getResultsString() {
-		return resultsString;
-	}
-
-	public void setResultsString(String resultsString) {
-		this.resultsString = resultsString;
-	}
+        }
+    }
 	
 	
 }

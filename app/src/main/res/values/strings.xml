@@ -9,7 +9,7 @@
     
     <!-- 以下是base中用到的 -->
     <!-- net -->
-    <string name="net_tip">网络无法连接，查看下吧!</string>
+    <string name="net_tip">网络不给力，查看下吧！</string>
     <!-- task -->
     <string name="task_item1">连接服务器异常，请稍后再试！</string>
     <string name="task_item2">正在加载</string>
@@ -59,5 +59,8 @@
     <string name="choose_images_done">完成</string>
     <string name="choose_images_preview">预览</string>
     <string name="choose_images_choose">选择</string>
+
+    <string name="check_version">检查更新</string>
+    <string name="check_version_fail">更新失败</string>
 
 </resources>

@@ -8,6 +8,6 @@
     <bitmap
         android:antialias="true"
         android:filter="true"
-        android:src="@drawable/base_progress_loading_360" />
+        android:src="@drawable/base_pop_load" />
 
 </rotate>

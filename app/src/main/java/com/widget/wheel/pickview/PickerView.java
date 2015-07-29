@@ -113,13 +113,22 @@ public class PickerView extends View
 	public void setData(List<String> datas)
 	{
 		mDataList = datas;
-		mCurrentSelected = datas.size() / 2;
+//		mCurrentSelected = datas.size() / 2;
 		invalidate();
 	}
 
+    /**
+     * 设置选中项
+     * @param selected
+     */
 	public void setSelected(int selected)
 	{
-		mCurrentSelected = selected;
+        if (selected<mDataList.size()){
+            mCurrentSelected = selected;
+        }else {
+            mCurrentSelected = 0;
+        }
+        invalidate();
 	}
 
 	private void moveHeadToTail()
@@ -180,8 +189,13 @@ public class PickerView extends View
 		float y = (float) (mViewHeight / 2.0 + mMoveLen);
 		FontMetricsInt fmi = mPaint.getFontMetricsInt();
 		float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
+        try {
+            canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
+        }catch (Exception e){
+            e.printStackTrace();
+            return;
+        }
 
-		canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
 		// 绘制上方data
 		for (int i = 1; (mCurrentSelected - i) >= 0; i++)
 		{
@@ -319,4 +333,26 @@ public class PickerView extends View
 	{
 		void onSelect(String text);
 	}
+
+    /**
+     * 获取选择的序号
+     * @return
+     */
+    public int getSelectIndex() {
+        return mCurrentSelected;
+    }
+
+    /**
+     * 获取选择的内容
+     * @return
+     */
+    public String getSelectContent(){
+        String content = "";
+        if (mCurrentSelected<mDataList.size()){
+            content = mDataList.get(mCurrentSelected);
+        }
+        return content;
+    }
+
+
 }

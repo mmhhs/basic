@@ -5,14 +5,18 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
+import com.base.feima.baseproject.listener.IOnDialogResultListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.net.HttpUtil;
-import com.base.feima.baseproject.net.Httpclient;
+import com.base.feima.baseproject.util.net.HttpUtil;
+import com.base.feima.baseproject.util.net.Httpclient;
 import com.base.feima.baseproject.tool.PublicTools;
+import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.JacksonUtil;
+import com.base.feima.baseproject.util.StringUtils;
 
 import java.io.File;
 import java.util.List;
@@ -20,30 +24,30 @@ import java.util.Map;
 
 
 public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
-    public final static int POST = 1;
-    public final static int GET = 2;
-    public final static int PUT = 3;
-    public final static int UPLOAD = 4;
-    public final static int UPLOADS = 5;
-    public final static int NET_ERROR = 6;
-    public int accessType;
-	public boolean showDialog = false;
-	public boolean showNetToast = false;
-	public PopupWindow loadPopupWindow;
-	public Context context;
-	public View parentView;
-	public String loadsString = "";
-	public String httpUrl = "";
-	public Map<String, Object> argMap;
-	public String errorMsg;
-	public String resultsString = null;
+    //显示相关
+    public final static int NET_ERROR = 6;//没有网络
+    public int netFlag =0;//网络标识
+    public Context context;//上下文
+    public View parentView;//父类视图
+	public boolean showDialog = false;//显示加载框
+	public boolean showNetToast = false;//显示网络问题toast
+	public PopupWindow loadPopupWindow;//加载框
+	public String loadString = "";//加载文字
+    //访问相关
+    public int accessType;//访问方式
+	public String httpUrl = "";//网络路径
+	public Map<String, Object> argMap;//参数
+	public List<File> fileList;//上传文件列表
+	public String keyString = "Filedata";//上传文件键值
+    //返回值相关
+    public String errorMsg;//错误信息
+    public String resultsString = null;//返回值
+    public boolean loginInvalid = false;//登录失效
 
-	public List<File> fileList;
-	public String keyString = "Filedata";
-	public String keyString2 = "Filedata[]";
-	public int taskFlag=0;
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowDialogTask";
+    private IOnDialogResultListener iOnDialogResultListener;
+    private IOnDialogBackgroundListener iOnDialogBackgroundListener;
 	
 	/**
 	 * 本地处理耗时线程
@@ -55,7 +59,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.tagString = tagString;
 	}
@@ -73,7 +77,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
@@ -93,7 +97,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType,boolean showNet){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
@@ -115,7 +119,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,int accessType){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
@@ -138,13 +142,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
 		this.fileList = fileList;
 		this.keyString = key;
-		this.keyString2 = key;
 		this.accessType = accessType;
 		this.tagString = tagString;
 	}
@@ -163,13 +166,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType,boolean showNet){
 		this.context = context;
 		this.parentView = parentView;
-		this.loadsString = loadsString;
+		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
 		this.fileList = fileList;
 		this.keyString = key;
-		this.keyString2 = key;
 		this.accessType = accessType;
 		this.showNetToast = showNet;
 		this.tagString = tagString;
@@ -179,12 +181,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public void onPreExecute() 
 	{	
 		try {
-			taskManager.addTask(tagString, this);
-			if(loadsString.isEmpty()){
-				loadsString = context.getResources().getString(R.string.task_item3);
+            addTask();
+			if(StringUtils.isEmpty(loadString)){
+				loadString = context.getResources().getString(R.string.task_item3);
 			}
 			if(!HttpUtil.isnet(context)){				
-				taskFlag = NET_ERROR;
+				netFlag = NET_ERROR;
 				if (showNetToast) {
 					PublicTools.addToast(context, context.getResources().getString(R.string.net_tip));
 				}
@@ -193,7 +195,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 					if(parentView==null){
 						return;
 					}
-					loadPopupWindow = PopupwindowTool.showLoadWindow(context, parentView, loadsString, 0, 0, 0, 0);
+					loadPopupWindow = PopupwindowTool.showLoadWindow(context, parentView, loadString,0, true,true);
 				}
 				
 			}				
@@ -206,62 +208,62 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
 		//不访问网络的情况
-		if(httpUrl.isEmpty()){
+		if(StringUtils.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
 		}
-		if (taskFlag==NET_ERROR) {
+		if (netFlag == NET_ERROR) {
 			return taskResult;
 		}
 		switch (accessType) {
-		case POST:
-			try {
-				resultsString = Httpclient.POSTMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case PUT:
-			try {
-				resultsString = Httpclient.PUTMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-			break;
-		case GET:
-			try {
-				resultsString = Httpclient.GETMethod(httpUrl, argMap);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case UPLOAD:
-			try {
-				resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		case UPLOADS:
-			try {
-				resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString2);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		default:
-			break;
+            case TaskConstant.POST:
+                try {
+                    resultsString = Httpclient.POSTMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.PUT:
+                try {
+                    resultsString = Httpclient.PUTMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.GET:
+                try {
+                    resultsString = Httpclient.GETMethod(httpUrl, argMap);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.UPLOAD:
+                try {
+                    resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case TaskConstant.UPLOADS:
+                try {
+                    resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
 		}
-		if(resultsString==null){				
+		if(StringUtils.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
-			if (onBackgroundListener==null) {
-				onBackgroundListener = defaultBackgroundListener;				
+			if (iOnDialogBackgroundListener==null) {
+                iOnDialogBackgroundListener = defaultBackgroundListener;
 			}
 			taskResult = doOnBackgroundListener(this);
 		}
@@ -279,110 +281,62 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+        if(iOnDialogResultListener!=null){
+            this.iOnDialogResultListener.onDone(this);
+        }
 		switch(result){			
-		case OK:					
-			doOnOKListener(this);
-			break;
-		case ERROR:
-			doOnERRORListener(this);				
-			break;
-		case CANCELLED:			
-			PublicTools.addToast(context, context.getResources().getString(R.string.task_item1));
-			break;
-		default:
-			break;
+            case OK:
+                if(iOnDialogResultListener!=null){
+                    this.iOnDialogResultListener.onOK(this);
+                }
+                break;
+            case ERROR:
+                if(iOnDialogResultListener!=null){
+                    this.iOnDialogResultListener.onError(this);
+                }
+                if (!StringUtils.isEmpty(httpUrl)){
+                    PublicTools.addToast(context, ""+errorMsg);
+                }
+                dealLoginInvalid();
+                break;
+            case CANCELLED:
+                PublicTools.addToast(context, context.getString(R.string.task_item1));
+                break;
+            default:
+                break;
 		}
-		doOnDoneListener(this);
-		taskManager.cancelOneTasks(this);
-	}
-	
-	private OnBackgroundListener onBackgroundListener;
-	
-	public interface OnBackgroundListener{
-		public TaskResult onBackground(ShowDialogTask showDialogTask);
-	}	
-
-	/**
-	 * 后台执行代码-解析接口或处理耗时事件
-	 * @param onBackgroundClickListener
-	 */
-	public void setOnBackgroundListener(
-			OnBackgroundListener onBackgroundClickListener) {
-		this.onBackgroundListener = onBackgroundClickListener;
+        cancelTask();
 	}
 
-	private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
+    public void addTask(){
+        taskManager.addTask(tagString, this);
+    }
+
+    public void cancelTask(){
+        taskManager.cancelOneTasks(this);
+    }
+
+    public void setiOnDialogResultListener(IOnDialogResultListener iOnDialogResultListener) {
+        this.iOnDialogResultListener = iOnDialogResultListener;
+    }
+
+    public void setiOnDialogBackgroundListener(IOnDialogBackgroundListener iOnDialogBackgroundListener) {
+        this.iOnDialogBackgroundListener = iOnDialogBackgroundListener;
+    }
+
+    private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
 		TaskResult taskResult = TaskResult.NOTHING;
-		if(onBackgroundListener!=null){
-			taskResult = this.onBackgroundListener.onBackground(showDialogTask);
+		if(iOnDialogBackgroundListener!=null){
+			taskResult = this.iOnDialogBackgroundListener.onBackground(showDialogTask);
 		}		
 		return taskResult;
 	}
-	
-	private OnOKListener onOKListener;
-	
-	public interface OnOKListener{
-		public void onOK(ShowDialogTask showDialogTask);
-	}	
-	/**
-	 * 成功处理
-	 * @param onOKListener
-	 */
-	public void setOnOKListener(
-			OnOKListener onOKListener) {
-		this.onOKListener = onOKListener;
-	}
 
-	private void doOnOKListener(ShowDialogTask showDialogTask){
-		if(onOKListener!=null){
-			this.onOKListener.onOK(showDialogTask);
-		}		
-	}
-	
-	private OnErrorListener onErrorListener;
-	
-	public interface OnErrorListener{
-		public void onError(ShowDialogTask showDialogTask);
-	}	
-	/**
-	 * 错误处理
-	 * @param onErrorListener
-	 */
-	public void setOnERRORListener(
-			OnErrorListener onErrorListener) {
-		this.onErrorListener = onErrorListener;
-	}
-
-	private void doOnERRORListener(ShowDialogTask showDialogTask){
-		if(onErrorListener!=null){
-			this.onErrorListener.onError(showDialogTask);
-		}		
-	}
-	
-	private OnDoneListener onDoneListener;
-	
-	public interface OnDoneListener{
-		public void onDone(ShowDialogTask showDialogTask);
-	}	
-	/**
-	 * 结束处理
-	 * @param onErrorListener
-	 */
-	public void setOnDoneListener(
-			OnDoneListener onDoneListener) {
-		this.onDoneListener = onDoneListener;
-	}
-
-	private void doOnDoneListener(ShowDialogTask showDialogTask){
-		if(onDoneListener!=null){
-			this.onDoneListener.onDone(showDialogTask);
-		}		
-	}
 	
 	/**
 	 * 默认后台解析返回结果
 	 */
-	private OnBackgroundListener defaultBackgroundListener = new OnBackgroundListener(){
+	private IOnDialogBackgroundListener defaultBackgroundListener = new IOnDialogBackgroundListener(){
 
 		@Override
 		public TaskResult onBackground(ShowDialogTask showDialogTask) {
@@ -391,11 +345,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(PublicTools.judgeResult(context,""+res.getResult())){
+				if(ResultTools.judgeResult(context, "" + res.getCode())){
 					taskResult = TaskResult.OK;							
 				}else{					
 					taskResult = TaskResult.ERROR;
-					errorMsg = PublicTools.judgeResult2(context,""+res.getResult());					
+					errorMsg = res.getMsg();
+                    judgeLoginInvalid(res.getCode());
 				}
 			}else{
 				taskResult = TaskResult.CANCELLED;
@@ -405,29 +360,6 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		
 	};
 
-	public boolean isShowDialog() {
-		return showDialog;
-	}
-
-	public void setShowDialog(boolean showDialog) {
-		this.showDialog = showDialog;
-	}
-
-	public View getParentView() {
-		return parentView;
-	}
-
-	public void setParentView(View parentView) {
-		this.parentView = parentView;
-	}
-
-	public String getLoadsString() {
-		return loadsString;
-	}
-
-	public void setLoadsString(String loadsString) {
-		this.loadsString = loadsString;
-	}
 
 	public String getErrorMsg() {
 		return errorMsg;
@@ -441,9 +373,24 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		return resultsString;
 	}
 
-	public void setResultsString(String resultsString) {
-		this.resultsString = resultsString;
-	}
-	
+    /**
+     * 判断登录失效
+     */
+	public void judgeLoginInvalid(String code){
+        if (ResultTools.judgeLoginInvalid(context, "" + code)){
+            loginInvalid = true;
+        }else {
+            loginInvalid = false;
+        }
+    }
+
+    /**
+     * 处理登录失效
+     */
+    public void dealLoginInvalid(){
+        if (loginInvalid){
+
+        }
+    }
 	
 }

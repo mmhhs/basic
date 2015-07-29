@@ -11,16 +11,23 @@ import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseFragmentActivity;
-
 import com.base.feima.baseproject.fragment.DemoFragment;
-import com.base.feima.baseproject.model.ResultModel;
+import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
+import com.base.feima.baseproject.listener.IOnDialogResultListener;
+import com.base.feima.baseproject.listener.IOnProgressListener;
+import com.base.feima.baseproject.listener.IOnSureListener;
+import com.base.feima.baseproject.model.version.VersionResult;
+import com.base.feima.baseproject.task.FileDownLoadAsyncTask;
 import com.base.feima.baseproject.task.ShowDialogTask;
+import com.base.feima.baseproject.task.TaskConstant;
 import com.base.feima.baseproject.tool.EncryTools;
 import com.base.feima.baseproject.tool.PublicTools;
+import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
 import com.base.feima.baseproject.util.BaseConstant;
 import com.base.feima.baseproject.util.JacksonUtil;
 
+import java.io.File;
 import java.util.Map;
 
 import butterknife.InjectView;
@@ -124,23 +131,59 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
         }
     }
 
+
+    private void updateVersion(){
+        try {
+            if (versionDataEntity!=null){
+                if (!versionDataEntity.getVersionCode().equals(""+PublicTools.getVersionCode(BaseHomeTabActivity.this))){
+                    PopupwindowTool popupwindowTool = new PopupwindowTool();
+                    popupwindowTool.showSureWindow(BaseHomeTabActivity.this, naviText0, getString(R.string.dialog_item6), ""+versionDataEntity.getUpdateInfo(), true, true, false, 0);
+                    popupwindowTool.setiOnSureListener(new IOnSureListener() {
+                        @Override
+                        public void onSureClick() {
+                            File apkFile = new File(BaseConstant.APKPATH);
+                            boolean needDownLoad = true;
+                            if (apkFile.exists()){
+                                int versionCode = PublicTools.getApkVersionCode(BaseHomeTabActivity.this,BaseConstant.APKPATH);
+                                if (versionDataEntity.getVersionCode().equals(""+versionCode)){
+                                    needDownLoad = false;
+                                }
+                            }
+                            if (needDownLoad){
+                                downLoadApk(versionDataEntity.getDownload(), BaseConstant.APKPATH);
+                            }else {
+                                PublicTools.install(BaseHomeTabActivity.this,BaseConstant.APKPATH);
+                            }
+                        }
+                    });
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private VersionResult.VersionDataEntity versionDataEntity;
     public void setCheckVersion(){
-        String httpUrl = BaseConstant.SERVICE_HOST_IP_LAN+BaseConstant.VERSION;
+        String httpUrl = BaseConstant.VERSION;
         Map<String,Object> argMap = EncryTools.getEncryMap();
-        ShowDialogTask task = new ShowDialogTask(this,taskTag,naviText0,getString(R.string.dialog_item6),true,httpUrl,argMap,ShowDialogTask.POST);
-        task.setOnBackgroundListener(new ShowDialogTask.OnBackgroundListener() {
+        argMap.put("version",PublicTools.getVersionName(this));
+        argMap.put("versionCode",""+PublicTools.getVersionCode(this));
+        argMap.put("deviceType","android");
+        ShowDialogTask task = new ShowDialogTask(this,taskTag,naviText0,getString(R.string.dialog_item6),false,httpUrl,argMap, TaskConstant.POST);
+        task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
             @Override
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
                 BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
                 JacksonUtil json = JacksonUtil.getInstance();
-                ResultModel res = json.readValue(showDialogTask.getResultsString(), ResultModel.class);//解析需要等接口确定后更改
+                VersionResult res = json.readValue(showDialogTask.getResultsString(), VersionResult.class);
                 if(res!=null){
-                    if(PublicTools.judgeResult(BaseHomeTabActivity.this, res.getResult())){
+                    if(ResultTools.judgeResult(BaseHomeTabActivity.this, res.getCode())){
                         taskResult = BaseConstant.TaskResult.OK;
-
+                        versionDataEntity = res.getData();
                     }else{
                         taskResult = BaseConstant.TaskResult.ERROR;
-                        showDialogTask.setErrorMsg(res.getResult());
+                        showDialogTask.setErrorMsg(res.getCode());
                     }
                 }else{
                     taskResult = BaseConstant.TaskResult.CANCELLED;
@@ -148,26 +191,53 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
                 return taskResult;
             }
         });
-        task.setOnOKListener(new ShowDialogTask.OnOKListener() {
+        task.setiOnDialogResultListener(new IOnDialogResultListener() {
             @Override
             public void onOK(ShowDialogTask showDialogTask) {
-                PopupwindowTool popupwindowTool = new PopupwindowTool();
-                popupwindowTool.showSureWindow(BaseHomeTabActivity.this, naviText0, getString(R.string.dialog_item6), getString(R.string.dialog_item7), true, true, false, 0);
-                popupwindowTool.setOnSureClickListener(new PopupwindowTool.OnSureClickListener() {
-                    @Override
-                    public void onClick(int position) {
-                        PublicTools.openBrowser(BaseHomeTabActivity.this,updateUrl);
-                    }
-                });
+                updateVersion();
             }
-        });
-        task.setOnERRORListener(new ShowDialogTask.OnErrorListener() {
+
             @Override
             public void onError(ShowDialogTask showDialogTask) {
-                PublicTools.addToast(BaseHomeTabActivity.this,showDialogTask.getErrorMsg());
+
+            }
+
+            @Override
+            public void onDone(ShowDialogTask showDialogTask) {
+
             }
         });
         task.execute();
+    }
+
+    private void downLoadApk(String updateUrl, String storePath){
+        FileDownLoadAsyncTask fileDownLoadAsyncTask = new FileDownLoadAsyncTask(this,updateUrl,storePath,false,naviText0,getString(R.string.dialog_item6));
+        fileDownLoadAsyncTask.setiOnProgressListener(new IOnProgressListener() {
+            @Override
+            public void start() {
+
+            }
+
+            @Override
+            public void transferred(String transferedBytes, long totalBytes) {
+            }
+
+            @Override
+            public void success(String fileStorePath) {
+                PublicTools.install(BaseHomeTabActivity.this,fileStorePath);
+            }
+
+            @Override
+            public void error(String tip) {
+                PublicTools.addToast(BaseHomeTabActivity.this,tip);
+            }
+
+            @Override
+            public void done() {
+
+            }
+        });
+        fileDownLoadAsyncTask.execute();
     }
       
 }

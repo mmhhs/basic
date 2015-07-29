@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.image.FrescoUtils;
-import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.image.instrumentation.PerfListener;
-import com.base.feima.baseproject.tool.ImageTools;
+import com.base.feima.baseproject.fresco.FrescoUtils;
+import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
+import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
+import com.base.feima.baseproject.tool.image.ImageTools;
 
 import java.util.List;
 
@@ -116,7 +116,7 @@ public class ChooseImagesGridAdapter extends BaseAdapter{
     public final static class ViewHolder {
 //        @InjectView(R.id.base_adapter_choose_images_grid_content)
 //        public ImageView contentImage;
-        @InjectView(R.id.base_fresco_sample_imageView)
+        @InjectView(R.id.base_fresco_fitcenter_imageview)
         public InstrumentedDraweeView contentImage;
         @InjectView(R.id.base_adapter_choose_images_grid_selector)
         public ImageView selectorImage;

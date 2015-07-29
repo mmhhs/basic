@@ -28,10 +28,9 @@ public class ScreenManager {
 	 * 退出栈顶Activity
 	 * @param activity
 	 */
-	public void finishActivity(Activity activity) {
+	public void closeActivity(Activity activity) {
 		if (activity != null) {
 			activity.finish();
-			activityList.remove(activity);
 			activity = null;
 		}
 	}
@@ -61,50 +60,91 @@ public class ScreenManager {
 	/**
 	 * 退出栈中所有Activity除了一个Activity
 	 */	
-	public void finishAllActivityExceptOne(Class cls) {
-		for(int i=0;i<activityList.size();i++){
-			try {
-				Activity activity = activityList.get(i);
-				if (activity != null&&!activity.getClass().equals(cls)) {
-					finishActivity(activity);
-				}				
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				
-			}
-		}
-		
-	}
-	
-	/**
-	 * 退出栈中所有Activity
-	 */	
-	public void finishAllActivity() {
+	public void closeAllExceptOne(Class cls) {
+        Activity keepActivity = null;
 		for(int i=0;i<activityList.size();i++){
 			try {
 				Activity activity = activityList.get(i);
 				if (activity != null) {
-					finishActivity(activity);
+                    if (activity.getClass().getSimpleName().equals(cls.getSimpleName())){
+                        keepActivity = activity;
+                    }else {
+                        closeActivity(activity);
+                    }
 				}				
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				
+			}
+		}
+        activityList.clear();
+        if (keepActivity!=null){
+            activityList.add(keepActivity);
+        }
+	}
+
+    /**
+     * 退出栈中所有Activity除了指定Activity
+     * @param cls
+     */
+    public void closeAllExcept(Class[] cls) {
+        Activity[] activities = new Activity[cls.length];
+        for(int i=0;i<activityList.size();i++){
+            try {
+                Activity activity = activityList.get(i);
+                if (activity != null) {
+                    boolean canClose = true;
+                    for (int c=0;c<cls.length;c++){
+                        if (activity.getClass().getSimpleName().equals(cls[c].getSimpleName())){
+                            canClose = false;
+                            activities[c] = activity;
+                        }
+                    }
+                    if (canClose){
+                        closeActivity(activity);
+                    }
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+        activityList.clear();
+        for (int i=0;i<activities.length;i++){
+            if (activities[i]!=null){
+                activityList.add(activities[i]);
+            }
+        }
+
+    }
+	
+	/**
+	 * 退出栈中所有Activity
+	 */	
+	public void closeAll() {
+		for(int i=0;i<activityList.size();i++){
+			try {
+				Activity activity = activityList.get(i);
+				if (activity != null) {
+					closeActivity(activity);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 	}
 	
 	/**
-	 * 退出栈中当前Activity
+	 * 退出栈顶activity
 	 */	
-	public void finishCurrentActivity() {
+	public void closeCurrent() {
 		try {
 			Activity activity = getCurrentActivity();
 			if (activity == null) {
 				return;
 			}			
-			finishActivity(activity);
+			closeActivity(activity);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -115,17 +155,17 @@ public class ScreenManager {
 	/**
 	 * 退出栈中指定Activity
 	 */	
-	public void finishOneActivity(Class cls) {
+	public void closeAppoin(Class cls) {
 		for(int i=0;i<activityList.size();i++){
 			try {
 				Activity activity = activityList.get(i);
-				if (activity != null&&activity.getClass().equals(cls)) {
-					finishActivity(activity);
+				if (activity != null&&activity.getClass().getSimpleName().equals(cls.getSimpleName())) {
+					closeActivity(activity);
+                    activityList.remove(activity);
 				}				
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				
 			}
 		}
 	}

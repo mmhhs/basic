@@ -62,7 +62,7 @@ public class CustomClipLoading extends FrameLayout {
 	private void init(Context context) {
 		View view = LayoutInflater.from(context).inflate(R.layout.base_custom_loading, null);
 		addView(view);
-		ImageView imageView = (ImageView) findViewById(R.id.iv_progress);
+		ImageView imageView = (ImageView) findViewById(R.id.base_custom_loading_progress);
 		mClipDrawable = (ClipDrawable) imageView.getDrawable();
 		
 		Thread s = new Thread(r);

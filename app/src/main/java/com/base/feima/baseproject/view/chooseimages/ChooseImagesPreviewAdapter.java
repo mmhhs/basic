@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.image.FrescoUtils;
-import com.base.feima.baseproject.image.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.image.instrumentation.PerfListener;
-import com.base.feima.baseproject.view.multilayer.IOnItemClickListener;
+import com.base.feima.baseproject.fresco.FrescoUtils;
+import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
+import com.base.feima.baseproject.listener.IOnItemClickListener;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class ChooseImagesPreviewAdapter extends PagerAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.base_adapter_choose_images_preview, null);
 //        ImageView imageView = (ImageView) convertView.findViewById(R.id.base_adapter_choose_images_preview_imageView);
 //        imageLoader.displayImage("file://"+list.get(position),imageView, OptionTools.getNoDiscOptions(context));
-        InstrumentedDraweeView imageView = (InstrumentedDraweeView)convertView.findViewById(R.id.base_fresco_sample_imageView);
+        InstrumentedDraweeView imageView = (InstrumentedDraweeView)convertView.findViewById(R.id.base_fresco_fitcenter_imageview);
         imageView.initInstrumentation(list.get(position), PerfListener.getInstance());
         FrescoUtils.displayImage(imageView,"file://"+list.get(position),720,1280);
         imageView.setOnClickListener(new View.OnClickListener() {
