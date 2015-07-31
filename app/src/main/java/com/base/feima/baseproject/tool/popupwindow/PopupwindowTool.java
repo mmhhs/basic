@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
+import com.base.feima.baseproject.tool.AnimTools;
 import com.base.feima.baseproject.tool.PublicTools;
 import com.base.feima.baseproject.util.StringUtils;
 import com.base.feima.baseproject.view.PageIndicatorView;
@@ -32,12 +33,23 @@ import java.util.List;
 public class PopupwindowTool {
     private IOnItemClickListener iOnItemClickListener;
     private IOnSureListener iOnSureListener;
-	
-	public PopupwindowTool(){
-		
-	}
+    private Activity activity;
+    private float showAlpha = 0.5f;
+    private float hideAlpha = 1f;
 
-	public void setiOnItemClickListener(
+    public PopupwindowTool(Activity activity) {
+        this.activity = activity;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void setiOnItemClickListener(
             IOnItemClickListener iOnItemClickListener) {
 		this.iOnItemClickListener = iOnItemClickListener;
 	}
@@ -96,6 +108,7 @@ public class PopupwindowTool {
         if(!StringUtils.isEmpty(title)){
         	titleText.setText(title);
         }
+        AnimTools.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
 		popupWindow.setFocusable(true);		
 		popupWindow.setOutsideTouchable(false);
@@ -127,7 +140,12 @@ public class PopupwindowTool {
             }
 
         });
-		
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                AnimTools.setBackgroundAlpha(activity,hideAlpha);
+            }
+        });
 		return popupWindow;
 	}
 
@@ -177,6 +195,7 @@ public class PopupwindowTool {
         	cancleText.setVisibility(View.GONE);
         	line.setVisibility(View.GONE);
         }
+        AnimTools.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
 		popupWindow.setFocusable(true);		
 		popupWindow.setOutsideTouchable(false);
@@ -216,7 +235,12 @@ public class PopupwindowTool {
             }
 
         });
-		
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+            }
+        });
 		return popupWindow;
 	}
 
@@ -231,7 +255,7 @@ public class PopupwindowTool {
      * @param dismissKeyback  返回消失
      * @return
      */
-	public static PopupWindow showLoadWindow(Context context, View view, String loadsString, int animStyle,final boolean dismissOutside,final boolean dismissKeyback){
+	public PopupWindow showLoadWindow(Context context, View view, String loadsString, int animStyle,final boolean dismissOutside,final boolean dismissKeyback){
 		PopupWindow loadPopupWindow = getLoadWindow(context, loadsString,  animStyle, dismissOutside, dismissKeyback);
 		loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 		return loadPopupWindow;
@@ -243,20 +267,20 @@ public class PopupwindowTool {
      * @param view    父类视图
      * @return
      */
-    public static PopupWindow showLoadWindow(Context context,View view){
+    public PopupWindow showLoadWindow(Context context,View view){
         PopupWindow loadPopupWindow = getLoadWindow(context, context.getString(R.string.task_item2), 0, true, true);
         loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         return loadPopupWindow;
     }
 		
-	public static PopupWindow getLoadWindow(Context context, String loadString,int animStyle,final boolean dismissOutside,final boolean dismissKeyback) {
+	public PopupWindow getLoadWindow(Context context, String loadString,int animStyle,final boolean dismissOutside,final boolean dismissKeyback) {
 		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_dialog,null, false);
 	    TextView loadText = (TextView) view.findViewById(R.id.base_pop_load_text);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_dialog_contain);
-        containLayout.setBackgroundColor(context.getResources().getColor(R.color.transparent));
         if(!loadString.isEmpty()){
         	loadText.setText(loadString);
         }
+        AnimTools.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
 		popupWindow.setFocusable(true);		
 		popupWindow.setOutsideTouchable(false);
@@ -276,6 +300,12 @@ public class PopupwindowTool {
                 }
             }
 
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+            }
         });
 		return popupWindow;
 	}
@@ -311,23 +341,29 @@ public class PopupwindowTool {
         if (canCancel){
             cancelLayout.setVisibility(View.VISIBLE);
         }
+        AnimTools.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
 
-        cancleText.setOnClickListener(new OnClickListener(){
+        cancleText.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (iOnSureListener!=null){
+                if (iOnSureListener != null) {
                     iOnSureListener.onSureClick();
                 }
                 popupWindow.dismiss();
             }
 
         });
-
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+            }
+        });
 
         return popupWindow;
     }
@@ -397,6 +433,7 @@ public class PopupwindowTool {
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable()); //使按返回键能够消失
+        popupWindow.setAnimationStyle(R.style.base_anim_alpha);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener(){
             @Override
             public void onItemClick(int position) {
@@ -414,7 +451,7 @@ public class PopupwindowTool {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-
+                AnimTools.setBackgroundAlpha(activity, hideAlpha);
             }
         });
         return popupWindow;

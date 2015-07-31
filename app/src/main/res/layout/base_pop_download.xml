@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:gravity="center"
     android:id="@+id/base_pop_download_layout"
-    style="@style/base_pop_background"
     >
 
     <LinearLayout

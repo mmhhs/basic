@@ -37,7 +37,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
     private ChooseImagesSampleAdapter chooseImagesSampleAdapter;
     private int screenWidth = 0;
     private int maxSize = 9;
-    private PopupwindowTool popupwindowTool = new PopupwindowTool();
+    private PopupwindowTool popupwindowTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        popupwindowTool = new PopupwindowTool(this);
         screenWidth = PublicTools.getScreenWidth(this);
         registerBroadcast();
         chooseImagesSampleAdapter = new ChooseImagesSampleAdapter(this,chooseImageList,screenWidth);

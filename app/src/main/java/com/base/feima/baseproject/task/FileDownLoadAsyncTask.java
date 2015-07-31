@@ -1,8 +1,9 @@
 package com.base.feima.baseproject.task;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.View;
 import android.widget.PopupWindow;
+
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnProgressListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
@@ -28,7 +29,7 @@ import java.io.InputStream;
 
 public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.TaskResult> {
 	private String url = "";// 文件下载地址
-	private Context context;//上下文
+	private Activity activity;//上下文
     private IOnProgressListener iOnProgressListener;//进度监听
     private String fileStorePath;//文件存储路径
     private long totalSize=0;//下载文件大小
@@ -42,14 +43,14 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
     private FileOutputStream fileOutputStream=null;
     private CountingInputStream cis = null;
 
-	public FileDownLoadAsyncTask(Context context, String url, String fileStorePath, boolean silenceDownload, View parentView, String windowTitle) {
-		this.context = context;
+	public FileDownLoadAsyncTask(Activity activity, String url, String fileStorePath, boolean silenceDownload, View parentView, String windowTitle) {
+		this.activity = activity;
         this.url = url;
         this.fileStorePath = fileStorePath;
         this.silenceDownload = silenceDownload;
         this.windowTitle = windowTitle;
         this.parentView = parentView;
-        popupwindowTool = new PopupwindowTool();
+        popupwindowTool = new PopupwindowTool(activity);
         popupwindowTool.setiOnSureListener(new IOnSureListener() {
             @Override
             public void onSureClick() {
@@ -69,7 +70,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
                 iOnProgressListener.start();
             }
             if (!silenceDownload){
-                popupWindow = popupwindowTool.showDownloadWindow(context,parentView,windowTitle,false);
+                popupWindow = popupwindowTool.showDownloadWindow(activity,parentView,windowTitle,false);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -153,12 +154,12 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
                 break;
             case ERROR:
                 if (iOnProgressListener!=null){
-                    iOnProgressListener.error(context.getString(R.string.check_version_fail));
+                    iOnProgressListener.error(activity.getString(R.string.check_version_fail));
                 }
                 break;
             case CANCELLED:
                 if (iOnProgressListener!=null){
-                    iOnProgressListener.error(context.getString(R.string.check_version_fail));
+                    iOnProgressListener.error(activity.getString(R.string.check_version_fail));
                 }
                 break;
             default:

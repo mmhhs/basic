@@ -1,6 +1,6 @@
 package com.base.feima.baseproject.task;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.View;
 import android.widget.PopupWindow;
 
@@ -9,14 +9,14 @@ import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
 import com.base.feima.baseproject.listener.IOnDialogResultListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.util.net.HttpUtil;
-import com.base.feima.baseproject.util.net.Httpclient;
 import com.base.feima.baseproject.tool.PublicTools;
 import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.JacksonUtil;
 import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.net.HttpUtil;
+import com.base.feima.baseproject.util.net.Httpclient;
 
 import java.io.File;
 import java.util.List;
@@ -27,7 +27,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
     //显示相关
     public final static int NET_ERROR = 6;//没有网络
     public int netFlag =0;//网络标识
-    public Context context;//上下文
+    public Activity activity;//上下文
     public View parentView;//父类视图
 	public boolean showDialog = false;//显示加载框
 	public boolean showNetToast = false;//显示网络问题toast
@@ -48,25 +48,27 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public String tagString="ShowDialogTask";
     private IOnDialogResultListener iOnDialogResultListener;
     private IOnDialogBackgroundListener iOnDialogBackgroundListener;
+	private PopupwindowTool popupwindowTool;
 	
 	/**
 	 * 本地处理耗时线程
-	 * @param context 上下文
+	 * @param activity 上下文
 	 * @param parentView 父类视图 
 	 * @param loadsString 显示文字
 	 * @param showDialog 是否显示dialog 若显示，则parentView不能为空
 	 */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
 		this.tagString = tagString;
+		init();
 	}
 	
 	/**
 	 * 网络加载线程
-	 * @param context 上下文
+	 * @param activity 上下文
 	 * @param parentView 父类视图
 	 * @param loadsString 显示文字
 	 * @param showDialog 是否显示dialog 若显示parentView不能为空
@@ -74,8 +76,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	 * @param argMap 参数集合
 	 * @param accessType 访问方式
 	 */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
@@ -83,10 +85,11 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.argMap = argMap;
 		this.accessType = accessType;
 		this.tagString = tagString;
+		init();
 	}
     /**
      * 网络加载线程 最后一个参数若为true，则没有网络时，弹出提示
-     * @param context 上下文
+     * @param activity 上下文
      * @param parentView 父类视图
      * @param loadsString 显示文字
      * @param showDialog 是否显示dialog 若显示parentView不能为空
@@ -94,8 +97,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
      * @param argMap 参数集合
      * @param accessType 访问方式
      */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType,boolean showNet){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType,boolean showNet){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
@@ -104,10 +107,11 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.accessType = accessType;
 		this.tagString = tagString;
 		this.showNetToast = showNet;
+		init();
 	}
 	/**
 	 * 网络加载线程-上传文件
-	 * @param context 上下文
+	 * @param activity 上下文
 	 * @param parentView 父类视图 
 	 * @param loadsString 显示文字
 	 * @param showDialog 是否显示dialog 若显示parentView不能为空
@@ -116,8 +120,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	 * @param fileList 文件集合
 	 * @param accessType 访问方式
 	 */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,int accessType){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,int accessType){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
@@ -126,10 +130,11 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.fileList = fileList;
 		this.accessType = accessType;
 		this.tagString = tagString;
+		init();
 	}
 	/**
 	 * 网络加载线程-上传文件-文件标识
-	 * @param context 上下文
+	 * @param activity 上下文
 	 * @param parentView 父类视图 
 	 * @param loadsString 显示文字
 	 * @param showDialog 是否显示dialog 若显示parentView不能为空
@@ -139,8 +144,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	 * @param key 服务器判断文件标识
 	 * @param accessType 访问方式
 	 */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
@@ -150,10 +155,11 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.keyString = key;
 		this.accessType = accessType;
 		this.tagString = tagString;
+		init();
 	}
     /**
      * 网络加载线程-上传文件-文件标识 最后一个参数若为true，则没有网络时，弹出提示
-     * @param context 上下文
+     * @param activity 上下文
      * @param parentView 父类视图
      * @param loadsString 显示文字
      * @param showDialog 是否显示dialog 若显示parentView不能为空
@@ -163,8 +169,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
      * @param key 服务器判断文件标识
      * @param accessType 访问方式
      */
-	public ShowDialogTask(Context context,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType,boolean showNet){
-		this.context = context;
+	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType,boolean showNet){
+		this.activity = activity;
 		this.parentView = parentView;
 		this.loadString = loadsString;
 		this.showDialog = showDialog;
@@ -175,6 +181,11 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.accessType = accessType;
 		this.showNetToast = showNet;
 		this.tagString = tagString;
+		init();
+	}
+
+	private void init(){
+		popupwindowTool = new PopupwindowTool(activity);
 	}
 	
 	@Override
@@ -183,19 +194,19 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		try {
             addTask();
 			if(StringUtils.isEmpty(loadString)){
-				loadString = context.getResources().getString(R.string.task_item3);
+				loadString = activity.getResources().getString(R.string.task_item3);
 			}
-			if(!HttpUtil.isnet(context)){				
+			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
 				if (showNetToast) {
-					PublicTools.addToast(context, context.getResources().getString(R.string.net_tip));
+					PublicTools.addToast(activity, activity.getResources().getString(R.string.net_tip));
 				}
 			}else {
 				if (showDialog) {
 					if(parentView==null){
 						return;
 					}
-					loadPopupWindow = PopupwindowTool.showLoadWindow(context, parentView, loadString,0, true,true);
+					loadPopupWindow = popupwindowTool.showLoadWindow(activity, parentView, loadString,0, true,true);
 				}
 				
 			}				
@@ -295,12 +306,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
                     this.iOnDialogResultListener.onError(this);
                 }
                 if (!StringUtils.isEmpty(httpUrl)){
-                    PublicTools.addToast(context, ""+errorMsg);
+                    PublicTools.addToast(activity, ""+errorMsg);
                 }
                 dealLoginInvalid();
                 break;
             case CANCELLED:
-                PublicTools.addToast(context, context.getString(R.string.task_item1));
+                PublicTools.addToast(activity, activity.getString(R.string.task_item1));
                 break;
             default:
                 break;
@@ -345,7 +356,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(ResultTools.judgeResult(context, "" + res.getCode())){
+				if(ResultTools.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;							
 				}else{					
 					taskResult = TaskResult.ERROR;
@@ -377,7 +388,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
      * 判断登录失效
      */
 	public void judgeLoginInvalid(String code){
-        if (ResultTools.judgeLoginInvalid(context, "" + code)){
+        if (ResultTools.judgeLoginInvalid(activity, "" + code)){
             loginInvalid = true;
         }else {
             loginInvalid = false;

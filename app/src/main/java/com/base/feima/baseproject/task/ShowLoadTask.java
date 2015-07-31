@@ -1,6 +1,6 @@
 package com.base.feima.baseproject.task;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,14 +10,14 @@ import com.base.feima.baseproject.listener.IOnLoadResultListener;
 import com.base.feima.baseproject.listener.IOnTryClickListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.util.net.HttpUtil;
-import com.base.feima.baseproject.util.net.Httpclient;
 import com.base.feima.baseproject.tool.PublicTools;
 import com.base.feima.baseproject.tool.ResultTools;
 import com.base.feima.baseproject.tool.popupwindow.ViewTool;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.JacksonUtil;
 import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.net.HttpUtil;
+import com.base.feima.baseproject.util.net.Httpclient;
 
 import java.io.File;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
     public int netFlag =0;//网络标识
 	public boolean showLoad = false;
 	public ViewTool viewTool;//视图管理
-	public Context context;//上下文
+	public Activity activity;//上下文
 	public View contentView;//内容界面
 	public LinearLayout loadView;//加载界面
 	public String loadString = "";//加载文字
@@ -52,14 +52,14 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	
 	/**
 	 * 本地处理耗时线程
-	 * @param context           上下文
+	 * @param activity           上下文
 	 * @param contentView       内容视图
 	 * @param loadView          加载视图
 	 * @param loadString        显示文字
 	 * @param showLoad          是否显示loadview 若显示，则contentView，loadView不能为空
 	 */
-	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener){
-		this.context = context;
+	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener){
+		this.activity = activity;
         this.tagString = tagString;
 		this.contentView = contentView;
         this.loadView = loadView;
@@ -71,7 +71,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	
 	/**
 	 * 网络加载线程
-	 * @param context           上下文
+	 * @param activity           上下文
 	 * @param contentView       内容视图
 	 * @param loadView          加载视图
 	 * @param loadString        显示文字
@@ -80,8 +80,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	 * @param argMap            参数集合
 	 * @param accessType        访问方式
 	 */
-	public ShowLoadTask(Context context,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
-        this.context = context;
+	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
+        this.activity = activity;
         this.tagString = tagString;
         this.contentView = contentView;
         this.loadView = loadView;
@@ -100,25 +100,25 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		try {
 			addTask();
 			if(StringUtils.isEmpty(loadString)){
-				loadString = context.getResources().getString(R.string.pop_item1);
+				loadString = activity.getResources().getString(R.string.pop_item1);
 			}
-			if(!HttpUtil.isnet(context)){
+			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
 				if (showLoad) {
 					if(contentView==null||loadView==null){
 						return;
 					}
-					viewTool.addErrorView(context, context.getResources().getString(R.string.pop_item2),
+					viewTool.addErrorView(activity, activity.getString(R.string.pop_item2),
 							contentView, loadView, iOnTryClickListener);
 				}else {
-					PublicTools.addToast(context, context.getResources().getString(R.string.net_tip));
+					PublicTools.addToast(activity, activity.getString(R.string.net_tip));
 				}
 			}else {
 				if (showLoad) {
 					if(contentView==null||loadView==null){
 						return;
 					}
-					viewTool.addLoadView(context, loadString, contentView, loadView);
+					viewTool.addLoadView(activity, loadString, contentView, loadView);
 				}
 			}	
 		} catch (Exception e) {
@@ -217,7 +217,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			break;
 		case ERROR:
 			if (showLoad) {
-				viewTool.addErrorView(context, context.getResources().getString(R.string.pop_item3),
+				viewTool.addErrorView(activity, activity.getString(R.string.pop_item3),
 						contentView, loadView, iOnTryClickListener);
 			}
 			if (iOnLoadResultListener!=null){
@@ -227,7 +227,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			break;
 		case CANCELLED:
 			if (showLoad) {
-				viewTool.addErrorView(context, context.getResources().getString(R.string.task_item1),
+				viewTool.addErrorView(activity, activity.getString(R.string.task_item1),
 						contentView, loadView, iOnTryClickListener);
 			}			
 			break;
@@ -266,7 +266,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(ResultTools.judgeResult(context, "" + res.getCode())){
+				if(ResultTools.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{					
 					taskResult = TaskResult.ERROR;
@@ -296,7 +296,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
      * 判断登录失效
      */
     public void judgeLoginInvalid(String code){
-        if (ResultTools.judgeLoginInvalid(context, "" + code)){
+        if (ResultTools.judgeLoginInvalid(activity, "" + code)){
             loginInvalid = true;
         }else {
             loginInvalid = false;

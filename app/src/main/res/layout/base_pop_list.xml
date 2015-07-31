@@ -3,7 +3,6 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:id="@+id/base_pop_list_contain"
-    style="@style/base_pop_background"
     android:orientation="vertical" >
 
     
