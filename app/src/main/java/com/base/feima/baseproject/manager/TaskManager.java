@@ -5,11 +5,6 @@ import com.base.feima.baseproject.task.BaseTask;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 线程管理
- * @author mmh
- * 2015.02.08
- */
 public class TaskManager {
 	public String tag = "TaskManager";
 	public List<TaskModel> taskList = new ArrayList<TaskModel>();
