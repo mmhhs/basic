@@ -29,15 +29,15 @@ public class ImageTools {
 
 
 	/**
-	 * ¼ÆËãÍ¼Æ¬Ñ¹Ëõ±ÈÀı
-	 * 
+	 * è®¡ç®—å›¾ç‰‡å‹ç¼©æ¯”ä¾‹
+	 *
 	 * @param options
 	 * @param reqWidth
 	 * @param reqHeight
 	 * @return
 	 */
 	public static int calculateInSampleSize(BitmapFactory.Options options,
-			int reqWidth, int reqHeight) {
+											int reqWidth, int reqHeight) {
 		// Raw height and width of image
 		final int height = options.outHeight;
 		final int width = options.outWidth;
@@ -54,7 +54,7 @@ public class ImageTools {
 	}
 
 	/**
-	 * dp×ª»»Îªpx
+	 * dpè½¬æ¢ä¸ºpx
 	 */
 	public static int dip2px(Context context, float dpValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -62,7 +62,7 @@ public class ImageTools {
 	}
 
 	/**
-	 * px×ª»»Îªdp
+	 * pxè½¬æ¢ä¸ºdp
 	 */
 	public static int px2dip(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -70,22 +70,22 @@ public class ImageTools {
 	}
 
 	/**
-	 * android»ñÈ¡sd¿¨Â·¾¶·½·¨£º
-	 * 
+	 * androidè·å–sdå¡è·¯å¾„æ–¹æ³•ï¼š
+	 *
 	 * @return
 	 */
 	public static String getSDPath() {
 		File sdDir = null;
 		boolean sdCardExist = Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED); // ÅĞ¶Ïsd¿¨ÊÇ·ñ´æÔÚ
+				Environment.MEDIA_MOUNTED); // åˆ¤æ–­sdå¡æ˜¯å¦å­˜åœ¨
 		if (sdCardExist) {
-			sdDir = Environment.getExternalStorageDirectory();// »ñÈ¡¸úÄ¿Â¼
+			sdDir = Environment.getExternalStorageDirectory();// è·å–è·Ÿç›®å½•
 		}
 		return sdDir.toString();
 	}
 
 	/**
-	 * AndroidÖĞÅĞ¶ÏSD¿¨ÊÇ·ñ´æÔÚ£¬²¢ÇÒ¿ÉÒÔ½øĞĞĞ´²Ù×÷£¬¿ÉÒÔÊ¹ÓÃÈçÏÂ´úÂë
+	 * Androidä¸­åˆ¤æ–­SDå¡æ˜¯å¦å­˜åœ¨ï¼Œå¹¶ä¸”å¯ä»¥è¿›è¡Œå†™æ“ä½œï¼Œå¯ä»¥ä½¿ç”¨å¦‚ä¸‹ä»£ç 
 	 *
 	 * @return
 	 */
@@ -98,37 +98,37 @@ public class ImageTools {
 			return false;
 		}
 	}
-	
+
 	/***
-	 * Í¼Æ¬µÄËõ·Å·½·¨
-	 * 
+	 * å›¾ç‰‡çš„ç¼©æ”¾æ–¹æ³•
+	 *
 	 * @param bgimage
-	 *            £ºÔ´Í¼Æ¬×ÊÔ´
+	 *            ï¼šæºå›¾ç‰‡èµ„æº
 	 * @param newWidth
-	 *            £ºËõ·Åºó¿í¶È
+	 *            ï¼šç¼©æ”¾åå®½åº¦
 	 * @param newHeight
-	 *            £ºËõ·Åºó¸ß¶È
+	 *            ï¼šç¼©æ”¾åé«˜åº¦
 	 * @return
 	 */
 	public static Bitmap zoomImage(Bitmap bgimage, double newWidth,
-			double newHeight) {
-		// »ñÈ¡Õâ¸öÍ¼Æ¬µÄ¿íºÍ¸ß
+								   double newHeight) {
+		// è·å–è¿™ä¸ªå›¾ç‰‡çš„å®½å’Œé«˜
 		float width = bgimage.getWidth();
 		float height = bgimage.getHeight();
-		// ´´½¨²Ù×÷Í¼Æ¬ÓÃµÄmatrix¶ÔÏó
+		// åˆ›å»ºæ“ä½œå›¾ç‰‡ç”¨çš„matrixå¯¹è±¡
 		Matrix matrix = new Matrix();
-		// ¼ÆËã¿í¸ßËõ·ÅÂÊ
+		// è®¡ç®—å®½é«˜ç¼©æ”¾ç‡
 		float scaleWidth = ((float) newWidth) / width;
 		float scaleHeight = ((float) newHeight) / height;
-		// Ëõ·ÅÍ¼Æ¬¶¯×÷
+		// ç¼©æ”¾å›¾ç‰‡åŠ¨ä½œ
 		matrix.postScale(scaleWidth, scaleHeight);
 		Bitmap bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) width,
 				(int) height, matrix, true);
 		return bitmap;
 	}
-	
+
 	/**
-	 * view×ªbitmap
+	 * viewè½¬bitmap
 	 * @param view
 	 * @return
 	 */
@@ -141,7 +141,7 @@ public class ImageTools {
 			if (width != 0 && height != 0) {
 
 				bitmap = Bitmap.createBitmap(width, height,
-						Bitmap.Config.ARGB_8888);				
+						Bitmap.Config.ARGB_8888);
 				Canvas canvas = new Canvas(bitmap);
 				view.layout(0, 0, width, height);
 				view.draw(canvas);
@@ -153,10 +153,10 @@ public class ImageTools {
 		return bitmap;
 	}
 
-	
+
 	/**
-	 * ½«Bitmap×ª»»³ÉÖ¸¶¨´óĞ¡
-	 * 
+	 * å°†Bitmapè½¬æ¢æˆæŒ‡å®šå¤§å°
+	 *
 	 * @param bitmap
 	 * @param width
 	 * @param height
@@ -167,8 +167,8 @@ public class ImageTools {
 	}
 
 	/**
-	 * Drawable ×ª Bitmap
-	 * 
+	 * Drawable è½¬ Bitmap
+	 *
 	 * @param drawable
 	 * @return
 	 */
@@ -178,8 +178,8 @@ public class ImageTools {
 	}
 
 	/**
-	 * Bitmap ×ª Drawable
-	 * 
+	 * Bitmap è½¬ Drawable
+	 *
 	 * @param bitmap
 	 * @return
 	 */
@@ -189,8 +189,8 @@ public class ImageTools {
 	}
 
 	/**
-	 * byte[] ×ª bitmap
-	 * 
+	 * byte[] è½¬ bitmap
+	 *
 	 * @param b
 	 * @return
 	 */
@@ -201,11 +201,11 @@ public class ImageTools {
 			return null;
 		}
 	}
-	
+
 
 	/**
-	 * bitmap ×ª byte[]
-	 * 
+	 * bitmap è½¬ byte[]
+	 *
 	 * @param bm
 	 * @return
 	 */
@@ -214,138 +214,138 @@ public class ImageTools {
 		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
-	
-	
-	/**  
-	* ±£´æÍ¼Æ¬ÎªJPEG  
-	*   
-	* @param bitmap  
-	* @param arg   ±£´æÖÊÁ¿
-	* @param path  ±£´æÂ·¾¶
-	*/  
-	public static Boolean saveJPGE_After(Bitmap bitmap, int arg,String path) { 
+
+
+	/**
+	 * ä¿å­˜å›¾ç‰‡ä¸ºJPEG
+	 *
+	 * @param bitmap
+	 * @param arg   ä¿å­˜è´¨é‡
+	 * @param path  ä¿å­˜è·¯å¾„
+	 */
+	public static Boolean saveJPGE_After(Bitmap bitmap, int arg,String path) {
 		boolean result = false;
-    	try {
-    		File photoFile = new File(path);  
-    		if(!photoFile.exists()){
-    			try {
-    				photoFile.createNewFile();
-    			} catch (IOException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
-    		}
-    		try {   
-    			FileOutputStream out = new FileOutputStream(photoFile);  
-    			if (bitmap.compress(Bitmap.CompressFormat.JPEG, arg, out)) {
-    				out.flush();   
-    				out.close();   
-    			}   
-    		} catch (FileNotFoundException e) {  
-    			photoFile.delete();
-    			e.printStackTrace();
-    			result =  false;
-    		} catch (IOException e) {  
-    			photoFile.delete();
-    			e.printStackTrace();
-    			result =  false;
-    		}catch (Exception e){
-    			e.printStackTrace();
-    			result =   false;
-    		}
-    		result = true;
+		try {
+			File photoFile = new File(path);
+			if(!photoFile.exists()){
+				try {
+					photoFile.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				FileOutputStream out = new FileOutputStream(photoFile);
+				if (bitmap.compress(Bitmap.CompressFormat.JPEG, arg, out)) {
+					out.flush();
+					out.close();
+				}
+			} catch (FileNotFoundException e) {
+				photoFile.delete();
+				e.printStackTrace();
+				result =  false;
+			} catch (IOException e) {
+				photoFile.delete();
+				e.printStackTrace();
+				result =  false;
+			}catch (Exception e){
+				e.printStackTrace();
+				result =   false;
+			}
+			result = true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
 			return result;
 		}
-		
+
 	}
 
 
-    /**
-     * ¶ÁÈ¡Â·¾¶ÖĞµÄÍ¼Æ¬£¬È»ºó½«Æä×ª»¯ÎªËõ·ÅºóµÄbitmap
-     * 360*640
-     * @param path
-     */
-    public static String saveScaleImage(String path) {
-        String result = "";
-        try {
-            String fileSavePath ="";
-            long time = System.currentTimeMillis();
-            if(!sdCardExist()||path.equals("")){
-                return "";
-            }
-            fileSavePath = BaseConstant.IMAGETAMPPATH +time+".jpg";
-            File folder = new File(BaseConstant.IMAGETAMPPATH);
-            if(!folder.exists()){
-                folder.mkdirs();
-            }
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            Bitmap bitmap = BitmapFactory.decodeFile(path, options); // ´ËÊ±·µ»ØbmÎª¿Õ
-            // »ñÈ¡Õâ¸öÍ¼Æ¬µÄ¿íºÍ¸ß
-            int width = options.outWidth;
-            int height = options.outHeight;
-            options.inJustDecodeBounds = false;
-            // ¼ÆËãËõ·Å±È
-            int be = caculateInSampleSize(width,height);
-            options.inSampleSize =be;
-            try{
-                bitmap = BitmapFactory.decodeFile(path, options);
-            }catch(Exception e){
-                e.printStackTrace();
-                return "";
-            }catch(OutOfMemoryError error){
-                error.printStackTrace();
-                return "";
-            }
-            if(bitmap==null){
-                return "";
-            }
-            boolean saveResult = saveJPGE_After(bitmap,100, fileSavePath);
-            if(!bitmap.isRecycled()){
-                bitmap.recycle();
-            }
-            bitmap=null;
-            if(saveResult){
+	/**
+	 * è¯»å–è·¯å¾„ä¸­çš„å›¾ç‰‡ï¼Œç„¶åå°†å…¶è½¬åŒ–ä¸ºç¼©æ”¾åçš„bitmap
+	 * 360*640
+	 * @param path
+	 */
+	public static String saveScaleImage(String path) {
+		String result = "";
+		try {
+			String fileSavePath ="";
+			long time = System.currentTimeMillis();
+			if(!sdCardExist()||path.equals("")){
+				return "";
+			}
+			fileSavePath = BaseConstant.IMAGETAMPPATH +time+".jpg";
+			File folder = new File(BaseConstant.IMAGETAMPPATH);
+			if(!folder.exists()){
+				folder.mkdirs();
+			}
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			Bitmap bitmap = BitmapFactory.decodeFile(path, options); // æ­¤æ—¶è¿”å›bmä¸ºç©º
+			// è·å–è¿™ä¸ªå›¾ç‰‡çš„å®½å’Œé«˜
+			int width = options.outWidth;
+			int height = options.outHeight;
+			options.inJustDecodeBounds = false;
+			// è®¡ç®—ç¼©æ”¾æ¯”
+			int be = caculateInSampleSize(width,height);
+			options.inSampleSize =be;
+			try{
+				bitmap = BitmapFactory.decodeFile(path, options);
+			}catch(Exception e){
+				e.printStackTrace();
+				return "";
+			}catch(OutOfMemoryError error){
+				error.printStackTrace();
+				return "";
+			}
+			if(bitmap==null){
+				return "";
+			}
+			boolean saveResult = saveJPGE_After(bitmap,100, fileSavePath);
+			if(!bitmap.isRecycled()){
+				bitmap.recycle();
+			}
+			bitmap=null;
+			if(saveResult){
 
-                result = fileSavePath;
-            }else{
+				result = fileSavePath;
+			}else{
 
-                result = "";
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }finally{
-            return result;
-        }
-
-
-    }
-
-    private static int caculateInSampleSize(int width,int height){
-        int be = 1;//be=1±íÊ¾²»Ëõ·Å
-        try {
-            if (width > height && height > BaseConstant.SCALE_WIDTH) {//Èç¹û¿í¶È´óµÄ»°¸ù¾İ¿í¶È¹Ì¶¨´óĞ¡Ëõ·Å
-                be = (int) (width / BaseConstant.SCALE_WIDTH);
-            } else if (width < height && height > BaseConstant.SCALE_HEIGHT) {//Èç¹û¸ß¶È¸ßµÄ»°¸ù¾İ¿í¶È¹Ì¶¨´óĞ¡Ëõ·Å
-                be = (int) (height / BaseConstant.SCALE_HEIGHT);
-            }
-            if(be<=1){
-                be = 1;
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }finally{
-            return be;
-        }
+				result = "";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally{
+			return result;
+		}
 
 
+	}
 
-    }
-	
+	private static int caculateInSampleSize(int width,int height){
+		int be = 1;//be=1è¡¨ç¤ºä¸ç¼©æ”¾
+		try {
+			if (width > height && height > BaseConstant.SCALE_WIDTH) {//å¦‚æœå®½åº¦å¤§çš„è¯æ ¹æ®å®½åº¦å›ºå®šå¤§å°ç¼©æ”¾
+				be = (int) (width / BaseConstant.SCALE_WIDTH);
+			} else if (width < height && height > BaseConstant.SCALE_HEIGHT) {//å¦‚æœé«˜åº¦é«˜çš„è¯æ ¹æ®å®½åº¦å›ºå®šå¤§å°ç¼©æ”¾
+				be = (int) (height / BaseConstant.SCALE_HEIGHT);
+			}
+			if(be<=1){
+				be = 1;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally{
+			return be;
+		}
+
+
+
+	}
+
 }

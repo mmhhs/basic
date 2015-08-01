@@ -5,11 +5,6 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Activity����
- * @author mmh
- * 2015.02.08
- */
 public class ScreenManager {
 	private static List<Activity> activityList = new ArrayList<Activity>();
 	private static ScreenManager instance;
@@ -25,7 +20,7 @@ public class ScreenManager {
 	}
 
 	/**
-	 * �˳�ջ��Activity
+	 * 退出栈顶Activity
 	 * @param activity
 	 */
 	public void closeActivity(Activity activity) {
@@ -36,7 +31,7 @@ public class ScreenManager {
 	}
 
 	/**
-	 * ��õ�ǰջ��Activity
+	 * 获得当前栈顶Activity
 	 * @return
 	 */
 	public Activity getCurrentActivity() {
@@ -46,81 +41,81 @@ public class ScreenManager {
 		}else{
 			return null;
 		}
-		
+
 	}
 
 	/**
-	 * ����ǰActivity����ջ��
+	 * 将当前Activity推入栈中
 	 * @param activity
-	 */	
-	public void pushActivity(Activity activity) {		
+	 */
+	public void pushActivity(Activity activity) {
 		activityList.add(activity);
 	}
 
 	/**
-	 * �˳�ջ������Activity����һ��Activity
-	 */	
+	 * 退出栈中所有Activity除了一个Activity
+	 */
 	public void closeAllExceptOne(Class cls) {
-        Activity keepActivity = null;
+		Activity keepActivity = null;
 		for(int i=0;i<activityList.size();i++){
 			try {
 				Activity activity = activityList.get(i);
 				if (activity != null) {
-                    if (activity.getClass().getSimpleName().equals(cls.getSimpleName())){
-                        keepActivity = activity;
-                    }else {
-                        closeActivity(activity);
-                    }
-				}				
+					if (activity.getClass().getSimpleName().equals(cls.getSimpleName())){
+						keepActivity = activity;
+					}else {
+						closeActivity(activity);
+					}
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
 		}
-        activityList.clear();
-        if (keepActivity!=null){
-            activityList.add(keepActivity);
-        }
+		activityList.clear();
+		if (keepActivity!=null){
+			activityList.add(keepActivity);
+		}
 	}
 
-    /**
-     * �˳�ջ������Activity����ָ��Activity
-     * @param cls
-     */
-    public void closeAllExcept(Class[] cls) {
-        Activity[] activities = new Activity[cls.length];
-        for(int i=0;i<activityList.size();i++){
-            try {
-                Activity activity = activityList.get(i);
-                if (activity != null) {
-                    boolean canClose = true;
-                    for (int c=0;c<cls.length;c++){
-                        if (activity.getClass().getSimpleName().equals(cls[c].getSimpleName())){
-                            canClose = false;
-                            activities[c] = activity;
-                        }
-                    }
-                    if (canClose){
-                        closeActivity(activity);
-                    }
-                }
-            } catch (Exception e) {
-                // TODO: handle exception
-                e.printStackTrace();
-            }
-        }
-        activityList.clear();
-        for (int i=0;i<activities.length;i++){
-            if (activities[i]!=null){
-                activityList.add(activities[i]);
-            }
-        }
-
-    }
-	
 	/**
-	 * �˳�ջ������Activity
-	 */	
+	 * 退出栈中所有Activity除了指定Activity
+	 * @param cls
+	 */
+	public void closeAllExcept(Class[] cls) {
+		Activity[] activities = new Activity[cls.length];
+		for(int i=0;i<activityList.size();i++){
+			try {
+				Activity activity = activityList.get(i);
+				if (activity != null) {
+					boolean canClose = true;
+					for (int c=0;c<cls.length;c++){
+						if (activity.getClass().getSimpleName().equals(cls[c].getSimpleName())){
+							canClose = false;
+							activities[c] = activity;
+						}
+					}
+					if (canClose){
+						closeActivity(activity);
+					}
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		activityList.clear();
+		for (int i=0;i<activities.length;i++){
+			if (activities[i]!=null){
+				activityList.add(activities[i]);
+			}
+		}
+
+	}
+
+	/**
+	 * 退出栈中所有Activity
+	 */
 	public void closeAll() {
 		for(int i=0;i<activityList.size();i++){
 			try {
@@ -133,41 +128,42 @@ public class ScreenManager {
 				e.printStackTrace();
 			}
 		}
+		activityList.clear();
 	}
-	
+
 	/**
-	 * �˳�ջ��activity
-	 */	
+	 * 退出栈顶activity
+	 */
 	public void closeCurrent() {
 		try {
 			Activity activity = getCurrentActivity();
 			if (activity == null) {
 				return;
-			}			
+			}
 			closeActivity(activity);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-				
+
 	}
-	
+
 	/**
-	 * �˳�ջ��ָ��Activity
-	 */	
+	 * 退出栈中指定Activity
+	 */
 	public void closeAppoin(Class cls) {
 		for(int i=0;i<activityList.size();i++){
 			try {
 				Activity activity = activityList.get(i);
 				if (activity != null&&activity.getClass().getSimpleName().equals(cls.getSimpleName())) {
 					closeActivity(activity);
-                    activityList.remove(activity);
-				}				
+					activityList.remove(activity);
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 }

@@ -11,38 +11,38 @@ import android.support.v4.app.NotificationCompat;
 import com.base.feima.baseproject.R;
 
 public class NotificationUtil{
-	
-	
+
+
 	public static void notice(Context context,String content,Intent intent) {
-		long[] vibreate= new long[]{1000,1000,1000,1000};  
+		long[] vibreate= new long[]{1000,1000,1000,1000};
 		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
-		mBuilder.setContentTitle(context.getResources().getString(R.string.app_name))//ÉèÖÃÍ¨ÖªÀ¸±êÌâ
-		.setVibrate(vibreate)
-		.setOnlyAlertOnce(false)
-		.setContentText(content) //<span style="font-family: Arial;">/ÉèÖÃÍ¨ÖªÀ¸ÏÔÊ¾ÄÚÈİ</span>
-		.setContentIntent(getDefalutIntent(context,Notification.FLAG_AUTO_CANCEL,intent)) //ÉèÖÃÍ¨ÖªÀ¸µã»÷ÒâÍ¼
-//		.setNumber(number) //ÉèÖÃÍ¨Öª¼¯ºÏµÄÊıÁ¿
-		.setTicker(content) //Í¨ÖªÊ×´Î³öÏÖÔÚÍ¨ÖªÀ¸£¬´øÉÏÉı¶¯»­Ğ§¹ûµÄ
-		.setWhen(System.currentTimeMillis())//Í¨Öª²úÉúµÄÊ±¼ä£¬»áÔÚÍ¨ÖªĞÅÏ¢ÀïÏÔÊ¾£¬Ò»°ãÊÇÏµÍ³»ñÈ¡µ½µÄÊ±¼ä
-		.setPriority(Notification.PRIORITY_HIGH) //ÉèÖÃ¸ÃÍ¨ÖªÓÅÏÈ¼¶
-		.setAutoCancel(true)//ÉèÖÃÕâ¸ö±êÖ¾µ±ÓÃ»§µ¥»÷Ãæ°å¾Í¿ÉÒÔÈÃÍ¨Öª½«×Ô¶¯È¡Ïû  
-		.setOngoing(false)//ture£¬ÉèÖÃËûÎªÒ»¸öÕıÔÚ½øĞĞµÄÍ¨Öª¡£ËûÃÇÍ¨³£ÊÇÓÃÀ´±íÊ¾Ò»¸öºóÌ¨ÈÎÎñ,ÓÃ»§»ı¼«²ÎÓë(Èç²¥·ÅÒôÀÖ)»òÒÔÄ³ÖÖ·½Ê½ÕıÔÚµÈ´ı,Òò´ËÕ¼ÓÃÉè±¸(ÈçÒ»¸öÎÄ¼şÏÂÔØ,Í¬²½²Ù×÷,Ö÷¶¯ÍøÂçÁ¬½Ó)
-		.setDefaults(Notification.DEFAULT_ALL)//ÏòÍ¨ÖªÌí¼ÓÉùÒô¡¢ÉÁµÆºÍÕñ¶¯Ğ§¹ûµÄ×î¼òµ¥¡¢×îÒ»ÖÂµÄ·½Ê½ÊÇÊ¹ÓÃµ±Ç°µÄÓÃ»§Ä¬ÈÏÉèÖÃ£¬Ê¹ÓÃdefaultsÊôĞÔ£¬¿ÉÒÔ×éºÏ
-		//Notification.DEFAULT_ALL  Notification.DEFAULT_SOUND Ìí¼ÓÉùÒô // requires VIBRATE permission
-		.setSmallIcon(R.drawable.ic_launcher);//ÉèÖÃÍ¨ÖªĞ¡ICON
-		
+		mBuilder.setContentTitle(context.getResources().getString(R.string.app_name))//è®¾ç½®é€šçŸ¥æ æ ‡é¢˜
+				.setVibrate(vibreate)
+				.setOnlyAlertOnce(false)
+				.setContentText(content) //<span style="font-family: Arial;">/è®¾ç½®é€šçŸ¥æ æ˜¾ç¤ºå†…å®¹</span>
+				.setContentIntent(getDefalutIntent(context,Notification.FLAG_AUTO_CANCEL,intent)) //è®¾ç½®é€šçŸ¥æ ç‚¹å‡»æ„å›¾
+//		.setNumber(number) //è®¾ç½®é€šçŸ¥é›†åˆçš„æ•°é‡
+				.setTicker(content) //é€šçŸ¥é¦–æ¬¡å‡ºç°åœ¨é€šçŸ¥æ ï¼Œå¸¦ä¸Šå‡åŠ¨ç”»æ•ˆæœçš„
+				.setWhen(System.currentTimeMillis())//é€šçŸ¥äº§ç”Ÿçš„æ—¶é—´ï¼Œä¼šåœ¨é€šçŸ¥ä¿¡æ¯é‡Œæ˜¾ç¤ºï¼Œä¸€èˆ¬æ˜¯ç³»ç»Ÿè·å–åˆ°çš„æ—¶é—´
+				.setPriority(Notification.PRIORITY_HIGH) //è®¾ç½®è¯¥é€šçŸ¥ä¼˜å…ˆçº§
+				.setAutoCancel(true)//è®¾ç½®è¿™ä¸ªæ ‡å¿—å½“ç”¨æˆ·å•å‡»é¢æ¿å°±å¯ä»¥è®©é€šçŸ¥å°†è‡ªåŠ¨å–æ¶ˆ
+				.setOngoing(false)//tureï¼Œè®¾ç½®ä»–ä¸ºä¸€ä¸ªæ­£åœ¨è¿›è¡Œçš„é€šçŸ¥ã€‚ä»–ä»¬é€šå¸¸æ˜¯ç”¨æ¥è¡¨ç¤ºä¸€ä¸ªåå°ä»»åŠ¡,ç”¨æˆ·ç§¯æå‚ä¸(å¦‚æ’­æ”¾éŸ³ä¹)æˆ–ä»¥æŸç§æ–¹å¼æ­£åœ¨ç­‰å¾…,å› æ­¤å ç”¨è®¾å¤‡(å¦‚ä¸€ä¸ªæ–‡ä»¶ä¸‹è½½,åŒæ­¥æ“ä½œ,ä¸»åŠ¨ç½‘ç»œè¿æ¥)
+				.setDefaults(Notification.DEFAULT_ALL)//å‘é€šçŸ¥æ·»åŠ å£°éŸ³ã€é—ªç¯å’ŒæŒ¯åŠ¨æ•ˆæœçš„æœ€ç®€å•ã€æœ€ä¸€è‡´çš„æ–¹å¼æ˜¯ä½¿ç”¨å½“å‰çš„ç”¨æˆ·é»˜è®¤è®¾ç½®ï¼Œä½¿ç”¨defaultså±æ€§ï¼Œå¯ä»¥ç»„åˆ
+						//Notification.DEFAULT_ALL  Notification.DEFAULT_SOUND æ·»åŠ å£°éŸ³ // requires VIBRATE permission
+				.setSmallIcon(R.drawable.ic_launcher);//è®¾ç½®é€šçŸ¥å°ICON
+
 		mNotificationManager.notify(0, mBuilder.build());
 	}
-	
-	public static PendingIntent getDefalutIntent(Context context,int flags,Intent intent){  
-	    PendingIntent pendingIntent= PendingIntent.getActivity(context, 1, intent, flags);  
-	    return pendingIntent;  
+
+	public static PendingIntent getDefalutIntent(Context context,int flags,Intent intent){
+		PendingIntent pendingIntent= PendingIntent.getActivity(context, 1, intent, flags);
+		return pendingIntent;
 	}
-	
+
 	public static void cancelAllNotification(Context context) {
 		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 		mNotificationManager.cancelAll();
 	}
-	
+
 }

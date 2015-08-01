@@ -5,11 +5,6 @@ import com.base.feima.baseproject.model.ResultModel;
 
 public class VersionResult extends ResultModel {
 
-    /**
-     * msg :
-     * code : 2000
-     * data : {"updateInfo":"更新信息","download":"下载地址","version":"版本名称如V2.0.0"}
-     */
 
     private VersionDataEntity data;
 
@@ -26,11 +21,6 @@ public class VersionResult extends ResultModel {
     }
 
     public class VersionDataEntity {
-        /**
-         * updateInfo : 更新信息
-         * download : 下载地址
-         * version : 版本名称如V2.0.0
-         */
         private String updateInfo;
         private String download;
         private String version;

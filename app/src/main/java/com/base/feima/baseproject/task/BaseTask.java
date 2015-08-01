@@ -134,7 +134,7 @@ public abstract class BaseTask<Params, Progress, Result> {
 	
 	private static List<BaseTask> taskList = new ArrayList();
 	
-    private static final String LOG_TAG = "UserTask";
+    private static final String LOG_TAG = "BaseTask";
 
     private static final int CORE_POOL_SIZE = 5;
     private static final int MAXIMUM_POOL_SIZE = 10;
@@ -148,7 +148,7 @@ public abstract class BaseTask<Params, Progress, Result> {
 
         @Override
 		public Thread newThread(Runnable r) {
-            return new Thread(r, "UserTask #" + mCount.getAndIncrement());
+            return new Thread(r, "BaseTask #" + mCount.getAndIncrement());
         }
     };
 
@@ -180,7 +180,7 @@ public abstract class BaseTask<Params, Progress, Result> {
          */
         RUNNING,
         /**
-         * Indicates that {@link UserTask#onPostExecute(Object)} has finished.
+         * Indicates that {@link BaseTask#onPostExecute(Object)} has finished.
          */
         FINISHED,
     }

@@ -44,16 +44,16 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class ChooseImagesActivity extends BaseActivity {
-    public final int CHOOSEIMAGESSCREENFLAG_GRIDLIST         = 3001;//Ğ¡ËõÂÔÍ¼ÁĞ±í
-    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWFOLDER    = 3002;//ÎÄ¼ş¼ĞÄÚËùÓĞÍ¼Æ¬´óÍ¼Ô¤ÀÀ
-    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWCHOOSE    = 3003;//Ñ¡ÖĞÍ¼Æ¬´óÍ¼Ô¤ÀÀ
-    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWEDIT      = 3004;//±à¼­½çÃæ´óÍ¼Ô¤ÀÀ
-    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWTAKE      = 3005;//ÅÄÕÕ½á¹û´óÍ¼Ô¤ÀÀ
+    public final int CHOOSEIMAGESSCREENFLAG_GRIDLIST         = 3001;//å°ç¼©ç•¥å›¾åˆ—è¡¨
+    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWFOLDER    = 3002;//æ–‡ä»¶å¤¹å†…æ‰€æœ‰å›¾ç‰‡å¤§å›¾é¢„è§ˆ
+    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWCHOOSE    = 3003;//é€‰ä¸­å›¾ç‰‡å¤§å›¾é¢„è§ˆ
+    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWEDIT      = 3004;//ç¼–è¾‘ç•Œé¢å¤§å›¾é¢„è§ˆ
+    public final int CHOOSEIMAGESSCREENFLAG_PREVIEWTAKE      = 3005;//æ‹ç…§ç»“æœå¤§å›¾é¢„è§ˆ
 
     public static final String BROADCASTFLAG = "CHOOSEIMAGES";
     private HashMap<String, List<String>> mGruopMap = new HashMap<String, List<String>>();
-    private ArrayList<String> allImageList = new ArrayList<String>();//ËùÓĞÍ¼Æ¬Â·¾¶ÁĞ±í
-    private ArrayList<String> chooseImageList = new ArrayList<String>();//Ñ¡ÖĞÍ¼Æ¬Â·¾¶ÁĞ±í
+    private ArrayList<String> allImageList = new ArrayList<String>();//æ‰€æœ‰å›¾ç‰‡è·¯å¾„åˆ—è¡¨
+    private ArrayList<String> chooseImageList = new ArrayList<String>();//é€‰ä¸­å›¾ç‰‡è·¯å¾„åˆ—è¡¨
     private List<ImageBean> folderImageBeanList = new ArrayList<ImageBean>();
 
     @InjectView(R.id.base_choose_images_gridView)
@@ -69,7 +69,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
     private int screenWidth = 0;
     private ChooseImagesGridAdapter chooseImagesGridAdapter;
-    private int maxSize = 9;//×î¶àÄÜÑ¡ÔñµÄÍ¼Æ¬Êı
+    private int maxSize = 9;//æœ€å¤šèƒ½é€‰æ‹©çš„å›¾ç‰‡æ•°
     private int folderShowIndex = 0;
     private ImageChooseTools imageChooseTools = new ImageChooseTools();
 
@@ -130,8 +130,8 @@ public class ChooseImagesActivity extends BaseActivity {
     }
 
     /**
-     * ×é×°·Ö×é½çÃæGridViewµÄÊı¾İÔ´£¬ÒòÎªÎÒÃÇÉ¨ÃèÊÖ»úµÄÊ±ºò½«Í¼Æ¬ĞÅÏ¢·ÅÔÚHashMapÖĞ
-     * ËùÒÔĞèÒª±éÀúHashMap½«Êı¾İ×é×°³ÉList
+     * ç»„è£…åˆ†ç»„ç•Œé¢GridViewçš„æ•°æ®æºï¼Œå› ä¸ºæˆ‘ä»¬æ‰«ææ‰‹æœºçš„æ—¶å€™å°†å›¾ç‰‡ä¿¡æ¯æ”¾åœ¨HashMapä¸­
+     * æ‰€ä»¥éœ€è¦éå†HashMapå°†æ•°æ®ç»„è£…æˆList
      *
      * @param mGruopMap
      * @return
@@ -147,7 +147,7 @@ public class ChooseImagesActivity extends BaseActivity {
         mImageBeanAll.setSelected(true);
         mImageBeanAll.setFolderName(keyAll);
         mImageBeanAll.setImageCounts(valueAll.size());
-        mImageBeanAll.setTopImagePath(valueAll.get(0));//»ñÈ¡¸Ã×éµÄµÚÒ»ÕÅÍ¼Æ¬
+        mImageBeanAll.setTopImagePath(valueAll.get(0));//è·å–è¯¥ç»„çš„ç¬¬ä¸€å¼ å›¾ç‰‡
         mImageBeanAll.setImagePathList(valueAll);
         list.add(mImageBeanAll);
         mGruopMap.put(getString(R.string.choose_images_all), allImageList);
@@ -160,7 +160,7 @@ public class ChooseImagesActivity extends BaseActivity {
             mImageBean.setSelected(false);
             mImageBean.setFolderName(key);
             mImageBean.setImageCounts(value.size());
-            mImageBean.setTopImagePath(value.get(0));//»ñÈ¡¸Ã×éµÄµÚÒ»ÕÅÍ¼Æ¬
+            mImageBean.setTopImagePath(value.get(0));//è·å–è¯¥ç»„çš„ç¬¬ä¸€å¼ å›¾ç‰‡
             mImageBean.setImagePathList(value);
             if (!key.equals(keyAll)){
                 list.add(mImageBean);
@@ -176,21 +176,21 @@ public class ChooseImagesActivity extends BaseActivity {
         }
         Uri mImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         ContentResolver mContentResolver = ChooseImagesActivity.this.getContentResolver();
-        //Ö»²éÑ¯jpegºÍpngµÄÍ¼Æ¬
+        //åªæŸ¥è¯¢jpegå’Œpngçš„å›¾ç‰‡
         Cursor mCursor = mContentResolver.query(mImageUri, null,
                 MediaStore.Images.Media.MIME_TYPE + "=? or "
                         + MediaStore.Images.Media.MIME_TYPE + "=?",
                 new String[] { "image/jpeg" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");
-//                new String[] { "image/jpeg", "image/png" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");²»Ö§³ÖPNG
-		allImageList.add("takePhoto");
+//                new String[] { "image/jpeg", "image/png" }, MediaStore.Images.Media.DATE_MODIFIED+ " desc");ä¸æ”¯æŒPNG
+        allImageList.add("takePhoto");
         while (mCursor.moveToNext()) {
-            //»ñÈ¡Í¼Æ¬µÄÂ·¾¶
+            //è·å–å›¾ç‰‡çš„è·¯å¾„
             String path = mCursor.getString(mCursor
                     .getColumnIndex(MediaStore.Images.Media.DATA));
             allImageList.add(path);
-            //»ñÈ¡¸ÃÍ¼Æ¬µÄ¸¸Â·¾¶Ãû
+            //è·å–è¯¥å›¾ç‰‡çš„çˆ¶è·¯å¾„å
             String parentName = new File(path).getParentFile().getName();
-            //¸ù¾İ¸¸Â·¾¶Ãû½«Í¼Æ¬·ÅÈëµ½mGruopMapÖĞ
+            //æ ¹æ®çˆ¶è·¯å¾„åå°†å›¾ç‰‡æ”¾å…¥åˆ°mGruopMapä¸­
             if (!mGruopMap.containsKey(parentName)) {
                 List<String> childList = new ArrayList<String>();
                 childList.add(path);
@@ -199,7 +199,7 @@ public class ChooseImagesActivity extends BaseActivity {
                 mGruopMap.get(parentName).add(path);
             }
         }
-//		mGruopMap.put("È«²¿Í¼Æ¬", allImageList);
+//		mGruopMap.put("å…¨éƒ¨å›¾ç‰‡", allImageList);
         mCursor.close();
         return true;
     }
@@ -262,8 +262,8 @@ public class ChooseImagesActivity extends BaseActivity {
     };
 
     /**
-     * ·¢ËÍ½á¹û¹ã²¥
-     * @param imageList Ñ¡ÖĞµÄÍ¼Æ¬ÁĞ±í
+     * å‘é€ç»“æœå¹¿æ’­
+     * @param imageList é€‰ä¸­çš„å›¾ç‰‡åˆ—è¡¨
      */
     private void sendChooseImagesBroad(ArrayList<String> imageList){
         Intent intent = new Intent();
@@ -282,7 +282,7 @@ public class ChooseImagesActivity extends BaseActivity {
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         if(dismissKeyback){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
         }
         if(animStyle>0){
             popupWindow.setAnimationStyle(animStyle);
@@ -314,7 +314,7 @@ public class ChooseImagesActivity extends BaseActivity {
     }
 
     /**
-     * ÇĞ»»ÏÔÊ¾ÎÄ¼ş¼ĞÍ¼Æ¬
+     * åˆ‡æ¢æ˜¾ç¤ºæ–‡ä»¶å¤¹å›¾ç‰‡
      * @param position
      */
     private void setFolderShow(int position){
@@ -433,7 +433,7 @@ public class ChooseImagesActivity extends BaseActivity {
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         if(true){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
         }
 //        if(animStyle>0){
 //            popupWindow.setAnimationStyle(animStyle);
@@ -521,7 +521,7 @@ public class ChooseImagesActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ImageChooseTools.PHOTO_WITH_CAMERA:
-                    String path = imageChooseTools.getTakePhotoScaleUrl();//»ñÈ¡ÅÄÕÕÑ¹ËõÂ·¾¶
+                    String path = imageChooseTools.getTakePhotoScaleUrl();//è·å–æ‹ç…§å‹ç¼©è·¯å¾„
                     List<String> pathList = new ArrayList<String>();
                     pathList.add(path);
                     PopupWindow popupWindow = getPreviewWindow(ChooseImagesActivity.this,CHOOSEIMAGESSCREENFLAG_PREVIEWTAKE,pathList,0);

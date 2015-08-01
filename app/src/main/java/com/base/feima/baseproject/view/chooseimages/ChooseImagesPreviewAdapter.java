@@ -1,8 +1,5 @@
 package com.base.feima.baseproject.view.chooseimages;
 
-
-// add by liumy  2013 7-19
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;

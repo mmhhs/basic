@@ -4,18 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * 对外提供getMD5(String)方法
- * @author randyjia
- *
- */
+
 public class MD5Tools {
 	
 	public static String getMD5(String val) throws NoSuchAlgorithmException{
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
 		md5.reset();
 		md5.update(val.getBytes());
-		byte[] m = md5.digest();//加密
+		byte[] m = md5.digest();
 		return getString(m);
 }
 	private static String getString(byte[] b){
@@ -25,12 +21,7 @@ public class MD5Tools {
 		 }
 		 return sb.toString();
 }
-	
-	/**
-	* MD5 32位加密方法二 小写
-	* @param str
-	* @return
-	*/
+
 
 	public final static String get32MD5Str(String str) { 
 		MessageDigest messageDigest = null; 

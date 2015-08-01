@@ -24,79 +24,79 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
-    //ÏÔÊ¾Ïà¹Ø
-    public final static int NET_ERROR = 6;//Ã»ÓĞÍøÂç
-    public int netFlag =0;//ÍøÂç±êÊ¶
+	//æ˜¾ç¤ºç›¸å…³
+	public final static int NET_ERROR = 6;//æ²¡æœ‰ç½‘ç»œ
+	public int netFlag =0;//ç½‘ç»œæ ‡è¯†
 	public boolean showLoad = false;
-	public ViewTool viewTool;//ÊÓÍ¼¹ÜÀí
-	public Activity activity;//ÉÏÏÂÎÄ
-	public View contentView;//ÄÚÈİ½çÃæ
-	public LinearLayout loadView;//¼ÓÔØ½çÃæ
-	public String loadString = "";//¼ÓÔØÎÄ×Ö
-    //·ÃÎÊÏà¹Ø
-    public int accessType;//·ÃÎÊ·½Ê½
-	public String httpUrl = "";//ÍøÂçÂ·¾¶
-	public Map<String, Object> argMap;//²ÎÊı
-    public List<File> fileList;//ÉÏ´«ÎÄ¼şÁĞ±í
-    public String keyString = "Filedata";//ÉÏ´«ÎÄ¼ş¼üÖµ
-    //·µ»ØÖµÏà¹Ø
-	public String errorMsg;//´íÎóĞÅÏ¢
-	public String resultsString = null;	//·µ»ØÖµ
-    public boolean loginInvalid = false;//µÇÂ¼Ê§Ğ§
+	public ViewTool viewTool;//è§†å›¾ç®¡ç†
+	public Activity activity;//ä¸Šä¸‹æ–‡
+	public View contentView;//å†…å®¹ç•Œé¢
+	public LinearLayout loadView;//åŠ è½½ç•Œé¢
+	public String loadString = "";//åŠ è½½æ–‡å­—
+	//è®¿é—®ç›¸å…³
+	public int accessType;//è®¿é—®æ–¹å¼
+	public String httpUrl = "";//ç½‘ç»œè·¯å¾„
+	public Map<String, Object> argMap;//å‚æ•°
+	public List<File> fileList;//ä¸Šä¼ æ–‡ä»¶åˆ—è¡¨
+	public String keyString = "Filedata";//ä¸Šä¼ æ–‡ä»¶é”®å€¼
+	//è¿”å›å€¼ç›¸å…³
+	public String errorMsg;//é”™è¯¯ä¿¡æ¯
+	public String resultsString = null;	//è¿”å›å€¼
+	public boolean loginInvalid = false;//ç™»å½•å¤±æ•ˆ
 
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowLoadTask";
-    public IOnTryClickListener iOnTryClickListener;//ÖØÊÔ¼àÌı
-    private IOnLoadBackgroundListener iOnLoadBackgroundListener;
-    private IOnLoadResultListener iOnLoadResultListener;
-	
+	public IOnTryClickListener iOnTryClickListener;//é‡è¯•ç›‘å¬
+	private IOnLoadBackgroundListener iOnLoadBackgroundListener;
+	private IOnLoadResultListener iOnLoadResultListener;
+
 	/**
-	 * ±¾µØ´¦ÀíºÄÊ±Ïß³Ì
-	 * @param activity           ÉÏÏÂÎÄ
-	 * @param contentView       ÄÚÈİÊÓÍ¼
-	 * @param loadView          ¼ÓÔØÊÓÍ¼
-	 * @param loadString        ÏÔÊ¾ÎÄ×Ö
-	 * @param showLoad          ÊÇ·ñÏÔÊ¾loadview ÈôÏÔÊ¾£¬ÔòcontentView£¬loadView²»ÄÜÎª¿Õ
+	 * æœ¬åœ°å¤„ç†è€—æ—¶çº¿ç¨‹
+	 * @param activity           ä¸Šä¸‹æ–‡
+	 * @param contentView       å†…å®¹è§†å›¾
+	 * @param loadView          åŠ è½½è§†å›¾
+	 * @param loadString        æ˜¾ç¤ºæ–‡å­—
+	 * @param showLoad          æ˜¯å¦æ˜¾ç¤ºloadview è‹¥æ˜¾ç¤ºï¼Œåˆ™contentViewï¼ŒloadViewä¸èƒ½ä¸ºç©º
 	 */
 	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener){
 		this.activity = activity;
-        this.tagString = tagString;
+		this.tagString = tagString;
 		this.contentView = contentView;
-        this.loadView = loadView;
+		this.loadView = loadView;
 		this.loadString = loadString;
 		this.showLoad = showLoad;
 		this.iOnTryClickListener = iOnTryClickListener;
-        viewTool = new ViewTool();
+		viewTool = new ViewTool();
 	}
-	
+
 	/**
-	 * ÍøÂç¼ÓÔØÏß³Ì
-	 * @param activity           ÉÏÏÂÎÄ
-	 * @param contentView       ÄÚÈİÊÓÍ¼
-	 * @param loadView          ¼ÓÔØÊÓÍ¼
-	 * @param loadString        ÏÔÊ¾ÎÄ×Ö
-	 * @param showLoad          ÊÇ·ñÏÔÊ¾loadview ÈôÏÔÊ¾£¬ÔòcontentView£¬loadView²»ÄÜÎª¿Õ
-	 * @param httpUrl           ·ÃÎÊÂ·¾¶
-	 * @param argMap            ²ÎÊı¼¯ºÏ
-	 * @param accessType        ·ÃÎÊ·½Ê½
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹
+	 * @param activity           ä¸Šä¸‹æ–‡
+	 * @param contentView       å†…å®¹è§†å›¾
+	 * @param loadView          åŠ è½½è§†å›¾
+	 * @param loadString        æ˜¾ç¤ºæ–‡å­—
+	 * @param showLoad          æ˜¯å¦æ˜¾ç¤ºloadview è‹¥æ˜¾ç¤ºï¼Œåˆ™contentViewï¼ŒloadViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl           è®¿é—®è·¯å¾„
+	 * @param argMap            å‚æ•°é›†åˆ
+	 * @param accessType        è®¿é—®æ–¹å¼
 	 */
 	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
-        this.activity = activity;
-        this.tagString = tagString;
-        this.contentView = contentView;
-        this.loadView = loadView;
-        this.loadString = loadString;
-        this.showLoad = showLoad;
-        this.iOnTryClickListener = iOnTryClickListener;
+		this.activity = activity;
+		this.tagString = tagString;
+		this.contentView = contentView;
+		this.loadView = loadView;
+		this.loadString = loadString;
+		this.showLoad = showLoad;
+		this.iOnTryClickListener = iOnTryClickListener;
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
 		this.accessType = accessType;
-        viewTool = new ViewTool();
+		viewTool = new ViewTool();
 	}
-	
+
 	@Override
-	public void onPreExecute() 
-	{	
+	public void onPreExecute()
+	{
 		try {
 			addTask();
 			if(StringUtils.isEmpty(loadString)){
@@ -120,79 +120,79 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 					}
 					viewTool.addLoadView(activity, loadString, contentView, loadView);
 				}
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 	@Override
 	public TaskResult doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
-		//²»·ÃÎÊÍøÂçµÄÇé¿ö
+		//ä¸è®¿é—®ç½‘ç»œçš„æƒ…å†µ
 		if(StringUtils.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
 		}
-        //ÎŞÍøÂçÇé¿ö
+		//æ— ç½‘ç»œæƒ…å†µ
 		if (netFlag == NET_ERROR) {
 			return taskResult;
 		}
 		switch (accessType) {
-            case TaskConstant.POST:
-                try {
-                    resultsString = Httpclient.POSTMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.PUT:
-                try {
-                    resultsString = Httpclient.PUTMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.GET:
-                try {
-                    resultsString = Httpclient.GETMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.UPLOAD:
-                try {
-                    resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.UPLOADS:
-                try {
-                    resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                break;
+			case TaskConstant.POST:
+				try {
+					resultsString = Httpclient.POSTMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.PUT:
+				try {
+					resultsString = Httpclient.PUTMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.GET:
+				try {
+					resultsString = Httpclient.GETMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.UPLOAD:
+				try {
+					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.UPLOADS:
+				try {
+					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			default:
+				break;
 		}
 		if(StringUtils.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
 			if (iOnLoadBackgroundListener==null) {
-                iOnLoadBackgroundListener = defaultBackgroundListener;
+				iOnLoadBackgroundListener = defaultBackgroundListener;
 			}
 			taskResult = doOnBackgroundListener(this);
 		}
 		return taskResult;
 	}
-	
+
 	@Override
 	public void onPostExecute(TaskResult result)
 	{
@@ -206,41 +206,41 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-        if (iOnLoadResultListener!=null){
-            iOnLoadResultListener.onDone(this);
-        }
-		switch(result){			
-		case OK:					
-			if (iOnLoadResultListener!=null){
-                iOnLoadResultListener.onOK(this);
-            }
-			break;
-		case ERROR:
-			if (showLoad) {
-				viewTool.addErrorView(activity, activity.getString(R.string.pop_item3),
-						contentView, loadView, iOnTryClickListener);
-			}
-			if (iOnLoadResultListener!=null){
-                iOnLoadResultListener.onError(this);
-            }
-            dealLoginInvalid();
-			break;
-		case CANCELLED:
-			if (showLoad) {
-				viewTool.addErrorView(activity, activity.getString(R.string.task_item1),
-						contentView, loadView, iOnTryClickListener);
-			}			
-			break;
-		default:
-			break;
+		if (iOnLoadResultListener!=null){
+			iOnLoadResultListener.onDone(this);
+		}
+		switch(result){
+			case OK:
+				if (iOnLoadResultListener!=null){
+					iOnLoadResultListener.onOK(this);
+				}
+				break;
+			case ERROR:
+				if (showLoad) {
+					viewTool.addErrorView(activity, activity.getString(R.string.pop_item3),
+							contentView, loadView, iOnTryClickListener);
+				}
+				if (iOnLoadResultListener!=null){
+					iOnLoadResultListener.onError(this);
+				}
+				dealLoginInvalid();
+				break;
+			case CANCELLED:
+				if (showLoad) {
+					viewTool.addErrorView(activity, activity.getString(R.string.task_item1),
+							contentView, loadView, iOnTryClickListener);
+				}
+				break;
+			default:
+				break;
 		}
 		cancelTask();
 	}
-	
+
 	public void addTask(){
 		taskManager.addTask(tagString, this);
 	}
-	
+
 	public void cancelTask(){
 		taskManager.cancelOneTasks(this);
 	}
@@ -250,12 +250,12 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		TaskResult taskResult = TaskResult.NOTHING;
 		if(iOnLoadBackgroundListener!=null){
 			taskResult = this.iOnLoadBackgroundListener.onBackground(showLoadTask);
-		}		
+		}
 		return taskResult;
 	}
-	
+
 	/**
-	 * Ä¬ÈÏºóÌ¨½âÎö·µ»Ø½á¹û
+	 * é»˜è®¤åå°è§£æè¿”å›ç»“æœ
 	 */
 	private IOnLoadBackgroundListener defaultBackgroundListener = new IOnLoadBackgroundListener(){
 
@@ -268,49 +268,49 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			if(res!=null){
 				if(ResultTools.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
-				}else{					
+				}else{
 					taskResult = TaskResult.ERROR;
 					errorMsg = res.getMsg();
-                    judgeLoginInvalid(""+res.getCode());
+					judgeLoginInvalid(""+res.getCode());
 				}
 			}else{
 				taskResult = TaskResult.CANCELLED;
-			}	
+			}
 			return taskResult;
 		}
 	};
 
-    public void setiOnTryClickListener(IOnTryClickListener iOnTryClickListener) {
-        this.iOnTryClickListener = iOnTryClickListener;
-    }
+	public void setiOnTryClickListener(IOnTryClickListener iOnTryClickListener) {
+		this.iOnTryClickListener = iOnTryClickListener;
+	}
 
-    public void setiOnLoadBackgroundListener(IOnLoadBackgroundListener iOnLoadBackgroundListener) {
-        this.iOnLoadBackgroundListener = iOnLoadBackgroundListener;
-    }
+	public void setiOnLoadBackgroundListener(IOnLoadBackgroundListener iOnLoadBackgroundListener) {
+		this.iOnLoadBackgroundListener = iOnLoadBackgroundListener;
+	}
 
-    public void setiOnLoadResultListener(IOnLoadResultListener iOnLoadResultListener) {
-        this.iOnLoadResultListener = iOnLoadResultListener;
-    }
+	public void setiOnLoadResultListener(IOnLoadResultListener iOnLoadResultListener) {
+		this.iOnLoadResultListener = iOnLoadResultListener;
+	}
 
-    /**
-     * ÅĞ¶ÏµÇÂ¼Ê§Ğ§
-     */
-    public void judgeLoginInvalid(String code){
-        if (ResultTools.judgeLoginInvalid(activity, "" + code)){
-            loginInvalid = true;
-        }else {
-            loginInvalid = false;
-        }
-    }
+	/**
+	 * åˆ¤æ–­ç™»å½•å¤±æ•ˆ
+	 */
+	public void judgeLoginInvalid(String code){
+		if (ResultTools.judgeLoginInvalid(activity, "" + code)){
+			loginInvalid = true;
+		}else {
+			loginInvalid = false;
+		}
+	}
 
-    /**
-     * ´¦ÀíµÇÂ¼Ê§Ğ§
-     */
-    public void dealLoginInvalid(){
-        if (loginInvalid){
+	/**
+	 * å¤„ç†ç™»å½•å¤±æ•ˆ
+	 */
+	public void dealLoginInvalid(){
+		if (loginInvalid){
 
-        }
-    }
-	
-	
+		}
+	}
+
+
 }

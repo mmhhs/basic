@@ -155,9 +155,9 @@ public class SampleUltimateActivity extends ActionBarActivity implements ActionM
             @Override
             public void onUpOrCancelMotionEvent(ObservableScrollState observableScrollState) {
                 if (observableScrollState == ObservableScrollState.DOWN) {
-                     ultimateRecyclerView.showToolbar(toolbar, ultimateRecyclerView,getScreenHeight());
+                    ultimateRecyclerView.showToolbar(toolbar, ultimateRecyclerView,getScreenHeight());
                 } else if (observableScrollState == ObservableScrollState.UP) {
-                      ultimateRecyclerView.hideToolbar(toolbar,ultimateRecyclerView,getScreenHeight());
+                    ultimateRecyclerView.hideToolbar(toolbar,ultimateRecyclerView,getScreenHeight());
                 } else if (observableScrollState == ObservableScrollState.STOP) {
                 }
             }

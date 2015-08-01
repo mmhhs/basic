@@ -4,59 +4,59 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class DownloadTaskManager {  
-    private static final String TAG="DownloadTaskManager";  
-    // UIÇëÇó¶ÓÁĞ  
-    private LinkedList<DownloadTask> downloadTasks;  
-    // ÈÎÎñ²»ÄÜÖØ¸´  
-    private Set<String> taskIdSet;  
-  
+public class DownloadTaskManager {
+    private static final String TAG="DownloadTaskManager";
+    // UIè¯·æ±‚é˜Ÿåˆ—  
+    private LinkedList<DownloadTask> downloadTasks;
+    // ä»»åŠ¡ä¸èƒ½é‡å¤  
+    private Set<String> taskIdSet;
+
     private static DownloadTaskManager downloadTaskMananger;
-  
-    private DownloadTaskManager() {  
-  
-        downloadTasks = new LinkedList<DownloadTask>();  
-        taskIdSet = new HashSet<String>();  
-          
-    }  
-  
+
+    private DownloadTaskManager() {
+
+        downloadTasks = new LinkedList<DownloadTask>();
+        taskIdSet = new HashSet<String>();
+
+    }
+
     public static synchronized DownloadTaskManager getInstance() {
-        if (downloadTaskMananger == null) {  
+        if (downloadTaskMananger == null) {
             downloadTaskMananger = new DownloadTaskManager();
-        }  
-        return downloadTaskMananger;  
-    }  
-  
-    //1.ÏÈÖ´ĞĞ  
-    public void addDownloadTask(DownloadTask downloadTask) {  
-        synchronized (downloadTasks) {  
-            if (!isTaskRepeat(downloadTask.getFileId())) {  
-                // Ôö¼ÓÏÂÔØÈÎÎñ  
-                downloadTasks.addLast(downloadTask);   
-            }  
-        }  
-  
-    }  
-    public boolean isTaskRepeat(String fileId) {  
-        synchronized (taskIdSet) {  
-            if (taskIdSet.contains(fileId)) {  
-                return true;  
-            } else {  
-                System.out.println("ÏÂÔØ¹ÜÀíÆ÷Ôö¼ÓÏÂÔØÈÎÎñ£º"+ fileId);  
-                taskIdSet.add(fileId);  
-                return false;  
-            }  
-        }  
-    }  
-      
-    public DownloadTask getDownloadTask() {  
-        synchronized (downloadTasks) {  
-            if (downloadTasks.size() > 0) {  
-                System.out.println("ÏÂÔØ¹ÜÀíÆ÷Ôö¼ÓÏÂÔØÈÎÎñ£º"+"È¡³öÈÎÎñ");  
-                DownloadTask downloadTask = downloadTasks.removeFirst();  
-                return downloadTask;  
-            }  
-        }  
-        return null;  
-    }  
+        }
+        return downloadTaskMananger;
+    }
+
+    //1.å…ˆæ‰§è¡Œ  
+    public void addDownloadTask(DownloadTask downloadTask) {
+        synchronized (downloadTasks) {
+            if (!isTaskRepeat(downloadTask.getFileId())) {
+                // å¢åŠ ä¸‹è½½ä»»åŠ¡  
+                downloadTasks.addLast(downloadTask);
+            }
+        }
+
+    }
+    public boolean isTaskRepeat(String fileId) {
+        synchronized (taskIdSet) {
+            if (taskIdSet.contains(fileId)) {
+                return true;
+            } else {
+                System.out.println("ä¸‹è½½ç®¡ç†å™¨å¢åŠ ä¸‹è½½ä»»åŠ¡ï¼š"+ fileId);
+                taskIdSet.add(fileId);
+                return false;
+            }
+        }
+    }
+
+    public DownloadTask getDownloadTask() {
+        synchronized (downloadTasks) {
+            if (downloadTasks.size() > 0) {
+                System.out.println("ä¸‹è½½ç®¡ç†å™¨å¢åŠ ä¸‹è½½ä»»åŠ¡ï¼š"+"å–å‡ºä»»åŠ¡");
+                DownloadTask downloadTask = downloadTasks.removeFirst();
+                return downloadTask;
+            }
+        }
+        return null;
+    }
 }  

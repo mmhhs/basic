@@ -25,28 +25,28 @@ public class PageIndicatorView extends View {
 	private int space;
 
 	private int alpha;
-	
+
 	/**
-	 * Ñ¡ÖĞÑÕÉ«Öµ
+	 * é€‰ä¸­é¢œè‰²å€¼
 	 */
 	private String selectedColorString = "#FF0000";
 	/**
-	 * Î´Ñ¡ÖĞÑÕÉ«Öµ
+	 * æœªé€‰ä¸­é¢œè‰²å€¼
 	 */
 	private String unselectedColorString = "#778899";
 	/**
-	 * ×ÜÒ³Êı
+	 * æ€»é¡µæ•°
 	 */
 	private int mTotalPage = 0;
 	/**
-	 * °ë¾¶
+	 * åŠå¾„
 	 */
 	private int rediusSize = 5;
 	/**
-	 * ¼ä¾à
+	 * é—´è·
 	 */
 	private int spaceSize = 20;
-	
+
 
 	public PageIndicatorView(Context context) {
 		super(context);

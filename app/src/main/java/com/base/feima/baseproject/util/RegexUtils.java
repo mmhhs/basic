@@ -3,155 +3,155 @@ package com.base.feima.baseproject.util;
 import java.util.regex.Pattern;
 
 /**
- * ÕıÔò¹¤¾ßÀà
- * Ìá¹©ÑéÖ¤ÓÊÏä¡¢ÊÖ»úºÅ¡¢µç»°ºÅÂë¡¢Éí·İÖ¤ºÅÂë¡¢Êı×ÖµÈ·½·¨
+ * æ­£åˆ™å·¥å…·ç±»
+ * æä¾›éªŒè¯é‚®ç®±ã€æ‰‹æœºå·ã€ç”µè¯å·ç ã€èº«ä»½è¯å·ç ã€æ•°å­—ç­‰æ–¹æ³•
  */
 public final class RegexUtils {
 
 	/**
-	 * ÑéÖ¤Email
-	 * @param email emailµØÖ·£¬¸ñÊ½£ºzhangsan@sina.com£¬zhangsan@xxx.com.cn£¬xxx´ú±íÓÊ¼ş·şÎñÉÌ
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯Email
+	 * @param email emailåœ°å€ï¼Œæ ¼å¼ï¼šzhangsan@sina.comï¼Œzhangsan@xxx.com.cnï¼Œxxxä»£è¡¨é‚®ä»¶æœåŠ¡å•†
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkEmail(String email) {
 		String regex = "\\w+@\\w+\\.[a-z]+(\\.[a-z]+)?";
 		return Pattern.matches(regex, email);
 	}
-	
+
 	/**
-	 * ÑéÖ¤Éí·İÖ¤ºÅÂë
-	 * @param idCard ¾ÓÃñÉí·İÖ¤ºÅÂë15Î»»ò18Î»£¬×îºóÒ»Î»¿ÉÄÜÊÇÊı×Ö»ò×ÖÄ¸
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯èº«ä»½è¯å·ç 
+	 * @param idCard å±…æ°‘èº«ä»½è¯å·ç 15ä½æˆ–18ä½ï¼Œæœ€åä¸€ä½å¯èƒ½æ˜¯æ•°å­—æˆ–å­—æ¯
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkIdCard(String idCard) {
 		String regex = "[1-9]\\d{13,16}[a-zA-Z0-9]{1}";
 		return Pattern.matches(regex,idCard);
 	}
-	
+
 	/**
-	 * ÑéÖ¤ÊÖ»úºÅÂë£¨Ö§³Ö¹ú¼Ê¸ñÊ½£¬+86135xxxx...£¨ÖĞ¹úÄÚµØ£©£¬+00852137xxxx...£¨ÖĞ¹úÏã¸Û£©£©
-	 * @param mobile ÒÆ¶¯¡¢ÁªÍ¨¡¢µçĞÅÔËÓªÉÌµÄºÅÂë¶Î
-	 *<p>ÒÆ¶¯µÄºÅ¶Î£º134(0-8)¡¢135¡¢136¡¢137¡¢138¡¢139¡¢147£¨Ô¤¼ÆÓÃÓÚTDÉÏÍø¿¨£©
-	 *¡¢150¡¢151¡¢152¡¢157£¨TD×¨ÓÃ£©¡¢158¡¢159¡¢187£¨Î´ÆôÓÃ£©¡¢188£¨TD×¨ÓÃ£©</p>
-	 *<p>ÁªÍ¨µÄºÅ¶Î£º130¡¢131¡¢132¡¢155¡¢156£¨ÊÀ½ç·ç×¨ÓÃ£©¡¢185£¨Î´ÆôÓÃ£©¡¢186£¨3g£©</p>
-	 *<p>µçĞÅµÄºÅ¶Î£º133¡¢153¡¢180£¨Î´ÆôÓÃ£©¡¢189</p>
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯æ‰‹æœºå·ç ï¼ˆæ”¯æŒå›½é™…æ ¼å¼ï¼Œ+86135xxxx...ï¼ˆä¸­å›½å†…åœ°ï¼‰ï¼Œ+00852137xxxx...ï¼ˆä¸­å›½é¦™æ¸¯ï¼‰ï¼‰
+	 * @param mobile ç§»åŠ¨ã€è”é€šã€ç”µä¿¡è¿è¥å•†çš„å·ç æ®µ
+	 *<p>ç§»åŠ¨çš„å·æ®µï¼š134(0-8)ã€135ã€136ã€137ã€138ã€139ã€147ï¼ˆé¢„è®¡ç”¨äºTDä¸Šç½‘å¡ï¼‰
+	 *ã€150ã€151ã€152ã€157ï¼ˆTDä¸“ç”¨ï¼‰ã€158ã€159ã€187ï¼ˆæœªå¯ç”¨ï¼‰ã€188ï¼ˆTDä¸“ç”¨ï¼‰</p>
+	 *<p>è”é€šçš„å·æ®µï¼š130ã€131ã€132ã€155ã€156ï¼ˆä¸–ç•Œé£ä¸“ç”¨ï¼‰ã€185ï¼ˆæœªå¯ç”¨ï¼‰ã€186ï¼ˆ3gï¼‰</p>
+	 *<p>ç”µä¿¡çš„å·æ®µï¼š133ã€153ã€180ï¼ˆæœªå¯ç”¨ï¼‰ã€189</p>
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 * (\\+\\d+)?1[3458]\\d{9}$
 	 */
 	public static boolean checkMobile(String mobile) {
 		String regex = "(\\+\\d+)?1[123456789]\\d{9}$";
 		return Pattern.matches(regex,mobile);
 	}
-	
+
 
 	/**
-	 * ÑéÖ¤¹Ì¶¨µç»°ºÅÂë
-	 * @param phone µç»°ºÅÂë£¬¸ñÊ½£º¹ú¼Ò£¨µØÇø£©µç»°´úÂë + ÇøºÅ£¨³ÇÊĞ´úÂë£© + µç»°ºÅÂë£¬Èç£º+8602085588447
-	 * <p><b>¹ú¼Ò£¨µØÇø£© ´úÂë £º</b>±êÊ¶µç»°ºÅÂëµÄ¹ú¼Ò£¨µØÇø£©µÄ±ê×¼¹ú¼Ò£¨µØÇø£©´úÂë¡£Ëü°üº¬´Ó 0 µ½ 9 µÄÒ»Î»»ò¶àÎ»Êı×Ö£¬
-	 *  Êı×ÖÖ®ºóÊÇ¿Õ¸ñ·Ö¸ôµÄ¹ú¼Ò£¨µØÇø£©´úÂë¡£</p>
-	 * <p><b>ÇøºÅ£¨³ÇÊĞ´úÂë£©£º</b>Õâ¿ÉÄÜ°üº¬Ò»¸ö»ò¶à¸ö´Ó 0 µ½ 9 µÄÊı×Ö£¬µØÇø»ò³ÇÊĞ´úÂë·ÅÔÚÔ²À¨ºÅ¡ª¡ª
-	 * ¶Ô²»Ê¹ÓÃµØÇø»ò³ÇÊĞ´úÂëµÄ¹ú¼Ò£¨µØÇø£©£¬ÔòÊ¡ÂÔ¸Ã×é¼ş¡£</p>
-	 * <p><b>µç»°ºÅÂë£º</b>Õâ°üº¬´Ó 0 µ½ 9 µÄÒ»¸ö»ò¶à¸öÊı×Ö </p>
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯å›ºå®šç”µè¯å·ç 
+	 * @param phone ç”µè¯å·ç ï¼Œæ ¼å¼ï¼šå›½å®¶ï¼ˆåœ°åŒºï¼‰ç”µè¯ä»£ç  + åŒºå·ï¼ˆåŸå¸‚ä»£ç ï¼‰ + ç”µè¯å·ç ï¼Œå¦‚ï¼š+8602085588447
+	 * <p><b>å›½å®¶ï¼ˆåœ°åŒºï¼‰ ä»£ç  ï¼š</b>æ ‡è¯†ç”µè¯å·ç çš„å›½å®¶ï¼ˆåœ°åŒºï¼‰çš„æ ‡å‡†å›½å®¶ï¼ˆåœ°åŒºï¼‰ä»£ç ã€‚å®ƒåŒ…å«ä» 0 åˆ° 9 çš„ä¸€ä½æˆ–å¤šä½æ•°å­—ï¼Œ
+	 *  æ•°å­—ä¹‹åæ˜¯ç©ºæ ¼åˆ†éš”çš„å›½å®¶ï¼ˆåœ°åŒºï¼‰ä»£ç ã€‚</p>
+	 * <p><b>åŒºå·ï¼ˆåŸå¸‚ä»£ç ï¼‰ï¼š</b>è¿™å¯èƒ½åŒ…å«ä¸€ä¸ªæˆ–å¤šä¸ªä» 0 åˆ° 9 çš„æ•°å­—ï¼Œåœ°åŒºæˆ–åŸå¸‚ä»£ç æ”¾åœ¨åœ†æ‹¬å·â€”â€”
+	 * å¯¹ä¸ä½¿ç”¨åœ°åŒºæˆ–åŸå¸‚ä»£ç çš„å›½å®¶ï¼ˆåœ°åŒºï¼‰ï¼Œåˆ™çœç•¥è¯¥ç»„ä»¶ã€‚</p>
+	 * <p><b>ç”µè¯å·ç ï¼š</b>è¿™åŒ…å«ä» 0 åˆ° 9 çš„ä¸€ä¸ªæˆ–å¤šä¸ªæ•°å­— </p>
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkPhone(String phone) {
 		String regex = "(\\+\\d+)?(\\d{3,4}\\-?)?\\d{7,8}$";
 		return Pattern.matches(regex, phone);
 	}
-	
+
 	/**
-	 * ÑéÖ¤ÕûÊı£¨ÕıÕûÊıºÍ¸ºÕûÊı£©
-	 * @param digit Ò»Î»»ò¶àÎ»0-9Ö®¼äµÄÕûÊı
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯æ•´æ•°ï¼ˆæ­£æ•´æ•°å’Œè´Ÿæ•´æ•°ï¼‰
+	 * @param digit ä¸€ä½æˆ–å¤šä½0-9ä¹‹é—´çš„æ•´æ•°
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkDigit(String digit) {
 		String regex = "\\-?[1-9]\\d+";
 		return Pattern.matches(regex,digit);
 	}
-	
+
 	/**
-	 * ÑéÖ¤ÕûÊıºÍ¸¡µãÊı£¨Õı¸ºÕûÊıºÍÕı¸º¸¡µãÊı£©
-	 * @param decimals Ò»Î»»ò¶àÎ»0-9Ö®¼äµÄ¸¡µãÊı£¬Èç£º1.23£¬233.30
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯æ•´æ•°å’Œæµ®ç‚¹æ•°ï¼ˆæ­£è´Ÿæ•´æ•°å’Œæ­£è´Ÿæµ®ç‚¹æ•°ï¼‰
+	 * @param decimals ä¸€ä½æˆ–å¤šä½0-9ä¹‹é—´çš„æµ®ç‚¹æ•°ï¼Œå¦‚ï¼š1.23ï¼Œ233.30
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkDecimals(String decimals) {
 		String regex = "\\-?[1-9]\\d+(\\.\\d+)?";
 		return Pattern.matches(regex,decimals);
-	} 
-	
+	}
+
 	/**
-	 * ÑéÖ¤¿Õ°××Ö·û
-	 * @param blankSpace ¿Õ°××Ö·û£¬°üÀ¨£º¿Õ¸ñ¡¢\t¡¢\n¡¢\r¡¢\f¡¢\x0B
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯ç©ºç™½å­—ç¬¦
+	 * @param blankSpace ç©ºç™½å­—ç¬¦ï¼ŒåŒ…æ‹¬ï¼šç©ºæ ¼ã€\tã€\nã€\rã€\fã€\x0B
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkBlankSpace(String blankSpace) {
 		String regex = "\\s+";
 		return Pattern.matches(regex,blankSpace);
 	}
-	
+
 	/**
-	 * ÑéÖ¤ÖĞÎÄ
-	 * @param chinese ÖĞÎÄ×Ö·û
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯ä¸­æ–‡
+	 * @param chinese ä¸­æ–‡å­—ç¬¦
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkChinese(String chinese) {
 		String regex = "^[\u4E00-\u9FA5]+$";
 		return Pattern.matches(regex,chinese);
 	}
-	
+
 	/**
-	 * ÑéÖ¤ÈÕÆÚ£¨ÄêÔÂÈÕ£©
-	 * @param birthday ÈÕÆÚ£¬¸ñÊ½£º1992-09-03£¬»ò1992.09.03
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯æ—¥æœŸï¼ˆå¹´æœˆæ—¥ï¼‰
+	 * @param birthday æ—¥æœŸï¼Œæ ¼å¼ï¼š1992-09-03ï¼Œæˆ–1992.09.03
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkBirthday(String birthday) {
 		String regex = "[1-9]{4}([-./])\\d{1,2}\\1\\d{1,2}";
 		return Pattern.matches(regex,birthday);
 	}
-	
+
 	/**
-	 * ÑéÖ¤URLµØÖ·
-	 * @param url ¸ñÊ½£ºhttp://blog.csdn.net:80/xyang81/article/details/7705960? »ò http://www.csdn.net:80
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * éªŒè¯URLåœ°å€
+	 * @param url æ ¼å¼ï¼šhttp://blog.csdn.net:80/xyang81/article/details/7705960? æˆ– http://www.csdn.net:80
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkURL(String url) {
 		String regex = "(https?://(w{3}\\.)?)?\\w+\\.\\w+(\\.[a-zA-Z]+)*(:\\d{1,5})?(/\\w*)*(\\??(.+=.*)?(&.+=.*)?)?";
 		return Pattern.matches(regex, url);
 	}
-	
+
 	/**
-	 * Æ¥ÅäÖĞ¹úÓÊÕş±àÂë
-	 * @param postcode ÓÊÕş±àÂë
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * åŒ¹é…ä¸­å›½é‚®æ”¿ç¼–ç 
+	 * @param postcode é‚®æ”¿ç¼–ç 
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkPostcode(String postcode) {
 		String regex = "[1-9]\\d{5}";
 		return Pattern.matches(regex, postcode);
 	}
-	
+
 	/**
-	 * Æ¥ÅäIPµØÖ·(¼òµ¥Æ¥Åä£¬¸ñÊ½£¬Èç£º192.168.1.1£¬127.0.0.1£¬Ã»ÓĞÆ¥ÅäIP¶ÎµÄ´óĞ¡)
-	 * @param ipAddress IPv4±ê×¼µØÖ·
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * åŒ¹é…IPåœ°å€(ç®€å•åŒ¹é…ï¼Œæ ¼å¼ï¼Œå¦‚ï¼š192.168.1.1ï¼Œ127.0.0.1ï¼Œæ²¡æœ‰åŒ¹é…IPæ®µçš„å¤§å°)
+	 * @param ipAddress IPv4æ ‡å‡†åœ°å€
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkIpAddress(String ipAddress) {
 		String regex = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))";
 		return Pattern.matches(regex, ipAddress);
 	}
 	/**
-	 * Æ¥ÅäÃÜÂë(ÃÜÂëÎª6-20¸ö×Ö·û£¬Ó¦Í¬Ê±°üº¬Êı×ÖºÍ×ÖÄ¸¡£)
-	 * @param 
-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+	 * åŒ¹é…å¯†ç (å¯†ç ä¸º6-20ä¸ªå­—ç¬¦ï¼Œåº”åŒæ—¶åŒ…å«æ•°å­—å’Œå­—æ¯ã€‚)
+	 * @param
+	 * @return éªŒè¯æˆåŠŸè¿”å›trueï¼ŒéªŒè¯å¤±è´¥è¿”å›false
 	 */
 	public static boolean checkPassword(String password) {
 		String regex = "^(?=.*\\d)(?=.*\\D).{6,20}$";
 		return Pattern.matches(regex, password);
 	}
 	/**
-	 * ¼ìÑé×Ö·û´®³¤¶È
+	 * æ£€éªŒå­—ç¬¦ä¸²é•¿åº¦
 	 * @param arg
-	 * @param min ×îĞ¡³¤¶È
-	 * @param max ×î´ó³¤¶È
+	 * @param min æœ€å°é•¿åº¦
+	 * @param max æœ€å¤§é•¿åº¦
 	 * @return
 	 */
 	public static boolean checkStringLength(String arg,int min,int max) {
@@ -166,7 +166,7 @@ public final class RegexUtils {
 		}finally{
 			return result;
 		}
-		
+
 	}
-	
+
 }

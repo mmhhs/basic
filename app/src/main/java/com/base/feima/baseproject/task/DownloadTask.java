@@ -44,7 +44,7 @@ public class DownloadTask implements Runnable{
 			if(res!=null){
 				if(ResultTools.judgeResult(context, "" + res.getCode())){
 					UserModel userModel = res.getData();
-					userModel.setUser_id(fieldId);
+
 					try {
 						userInfoDao.createOrUpdate(userModel);
 					} catch (SQLException e) {

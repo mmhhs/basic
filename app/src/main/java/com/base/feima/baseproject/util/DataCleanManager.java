@@ -1,6 +1,6 @@
 package com.base.feima.baseproject.util;
 
-/*  * ÎÄ ¼ş Ãû:  DataCleanManager.java  * Ãè    Êö:  Ö÷Òª¹¦ÄÜÓĞÇå³ıÄÚ/Íâ»º´æ£¬Çå³ıÊı¾İ¿â£¬Çå³ısharedPreference£¬Çå³ıfilesºÍÇå³ı×Ô¶¨ÒåÄ¿Â¼  */
+/*  * æ–‡ ä»¶ å:  DataCleanManager.java  * æ    è¿°:  ä¸»è¦åŠŸèƒ½æœ‰æ¸…é™¤å†…/å¤–ç¼“å­˜ï¼Œæ¸…é™¤æ•°æ®åº“ï¼Œæ¸…é™¤sharedPreferenceï¼Œæ¸…é™¤fileså’Œæ¸…é™¤è‡ªå®šä¹‰ç›®å½•  */
 
 import android.app.Activity;
 import android.os.Environment;
@@ -11,12 +11,12 @@ import com.base.feima.baseproject.task.ShowDialogTask;
 import java.io.File;
 import java.math.BigDecimal;
 
-/** * ±¾Ó¦ÓÃÊı¾İÇå³ı¹ÜÀíÆ÷ */
+/** * æœ¬åº”ç”¨æ•°æ®æ¸…é™¤ç®¡ç†å™¨ */
 public class DataCleanManager {
     private static String tagStr = "DataCleanManager";
 
     /**
-     * ¼ÆËã»º´æ´óĞ¡
+     * è®¡ç®—ç¼“å­˜å¤§å°
      * @param activity
      * @return
      * @throws Exception
@@ -35,7 +35,7 @@ public class DataCleanManager {
         try {
             File[] fileList = file.listFiles();
             for (int i = 0; i < fileList.length; i++) {
-                // Èç¹ûÏÂÃæ»¹ÓĞÎÄ¼ş
+                // å¦‚æœä¸‹é¢è¿˜æœ‰æ–‡ä»¶
                 if (fileList[i].isDirectory()) {
                     size = size + getFolderSize(fileList[i]);
                 } else {
@@ -49,7 +49,7 @@ public class DataCleanManager {
     }
 
     /**
-     * ¸ñÊ½»¯µ¥Î»
+     * æ ¼å¼åŒ–å•ä½
      *
      * @param size
      * @return
@@ -86,19 +86,19 @@ public class DataCleanManager {
                 + "TB";
     }
 
-    /** * Çå³ı±¾Ó¦ÓÃÄÚ²¿»º´æ(/data/data/com.xxx.xxx/cache) * * @param activity */
+    /** * æ¸…é™¤æœ¬åº”ç”¨å†…éƒ¨ç¼“å­˜(/data/data/com.xxx.xxx/cache) * * @param activity */
     public static void cleanInternalCache(Activity activity) {
         deleteFilesByDirectory(activity,activity.getCacheDir());
     }
 
-    /** * Çå³ı±¾Ó¦ÓÃËùÓĞÊı¾İ¿â(/data/data/com.xxx.xxx/databases) * * @param activity */
+    /** * æ¸…é™¤æœ¬åº”ç”¨æ‰€æœ‰æ•°æ®åº“(/data/data/com.xxx.xxx/databases) * * @param activity */
     public static void cleanDatabases(Activity activity) {
         deleteFilesByDirectory(activity,new File("/data/data/"
                 + activity.getPackageName() + "/databases"));
     }
 
     /**
-     * * Çå³ı±¾Ó¦ÓÃSharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
+     * * æ¸…é™¤æœ¬åº”ç”¨SharedPreference(/data/data/com.xxx.xxx/shared_prefs) * * @param
      * activity
      */
     public static void cleanSharedPreference(Activity activity) {
@@ -106,18 +106,18 @@ public class DataCleanManager {
                 + activity.getPackageName() + "/shared_prefs"));
     }
 
-    /** * °´Ãû×ÖÇå³ı±¾Ó¦ÓÃÊı¾İ¿â * * @param activity * @param dbName */
+    /** * æŒ‰åå­—æ¸…é™¤æœ¬åº”ç”¨æ•°æ®åº“ * * @param activity * @param dbName */
     public static void cleanDatabaseByName(Activity activity, String dbName) {
         activity.deleteDatabase(dbName);
     }
 
-    /** * Çå³ı/data/data/com.xxx.xxx/filesÏÂµÄÄÚÈİ * * @param activity */
+    /** * æ¸…é™¤/data/data/com.xxx.xxx/filesä¸‹çš„å†…å®¹ * * @param activity */
     public static void cleanFiles(Activity activity) {
         deleteFilesByDirectory(activity,activity.getFilesDir());
     }
 
     /**
-     * * Çå³ıÍâ²¿cacheÏÂµÄÄÚÈİ(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
+     * * æ¸…é™¤å¤–éƒ¨cacheä¸‹çš„å†…å®¹(/mnt/sdcard/android/data/com.xxx.xxx/cache) * * @param
      * activity
      */
     public static void cleanExternalCache(Activity activity) {
@@ -127,12 +127,12 @@ public class DataCleanManager {
         }
     }
 
-    /** * Çå³ı×Ô¶¨ÒåÂ·¾¶ÏÂµÄÎÄ¼ş£¬Ê¹ÓÃĞèĞ¡ĞÄ£¬Çë²»ÒªÎóÉ¾¡£¶øÇÒÖ»Ö§³ÖÄ¿Â¼ÏÂµÄÎÄ¼şÉ¾³ı * * @param filePath */
+    /** * æ¸…é™¤è‡ªå®šä¹‰è·¯å¾„ä¸‹çš„æ–‡ä»¶ï¼Œä½¿ç”¨éœ€å°å¿ƒï¼Œè¯·ä¸è¦è¯¯åˆ ã€‚è€Œä¸”åªæ”¯æŒç›®å½•ä¸‹çš„æ–‡ä»¶åˆ é™¤ * * @param filePath */
     public static void cleanCustomCache(Activity activity,String filePath) {
         deleteFilesByDirectory(activity,new File(filePath));
     }
 
-    /** * Çå³ı±¾Ó¦ÓÃËùÓĞµÄÊı¾İ * * @param activity * @param filepath */
+    /** * æ¸…é™¤æœ¬åº”ç”¨æ‰€æœ‰çš„æ•°æ® * * @param activity * @param filepath */
     public static void cleanApplicationData(Activity activity, String... filepath) {
         cleanInternalCache(activity);
         cleanExternalCache(activity);
@@ -144,7 +144,7 @@ public class DataCleanManager {
         }
     }
 
-//    /** * É¾³ı·½·¨ ÕâÀïÖ»»áÉ¾³ıÄ³¸öÎÄ¼ş¼ĞÏÂµÄÎÄ¼ş£¬Èç¹û´«ÈëµÄdirectoryÊÇ¸öÎÄ¼ş£¬½«²»×ö´¦Àí * * @param directory */
+//    /** * åˆ é™¤æ–¹æ³• è¿™é‡Œåªä¼šåˆ é™¤æŸä¸ªæ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶ï¼Œå¦‚æœä¼ å…¥çš„directoryæ˜¯ä¸ªæ–‡ä»¶ï¼Œå°†ä¸åšå¤„ç† * * @param directory */
 //    private static void deleteFilesByDirectory(File directory) {
 //        if (directory != null && directory.exists() && directory.isDirectory()) {
 //            for (File item : directory.listFiles()) {
@@ -153,7 +153,7 @@ public class DataCleanManager {
 //        }
 //    }
 
-    /** * É¾³ı·½·¨ ÕâÀï»áÉ¾³ıËùÓĞÎÄ¼ş¼ĞÏÂµÄÎÄ¼ş*/
+    /** * åˆ é™¤æ–¹æ³• è¿™é‡Œä¼šåˆ é™¤æ‰€æœ‰æ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶*/
     private static void deleteFilesByDirectory(Activity activity, final File directory) {
         if (directory != null && directory.exists()) {
             ShowDialogTask showDialogTask = new ShowDialogTask(activity,tagStr,null,"",false);

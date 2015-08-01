@@ -1,67 +1,59 @@
-/**    
- * @Title: RequestTaskThread.java  
- * @Package com.kingsoft.filesystem  
- * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)  
- * @author zengzhaoshuai zengzhaoshuai@kingsoft.com    
- * @date 2012-2-25 ÉÏÎç10:35:00  
- * @version V1.0    
- */  
 package com.base.feima.baseproject.task;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-public class DownloadTaskManagerThread implements Runnable {  
-  
+public class DownloadTaskManagerThread implements Runnable {
+
     private DownloadTaskManager downloadTaskManager;
-  
-    // ´´½¨Ò»¸ö¿ÉÖØÓÃ¹Ì¶¨Ïß³ÌÊıµÄÏß³Ì³Ø  
-    private ExecutorService pool;  
-    // Ïß³Ì³Ø´óĞ¡  
-    private final int POOL_SIZE = 3;  
-    // ÂÖÑ¯Ê±¼ä  
-    private final int SLEEP_TIME = 1000;  
-    // ÊÇ·ñÍ£Ö¹  
-    private boolean isStop = false;  
-  
-    public DownloadTaskManagerThread() {  
+
+    // åˆ›å»ºä¸€ä¸ªå¯é‡ç”¨å›ºå®šçº¿ç¨‹æ•°çš„çº¿ç¨‹æ±   
+    private ExecutorService pool;
+    // çº¿ç¨‹æ± å¤§å°  
+    private final int POOL_SIZE = 3;
+    // è½®è¯¢æ—¶é—´  
+    private final int SLEEP_TIME = 1000;
+    // æ˜¯å¦åœæ­¢  
+    private boolean isStop = false;
+
+    public DownloadTaskManagerThread() {
         downloadTaskManager = DownloadTaskManager.getInstance();
-        pool = Executors.newFixedThreadPool(POOL_SIZE);  
-  
-    }  
-  
-    @Override  
-    public void run() {  
+        pool = Executors.newFixedThreadPool(POOL_SIZE);
+
+    }
+
+    @Override
+    public void run() {
         // TODO Auto-generated method stub  
-        while (!isStop) {  
+        while (!isStop) {
             DownloadTask downloadTask = downloadTaskManager.getDownloadTask();
-            if (downloadTask != null) {  
-                pool.execute(downloadTask);  
-            } else {  //Èç¹ûµ±Ç°Î´ÓĞdownloadTaskÔÚÈÎÎñ¶ÓÁĞÖĞ  
-                try {  
-                    // ²éÑ¯ÈÎÎñÍê³ÉÊ§°ÜµÄ,ÖØĞÂ¼ÓÔØÈÎÎñ¶ÓÁĞ  
-                    // ÂÖÑ¯,  
-                    Thread.sleep(SLEEP_TIME);  
-                } catch (InterruptedException e) {  
+            if (downloadTask != null) {
+                pool.execute(downloadTask);
+            } else {  //å¦‚æœå½“å‰æœªæœ‰downloadTaskåœ¨ä»»åŠ¡é˜Ÿåˆ—ä¸­  
+                try {
+                    // æŸ¥è¯¢ä»»åŠ¡å®Œæˆå¤±è´¥çš„,é‡æ–°åŠ è½½ä»»åŠ¡é˜Ÿåˆ—  
+                    // è½®è¯¢,  
+                    Thread.sleep(SLEEP_TIME);
+                } catch (InterruptedException e) {
                     // TODO Auto-generated catch block  
-                    e.printStackTrace();  
-                }  
-            }  
-  
-        }  
-        if (isStop) {  
-            pool.shutdown();  
-        }  
-  
-    }  
-  
-    /** 
-     * @param isStop 
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        if (isStop) {
+            pool.shutdown();
+        }
+
+    }
+
+    /**
+     * @param isStop
      *            the isStop to set 
-     */  
-    public void setStop(boolean isStop) {  
-        this.isStop = isStop;  
-    }  
-  
+     */
+    public void setStop(boolean isStop) {
+        this.isStop = isStop;
+    }
+
 }  

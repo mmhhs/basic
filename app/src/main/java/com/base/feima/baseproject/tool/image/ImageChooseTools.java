@@ -27,9 +27,6 @@ import java.io.Serializable;
 
 
 public class ImageChooseTools implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 510488826187140949L;
 	public static final int PHOTO_WITH_CAMERA = 116;	
 	public static final int CHOOSE_PICTURE = 117;

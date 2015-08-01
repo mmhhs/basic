@@ -179,7 +179,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         if(true){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›žé”®èƒ½å¤Ÿæ¶ˆå¤±
         }
 //        if(animStyle>0){
 //            popupWindow.setAnimationStyle(animStyle);

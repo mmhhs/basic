@@ -2,7 +2,7 @@ package com.base.feima.baseproject.tool;
 
 public class MapTools {
     /**
-     * ÅĞ¶Ï°Ù¶ÈµØÍ¼ÊÇ·ñ¶¨Î»³É¹¦
+     * åˆ¤æ–­ç™¾åº¦åœ°å›¾æ˜¯å¦å®šä½æˆåŠŸ
      * @param longtitude
      * @return
      */
@@ -24,7 +24,7 @@ public class MapTools {
     }
 
 //	/**
-//	 * °Ù¶ÈµØÍ¼¼ÆËã¾àÀë--ÈôÒªÊ¹ÓÃ£¬ĞèÒªµ¼Èë°Ù¶ÈµØÍ¼Ïà¹Øjar°ü
+//	 * ç™¾åº¦åœ°å›¾è®¡ç®—è·ç¦»--è‹¥è¦ä½¿ç”¨ï¼Œéœ€è¦å¯¼å…¥ç™¾åº¦åœ°å›¾ç›¸å…³jaråŒ…
 //	 * @param context
 //	 * @param targetLat
 //	 * @param targetLon
@@ -33,9 +33,9 @@ public class MapTools {
 //	public static String caculateDistance(Context context,String targetLat,String targetLon){
 //		String result = "0.01";
 //		try {
-//			//ÎÒµÄÎ³¶È
+//			//æˆ‘çš„çº¬åº¦
 //			double latF = Double.parseDouble(SharedUtil.getLat(context));
-//			//ÎÒµÄ¾­¶È
+//			//æˆ‘çš„ç»åº¦
 //			double lonF = Double.parseDouble(SharedUtil.getLng(context));
 //			double lat = Double.parseDouble(targetLat);
 //			double lon = Double.parseDouble(targetLon);

@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Ïß³Ì¹ÜÀí
+ * çº¿ç¨‹ç®¡ç†
  * @author mmh
  * 2015.02.08
  */
 public class TaskManager {
 	public String tag = "TaskManager";
 	public List<TaskModel> taskList = new ArrayList<TaskModel>();
-	
+
 	private static TaskManager instance;
-	
+
 	private TaskManager() {
 	}
 
@@ -26,9 +26,9 @@ public class TaskManager {
 		return instance;
 	}
 
-    /**
-     * Ìí¼ÓÏß³Ì
-     */
+	/**
+	 * æ·»åŠ çº¿ç¨‹
+	 */
 	public void addTask(String tagString,BaseTask task){
 		try {
 			TaskModel taskModel = new TaskModel();
@@ -38,62 +38,70 @@ public class TaskManager {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}		
+		}
 	}
 
-    /**
-     * ¹Ø±ÕËùÓÐ»¹ÔÚÔËÐÐµÄÏß³Ì
-     */
+	/**
+	 * å…³é—­æ‰€æœ‰è¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
+	 */
 	public void cancelAllTasks(){
 		for(int i=0;i<taskList.size();i++){
-		try {			
-			TaskModel taskModel = taskList.get(i);
-			if(taskModel.task!=null){				
-				taskModel.task.cancel(true);
-				taskList.remove(taskModel);
-			}			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			try {
+				TaskModel taskModel = taskList.get(i);
+				if(taskModel.task!=null){
+					taskModel.task.cancel(true);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		}
-		}
+		taskList.clear();
 	}
 
-    /**
-     * ¹Ø±ÕtagStringËù±êÊ¶µÄActivity»òÕßFragmentÖÐËùÓÐ»¹ÔÚÔËÐÐµÄÏß³Ì
-     * @param tagString
-     */
+	/**
+	 * å…³é—­tagStringæ‰€æ ‡è¯†çš„Activityæˆ–è€…Fragmentä¸­æ‰€æœ‰è¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
+	 * @param tagString
+	 */
 	public void cancelLimitTasks(String tagString){
+		List<TaskModel> taskModels = new ArrayList<TaskModel>();
 		for(int i=0;i<taskList.size();i++){
-		try {			
-			TaskModel taskModel = taskList.get(i);			
-			if(taskModel.tagString.equals(tagString)&&taskModel.task!=null){				
-				taskModel.task.cancel(true);
-				taskList.remove(taskModel);
-			}			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			try {
+				TaskModel taskModel = taskList.get(i);
+				if(taskModel.tagString.equals(tagString)&&taskModel.task!=null){
+					taskModel.task.cancel(true);
+					taskModels.add(taskModel);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		}
+		for (int i=0;i<taskModels.size();i++){
+			try {
+				taskList.remove(taskModels.get(i));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 
-    /**
-     * ¹Ø±ÕÒ»¸ö»¹ÔÚÔËÐÐµÄÏß³Ì
-     */
+	/**
+	 * å…³é—­ä¸€ä¸ªè¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
+	 */
 	public void cancelOneTasks(BaseTask task){
 		for(int i=0;i<taskList.size();i++){
-		try {			
-			TaskModel taskModel = taskList.get(i);			
-			if(taskModel.task!=null&&taskModel.task==task){				
-				taskModel.task.cancel(true);
-				taskList.remove(taskModel);
-				break;
-			}			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+			try {
+				TaskModel taskModel = taskList.get(i);
+				if(taskModel.task!=null&&taskModel.task==task){
+					taskModel.task.cancel(true);
+					taskList.remove(taskModel);
+					break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -102,6 +110,6 @@ public class TaskManager {
 		String tagString;
 		BaseTask task;
 	}
-	
-	
+
+
 }

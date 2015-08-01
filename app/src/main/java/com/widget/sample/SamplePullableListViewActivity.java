@@ -33,14 +33,14 @@ public class SamplePullableListViewActivity extends Activity
 	}
 
 	/**
-	 * ListView≥ı ºªØ∑Ω∑®
+	 * ListViewÂàùÂßãÂåñÊñπÊ≥ï
 	 */
 	private void initListView()
 	{
 		List<String> items = new ArrayList<String>();
 		for (int i = 0; i < 30; i++)
 		{
-			items.add("’‚¿Ô «item " + i);
+			items.add("ËøôÈáåÊòØitem " + i);
 		}
 //		MyAdapter adapter = new MyAdapter(this, items);
 //		listView.setAdapter(adapter);
@@ -49,7 +49,7 @@ public class SamplePullableListViewActivity extends Activity
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id)
+										   int position, long id)
 			{
 				Toast.makeText(
 						SamplePullableListViewActivity.this,
@@ -64,7 +64,7 @@ public class SamplePullableListViewActivity extends Activity
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id)
+									int position, long id)
 			{
 				Toast.makeText(SamplePullableListViewActivity.this,
 						" Click on " + parent.getAdapter().getItemId(position),

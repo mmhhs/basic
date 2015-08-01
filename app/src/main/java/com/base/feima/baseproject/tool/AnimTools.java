@@ -39,7 +39,7 @@ public class AnimTools {
     }
 
     /**
-     * ÉèÖÃÌí¼ÓÆÁÄ»µÄ±³¾°Í¸Ã÷¶È
+     * è®¾ç½®æ·»åŠ å±å¹•çš„èƒŒæ™¯é€æ˜åº¦
      * @param bgAlpha   //0.0-1.0
      */
     public static void setBackgroundAlpha(Activity activity,float bgAlpha)

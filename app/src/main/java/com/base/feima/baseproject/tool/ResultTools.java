@@ -7,7 +7,7 @@ import com.base.feima.baseproject.util.BaseConstant;
 
 public class ResultTools {
     /**
-     * 获取图片正确路径
+     * 鑾峰彇鍥剧墖姝ｇ‘璺緞
      * @return
      */
     public static String judgeImagePath(String path) {
@@ -28,7 +28,7 @@ public class ResultTools {
     }
 
     /**
-     * 判断网络返回成功与否
+     * 鍒ゆ柇缃戠粶杩斿洖鎴愬姛涓庡惁
      * @param result
      * @return
      */
@@ -42,7 +42,7 @@ public class ResultTools {
     }
 
     /**
-     * 判断登录失效
+     * 鍒ゆ柇鐧诲綍澶辨晥
      * @param result
      * @return
      */
@@ -56,7 +56,7 @@ public class ResultTools {
     }
 
     /**
-     * 判断网络返回结果提示
+     * 鍒ゆ柇缃戠粶杩斿洖缁撴灉鎻愮ず
      * @param result
      * @return
      */

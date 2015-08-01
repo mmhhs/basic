@@ -4,29 +4,29 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * GridViewµÄÃ¿¸öitemµÄÊı¾İ¶ÔÏó
- * 
+ * GridViewçš„æ¯ä¸ªitemçš„æ•°æ®å¯¹è±¡
+ *
  * @author len
  *
  */
 public class ImageBean implements Serializable{
 	/**
-	 * ÎÄ¼ş¼ĞµÄµÚÒ»ÕÅÍ¼Æ¬Â·¾¶
+	 * æ–‡ä»¶å¤¹çš„ç¬¬ä¸€å¼ å›¾ç‰‡è·¯å¾„
 	 */
 	private String topImagePath;
 	/**
-	 * ÎÄ¼ş¼ĞÃû
+	 * æ–‡ä»¶å¤¹å
 	 */
-	private String folderName; 
+	private String folderName;
 	/**
-	 * ÎÄ¼ş¼ĞÖĞµÄÍ¼Æ¬Êı
+	 * æ–‡ä»¶å¤¹ä¸­çš„å›¾ç‰‡æ•°
 	 */
 	private int imageCounts;
-	
+
 	private Boolean isSelected = false;
 
-    private List<String> imagePathList;
-	
+	private List<String> imagePathList;
+
 	public String getTopImagePath() {
 		return topImagePath;
 	}
@@ -39,14 +39,14 @@ public class ImageBean implements Serializable{
 	public void setFolderName(String folderName) {
 		this.folderName = folderName;
 	}
-	
+
 	public int getImageCounts() {
 		return imageCounts;
 	}
 	public void setImageCounts(int count) {
 		this.imageCounts = count;
 	}
-	
+
 	public Boolean getSelected() {
 		return isSelected;
 	}
@@ -55,11 +55,11 @@ public class ImageBean implements Serializable{
 	}
 
 
-    public List<String> getImagePathList() {
-        return imagePathList;
-    }
+	public List<String> getImagePathList() {
+		return imagePathList;
+	}
 
-    public void setImagePathList(List<String> imagePathList) {
-        this.imagePathList = imagePathList;
-    }
+	public void setImagePathList(List<String> imagePathList) {
+		this.imagePathList = imagePathList;
+	}
 }

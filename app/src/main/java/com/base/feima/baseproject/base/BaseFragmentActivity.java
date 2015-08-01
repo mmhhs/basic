@@ -12,91 +12,91 @@ import com.base.feima.baseproject.manager.ScreenManager;
 import butterknife.ButterKnife;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
-	public String taskTag = "BaseFragmentActivity";//µ±Ç°BaseFragmentActivityµÄÏß³Ì±êÊ¶
+	public String taskTag = "BaseFragmentActivity";//å½“å‰BaseFragmentActivityçš„çº¿ç¨‹æ ‡è¯†
 	protected ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
-    public MFragmentsManager mFragmentsManager = MFragmentsManager.getFragmentManagerInstance();
-	
+	public MFragmentsManager mFragmentsManager = MFragmentsManager.getFragmentManagerInstance();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		screenManager.pushActivity(this);
 	}
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        ButterKnife.inject(this);
-        initView();
-        initData();
-    }
-	
 	@Override
-	protected void onPause(){		
+	public void setContentView(int layoutResID) {
+		super.setContentView(layoutResID);
+		ButterKnife.inject(this);
+		initView();
+		initData();
+	}
+
+	@Override
+	protected void onPause(){
 		super.onPause();
 	}
-	
+
 	@Override
-	protected void onResume(){		
+	protected void onResume(){
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
 		cancelTasks();
 	}
 
-    /**
-     * ³õÊ¼»¯ÊÓÍ¼Ïà¹Ø²Ù×÷
-     */
-    public abstract void initView();
+	/**
+	 * åˆå§‹åŒ–è§†å›¾ç›¸å…³æ“ä½œ
+	 */
+	public abstract void initView();
 
-    /**
-     * ³õÊ¼»¯Êı¾İÏà¹Ø²Ù×÷
-     */
-    public abstract void initData();
+	/**
+	 * åˆå§‹åŒ–æ•°æ®ç›¸å…³æ“ä½œ
+	 */
+	public abstract void initData();
 
-    /**
-     * Ìí¼ÓÏß³Ìµ½Ïß³Ì¹ÜÀíÖĞ
-     * @param task
-     */
+	/**
+	 * æ·»åŠ çº¿ç¨‹åˆ°çº¿ç¨‹ç®¡ç†ä¸­
+	 * @param task
+	 */
 	protected void addTask(BaseTask task){
 		try {
 			taskManager.addTask(taskTag, task);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}		
+		}
 	}
 
-    /**
-     * ¹Ø±Õµ±Ç°FragmentActivityÖĞËùÓĞ»¹ÔÚÔËĞĞµÄÏß³Ì
-     */
+	/**
+	 * å…³é—­å½“å‰FragmentActivityä¸­æ‰€æœ‰è¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
+	 */
 	protected void cancelTasks(){
 		taskManager.cancelLimitTasks(taskTag);
 	}
 
-    /**
-     * »ñÈ¡Ïß³Ì±êÊ¶
-     * @return
-     */
+	/**
+	 * è·å–çº¿ç¨‹æ ‡è¯†
+	 * @return
+	 */
 	public String getTaskTag() {
 		return taskTag;
 	}
 
-    /**
-     * ÉèÖÃÏß³Ì±êÊ¶
-     * @param taskTag
-     */
+	/**
+	 * è®¾ç½®çº¿ç¨‹æ ‡è¯†
+	 * @param taskTag
+	 */
 	public void setTaskTag(String taskTag) {
 		this.taskTag = taskTag;
 	}
 
-    /**
-     * É¾³ıËùÓĞFragment
-     */
+	/**
+	 * åˆ é™¤æ‰€æœ‰Fragment
+	 */
 	public void removeAllFragments(){
-        mFragmentsManager.removeAllFragment(getSupportFragmentManager());
-    }
+		mFragmentsManager.removeAllFragment(getSupportFragmentManager());
+	}
 }

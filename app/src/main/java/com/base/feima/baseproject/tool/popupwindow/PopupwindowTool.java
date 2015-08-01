@@ -51,85 +51,85 @@ public class PopupwindowTool {
 
     public void setiOnItemClickListener(
             IOnItemClickListener iOnItemClickListener) {
-		this.iOnItemClickListener = iOnItemClickListener;
-	}
+        this.iOnItemClickListener = iOnItemClickListener;
+    }
 
-	private void doOnListItemClickListener(int position){
-		if(iOnItemClickListener !=null){
-			this.iOnItemClickListener.onItemClick(position);
-		}		
-	}
+    private void doOnListItemClickListener(int position){
+        if(iOnItemClickListener !=null){
+            this.iOnItemClickListener.onItemClick(position);
+        }
+    }
 
-	public void setiOnSureListener(
+    public void setiOnSureListener(
             IOnSureListener iOnSureListener) {
-		this.iOnSureListener = iOnSureListener;
-	}
+        this.iOnSureListener = iOnSureListener;
+    }
 
-	private void doOnSureClickListener(){
-		if(iOnSureListener !=null){
-			this.iOnSureListener.onSureClick();
-		}		
-	}
-	
-	/**
-	 * Ñ¡Ôñ½çÃæ-ÏêÏ¸
-	 * @param context           ÉÏÏÂÎÄ
-	 * @param view              ¸¸ÀàÊÓÍ¼
-	 * @param title             ±êÌâ
-	 * @param itemArray         Ã¿ÏîÊı×é
-	 * @param dismissOutside    µã»÷ÏûÊ§
-	 * @param dismissKeyback    ·µ»ØÏûÊ§
-	 * @param animStyle         ¶¯»­ÑùÊ½
-	 */
-	public void showListWindow(Context context,View view,String title,String[] itemArray,boolean dismissOutside,boolean dismissKeyback,int animStyle){
-		PopupWindow pictureWindow = getListWindow(context,title,itemArray,dismissOutside,dismissKeyback,animStyle);
-		pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-	}
+    private void doOnSureClickListener(){
+        if(iOnSureListener !=null){
+            this.iOnSureListener.onSureClick();
+        }
+    }
 
     /**
-     * Ñ¡Ôñ½çÃæ-¼òµ¥
-     * @param context           ÉÏÏÂÎÄ
-     * @param view              ¸¸ÀàÊÓÍ¼
-     * @param title             ±êÌâ
-     * @param itemArray         Ã¿ÏîÊı×é
+     * é€‰æ‹©ç•Œé¢-è¯¦ç»†
+     * @param context           ä¸Šä¸‹æ–‡
+     * @param view              çˆ¶ç±»è§†å›¾
+     * @param title             æ ‡é¢˜
+     * @param itemArray         æ¯é¡¹æ•°ç»„
+     * @param dismissOutside    ç‚¹å‡»æ¶ˆå¤±
+     * @param dismissKeyback    è¿”å›æ¶ˆå¤±
+     * @param animStyle         åŠ¨ç”»æ ·å¼
+     */
+    public void showListWindow(Context context,View view,String title,String[] itemArray,boolean dismissOutside,boolean dismissKeyback,int animStyle){
+        PopupWindow pictureWindow = getListWindow(context,title,itemArray,dismissOutside,dismissKeyback,animStyle);
+        pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+
+    /**
+     * é€‰æ‹©ç•Œé¢-ç®€å•
+     * @param context           ä¸Šä¸‹æ–‡
+     * @param view              çˆ¶ç±»è§†å›¾
+     * @param title             æ ‡é¢˜
+     * @param itemArray         æ¯é¡¹æ•°ç»„
      */
     public void showListWindow(Context context,View view,String title,String[] itemArray){
         PopupWindow pictureWindow = getListWindow(context,title,itemArray,true,true,0);
         pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
-	
-	public PopupWindow getListWindow(Context context,String title,String[] itemArray,final boolean dismissOutside,boolean dismissKeyback,int animStyle) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_list,null, false);
-	    ListView listView = (ListView) view.findViewById(R.id.base_pop_list_listview);
-	    TextView titleText = (TextView) view.findViewById(R.id.base_pop_list_title);
+
+    public PopupWindow getListWindow(Context context,String title,String[] itemArray,final boolean dismissOutside,boolean dismissKeyback,int animStyle) {
+        View view = LayoutInflater.from(context).inflate(R.layout.base_pop_list,null, false);
+        ListView listView = (ListView) view.findViewById(R.id.base_pop_list_listview);
+        TextView titleText = (TextView) view.findViewById(R.id.base_pop_list_title);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_list_contain);
         PopupwindowListAdapter adapter = new PopupwindowListAdapter(context,itemArray);
         listView.setAdapter(adapter);
         if(!StringUtils.isEmpty(title)){
-        	titleText.setText(title);
+            titleText.setText(title);
         }
         AnimTools.setBackgroundAlpha(activity, showAlpha);
-        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
-		popupWindow.setFocusable(true);		
-		popupWindow.setOutsideTouchable(false);
-		if(dismissKeyback){
-			popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
-		}
-		if(animStyle>0){
-			popupWindow.setAnimationStyle(animStyle);
-		}		
-		listView.setOnItemClickListener(new OnItemClickListener(){
+        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(false);
+        if(dismissKeyback){
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
+        }
+        if(animStyle>0){
+            popupWindow.setAnimationStyle(animStyle);
+        }
+        listView.setOnItemClickListener(new OnItemClickListener(){
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				doOnListItemClickListener(arg2);
-				popupWindow.dismiss();
-			}
-			
-		});
-		containLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                doOnListItemClickListener(arg2);
+                popupWindow.dismiss();
+            }
+
+        });
+        containLayout.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -146,85 +146,85 @@ public class PopupwindowTool {
                 AnimTools.setBackgroundAlpha(activity,hideAlpha);
             }
         });
-		return popupWindow;
-	}
+        return popupWindow;
+    }
 
     /**
-     * È·¶¨½çÃæ - ÏêÏ¸
-     * @param context                ÉÏÏÂÎÄ
-     * @param view                   ¸¸ÀàÊÓÍ¼
-     * @param title                  ±êÌâ
-     * @param message                ÄÚÈİ
-     * @param dismissOutside         µã»÷ÏûÊ§
-     * @param dismissKeyback         ·µ»ØÏûÊ§
-     * @param showOne                ÏÔÊ¾Ò»¸ö°´Å¥
-     * @param animStyle              ¶¯»­ÑùÊ½
+     * ç¡®å®šç•Œé¢ - è¯¦ç»†
+     * @param context                ä¸Šä¸‹æ–‡
+     * @param view                   çˆ¶ç±»è§†å›¾
+     * @param title                  æ ‡é¢˜
+     * @param message                å†…å®¹
+     * @param dismissOutside         ç‚¹å‡»æ¶ˆå¤±
+     * @param dismissKeyback         è¿”å›æ¶ˆå¤±
+     * @param showOne                æ˜¾ç¤ºä¸€ä¸ªæŒ‰é’®
+     * @param animStyle              åŠ¨ç”»æ ·å¼
      */
-	public void showSureWindow(Context context,View view,String title,String message,boolean dismissOutside,boolean dismissKeyback,boolean showOne,int animStyle){
-		PopupWindow pictureWindow = getSureWindow(context,title,message,dismissOutside,dismissKeyback,showOne,animStyle);
-		pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-	}
+    public void showSureWindow(Context context,View view,String title,String message,boolean dismissOutside,boolean dismissKeyback,boolean showOne,int animStyle){
+        PopupWindow pictureWindow = getSureWindow(context,title,message,dismissOutside,dismissKeyback,showOne,animStyle);
+        pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
 
     /**
-     * È·¶¨½çÃæ - ¼òµ¥
-     * @param context                ÉÏÏÂÎÄ
-     * @param view                   ¸¸ÀàÊÓÍ¼
-     * @param title                  ±êÌâ
-     * @param message                ÄÚÈİ
+     * ç¡®å®šç•Œé¢ - ç®€å•
+     * @param context                ä¸Šä¸‹æ–‡
+     * @param view                   çˆ¶ç±»è§†å›¾
+     * @param title                  æ ‡é¢˜
+     * @param message                å†…å®¹
      */
     public void showSureWindow(Context context,View view,String title,String message){
         PopupWindow pictureWindow = getSureWindow(context,title,message,true,true,false,0);
         pictureWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
-	
-	public PopupWindow getSureWindow(Context context,String title,String message,final boolean dismissOutside,boolean dismissKeyback,boolean showOne,int animStyle) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_sure,null, false);
-	    TextView titleText = (TextView) view.findViewById(R.id.base_pop_sure_title);
-	    TextView messageText = (TextView) view.findViewById(R.id.base_pop_sure_content);
-	    TextView cancleText = (TextView) view.findViewById(R.id.base_pop_sure_item1);
-	    TextView sureText = (TextView) view.findViewById(R.id.base_pop_sure_item2);
-	    View line = (View) view.findViewById(R.id.pop_sure_line);
+
+    public PopupWindow getSureWindow(Context context,String title,String message,final boolean dismissOutside,boolean dismissKeyback,boolean showOne,int animStyle) {
+        View view = LayoutInflater.from(context).inflate(R.layout.base_pop_sure,null, false);
+        TextView titleText = (TextView) view.findViewById(R.id.base_pop_sure_title);
+        TextView messageText = (TextView) view.findViewById(R.id.base_pop_sure_content);
+        TextView cancleText = (TextView) view.findViewById(R.id.base_pop_sure_item1);
+        TextView sureText = (TextView) view.findViewById(R.id.base_pop_sure_item2);
+        View line = (View) view.findViewById(R.id.pop_sure_line);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_sure_contain);
         if(!StringUtils.isEmpty(title)){
-        	titleText.setText(title);
+            titleText.setText(title);
         }
         if(!StringUtils.isEmpty(message)){
-        	messageText.setText(message);
+            messageText.setText(message);
         }
         if(showOne){
-        	cancleText.setVisibility(View.GONE);
-        	line.setVisibility(View.GONE);
+            cancleText.setVisibility(View.GONE);
+            line.setVisibility(View.GONE);
         }
         AnimTools.setBackgroundAlpha(activity, showAlpha);
-        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
-		popupWindow.setFocusable(true);		
-		popupWindow.setOutsideTouchable(false);
-		if(dismissKeyback){
-			popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
-		}
-		if(animStyle>0){
-			popupWindow.setAnimationStyle(animStyle);
-		}
-		sureText.setOnClickListener(new OnClickListener(){
+        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(false);
+        if(dismissKeyback){
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
+        }
+        if(animStyle>0){
+            popupWindow.setAnimationStyle(animStyle);
+        }
+        sureText.setOnClickListener(new OnClickListener(){
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub	
-				doOnSureClickListener();
-				popupWindow.dismiss();	
-			}
-			
-		});
-		cancleText.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                doOnSureClickListener();
+                popupWindow.dismiss();
+            }
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub	
-				popupWindow.dismiss();								
-			}
-			
-		});
-		containLayout.setOnClickListener(new OnClickListener() {
+        });
+        cancleText.setOnClickListener(new OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+            }
+
+        });
+        containLayout.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -241,30 +241,30 @@ public class PopupwindowTool {
                 AnimTools.setBackgroundAlpha(activity, hideAlpha);
             }
         });
-		return popupWindow;
-	}
+        return popupWindow;
+    }
 
 
     /**
-     * ÕÚµ²½çÃæ-ÍêÕûĞÅÏ¢
-     * @param context         ÉÏÏÂÎÄ
-     * @param view            ¸¸ÀàÊÓÍ¼
-     * @param loadsString     ¼ÓÔØÎÄ×Ö
-     * @param animStyle       PopupWindow¶¯»­
-     * @param dismissOutside  µã»÷ÏûÊ§
-     * @param dismissKeyback  ·µ»ØÏûÊ§
+     * é®æŒ¡ç•Œé¢-å®Œæ•´ä¿¡æ¯
+     * @param context         ä¸Šä¸‹æ–‡
+     * @param view            çˆ¶ç±»è§†å›¾
+     * @param loadsString     åŠ è½½æ–‡å­—
+     * @param animStyle       PopupWindowåŠ¨ç”»
+     * @param dismissOutside  ç‚¹å‡»æ¶ˆå¤±
+     * @param dismissKeyback  è¿”å›æ¶ˆå¤±
      * @return
      */
-	public PopupWindow showLoadWindow(Context context, View view, String loadsString, int animStyle,final boolean dismissOutside,final boolean dismissKeyback){
-		PopupWindow loadPopupWindow = getLoadWindow(context, loadsString,  animStyle, dismissOutside, dismissKeyback);
-		loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-		return loadPopupWindow;
-	}
+    public PopupWindow showLoadWindow(Context context, View view, String loadsString, int animStyle,final boolean dismissOutside,final boolean dismissKeyback){
+        PopupWindow loadPopupWindow = getLoadWindow(context, loadsString,  animStyle, dismissOutside, dismissKeyback);
+        loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        return loadPopupWindow;
+    }
 
     /**
-     * ÕÚµ²½çÃæ-¼òµ¥
-     * @param context ÉÏÏÂÎÄ
-     * @param view    ¸¸ÀàÊÓÍ¼
+     * é®æŒ¡ç•Œé¢-ç®€å•
+     * @param context ä¸Šä¸‹æ–‡
+     * @param view    çˆ¶ç±»è§†å›¾
      * @return
      */
     public PopupWindow showLoadWindow(Context context,View view){
@@ -272,23 +272,23 @@ public class PopupwindowTool {
         loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         return loadPopupWindow;
     }
-		
-	public PopupWindow getLoadWindow(Context context, String loadString,int animStyle,final boolean dismissOutside,final boolean dismissKeyback) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_dialog,null, false);
-	    TextView loadText = (TextView) view.findViewById(R.id.base_pop_load_text);
+
+    public PopupWindow getLoadWindow(Context context, String loadString,int animStyle,final boolean dismissOutside,final boolean dismissKeyback) {
+        View view = LayoutInflater.from(context).inflate(R.layout.base_pop_dialog,null, false);
+        TextView loadText = (TextView) view.findViewById(R.id.base_pop_load_text);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_dialog_contain);
         if(!loadString.isEmpty()){
-        	loadText.setText(loadString);
+            loadText.setText(loadString);
         }
         AnimTools.setBackgroundAlpha(activity, showAlpha);
-        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);        	
-		popupWindow.setFocusable(true);		
-		popupWindow.setOutsideTouchable(false);
-		if(animStyle>0){
-			popupWindow.setAnimationStyle(animStyle);
-		}
+        final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(false);
+        if(animStyle>0){
+            popupWindow.setAnimationStyle(animStyle);
+        }
         if(dismissKeyback){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
+            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
         }
         containLayout.setOnClickListener(new OnClickListener() {
 
@@ -307,16 +307,16 @@ public class PopupwindowTool {
                 AnimTools.setBackgroundAlpha(activity, hideAlpha);
             }
         });
-		return popupWindow;
-	}
+        return popupWindow;
+    }
 
 
     /**
-     * ÏÂÔØ½çÃæ
-     * @param context       ÉÏÏÂÎÄ
-     * @param view          ¸¸ÀàÊÓÍ¼
-     * @param title         ±êÌâ
-     * @param canCancel     ÖÕÖ¹
+     * ä¸‹è½½ç•Œé¢
+     * @param context       ä¸Šä¸‹æ–‡
+     * @param view          çˆ¶ç±»è§†å›¾
+     * @param title         æ ‡é¢˜
+     * @param canCancel     ç»ˆæ­¢
      * @return
      */
     public PopupWindow showDownloadWindow(Context context,View view,String title,boolean canCancel){
@@ -383,11 +383,11 @@ public class PopupwindowTool {
 
 
     /**
-     * ÏÔÊ¾´óÍ¼Ô¤ÀÀ
+     * æ˜¾ç¤ºå¤§å›¾é¢„è§ˆ
      * @param activity
      * @param view
-     * @param position µ±Ç°Í¼Æ¬Ë÷Òı
-     * @param chooseImageList Í¼Æ¬Â·¾¶ÁĞ±í
+     * @param position å½“å‰å›¾ç‰‡ç´¢å¼•
+     * @param chooseImageList å›¾ç‰‡è·¯å¾„åˆ—è¡¨
      * @return
      */
     public PopupWindow showPreviewWindow(Activity activity,View view,int position,final List<String> chooseImageList){
@@ -432,7 +432,7 @@ public class PopupwindowTool {
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable()); //Ê¹°´·µ»Ø¼üÄÜ¹»ÏûÊ§
+        popupWindow.setBackgroundDrawable(new BitmapDrawable()); //ä½¿æŒ‰è¿”å›é”®èƒ½å¤Ÿæ¶ˆå¤±
         popupWindow.setAnimationStyle(R.style.base_anim_alpha);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener(){
             @Override
@@ -456,6 +456,6 @@ public class PopupwindowTool {
         });
         return popupWindow;
     }
-	
-	
+
+
 }

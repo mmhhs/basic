@@ -36,50 +36,50 @@ import java.util.Set;
 
 
 public class Httpclient {
-	public static final String TAG = "Httpclient Result";
-	
-	
-	
-	 /**
-     * ÒÔPost·½·¨·ÃÎÊ
-     * @param url ÇëÇóµØÖ·
-     * @param argsMap Ğ¯´øµÄ²ÎÊı
-     * @return  String ·µ»Ø½á¹û
+    public static final String TAG = "Httpclient Result";
+
+
+
+    /**
+     * ä»¥Postæ–¹æ³•è®¿é—®
+     * @param url è¯·æ±‚åœ°å€
+     * @param argsMap æºå¸¦çš„å‚æ•°
+     * @return  String è¿”å›ç»“æœ
      * @throws Exception
      */
     public static String POSTMethod(String url,Map<String, Object> argsMap) throws Exception{
         byte[] dataByte = null;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
-        //ÉèÖÃ²ÎÊı
+        //è®¾ç½®å‚æ•°
         UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(setHttpParams(argsMap), "UTF-8");
         httpPost.setEntity(encodedFormEntity);
-        // Ö´ĞĞÇëÇó
+        // æ‰§è¡Œè¯·æ±‚
         HttpResponse httpResponse = httpClient.execute(httpPost);
-        // »ñÈ¡·µ»ØµÄÊı¾İ
+        // è·å–è¿”å›çš„æ•°æ®
         HttpEntity httpEntity = httpResponse.getEntity();
         if (httpEntity != null) {
             byte[] responseBytes = getData(httpEntity);
             dataByte = responseBytes;
             httpPost.abort();
         }
-        //½«×Ö½ÚÊı×é×ª»»³ÉÎª×Ö·û´®
+        //å°†å­—èŠ‚æ•°ç»„è½¬æ¢æˆä¸ºå­—ç¬¦ä¸²
         String result = bytesToString(dataByte);
         LogUtil.d("arg= " + new JSONObject(argsMap).toString());
         LogUtil.d("" + url + "= " + result);
         return result;
     }
-     
+
     /**
-     * ÒÔGet·½·¨·ÃÎÊ
-     * @param url ÇëÇóµØÖ·
+     * ä»¥Getæ–¹æ³•è®¿é—®
+     * @param url è¯·æ±‚åœ°å€
      * @return String
      * @throws Exception
      */
     public static String GETMethod(String url,Map<String, Object> argsMap) throws Exception{
         byte[] dataByte = null;
         HttpClient httpClient = new DefaultHttpClient();
-        //ÎªGETÇëÇóÁ´½Ó¹¹Ôì²ÎÊı
+        //ä¸ºGETè¯·æ±‚é“¾æ¥æ„é€ å‚æ•°
         url = formatGetParameter(url,argsMap);
         HttpGet httpGet = new HttpGet(url);
         HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -89,17 +89,17 @@ public class Httpclient {
             dataByte = responseBytes;
             httpGet.abort();
         }
-        //½«×Ö½ÚÊı×é×ª»»³ÉÎª×Ö·û´®
+        //å°†å­—èŠ‚æ•°ç»„è½¬æ¢æˆä¸ºå­—ç¬¦ä¸²
         String result = bytesToString(dataByte);
         LogUtil.d("arg= " + new JSONObject(argsMap).toString());
         LogUtil.d("" + url + "= " + result);
         return result;
     }
-     
+
     /**
-     * ÒÔPut·½·¨·ÃÎÊ
-     * @param url ÇëÇóµØÖ·
-     * @param argsMap Ğ¯´øµÄ²ÎÊı
+     * ä»¥Putæ–¹æ³•è®¿é—®
+     * @param url è¯·æ±‚åœ°å€
+     * @param argsMap æºå¸¦çš„å‚æ•°
      * @return String
      * @throws Exception
      */
@@ -107,27 +107,27 @@ public class Httpclient {
         byte[] dataByte = null;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPut httpPut = new HttpPut(url);
-        //ÉèÖÃ²ÎÊı
+        //è®¾ç½®å‚æ•°
         UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(setHttpParams(argsMap), "UTF-8");
         httpPut.setEntity(encodedFormEntity);
-        // Ö´ĞĞÇëÇó
+        // æ‰§è¡Œè¯·æ±‚
         HttpResponse httpResponse = httpClient.execute(httpPut);
-        // »ñÈ¡·µ»ØµÄÊı¾İ
+        // è·å–è¿”å›çš„æ•°æ®
         HttpEntity httpEntity = httpResponse.getEntity();
         if (httpEntity != null) {
             byte[] responseBytes = getData(httpEntity);
             dataByte = responseBytes;
             httpPut.abort();
         }
-        //½«×Ö½ÚÊı×é×ª»»³ÉÎª×Ö·û´®
+        //å°†å­—èŠ‚æ•°ç»„è½¬æ¢æˆä¸ºå­—ç¬¦ä¸²
         String result = bytesToString(dataByte);
         LogUtil.d("arg= " + new JSONObject(argsMap).toString());
         LogUtil.d("" + url + "= " + result);
         return result;
     }
-     
+
     /**
-     * ¹¹ÔìGETÇëÇóµØÖ·µÄ²ÎÊıÆ´½Ó
+     * æ„é€ GETè¯·æ±‚åœ°å€çš„å‚æ•°æ‹¼æ¥
      * @param url
      * @param argsMap
      * @return String
@@ -137,7 +137,7 @@ public class Httpclient {
             if (!url.endsWith("?")) {
                 url = url +"?";
             }
-             
+
             if (argsMap!=null && !argsMap.isEmpty()) {
                 Set<Entry<String, Object>> entrySet = argsMap.entrySet();
                 Iterator<Entry<String, Object>> iterator = entrySet.iterator();
@@ -156,9 +156,9 @@ public class Httpclient {
         }
         return url;
     }
-     
+
     /**
-     * »ñÈ¡Êı¾İ
+     * è·å–æ•°æ®
      * @param httpEntity
      * @return
      * @throws Exception
@@ -170,15 +170,15 @@ public class Httpclient {
         byte[] responseBytes = byteArrayOutputStream.toByteArray();
         return responseBytes;
     }
-     
+
     /**
-     * ÉèÖÃHttpPostÇëÇó²ÎÊı
+     * è®¾ç½®HttpPostè¯·æ±‚å‚æ•°
      * @param argsMap
      * @return BasicHttpParams
      */
     private static List<BasicNameValuePair> setHttpParams(Map<String, Object> argsMap){
         List<BasicNameValuePair> nameValuePairList = new ArrayList<BasicNameValuePair>();
-        //ÉèÖÃÇëÇó²ÎÊı
+        //è®¾ç½®è¯·æ±‚å‚æ•°
         if (argsMap!=null && !argsMap.isEmpty()) {
             Set<Entry<String, Object>> set = argsMap.entrySet();
             Iterator<Entry<String, Object>> iterator = set.iterator();
@@ -190,9 +190,9 @@ public class Httpclient {
         }
         return nameValuePairList;
     }
-     
+
     /**
-     * ½«×Ö½ÚÊı×é×ª»»³É×Ö·û´®
+     * å°†å­—èŠ‚æ•°ç»„è½¬æ¢æˆå­—ç¬¦ä¸²
      * @param bytes
      * @return
      * @throws java.io.UnsupportedEncodingException
@@ -205,119 +205,119 @@ public class Httpclient {
         return null;
     }
 
-	/**
-	 * Ìá½»²ÎÊıÀïÓĞÎÄ¼şµÄÊı¾İ
-	 * @param<MultipartEntity>
-	 *
-	 * @param url
-	 *            ·şÎñÆ÷µØÖ·
-	 * @param param
-	 *            ²ÎÊı
-	 * @return ·şÎñÆ÷·µ»Ø½á¹û
-	 * @throws Exception
-	 */
-	public static String uploadSubmitFile(String url, Map<String, Object> param,
+    /**
+     * æäº¤å‚æ•°é‡Œæœ‰æ–‡ä»¶çš„æ•°æ®
+     * @param<MultipartEntity>
+     *
+     * @param url
+     *            æœåŠ¡å™¨åœ°å€
+     * @param param
+     *            å‚æ•°
+     * @return æœåŠ¡å™¨è¿”å›ç»“æœ
+     * @throws Exception
+     */
+    public static String uploadSubmitFile(String url, Map<String, Object> param,
                                           File file, String key) throws Exception {
-		HttpPost post = new HttpPost(url);
-		MultipartEntity entity = new MultipartEntity();
-		if (param != null && !param.isEmpty()) {
-			for (Entry<String, Object> entry : param.entrySet()) {
-				if (entry.getValue() != null
-						&& ((String) entry.getValue()).trim().length() > 0) {
-					entity.addPart(entry.getKey(),
-							new StringBody((String) entry.getValue(),Charset.forName("UTF-8")));
-				}
-			}
-		}
-		// Ìí¼ÓÎÄ¼ş²ÎÊı
-		if (file != null && file.exists()) {
-			entity.addPart(key, new FileBody(file));
-		}
-		post.setEntity(entity);
-		HttpClient httpClient = new DefaultHttpClient();//·¢ËÍÇëÇó
-		HttpResponse response = httpClient.execute(post);
-		int stateCode = response.getStatusLine().getStatusCode();
-		StringBuffer sb = new StringBuffer();
-		if (stateCode == HttpStatus.SC_OK) {
-			HttpEntity result = response.getEntity();
-			if (result != null) {
-				InputStream is = result.getContent();
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(is));
-				String tempLine;
-				while ((tempLine = br.readLine()) != null) {
-					sb.append(tempLine);
-				}
-			}
-		}
-		post.abort();
+        HttpPost post = new HttpPost(url);
+        MultipartEntity entity = new MultipartEntity();
+        if (param != null && !param.isEmpty()) {
+            for (Entry<String, Object> entry : param.entrySet()) {
+                if (entry.getValue() != null
+                        && ((String) entry.getValue()).trim().length() > 0) {
+                    entity.addPart(entry.getKey(),
+                            new StringBody((String) entry.getValue(),Charset.forName("UTF-8")));
+                }
+            }
+        }
+        // æ·»åŠ æ–‡ä»¶å‚æ•°
+        if (file != null && file.exists()) {
+            entity.addPart(key, new FileBody(file));
+        }
+        post.setEntity(entity);
+        HttpClient httpClient = new DefaultHttpClient();//å‘é€è¯·æ±‚
+        HttpResponse response = httpClient.execute(post);
+        int stateCode = response.getStatusLine().getStatusCode();
+        StringBuffer sb = new StringBuffer();
+        if (stateCode == HttpStatus.SC_OK) {
+            HttpEntity result = response.getEntity();
+            if (result != null) {
+                InputStream is = result.getContent();
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(is));
+                String tempLine;
+                while ((tempLine = br.readLine()) != null) {
+                    sb.append(tempLine);
+                }
+            }
+        }
+        post.abort();
         LogUtil.d("arg= " + new JSONObject(param).toString());
-		LogUtil.d("" + url + "= " + sb.toString());
-		return sb.toString();
-	}
-	/**
-	 * Ìá½»²ÎÊıÀïÓĞÎÄ¼şµÄÊı¾İ ¶à¸öÎÄ¼ş
-	 * @param
-	 *
-	 * @param url
-	 *            ·şÎñÆ÷µØÖ·
-	 * @param param
-	 *            ²ÎÊı
-	 * @return ·şÎñÆ÷·µ»Ø½á¹û
-	 * @throws Exception
-	 */
-	public static String uploadSubmitFiles(String url, Map<String, Object> param,
+        LogUtil.d("" + url + "= " + sb.toString());
+        return sb.toString();
+    }
+    /**
+     * æäº¤å‚æ•°é‡Œæœ‰æ–‡ä»¶çš„æ•°æ® å¤šä¸ªæ–‡ä»¶
+     * @param
+     *
+     * @param url
+     *            æœåŠ¡å™¨åœ°å€
+     * @param param
+     *            å‚æ•°
+     * @return æœåŠ¡å™¨è¿”å›ç»“æœ
+     * @throws Exception
+     */
+    public static String uploadSubmitFiles(String url, Map<String, Object> param,
                                            List<File> files, String key) throws Exception {
-		HttpPost post = new HttpPost(url);
-		MultipartEntity entity = new MultipartEntity();
-		if (param != null && !param.isEmpty()) {
-			for (Entry<String, Object> entry : param.entrySet()) {
-				if (entry.getValue() != null
-						&& ((String) entry.getValue()).trim().length() > 0) {
-					entity.addPart(entry.getKey(),
-							new StringBody((String) entry.getValue(),Charset.forName("UTF-8")));
-				}
-			}
-		}
-		// Ìí¼ÓÎÄ¼ş²ÎÊı
-		for(int i=0;i<files.size() ;i++){
-			if (files.get(i) != null && files.get(i).exists()) {
-				entity.addPart(key, new FileBody(files.get(i)));
-				
-			}
-		}
-		post.setEntity(entity);
-		HttpClient httpClient = new DefaultHttpClient();//·¢ËÍÇëÇó
-		HttpResponse response = httpClient.execute(post);
-		int stateCode = response.getStatusLine().getStatusCode();
-		StringBuffer sb = new StringBuffer();
-		if (stateCode == HttpStatus.SC_OK) {
-			HttpEntity result = response.getEntity();
-			if (result != null) {
-				InputStream is = result.getContent();
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(is));
-				String tempLine;
-				while ((tempLine = br.readLine()) != null) {
-					sb.append(tempLine);
-				}
-			}
-		}
-		post.abort();
+        HttpPost post = new HttpPost(url);
+        MultipartEntity entity = new MultipartEntity();
+        if (param != null && !param.isEmpty()) {
+            for (Entry<String, Object> entry : param.entrySet()) {
+                if (entry.getValue() != null
+                        && ((String) entry.getValue()).trim().length() > 0) {
+                    entity.addPart(entry.getKey(),
+                            new StringBody((String) entry.getValue(),Charset.forName("UTF-8")));
+                }
+            }
+        }
+        // æ·»åŠ æ–‡ä»¶å‚æ•°
+        for(int i=0;i<files.size() ;i++){
+            if (files.get(i) != null && files.get(i).exists()) {
+                entity.addPart(key, new FileBody(files.get(i)));
+
+            }
+        }
+        post.setEntity(entity);
+        HttpClient httpClient = new DefaultHttpClient();//å‘é€è¯·æ±‚
+        HttpResponse response = httpClient.execute(post);
+        int stateCode = response.getStatusLine().getStatusCode();
+        StringBuffer sb = new StringBuffer();
+        if (stateCode == HttpStatus.SC_OK) {
+            HttpEntity result = response.getEntity();
+            if (result != null) {
+                InputStream is = result.getContent();
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(is));
+                String tempLine;
+                while ((tempLine = br.readLine()) != null) {
+                    sb.append(tempLine);
+                }
+            }
+        }
+        post.abort();
         LogUtil.d("arg= " + new JSONObject(param).toString());
-		LogUtil.d("" + url + "= " + sb.toString());
-		return sb.toString();
-	}
+        LogUtil.d("" + url + "= " + sb.toString());
+        return sb.toString();
+    }
 
     /**
-     * cookieÈİÆ÷
-     * µ±·şÎñÆ÷ĞèÒªÉèÖÃsessionÊ±£¬±ğÍüÁË¸øÇëÇóÉèÖÃcookieÒÔ¼°±£´æcookie
+     * cookieå®¹å™¨
+     * å½“æœåŠ¡å™¨éœ€è¦è®¾ç½®sessionæ—¶ï¼Œåˆ«å¿˜äº†ç»™è¯·æ±‚è®¾ç½®cookieä»¥åŠä¿å­˜cookie
      *
      */
     private static HashMap<String,String> cookieContiner =new HashMap<String,String>() ;
 
     /**
-     * ±£´æCookie
+     * ä¿å­˜Cookie
      * @param httpResponse
      */
     private static void SaveCookies(HttpResponse httpResponse)
@@ -342,7 +342,7 @@ public class Httpclient {
     }
 
     /**
-     * Ôö¼ÓGet Cookie
+     * å¢åŠ Get Cookie
      * @param request
      */
     private static void addGetCookies(HttpGet request)
@@ -362,7 +362,7 @@ public class Httpclient {
     }
 
     /**
-     * Ôö¼ÓPost Cookie
+     * å¢åŠ Post Cookie
      * @param request
      */
     private static void addPostCookies(HttpPost request)
@@ -382,7 +382,7 @@ public class Httpclient {
     }
 
     /**
-     * Ôö¼ÓPut Cookie
+     * å¢åŠ Put Cookie
      * @param request
      */
     private static void addPutCookies(HttpPut request)
@@ -400,5 +400,5 @@ public class Httpclient {
         }
         request.addHeader("cookie", sb.toString());
     }
-	
+
 }

@@ -10,27 +10,27 @@ public class HttpUtil
 {
 
 
-  public static boolean isnet(Context paramContext)
-  {
-    ConnectivityManager localConnectivityManager = (ConnectivityManager)paramContext.getSystemService("connectivity");
-    
-    while (true)
-    {
-    	// 获取代表联网状态的NetWorkInfo对象 
-      NetworkInfo localNetworkInfo = localConnectivityManager.getActiveNetworkInfo();
-      if ((localNetworkInfo != null) && (localNetworkInfo.isConnected()))
-      {
-    	// 
-          if (localNetworkInfo.getState() == NetworkInfo.State.CONNECTED) {
-              return true;
-          }
-      }
-      
-      return false;
-    }
-  }
-  
-  
+	public static boolean isnet(Context paramContext)
+	{
+		ConnectivityManager localConnectivityManager = (ConnectivityManager)paramContext.getSystemService("connectivity");
+
+		while (true)
+		{
+			// 鑾峰彇浠ｈ〃鑱旂綉鐘舵�佺殑NetWorkInfo瀵硅薄
+			NetworkInfo localNetworkInfo = localConnectivityManager.getActiveNetworkInfo();
+			if ((localNetworkInfo != null) && (localNetworkInfo.isConnected()))
+			{
+				//
+				if (localNetworkInfo.getState() == NetworkInfo.State.CONNECTED) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+
 	/**
 	 * make true current connect service is wifi
 	 * @param mContext
@@ -46,7 +46,7 @@ public class HttpUtil
 		}
 		return false;
 	}
-	
+
 	public static int netWork(Context mContext){
 		ConnectivityManager connectivityManager = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -64,7 +64,7 @@ public class HttpUtil
 		}
 		return 0;
 	}
-	
-	
+
+
 }
 

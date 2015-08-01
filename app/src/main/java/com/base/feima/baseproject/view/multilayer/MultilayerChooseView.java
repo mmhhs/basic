@@ -30,8 +30,8 @@ public class MultilayerChooseView extends LinearLayout {
     private LayoutParams defaultTabLayoutParams;
     private List<TextView> menuTextViewList = new ArrayList<TextView>();
     private Map<String,PopupWindow> menuPopupWindowMap = new HashMap<String,PopupWindow>();
-    private boolean showPopupWindow = false;//ÅĞ¶Ïµ±Ç°ÊÇ·ñÓĞPopupWindowÏÔÊ¾
-    private ISelectedListener iSelectedListener;//Ñ¡Ôñ½á¹û¼àÌı
+    private boolean showPopupWindow = false;//åˆ¤æ–­å½“å‰æ˜¯å¦æœ‰PopupWindowæ˜¾ç¤º
+    private ISelectedListener iSelectedListener;//é€‰æ‹©ç»“æœç›‘å¬
 
     public MultilayerChooseView(Context context) {
         super(context);
@@ -49,7 +49,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * ³õÊ¼
+     * åˆå§‹
      * @param selectMenuModelList
      */
     public void init(List<SelectMenuModel> selectMenuModelList) {
@@ -63,7 +63,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * Ìí¼Ó²Ëµ¥Ïî
+     * æ·»åŠ èœå•é¡¹
      */
     private void addMenuItem(){
         if (selectMenuModelList!=null){
@@ -99,7 +99,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * ÏÔÊ¾PopupWindow
+     * æ˜¾ç¤ºPopupWindow
      * @param view
      * @param index
      */
@@ -122,7 +122,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * Òş²ØËùÓĞPopupWindow
+     * éšè—æ‰€æœ‰PopupWindow
      */
     public void hideAllChooseWindow(){
         for (String key : menuPopupWindowMap.keySet()) {
@@ -133,7 +133,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * »ñµÃPopupWindow
+     * è·å¾—PopupWindow
      * @param context
      * @param index
      * @return
@@ -257,7 +257,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * ÉèÖÃÑ¡ÖĞÏî
+     * è®¾ç½®é€‰ä¸­é¡¹
      * @param list
      * @param position
      */
@@ -273,7 +273,7 @@ public class MultilayerChooseView extends LinearLayout {
     }
 
     /**
-     * ÉèÖÃ²Ëµ¥ÏÔÊ¾ÎÄ×Ö
+     * è®¾ç½®èœå•æ˜¾ç¤ºæ–‡å­—
      */
     private void setMenuText(){
         for (int i=0;i<menuTextViewList.size();i++){

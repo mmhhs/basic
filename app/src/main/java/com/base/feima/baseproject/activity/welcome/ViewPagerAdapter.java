@@ -1,5 +1,4 @@
 package com.base.feima.baseproject.activity.welcome;
-// add by liumy  2013 7-19
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;

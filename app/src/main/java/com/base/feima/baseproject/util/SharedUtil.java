@@ -6,90 +6,90 @@ import android.content.SharedPreferences;
 
 public class SharedUtil{
 	public final static String USER_ID = "USER_ID";
-	
-	//¾­Î³¶È
+
+	//ç»çº¬åº¦
 	public final static String LOCATION = "LOCATION";
 	public final static String LATITUDE = "LATITUDE";
 	public final static String LONGITUDE = "LONGITUDE";
-	
+
 	public final static String HELP = "HELP";
-	
+
 	/**
-	 * ±£´æÓÃ»§id
+	 * ä¿å­˜ç”¨æˆ·id
 	 * @param context
-	 * @param id ÓÃ»§id
+	 * @param id ç”¨æˆ·id
 	 */
 	public static void saveUserId(Context context, String id)
-	{	      
-		  SharedPreferences sp = context.getSharedPreferences(USER_ID, 0); 		  
-	      SharedPreferences.Editor editor = sp.edit();
-	      editor.clear();
-	      editor.putString(USER_ID, id);
-	      editor.commit();
-	 }	
+	{
+		SharedPreferences sp = context.getSharedPreferences(USER_ID, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putString(USER_ID, id);
+		editor.commit();
+	}
 	public static String getUserId(Context context){
 		Context ctx = context;
 		SharedPreferences sp = ctx.getSharedPreferences(USER_ID, 0);
-		String id = sp.getString(USER_ID, "");		
+		String id = sp.getString(USER_ID, "");
 		return id;
 	}
-	
+
 	/**
-	 * ±£´æµØÀíÎ»ÖÃĞÅÏ¢
+	 * ä¿å­˜åœ°ç†ä½ç½®ä¿¡æ¯
 	 * @param context
 	 * @param lat
 	 * @param lng
 	 */
 	public static void saveLocation(Context context, String lat,String lng)
-	{	      
-		  SharedPreferences sp = context.getSharedPreferences(LOCATION, 0); 		  
-	      SharedPreferences.Editor editor = sp.edit();
-	      editor.clear();
-	      editor.putString(LATITUDE, lat);
-	      editor.putString(LONGITUDE, lng);
-	      editor.commit();
-	 }	
+	{
+		SharedPreferences sp = context.getSharedPreferences(LOCATION, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putString(LATITUDE, lat);
+		editor.putString(LONGITUDE, lng);
+		editor.commit();
+	}
 	/**
-	 * »ñÈ¡Î³¶È
+	 * è·å–çº¬åº¦
 	 * @param context
 	 * @return
 	 */
 	public static String getLat(Context context){
 		Context ctx = context;
 		SharedPreferences sp = ctx.getSharedPreferences(LOCATION, 0);
-		String lat = sp.getString(LATITUDE, "");		
+		String lat = sp.getString(LATITUDE, "");
 		return lat;
 	}
 	/**
-	 * »ñÈ¡¾­¶È
+	 * è·å–ç»åº¦
 	 * @param context
 	 * @return
 	 */
 	public static String getLng(Context context){
 		Context ctx = context;
 		SharedPreferences sp = ctx.getSharedPreferences(LOCATION, 0);
-		String lng = sp.getString(LONGITUDE, "");		
+		String lng = sp.getString(LONGITUDE, "");
 		return lng;
 	}
-	
+
 	/**
-	 * ±£´æ°ïÖú½çÃæÏÔÊ¾×´Ì¬
+	 * ä¿å­˜å¸®åŠ©ç•Œé¢æ˜¾ç¤ºçŠ¶æ€
 	 * @param context
-	 * @param status true±íÊ¾ĞèÒªÏÔÊ¾
+	 * @param status trueè¡¨ç¤ºéœ€è¦æ˜¾ç¤º
 	 */
 	public static void saveHelpStatus(Context context, boolean status,int code)
-	{	      
-		  SharedPreferences sp = context.getSharedPreferences(HELP, 0); 		  
-	      SharedPreferences.Editor editor = sp.edit();
-	      editor.clear();
-	      editor.putBoolean(HELP, status);
-	      editor.putInt("code", code);
-	      editor.commit();
-	 }	
+	{
+		SharedPreferences sp = context.getSharedPreferences(HELP, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putBoolean(HELP, status);
+		editor.putInt("code", code);
+		editor.commit();
+	}
 	public static boolean getHelpStatus(Context context){
 		Context ctx = context;
 		SharedPreferences sp = ctx.getSharedPreferences(HELP, 0);
-		boolean status = sp.getBoolean(HELP, true);	
+		boolean status = sp.getBoolean(HELP, true);
 		return status;
 	}
 	public static int getHelpCode(Context context){

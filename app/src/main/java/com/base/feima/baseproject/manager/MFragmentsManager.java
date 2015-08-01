@@ -8,11 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Fragment管理
- * @author mmh
- * 2015.04.08
- */
 public class MFragmentsManager {
     private static List<Fragment> fragmentList = new ArrayList<Fragment>();
     private static MFragmentsManager instance;
@@ -28,7 +23,7 @@ public class MFragmentsManager {
     }
 
     /**
-     * 添加Fragment
+     * 娣诲姞Fragment
      * @param fragment
      */
     public void addFragment(Fragment fragment){
@@ -36,7 +31,7 @@ public class MFragmentsManager {
     }
 
     /**
-     * 删除一个Fragment
+     * 鍒犻櫎涓�涓狥ragment
      * @param fm
      * @param fragment
      */
@@ -53,7 +48,7 @@ public class MFragmentsManager {
     }
 
     /**
-     * 删除所有Fragment
+     * 鍒犻櫎鎵�鏈塅ragment
      * @param fm
      */
     public void removeAllFragment(FragmentManager fm){

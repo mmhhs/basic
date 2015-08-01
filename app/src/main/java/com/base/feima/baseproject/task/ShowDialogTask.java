@@ -24,38 +24,38 @@ import java.util.Map;
 
 
 public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
-    //ÏÔÊ¾Ïà¹Ø
-    public final static int NET_ERROR = 6;//Ã»ÓĞÍøÂç
-    public int netFlag =0;//ÍøÂç±êÊ¶
-    public Activity activity;//ÉÏÏÂÎÄ
-    public View parentView;//¸¸ÀàÊÓÍ¼
-	public boolean showDialog = false;//ÏÔÊ¾¼ÓÔØ¿ò
-	public boolean showNetToast = false;//ÏÔÊ¾ÍøÂçÎÊÌâtoast
-	public PopupWindow loadPopupWindow;//¼ÓÔØ¿ò
-	public String loadString = "";//¼ÓÔØÎÄ×Ö
-    //·ÃÎÊÏà¹Ø
-    public int accessType;//·ÃÎÊ·½Ê½
-	public String httpUrl = "";//ÍøÂçÂ·¾¶
-	public Map<String, Object> argMap;//²ÎÊı
-	public List<File> fileList;//ÉÏ´«ÎÄ¼şÁĞ±í
-	public String keyString = "Filedata";//ÉÏ´«ÎÄ¼ş¼üÖµ
-    //·µ»ØÖµÏà¹Ø
-    public String errorMsg;//´íÎóĞÅÏ¢
-    public String resultsString = null;//·µ»ØÖµ
-    public boolean loginInvalid = false;//µÇÂ¼Ê§Ğ§
+	//æ˜¾ç¤ºç›¸å…³
+	public final static int NET_ERROR = 6;//æ²¡æœ‰ç½‘ç»œ
+	public int netFlag =0;//ç½‘ç»œæ ‡è¯†
+	public Activity activity;//ä¸Šä¸‹æ–‡
+	public View parentView;//çˆ¶ç±»è§†å›¾
+	public boolean showDialog = false;//æ˜¾ç¤ºåŠ è½½æ¡†
+	public boolean showNetToast = false;//æ˜¾ç¤ºç½‘ç»œé—®é¢˜toast
+	public PopupWindow loadPopupWindow;//åŠ è½½æ¡†
+	public String loadString = "";//åŠ è½½æ–‡å­—
+	//è®¿é—®ç›¸å…³
+	public int accessType;//è®¿é—®æ–¹å¼
+	public String httpUrl = "";//ç½‘ç»œè·¯å¾„
+	public Map<String, Object> argMap;//å‚æ•°
+	public List<File> fileList;//ä¸Šä¼ æ–‡ä»¶åˆ—è¡¨
+	public String keyString = "Filedata";//ä¸Šä¼ æ–‡ä»¶é”®å€¼
+	//è¿”å›å€¼ç›¸å…³
+	public String errorMsg;//é”™è¯¯ä¿¡æ¯
+	public String resultsString = null;//è¿”å›å€¼
+	public boolean loginInvalid = false;//ç™»å½•å¤±æ•ˆ
 
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowDialogTask";
-    private IOnDialogResultListener iOnDialogResultListener;
-    private IOnDialogBackgroundListener iOnDialogBackgroundListener;
+	private IOnDialogResultListener iOnDialogResultListener;
+	private IOnDialogBackgroundListener iOnDialogBackgroundListener;
 	private PopupwindowTool popupwindowTool;
-	
+
 	/**
-	 * ±¾µØ´¦ÀíºÄÊ±Ïß³Ì
-	 * @param activity ÉÏÏÂÎÄ
-	 * @param parentView ¸¸ÀàÊÓÍ¼ 
-	 * @param loadsString ÏÔÊ¾ÎÄ×Ö
-	 * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾£¬ÔòparentView²»ÄÜÎª¿Õ
+	 * æœ¬åœ°å¤„ç†è€—æ—¶çº¿ç¨‹
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾ 
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºï¼Œåˆ™parentViewä¸èƒ½ä¸ºç©º
 	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog){
 		this.activity = activity;
@@ -65,16 +65,16 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.tagString = tagString;
 		init();
 	}
-	
+
 	/**
-	 * ÍøÂç¼ÓÔØÏß³Ì
-	 * @param activity ÉÏÏÂÎÄ
-	 * @param parentView ¸¸ÀàÊÓÍ¼
-	 * @param loadsString ÏÔÊ¾ÎÄ×Ö
-	 * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾parentView²»ÄÜÎª¿Õ
-	 * @param httpUrl ·ÃÎÊÂ·¾¶
-	 * @param argMap ²ÎÊı¼¯ºÏ
-	 * @param accessType ·ÃÎÊ·½Ê½
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºparentViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl è®¿é—®è·¯å¾„
+	 * @param argMap å‚æ•°é›†åˆ
+	 * @param accessType è®¿é—®æ–¹å¼
 	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType){
 		this.activity = activity;
@@ -87,16 +87,16 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.tagString = tagString;
 		init();
 	}
-    /**
-     * ÍøÂç¼ÓÔØÏß³Ì ×îºóÒ»¸ö²ÎÊıÈôÎªtrue£¬ÔòÃ»ÓĞÍøÂçÊ±£¬µ¯³öÌáÊ¾
-     * @param activity ÉÏÏÂÎÄ
-     * @param parentView ¸¸ÀàÊÓÍ¼
-     * @param loadsString ÏÔÊ¾ÎÄ×Ö
-     * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾parentView²»ÄÜÎª¿Õ
-     * @param httpUrl ·ÃÎÊÂ·¾¶
-     * @param argMap ²ÎÊı¼¯ºÏ
-     * @param accessType ·ÃÎÊ·½Ê½
-     */
+	/**
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹ æœ€åä¸€ä¸ªå‚æ•°è‹¥ä¸ºtrueï¼Œåˆ™æ²¡æœ‰ç½‘ç»œæ—¶ï¼Œå¼¹å‡ºæç¤º
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºparentViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl è®¿é—®è·¯å¾„
+	 * @param argMap å‚æ•°é›†åˆ
+	 * @param accessType è®¿é—®æ–¹å¼
+	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,int accessType,boolean showNet){
 		this.activity = activity;
 		this.parentView = parentView;
@@ -110,15 +110,15 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		init();
 	}
 	/**
-	 * ÍøÂç¼ÓÔØÏß³Ì-ÉÏ´«ÎÄ¼ş
-	 * @param activity ÉÏÏÂÎÄ
-	 * @param parentView ¸¸ÀàÊÓÍ¼ 
-	 * @param loadsString ÏÔÊ¾ÎÄ×Ö
-	 * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾parentView²»ÄÜÎª¿Õ
-	 * @param httpUrl ·ÃÎÊÂ·¾¶
-	 * @param argMap ²ÎÊı¼¯ºÏ
-	 * @param fileList ÎÄ¼ş¼¯ºÏ
-	 * @param accessType ·ÃÎÊ·½Ê½
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹-ä¸Šä¼ æ–‡ä»¶
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾ 
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºparentViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl è®¿é—®è·¯å¾„
+	 * @param argMap å‚æ•°é›†åˆ
+	 * @param fileList æ–‡ä»¶é›†åˆ
+	 * @param accessType è®¿é—®æ–¹å¼
 	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,int accessType){
 		this.activity = activity;
@@ -133,16 +133,16 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		init();
 	}
 	/**
-	 * ÍøÂç¼ÓÔØÏß³Ì-ÉÏ´«ÎÄ¼ş-ÎÄ¼ş±êÊ¶
-	 * @param activity ÉÏÏÂÎÄ
-	 * @param parentView ¸¸ÀàÊÓÍ¼ 
-	 * @param loadsString ÏÔÊ¾ÎÄ×Ö
-	 * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾parentView²»ÄÜÎª¿Õ
-	 * @param httpUrl ·ÃÎÊÂ·¾¶
-	 * @param argMap ²ÎÊı¼¯ºÏ
-	 * @param fileList ÎÄ¼ş¼¯ºÏ
-	 * @param key ·şÎñÆ÷ÅĞ¶ÏÎÄ¼ş±êÊ¶
-	 * @param accessType ·ÃÎÊ·½Ê½
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹-ä¸Šä¼ æ–‡ä»¶-æ–‡ä»¶æ ‡è¯†
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾ 
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºparentViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl è®¿é—®è·¯å¾„
+	 * @param argMap å‚æ•°é›†åˆ
+	 * @param fileList æ–‡ä»¶é›†åˆ
+	 * @param key æœåŠ¡å™¨åˆ¤æ–­æ–‡ä»¶æ ‡è¯†
+	 * @param accessType è®¿é—®æ–¹å¼
 	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType){
 		this.activity = activity;
@@ -157,18 +157,18 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.tagString = tagString;
 		init();
 	}
-    /**
-     * ÍøÂç¼ÓÔØÏß³Ì-ÉÏ´«ÎÄ¼ş-ÎÄ¼ş±êÊ¶ ×îºóÒ»¸ö²ÎÊıÈôÎªtrue£¬ÔòÃ»ÓĞÍøÂçÊ±£¬µ¯³öÌáÊ¾
-     * @param activity ÉÏÏÂÎÄ
-     * @param parentView ¸¸ÀàÊÓÍ¼
-     * @param loadsString ÏÔÊ¾ÎÄ×Ö
-     * @param showDialog ÊÇ·ñÏÔÊ¾dialog ÈôÏÔÊ¾parentView²»ÄÜÎª¿Õ
-     * @param httpUrl ·ÃÎÊÂ·¾¶
-     * @param argMap ²ÎÊı¼¯ºÏ
-     * @param fileList ÎÄ¼ş¼¯ºÏ
-     * @param key ·şÎñÆ÷ÅĞ¶ÏÎÄ¼ş±êÊ¶
-     * @param accessType ·ÃÎÊ·½Ê½
-     */
+	/**
+	 * ç½‘ç»œåŠ è½½çº¿ç¨‹-ä¸Šä¼ æ–‡ä»¶-æ–‡ä»¶æ ‡è¯† æœ€åä¸€ä¸ªå‚æ•°è‹¥ä¸ºtrueï¼Œåˆ™æ²¡æœ‰ç½‘ç»œæ—¶ï¼Œå¼¹å‡ºæç¤º
+	 * @param activity ä¸Šä¸‹æ–‡
+	 * @param parentView çˆ¶ç±»è§†å›¾
+	 * @param loadsString æ˜¾ç¤ºæ–‡å­—
+	 * @param showDialog æ˜¯å¦æ˜¾ç¤ºdialog è‹¥æ˜¾ç¤ºparentViewä¸èƒ½ä¸ºç©º
+	 * @param httpUrl è®¿é—®è·¯å¾„
+	 * @param argMap å‚æ•°é›†åˆ
+	 * @param fileList æ–‡ä»¶é›†åˆ
+	 * @param key æœåŠ¡å™¨åˆ¤æ–­æ–‡ä»¶æ ‡è¯†
+	 * @param accessType è®¿é—®æ–¹å¼
+	 */
 	public ShowDialogTask(Activity activity,String tagString,View parentView,String loadsString,boolean showDialog,String httpUrl, Map<String, Object> argMap,List<File> fileList,String key,int accessType,boolean showNet){
 		this.activity = activity;
 		this.parentView = parentView;
@@ -187,12 +187,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	private void init(){
 		popupwindowTool = new PopupwindowTool(activity);
 	}
-	
+
 	@Override
-	public void onPreExecute() 
-	{	
+	public void onPreExecute()
+	{
 		try {
-            addTask();
+			addTask();
 			if(StringUtils.isEmpty(loadString)){
 				loadString = activity.getResources().getString(R.string.task_item3);
 			}
@@ -208,17 +208,17 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 					}
 					loadPopupWindow = popupwindowTool.showLoadWindow(activity, parentView, loadString,0, true,true);
 				}
-				
-			}				
+
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 	@Override
 	public TaskResult doInBackground(Void... params) {
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
-		//²»·ÃÎÊÍøÂçµÄÇé¿ö
+		//ä¸è®¿é—®ç½‘ç»œçš„æƒ…å†µ
 		if(StringUtils.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
@@ -227,63 +227,63 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			return taskResult;
 		}
 		switch (accessType) {
-            case TaskConstant.POST:
-                try {
-                    resultsString = Httpclient.POSTMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.PUT:
-                try {
-                    resultsString = Httpclient.PUTMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.GET:
-                try {
-                    resultsString = Httpclient.GETMethod(httpUrl, argMap);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.UPLOAD:
-                try {
-                    resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            case TaskConstant.UPLOADS:
-                try {
-                    resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                break;
+			case TaskConstant.POST:
+				try {
+					resultsString = Httpclient.POSTMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.PUT:
+				try {
+					resultsString = Httpclient.PUTMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.GET:
+				try {
+					resultsString = Httpclient.GETMethod(httpUrl, argMap);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.UPLOAD:
+				try {
+					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case TaskConstant.UPLOADS:
+				try {
+					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			default:
+				break;
 		}
 		if(StringUtils.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
 			if (iOnDialogBackgroundListener==null) {
-                iOnDialogBackgroundListener = defaultBackgroundListener;
+				iOnDialogBackgroundListener = defaultBackgroundListener;
 			}
 			taskResult = doOnBackgroundListener(this);
 		}
-				
+
 		return taskResult;
 	}
-	
+
 	@Override
-	public void onPostExecute(TaskResult result) 
+	public void onPostExecute(TaskResult result)
 	{
 		try {
 			if (loadPopupWindow!=null) {
@@ -292,60 +292,60 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-        if(iOnDialogResultListener!=null){
-            this.iOnDialogResultListener.onDone(this);
-        }
-		switch(result){			
-            case OK:
-                if(iOnDialogResultListener!=null){
-                    this.iOnDialogResultListener.onOK(this);
-                }
-                break;
-            case ERROR:
-                if(iOnDialogResultListener!=null){
-                    this.iOnDialogResultListener.onError(this);
-                }
-                if (!StringUtils.isEmpty(httpUrl)){
-                    PublicTools.addToast(activity, ""+errorMsg);
-                }
-                dealLoginInvalid();
-                break;
-            case CANCELLED:
-                PublicTools.addToast(activity, activity.getString(R.string.task_item1));
-                break;
-            default:
-                break;
+		if(iOnDialogResultListener!=null){
+			this.iOnDialogResultListener.onDone(this);
 		}
-        cancelTask();
+		switch(result){
+			case OK:
+				if(iOnDialogResultListener!=null){
+					this.iOnDialogResultListener.onOK(this);
+				}
+				break;
+			case ERROR:
+				if(iOnDialogResultListener!=null){
+					this.iOnDialogResultListener.onError(this);
+				}
+				if (!StringUtils.isEmpty(httpUrl)){
+					PublicTools.addToast(activity, ""+errorMsg);
+				}
+				dealLoginInvalid();
+				break;
+			case CANCELLED:
+				PublicTools.addToast(activity, activity.getString(R.string.task_item1));
+				break;
+			default:
+				break;
+		}
+		cancelTask();
 	}
 
-    public void addTask(){
-        taskManager.addTask(tagString, this);
-    }
+	public void addTask(){
+		taskManager.addTask(tagString, this);
+	}
 
-    public void cancelTask(){
-        taskManager.cancelOneTasks(this);
-    }
+	public void cancelTask(){
+		taskManager.cancelOneTasks(this);
+	}
 
-    public void setiOnDialogResultListener(IOnDialogResultListener iOnDialogResultListener) {
-        this.iOnDialogResultListener = iOnDialogResultListener;
-    }
+	public void setiOnDialogResultListener(IOnDialogResultListener iOnDialogResultListener) {
+		this.iOnDialogResultListener = iOnDialogResultListener;
+	}
 
-    public void setiOnDialogBackgroundListener(IOnDialogBackgroundListener iOnDialogBackgroundListener) {
-        this.iOnDialogBackgroundListener = iOnDialogBackgroundListener;
-    }
+	public void setiOnDialogBackgroundListener(IOnDialogBackgroundListener iOnDialogBackgroundListener) {
+		this.iOnDialogBackgroundListener = iOnDialogBackgroundListener;
+	}
 
-    private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
+	private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
 		TaskResult taskResult = TaskResult.NOTHING;
 		if(iOnDialogBackgroundListener!=null){
 			taskResult = this.iOnDialogBackgroundListener.onBackground(showDialogTask);
-		}		
+		}
 		return taskResult;
 	}
 
-	
+
 	/**
-	 * Ä¬ÈÏºóÌ¨½âÎö·µ»Ø½á¹û
+	 * é»˜è®¤åå°è§£æè¿”å›ç»“æœ
 	 */
 	private IOnDialogBackgroundListener defaultBackgroundListener = new IOnDialogBackgroundListener(){
 
@@ -357,18 +357,18 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
 				if(ResultTools.judgeResult(activity, "" + res.getCode())){
-					taskResult = TaskResult.OK;							
-				}else{					
+					taskResult = TaskResult.OK;
+				}else{
 					taskResult = TaskResult.ERROR;
 					errorMsg = res.getMsg();
-                    judgeLoginInvalid(res.getCode());
+					judgeLoginInvalid(res.getCode());
 				}
 			}else{
 				taskResult = TaskResult.CANCELLED;
-			}	
+			}
 			return taskResult;
 		}
-		
+
 	};
 
 
@@ -384,24 +384,24 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		return resultsString;
 	}
 
-    /**
-     * ÅĞ¶ÏµÇÂ¼Ê§Ğ§
-     */
+	/**
+	 * åˆ¤æ–­ç™»å½•å¤±æ•ˆ
+	 */
 	public void judgeLoginInvalid(String code){
-        if (ResultTools.judgeLoginInvalid(activity, "" + code)){
-            loginInvalid = true;
-        }else {
-            loginInvalid = false;
-        }
-    }
+		if (ResultTools.judgeLoginInvalid(activity, "" + code)){
+			loginInvalid = true;
+		}else {
+			loginInvalid = false;
+		}
+	}
 
-    /**
-     * ´¦ÀíµÇÂ¼Ê§Ğ§
-     */
-    public void dealLoginInvalid(){
-        if (loginInvalid){
+	/**
+	 * å¤„ç†ç™»å½•å¤±æ•ˆ
+	 */
+	public void dealLoginInvalid(){
+		if (loginInvalid){
 
-        }
-    }
-	
+		}
+	}
+
 }

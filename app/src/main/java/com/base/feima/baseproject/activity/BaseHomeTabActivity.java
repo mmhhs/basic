@@ -31,37 +31,37 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
     public int tabFlag = 0;
     public String updateUrl = "";
 
-	private final Class[] fragments = { DemoFragment.class, DemoFragment.class,
+    private final Class[] fragments = { DemoFragment.class, DemoFragment.class,
             DemoFragment.class };
-	
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             finish();
-	        return; 
-	    }
+            return;
+        }
         setTaskTag(getClass().getSimpleName());
         setContentView(R.layout.base_ui_home);
     }
-       
-    
+
+
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {      
-		super.onConfigurationChanged(newConfig);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
     public void initView(){
         mTabHost.setup(this, getSupportFragmentManager(), R.id.base_ui_home_frame);
-		int count = fragments.length;
-		for (int i = 0; i < count; i++) {
-			/* 为每一个Tab按钮设置图标、文字和内容 */
-			TabSpec tabSpec = mTabHost.newTabSpec(i + "").setIndicator(i + "");
-			/* 将Tab按钮添加进Tab选项卡中 */
-			mTabHost.addTab(tabSpec, fragments[i], null);
-		}
-		mTabHost.setCurrentTab(0);
+        int count = fragments.length;
+        for (int i = 0; i < count; i++) {
+			/* 涓烘瘡涓�涓猅ab鎸夐挳璁剧疆鍥炬爣銆佹枃瀛楀拰鍐呭 */
+            TabSpec tabSpec = mTabHost.newTabSpec(i + "").setIndicator(i + "");
+			/* 灏員ab鎸夐挳娣诲姞杩汿ab閫夐」鍗′腑 */
+            mTabHost.addTab(tabSpec, fragments[i], null);
+        }
+        mTabHost.setCurrentTab(0);
     }
 
     @Override
@@ -119,5 +119,5 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
 
 
 
-      
+
 }

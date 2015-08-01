@@ -16,10 +16,6 @@ import android.widget.DigitalClock;
 
 import java.util.Calendar;
 
-/**
- *  Custom digital clock
- * @author veally@foxmail.com
- */
 public class CustomDigitalClock extends DigitalClock {
 
 	Calendar mCalendar;

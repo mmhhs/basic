@@ -15,101 +15,101 @@ import butterknife.Optional;
 
 
 public abstract class BaseActivity extends Activity{
-	public String taskTag = "BaseActivity";//µ±Ç°BaseActivityµÄÏß³Ì±êÊ¶
+	public String taskTag = "BaseActivity";//å½“å‰BaseActivityçš„çº¿ç¨‹æ ‡è¯†
 	protected ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		screenManager.pushActivity(this);
 	}
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        ButterKnife.inject(this);
-        initView();
-        initData();
-    }
-	
+	@Override
+	public void setContentView(int layoutResID) {
+		super.setContentView(layoutResID);
+		ButterKnife.inject(this);
+		initView();
+		initData();
+	}
+
 	@Override
 	protected void onPause(){
 		super.onPause();
 	}
-	
+
 	@Override
 	protected void onResume(){
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
 		cancelTasks();
 	}
 
-    /**
-     * ³õÊ¼»¯ÊÓÍ¼Ïà¹Ø²Ù×÷
-     */
-    public abstract void initView();
+	/**
+	 * åˆå§‹åŒ–è§†å›¾ç›¸å…³æ“ä½œ
+	 */
+	public abstract void initView();
 
-    /**
-     * ³õÊ¼»¯Êı¾İÏà¹Ø²Ù×÷
-     */
-    public abstract void initData();
+	/**
+	 * åˆå§‹åŒ–æ•°æ®ç›¸å…³æ“ä½œ
+	 */
+	public abstract void initData();
 
-    /**
-     * Ìí¼ÓÏß³Ìµ½Ïß³Ì¹ÜÀíÖĞ
-     * @param task
-     */
+	/**
+	 * æ·»åŠ çº¿ç¨‹åˆ°çº¿ç¨‹ç®¡ç†ä¸­
+	 * @param task
+	 */
 	protected void addTask(BaseTask task){
 		try {
 			taskManager.addTask(taskTag, task);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}		
+		}
 	}
 
-    /**
-     * ¹Ø±Õµ±Ç°ActivityÖĞËùÓĞ»¹ÔÚÔËĞĞµÄÏß³Ì
-     */
+	/**
+	 * å…³é—­å½“å‰Activityä¸­æ‰€æœ‰è¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
+	 */
 	protected void cancelTasks(){
 		taskManager.cancelLimitTasks(taskTag);
 	}
 
-    /**
-     * ¹Ø±Õµ±Ç°Activity
-     */
+	/**
+	 * å…³é—­å½“å‰Activity
+	 */
 	public void finishSelf(){
 		try {
 			screenManager.closeActivity(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-    /**
-     * »ñÈ¡Ïß³Ì±êÊ¶
-     * @return
-     */
+	/**
+	 * è·å–çº¿ç¨‹æ ‡è¯†
+	 * @return
+	 */
 	public String getTaskTag() {
 		return taskTag;
 	}
 
-    /**
-     * ÉèÖÃÏß³Ì±êÊ¶
-     * @param taskTag
-     */
+	/**
+	 * è®¾ç½®çº¿ç¨‹æ ‡è¯†
+	 * @param taskTag
+	 */
 	public void setTaskTag(String taskTag) {
 		this.taskTag = taskTag;
 	}
 
-    @Optional
-    @OnClick(R.id.base_ui_title_back_layout)
-    public void onBack(){
-        finishSelf();
-    }
+	@Optional
+	@OnClick(R.id.base_ui_title_back_layout)
+	public void onBack(){
+		finishSelf();
+	}
 }

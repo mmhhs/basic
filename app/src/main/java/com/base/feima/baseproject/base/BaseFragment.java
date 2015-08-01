@@ -11,15 +11,15 @@ import com.base.feima.baseproject.manager.MFragmentsManager;
 
 
 public abstract class BaseFragment extends Fragment {
-	public String taskTag = "BaseFragment";//µ±Ç°FragmentµÄÏß³Ì±êÊ¶
-	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
+    public String taskTag = "BaseFragment";//å½“å‰Fragmentçš„çº¿ç¨‹æ ‡è¯†
+    public TaskManager taskManager = TaskManager.getTaskManagerInstance();
     public MFragmentsManager mFragmentsManager = MFragmentsManager.getFragmentManagerInstance();
 
 
-	@Override
-	public void onAttach(Activity activity){
-		super.onAttach(activity);
-	}
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,9 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-	public void onPause(){
-		super.onPause();
-	}
+    public void onPause(){
+        super.onPause();
+    }
 
     @Override
     public void onDestroyView() {
@@ -55,59 +55,59 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-	public void onDestroy(){
-		super.onDestroy();
-		cancelTasks();
-	}
+    public void onDestroy(){
+        super.onDestroy();
+        cancelTasks();
+    }
 
     /**
-     * ³õÊ¼»¯ÊÓÍ¼Ïà¹Ø²Ù×÷
+     * åˆå§‹åŒ–è§†å›¾ç›¸å…³æ“ä½œ
      */
     public abstract void initView();
 
     /**
-     * ³õÊ¼»¯Êı¾İÏà¹Ø²Ù×÷
+     * åˆå§‹åŒ–æ•°æ®ç›¸å…³æ“ä½œ
      */
     public abstract void initData();
 
     /**
-     * Ìí¼ÓÏß³Ìµ½Ïß³Ì¹ÜÀíÖĞ
+     * æ·»åŠ çº¿ç¨‹åˆ°çº¿ç¨‹ç®¡ç†ä¸­
      * @param task
      */
-	protected void addTask(BaseTask task){
-		try {
-			taskManager.addTask(taskTag, task);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}			
-	}
+    protected void addTask(BaseTask task){
+        try {
+            taskManager.addTask(taskTag, task);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
 
     /**
-     * ¹Ø±Õµ±Ç°FragmentÖĞËùÓĞ»¹ÔÚÔËĞĞµÄÏß³Ì
+     * å…³é—­å½“å‰Fragmentä¸­æ‰€æœ‰è¿˜åœ¨è¿è¡Œçš„çº¿ç¨‹
      */
-	protected void cancelTasks(){
-		taskManager.cancelLimitTasks(taskTag);
-	}
+    protected void cancelTasks(){
+        taskManager.cancelLimitTasks(taskTag);
+    }
 
     /**
-     * »ñÈ¡Ïß³Ì±êÊ¶
+     * è·å–çº¿ç¨‹æ ‡è¯†
      * @return
      */
-	public String getTaskTag() {
-		return taskTag;
-	}
+    public String getTaskTag() {
+        return taskTag;
+    }
 
     /**
-     * ÉèÖÃÏß³Ì±êÊ¶
+     * è®¾ç½®çº¿ç¨‹æ ‡è¯†
      * @param taskTag
      */
-	public void setTaskTag(String taskTag) {
-		this.taskTag = taskTag;
-	}
+    public void setTaskTag(String taskTag) {
+        this.taskTag = taskTag;
+    }
 
 
-	
-	
-	
+
+
+
 }

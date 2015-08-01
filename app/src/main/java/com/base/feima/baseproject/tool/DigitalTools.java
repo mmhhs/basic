@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 
 public class DigitalTools{
     /**
-     * ½«Ã¿Èı¸öÊı×Ö¼ÓÉÏ¶ººÅ´¦Àí£¨Í¨³£Ê¹ÓÃ½ğ¶î·½ÃæµÄ±à¼­£©
+     * å°†æ¯ä¸‰ä¸ªæ•°å­—åŠ ä¸Šé€—å·å¤„ç†ï¼ˆé€šå¸¸ä½¿ç”¨é‡‘é¢æ–¹é¢çš„ç¼–è¾‘ï¼‰
      */
     public static String formatMoney(String money){
         String result = "";
@@ -35,9 +35,9 @@ public class DigitalTools{
     }
 
     /**
-     * ±£ÁôdigitÎ»Ğ¡Êı ·½Ê½1
-     * @param num Ä¿±êÊı×Ö
-     * @param digit ¼¸Î»Ğ¡Êı
+     * ä¿ç•™digitä½å°æ•° æ–¹å¼1
+     * @param num ç›®æ ‡æ•°å­—
+     * @param digit å‡ ä½å°æ•°
      * @return
      */
     public static double storePoint(double num,int digit){
@@ -54,9 +54,9 @@ public class DigitalTools{
     }
 
     /**
-     * ±£ÁôdigitÎ»Ğ¡Êı ·½Ê½1 ÃÀÊ½¼Ç·¨
-     * @param num Ä¿±êÊı×Ö
-     * @param digit ¼¸Î»Ğ¡Êı
+     * ä¿ç•™digitä½å°æ•° æ–¹å¼1 ç¾å¼è®°æ³•
+     * @param num ç›®æ ‡æ•°å­—
+     * @param digit å‡ ä½å°æ•°
      * @return
      */
     public static String storePointString(double num,int digit){
@@ -73,7 +73,7 @@ public class DigitalTools{
     }
 
     /**
-     * ±£Áô2Î»Ğ¡Êı ·½Ê½2
+     * ä¿ç•™2ä½å°æ•° æ–¹å¼2
      * @param num
      * @return
      */
@@ -91,7 +91,7 @@ public class DigitalTools{
     }
 
     /**
-     * ±£ÁôĞ¡Êı ·½Ê½3
+     * ä¿ç•™å°æ•° æ–¹å¼3
      * @param num
      * @param digit
      * @return

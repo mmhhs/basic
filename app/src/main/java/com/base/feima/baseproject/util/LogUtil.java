@@ -2,11 +2,6 @@ package com.base.feima.baseproject.util;
 
 import android.util.Log;
 
-/**
- * 
- * @author lch
- * 
- */
 public class LogUtil {
 	private static boolean isDebug = true;
 	private static final String TAG = "LogUtil";

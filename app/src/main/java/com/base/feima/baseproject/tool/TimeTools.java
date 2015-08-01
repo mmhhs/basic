@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeTools {
-	
-	
+
+
 	/**
-	 * »ñÈ¡php·şÎñÆ÷ĞèÒªÊ±¼ä
+	 * è·å–phpæœåŠ¡å™¨éœ€è¦æ—¶é—´
 	 * @return
 	 */
 	public static String getStamp(){
@@ -17,76 +17,76 @@ public class TimeTools {
 		stamp = stamp.substring(0,10);
 		return stamp;
 	}
-	
+
 	/**
-	 * ¸ù¾İ¸ñÊ½×ª»»ÎªÊ±¼ä´Á
-	 * @param format Ê±¼ä¸ñÊ½ Èçyyyy-MM-dd HH:mm:ss
-	 * @param time Ê±¼ä
+	 * æ ¹æ®æ ¼å¼è½¬æ¢ä¸ºæ—¶é—´æˆ³
+	 * @param format æ—¶é—´æ ¼å¼ å¦‚yyyy-MM-dd HH:mm:ss
+	 * @param time æ—¶é—´
 	 * @return
 	 */
 	public static String tranFormatTime(String time,String format){
-		String re_time = "";		
+		String re_time = "";
 		try {
-			SimpleDateFormat   formatter   =   new   SimpleDateFormat   (""+format);     		
+			SimpleDateFormat   formatter   =   new   SimpleDateFormat   (""+format);
 			Date date = formatter.parse(time);
 			long l = date.getTime();
-			re_time = String.valueOf(l);			
+			re_time = String.valueOf(l);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		 
+		}
 		return re_time;
 	}
 
-	
+
 	/**
-	 * ¸ù¾İ¸ñÊ½»ñÈ¡µ±Ç°Ê±¼ä
-	 * @param format Ê±¼ä¸ñÊ½ Èçyyyy-MM-dd HH:mm:ss
+	 * æ ¹æ®æ ¼å¼è·å–å½“å‰æ—¶é—´
+	 * @param format æ—¶é—´æ ¼å¼ å¦‚yyyy-MM-dd HH:mm:ss
 	 * @return
 	 */
 	public static String getCurrentTime(String format){
-		SimpleDateFormat   formatter   =   new   SimpleDateFormat   (""+format);     
-		Date   curDate   =   new   Date(System.currentTimeMillis());//»ñÈ¡µ±Ç°Ê±¼ä     
-		String   str   =   formatter.format(curDate);   
+		SimpleDateFormat   formatter   =   new   SimpleDateFormat   (""+format);
+		Date   curDate   =   new   Date(System.currentTimeMillis());//è·å–å½“å‰æ—¶é—´     
+		String   str   =   formatter.format(curDate);
 		return str;
 	}
-	
+
 	/**
-	 * ¸ñÊ½PHP·şÎñÆ÷Ê±¼ä
-	 * @param time  php·şÎñÆ÷·µ»ØÊ±¼äÈ±ÉÙÈıÎ»£¬ĞèÒª³ËÒÔ1000
+	 * æ ¼å¼PHPæœåŠ¡å™¨æ—¶é—´
+	 * @param time  phpæœåŠ¡å™¨è¿”å›æ—¶é—´ç¼ºå°‘ä¸‰ä½ï¼Œéœ€è¦ä¹˜ä»¥1000
 	 * @return
 	 */
 	public static String formatServiceTime1(String time) {
-        String result = "";
-        try {
-        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        	 long loc_time = Long.valueOf(time);
-        	 result = sdf.format(new Date(loc_time*1000));
+		String result = "";
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			long loc_time = Long.valueOf(time);
+			result = sdf.format(new Date(loc_time*1000));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
 			return result;
-		}        
+		}
 	}
 	/**
-	 * ¸ñÊ½PHP·şÎñÆ÷Ê±¼ä
-	 * @param time  php·şÎñÆ÷·µ»ØÊ±¼äÈ±ÉÙÈıÎ»£¬ĞèÒª³ËÒÔ1000
+	 * æ ¼å¼PHPæœåŠ¡å™¨æ—¶é—´
+	 * @param time  phpæœåŠ¡å™¨è¿”å›æ—¶é—´ç¼ºå°‘ä¸‰ä½ï¼Œéœ€è¦ä¹˜ä»¥1000
 	 * @return
 	 */
 	public static String formatServiceTime2(String time) {
-        String result = "";
-        try {
-        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        	 long loc_time = Long.valueOf(time);
-        	 result = sdf.format(new Date(loc_time*1000));
+		String result = "";
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			long loc_time = Long.valueOf(time);
+			result = sdf.format(new Date(loc_time*1000));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
 			return result;
-		}        
+		}
 	}
 
-	
+
 }

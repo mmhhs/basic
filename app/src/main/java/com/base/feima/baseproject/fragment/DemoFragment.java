@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseFragment;
@@ -32,6 +33,8 @@ public class DemoFragment extends BaseFragment{
         if (rootView == null)
         {
             rootView = inflater.inflate(R.layout.sample,null);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+            rootView.setLayoutParams(params);
             ButterKnife.inject(this, rootView);
             initView();
             initData();

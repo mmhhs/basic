@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.feima.baseproject.tool.image.ImageTools;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,11 +81,11 @@ public class TitleBarTextView extends LinearLayout {
 		textView.setBackgroundResource(titleItem.getBackgroundResourseId());
 		textView.setText(titleItem.getName());
 		if(titleItem.getWidth()>0){
-			int w = dip2px(context, titleItem.getWidth());
+			int w = ImageTools.dip2px(context, titleItem.getWidth());
 			textView.setWidth(w);
 		}
 		if(titleItem.getHeigh()>0){
-			int h = dip2px(context, titleItem.getHeigh());
+			int h = ImageTools.dip2px(context, titleItem.getHeigh());
 			textView.setHeight(h);
 		}
 		textView.setGravity(Gravity.CENTER);
@@ -172,21 +174,6 @@ public class TitleBarTextView extends LinearLayout {
 
 	}
 
-	/**
-	 * dp转换为px
-	 */
-	public static int dip2px(Context context, float dpValue) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (dpValue * scale + 0.5f);
-	}
-
-	/**
-	 * px转换为dp
-	 */
-	public static int px2dip(Context context, float pxValue) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (pxValue / scale + 0.5f);
-	}
 
 	public static class TitleItem {
 		public String name;

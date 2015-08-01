@@ -18,27 +18,25 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * ¹ö¶¯Ñ¡ÔñÆ÷ ¸ü¶àÏê½â¼û²©¿Íhttp://blog.csdn.net/zhongkejingwang/article/details/38513301
- * 
- * @author chenjing
- * 
+ * æ»šåŠ¨é€‰æ‹©å™¨ æ›´å¤šè¯¦è§£è§åšå®¢http://blog.csdn.net/zhongkejingwang/article/details/38513301
+ *
  */
 public class PickerView extends View
 {
 
 	public static final String TAG = "PickerView";
 	/**
-	 * textÖ®¼ä¼ä¾àºÍminTextSizeÖ®±È
+	 * textä¹‹é—´é—´è·å’ŒminTextSizeä¹‹æ¯”
 	 */
 	public static final float MARGIN_ALPHA = 2.8f;
 	/**
-	 * ×Ô¶¯»Ø¹öµ½ÖĞ¼äµÄËÙ¶È
+	 * è‡ªåŠ¨å›æ»šåˆ°ä¸­é—´çš„é€Ÿåº¦
 	 */
 	public static final float SPEED = 2;
 
 	private List<String> mDataList;
 	/**
-	 * Ñ¡ÖĞµÄÎ»ÖÃ£¬Õâ¸öÎ»ÖÃÊÇmDataListµÄÖĞĞÄÎ»ÖÃ£¬Ò»Ö±²»±ä
+	 * é€‰ä¸­çš„ä½ç½®ï¼Œè¿™ä¸ªä½ç½®æ˜¯mDataListçš„ä¸­å¿ƒä½ç½®ï¼Œä¸€ç›´ä¸å˜
 	 */
 	private int mCurrentSelected;
 	private Paint mPaint;
@@ -56,7 +54,7 @@ public class PickerView extends View
 
 	private float mLastDownY;
 	/**
-	 * »¬¶¯µÄ¾àÀë
+	 * æ»‘åŠ¨çš„è·ç¦»
 	 */
 	private float mMoveLen = 0;
 	private boolean isInit = false;
@@ -80,7 +78,7 @@ public class PickerView extends View
 					performSelect();
 				}
 			} else
-				// ÕâÀïmMoveLen / Math.abs(mMoveLen)ÊÇÎªÁË±£ÓĞmMoveLenµÄÕı¸ººÅ£¬ÒÔÊµÏÖÉÏ¹ö»òÏÂ¹ö
+				// è¿™é‡ŒmMoveLen / Math.abs(mMoveLen)æ˜¯ä¸ºäº†ä¿æœ‰mMoveLençš„æ­£è´Ÿå·ï¼Œä»¥å®ç°ä¸Šæ»šæˆ–ä¸‹æ»š
 				mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
 			invalidate();
 		}
@@ -117,18 +115,18 @@ public class PickerView extends View
 		invalidate();
 	}
 
-    /**
-     * ÉèÖÃÑ¡ÖĞÏî
-     * @param selected
-     */
+	/**
+	 * è®¾ç½®é€‰ä¸­é¡¹
+	 * @param selected
+	 */
 	public void setSelected(int selected)
 	{
-        if (selected<mDataList.size()){
-            mCurrentSelected = selected;
-        }else {
-            mCurrentSelected = 0;
-        }
-        invalidate();
+		if (selected<mDataList.size()){
+			mCurrentSelected = selected;
+		}else {
+			mCurrentSelected = 0;
+		}
+		invalidate();
 	}
 
 	private void moveHeadToTail()
@@ -151,7 +149,7 @@ public class PickerView extends View
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		mViewHeight = getMeasuredHeight();
 		mViewWidth = getMeasuredWidth();
-		// °´ÕÕViewµÄ¸ß¶È¼ÆËã×ÖÌå´óĞ¡
+		// æŒ‰ç…§Viewçš„é«˜åº¦è®¡ç®—å­—ä½“å¤§å°
 		mMaxTextSize = mViewHeight / 4.0f;
 		mMinTextSize = mMaxTextSize / 2f;
 		isInit = true;
@@ -172,36 +170,36 @@ public class PickerView extends View
 	protected void onDraw(Canvas canvas)
 	{
 		super.onDraw(canvas);
-		// ¸ù¾İindex»æÖÆview
+		// æ ¹æ®indexç»˜åˆ¶view
 		if (isInit)
 			drawData(canvas);
 	}
 
 	private void drawData(Canvas canvas)
 	{
-		// ÏÈ»æÖÆÑ¡ÖĞµÄtextÔÙÍùÉÏÍùÏÂ»æÖÆÆäÓàµÄtext
+		// å…ˆç»˜åˆ¶é€‰ä¸­çš„textå†å¾€ä¸Šå¾€ä¸‹ç»˜åˆ¶å…¶ä½™çš„text
 		float scale = parabola(mViewHeight / 4.0f, mMoveLen);
 		float size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize;
 		mPaint.setTextSize(size);
 		mPaint.setAlpha((int) ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha));
-		// text¾ÓÖĞ»æÖÆ£¬×¢ÒâbaselineµÄ¼ÆËã²ÅÄÜ´ïµ½¾ÓÖĞ£¬yÖµÊÇtextÖĞĞÄ×ø±ê
+		// textå±…ä¸­ç»˜åˆ¶ï¼Œæ³¨æ„baselineçš„è®¡ç®—æ‰èƒ½è¾¾åˆ°å±…ä¸­ï¼Œyå€¼æ˜¯textä¸­å¿ƒåæ ‡
 		float x = (float) (mViewWidth / 2.0);
 		float y = (float) (mViewHeight / 2.0 + mMoveLen);
 		FontMetricsInt fmi = mPaint.getFontMetricsInt();
 		float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
-        try {
-            canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
-        }catch (Exception e){
-            e.printStackTrace();
-            return;
-        }
+		try {
+			canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
+		}
 
-		// »æÖÆÉÏ·½data
+		// ç»˜åˆ¶ä¸Šæ–¹data
 		for (int i = 1; (mCurrentSelected - i) >= 0; i++)
 		{
 			drawOtherText(canvas, i, -1);
 		}
-		// »æÖÆÏÂ·½data
+		// ç»˜åˆ¶ä¸‹æ–¹data
 		for (int i = 1; (mCurrentSelected + i) < mDataList.size(); i++)
 		{
 			drawOtherText(canvas, i, 1);
@@ -212,9 +210,9 @@ public class PickerView extends View
 	/**
 	 * @param canvas
 	 * @param position
-	 *            ¾àÀëmCurrentSelectedµÄ²îÖµ
+	 *            è·ç¦»mCurrentSelectedçš„å·®å€¼
 	 * @param type
-	 *            1±íÊ¾ÏòÏÂ»æÖÆ£¬-1±íÊ¾ÏòÉÏ»æÖÆ
+	 *            1è¡¨ç¤ºå‘ä¸‹ç»˜åˆ¶ï¼Œ-1è¡¨ç¤ºå‘ä¸Šç»˜åˆ¶
 	 */
 	private void drawOtherText(Canvas canvas, int position, int type)
 	{
@@ -232,12 +230,12 @@ public class PickerView extends View
 	}
 
 	/**
-	 * Å×ÎïÏß
-	 * 
+	 * æŠ›ç‰©çº¿
+	 *
 	 * @param zero
-	 *            Áãµã×ø±ê
+	 *            é›¶ç‚¹åæ ‡
 	 * @param x
-	 *            Æ«ÒÆÁ¿
+	 *            åç§»é‡
 	 * @return scale
 	 */
 	private float parabola(float zero, float x)
@@ -251,15 +249,15 @@ public class PickerView extends View
 	{
 		switch (event.getActionMasked())
 		{
-		case MotionEvent.ACTION_DOWN:
-			doDown(event);
-			break;
-		case MotionEvent.ACTION_MOVE:
-			doMove(event);
-			break;
-		case MotionEvent.ACTION_UP:
-			doUp(event);
-			break;
+			case MotionEvent.ACTION_DOWN:
+				doDown(event);
+				break;
+			case MotionEvent.ACTION_MOVE:
+				doMove(event);
+				break;
+			case MotionEvent.ACTION_UP:
+				doUp(event);
+				break;
 		}
 		return true;
 	}
@@ -281,12 +279,12 @@ public class PickerView extends View
 
 		if (mMoveLen > MARGIN_ALPHA * mMinTextSize / 2)
 		{
-			// ÍùÏÂ»¬³¬¹ıÀë¿ª¾àÀë
+			// å¾€ä¸‹æ»‘è¶…è¿‡ç¦»å¼€è·ç¦»
 			moveTailToHead();
 			mMoveLen = mMoveLen - MARGIN_ALPHA * mMinTextSize;
 		} else if (mMoveLen < -MARGIN_ALPHA * mMinTextSize / 2)
 		{
-			// ÍùÉÏ»¬³¬¹ıÀë¿ª¾àÀë
+			// å¾€ä¸Šæ»‘è¶…è¿‡ç¦»å¼€è·ç¦»
 			moveHeadToTail();
 			mMoveLen = mMoveLen + MARGIN_ALPHA * mMinTextSize;
 		}
@@ -297,7 +295,7 @@ public class PickerView extends View
 
 	private void doUp(MotionEvent event)
 	{
-		// Ì§ÆğÊÖºómCurrentSelectedµÄÎ»ÖÃÓÉµ±Ç°Î»ÖÃmoveµ½ÖĞ¼äÑ¡ÖĞÎ»ÖÃ
+		// æŠ¬èµ·æ‰‹åmCurrentSelectedçš„ä½ç½®ç”±å½“å‰ä½ç½®moveåˆ°ä¸­é—´é€‰ä¸­ä½ç½®
 		if (Math.abs(mMoveLen) < 0.0001)
 		{
 			mMoveLen = 0;
@@ -334,25 +332,25 @@ public class PickerView extends View
 		void onSelect(String text);
 	}
 
-    /**
-     * »ñÈ¡Ñ¡ÔñµÄĞòºÅ
-     * @return
-     */
-    public int getSelectIndex() {
-        return mCurrentSelected;
-    }
+	/**
+	 * è·å–é€‰æ‹©çš„åºå·
+	 * @return
+	 */
+	public int getSelectIndex() {
+		return mCurrentSelected;
+	}
 
-    /**
-     * »ñÈ¡Ñ¡ÔñµÄÄÚÈİ
-     * @return
-     */
-    public String getSelectContent(){
-        String content = "";
-        if (mCurrentSelected<mDataList.size()){
-            content = mDataList.get(mCurrentSelected);
-        }
-        return content;
-    }
+	/**
+	 * è·å–é€‰æ‹©çš„å†…å®¹
+	 * @return
+	 */
+	public String getSelectContent(){
+		String content = "";
+		if (mCurrentSelected<mDataList.size()){
+			content = mDataList.get(mCurrentSelected);
+		}
+		return content;
+	}
 
 
 }

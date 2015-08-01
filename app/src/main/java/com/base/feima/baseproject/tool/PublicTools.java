@@ -26,86 +26,86 @@ public class PublicTools{
 	public static String tag = "PublicTools";
 
 
-    /**
-     * ²¦´òµç»°
-     * @param context
-     */
-    public static void call(final Context context,final String tel){
-        try {
-            Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));
-            context.startActivity(intent);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-		
-	
 	/**
-	 * ¿ªÆôÈ«ÆÁÉèÖÃ
+	 * æ‹¨æ‰“ç”µè¯
+	 * @param context
+	 */
+	public static void call(final Context context,final String tel){
+		try {
+			Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));
+			context.startActivity(intent);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+
+	/**
+	 * å¼€å¯å…¨å±è®¾ç½®
 	 * @param activity
 	 */
 	public static void startFullScreen(Activity activity){
 		activity.getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
-	              WindowManager.LayoutParams. FLAG_FULLSCREEN);//È«ÆÁ
+				WindowManager.LayoutParams. FLAG_FULLSCREEN);//å…¨å±
 	}
-	
+
 	/**
-	 * È¡ÏûÈ«ÆÁÉèÖÃ
+	 * å–æ¶ˆå…¨å±è®¾ç½®
 	 * @param activity
 	 */
 	public static void quitFullScreen(Activity activity){
-	      final WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
-	      attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	      activity.getWindow().setAttributes(attrs);
-	      activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+		final WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
+		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		activity.getWindow().setAttributes(attrs);
+		activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 	}
 
 
-	
+
 	/**
-	 * Òş²Ø¼üÅÌ
+	 * éšè—é”®ç›˜
 	 * @param activity
 	 */
 	public static void closeKeyBoard(Activity activity){
-		
+
 		try{
-            activity.getWindow().setSoftInputMode(
-                    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+			activity.getWindow().setSoftInputMode(
+					WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 			((InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE))
-			.hideSoftInputFromWindow(activity.getCurrentFocus()
-					.getWindowToken(),
-					InputMethodManager.HIDE_NOT_ALWAYS); 
+					.hideSoftInputFromWindow(activity.getCurrentFocus()
+									.getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
-    /**
-     * ´ò¿ª¼üÅÌ
-     * @param activity
-     */
-    public static void openKeyBoard(Handler handler,final Activity activity,int delay) {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-        }, delay);
-    }
-
-
-
-
-	
 	/**
-	 * »ñÈ¡×´Ì¬À¸¸ß¶È
+	 * æ‰“å¼€é”®ç›˜
+	 * @param activity
+	 */
+	public static void openKeyBoard(Handler handler,final Activity activity,int delay) {
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					InputMethodManager imm = (InputMethodManager) activity.getSystemService(Service.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+
+			}
+		}, delay);
+	}
+
+
+
+
+
+	/**
+	 * è·å–çŠ¶æ€æ é«˜åº¦
 	 * @param activity
 	 * @return
 	 */
@@ -115,70 +115,70 @@ public class PublicTools{
 		int statusBarHeight = frame.top;
 		return statusBarHeight;
 	}
-	
+
 	/**
-	 * »ñÈ¡±êÌâÀ¸¸ß¶È
+	 * è·å–æ ‡é¢˜æ é«˜åº¦
 	 * @param activity
 	 * @return
 	 */
 	public static int getTitleBarHeight(Activity activity){
 		Rect frame = new Rect();
 		activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-		int statusBarHeight = frame.top;		
-		int contentTop = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();  
-		//statusBarHeightÊÇÉÏÃæËùÇóµÄ×´Ì¬À¸µÄ¸ß¶È  
+		int statusBarHeight = frame.top;
+		int contentTop = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
+		//statusBarHeightæ˜¯ä¸Šé¢æ‰€æ±‚çš„çŠ¶æ€æ çš„é«˜åº¦  
 		int titleBarHeight = contentTop - statusBarHeight;
 		return titleBarHeight;
 	}
-	
+
 	/**
-	 * »ñÈ¡ÆÁÄ»¿í¶Èpx
+	 * è·å–å±å¹•å®½åº¦px
 	 * @param activity
 	 * @return
 	 */
-	public static int getScreenWidth(Activity activity){		
+	public static int getScreenWidth(Activity activity){
 		int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
 		return screenWidth;
 	}
-	
+
 	/**
-	 * »ñÈ¡ÆÁÄ»¸ß¶Èpx
+	 * è·å–å±å¹•é«˜åº¦px
 	 * @param activity
 	 * @return
 	 */
-	public static int getScreenHeight(Activity activity){		
+	public static int getScreenHeight(Activity activity){
 		int screenHeight = activity.getResources().getDisplayMetrics().heightPixels;
 		return screenHeight;
 	}
 
 
-    /**
-     * ½«z×Ö·û´®´æÔÚÎÄ¼şÀï
-     * @param message
-     * @param fileName
-     */
-	public static void writeFileSdcard(String message, String fileName) { 
-		 
-        try { 
-        	String messages=message+"\n";
-        	 File file = new File(fileName);
-             if (!file.exists()) {
-              file.createNewFile();
-             }
-            FileOutputStream fout = new FileOutputStream(fileName);
-            byte[] bytes = messages.getBytes();
-            fout.write(bytes);
-            fout.close();
-        } 
- 
-        catch (Exception e) {
-            e.printStackTrace(); 
- 
-        }  
-    } 
+	/**
+	 * å°†zå­—ç¬¦ä¸²å­˜åœ¨æ–‡ä»¶é‡Œ
+	 * @param message
+	 * @param fileName
+	 */
+	public static void writeFileSdcard(String message, String fileName) {
+
+		try {
+			String messages=message+"\n";
+			File file = new File(fileName);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			FileOutputStream fout = new FileOutputStream(fileName);
+			byte[] bytes = messages.getBytes();
+			fout.write(bytes);
+			fout.close();
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
 
 	/**
-	 * ¼ÆËãÕ¹Ê¾Í¼Æ¬¸ß¶È
+	 * è®¡ç®—å±•ç¤ºå›¾ç‰‡é«˜åº¦
 	 * @param width
 	 * @param height
 	 * @param targetWidth
@@ -196,150 +196,150 @@ public class PublicTools{
 			}else{
 				targetHeight = (int) (targetWidth/rate);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
 			return targetHeight;
 		}
-		
+
 	}
-	
 
 
-	
+
+
 	/**
-	 * µ¯³ötoast
+	 * å¼¹å‡ºtoast
 	 * @param context
 	 * @param value
 	 */
 	public static void addToast(Context context,String value){
-		try {			
+		try {
 			Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * »ñÈ¡ÏµÍ³°æ±¾
+	 * è·å–ç³»ç»Ÿç‰ˆæœ¬
 	 * @return
 	 */
 	public static int getSystemVersion(){
-		int sysVersion = VERSION.SDK_INT;  
+		int sysVersion = VERSION.SDK_INT;
 		return sysVersion;
 	}
 
 
-    /**
-     * »ñÈ¡Éè±¸IdºÍÊÖ»úÆ·ÅÆÒÔ¡°_¡±·Ö¸ô
-     * @param context
-     * @return
-     */
-    public static String getDeviceId(Context context){
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String result = ""+tm.getDeviceId()+"_"+ Build.BRAND;
-        return result;
-    }
-
-	
 	/**
-	 * »ñÈ¡°æ±¾ºÅ
-	 * @return µ±Ç°Ó¦ÓÃµÄ°æ±¾ºÅ
+	 * è·å–è®¾å¤‡Idå’Œæ‰‹æœºå“ç‰Œä»¥â€œ_â€åˆ†éš”
+	 * @param context
+	 * @return
+	 */
+	public static String getDeviceId(Context context){
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		String result = ""+tm.getDeviceId()+"_"+ Build.BRAND;
+		return result;
+	}
+
+
+	/**
+	 * è·å–ç‰ˆæœ¬å·
+	 * @return å½“å‰åº”ç”¨çš„ç‰ˆæœ¬å·
 	 */
 	public static int getVersionCode(Context context) {
 		int code = 1;
-	    try {
-	        PackageManager manager = context.getPackageManager();
-	        PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-	        code = info.versionCode;	       
-	    } catch (Exception e) {
-	        e.printStackTrace();	       
-	    }
-	    return code;
+		try {
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+			code = info.versionCode;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return code;
 	}
-	
+
 	/**
-	 * »ñÈ¡°æ±¾Ãû³Æ
-	 * @return µ±Ç°Ó¦ÓÃµÄ°æ±¾Ãû³Æ
+	 * è·å–ç‰ˆæœ¬åç§°
+	 * @return å½“å‰åº”ç”¨çš„ç‰ˆæœ¬åç§°
 	 */
 	public static String getVersionName(Context context) {
 		String name = "";
-	    try {
-	        PackageManager manager = context.getPackageManager();
-	        PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-	        name = info.versionName;	       
-	    } catch (Exception e) {
-	        e.printStackTrace();	       
-	    }
-	    return name;
+		try {
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+			name = info.versionName;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return name;
 	}
 
-    /**
-     * ä¯ÀÀÆ÷´ò¿ªÍøÒ³
-     * @param context
-     * @param url
-     */
-    public static void openBrowser(Context context,String url){
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(url);
-        intent.setData(content_url);
-        context.startActivity(intent);
-    }
+	/**
+	 * æµè§ˆå™¨æ‰“å¼€ç½‘é¡µ
+	 * @param context
+	 * @param url
+	 */
+	public static void openBrowser(Context context,String url){
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse(url);
+		intent.setData(content_url);
+		context.startActivity(intent);
+	}
 
-    /**
-     * ÉèÖÃË¢ĞÂÑÕÉ«
-     * @param swipeRefreshLayout
-     */
-    public static void setSwipeRefreshColor(SwipeRefreshLayout swipeRefreshLayout){
-        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
-    }
+	/**
+	 * è®¾ç½®åˆ·æ–°é¢œè‰²
+	 * @param swipeRefreshLayout
+	 */
+	public static void setSwipeRefreshColor(SwipeRefreshLayout swipeRefreshLayout){
+		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+				android.R.color.holo_orange_light, android.R.color.holo_red_light);
+	}
 
-    /**
-     * ½áÊøË¢ĞÂ
-     * @param swipeRefreshLayout
-     */
-    public static void setSwipeRefreshFinish(SwipeRefreshLayout swipeRefreshLayout){
-        swipeRefreshLayout.setRefreshing(false);
-    }
+	/**
+	 * ç»“æŸåˆ·æ–°
+	 * @param swipeRefreshLayout
+	 */
+	public static void setSwipeRefreshFinish(SwipeRefreshLayout swipeRefreshLayout){
+		swipeRefreshLayout.setRefreshing(false);
+	}
 
-    /**
-     * °²×°
-     *
-     * @param context
-     *            ½ÓÊÕÍâ²¿´«½øÀ´µÄcontext
-     */
-    public static void install(Context context,String storePath) {
-        try {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(new File(storePath)),
-                    "application/vnd.android.package-archive");
-            context.startActivity(intent);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * å®‰è£…
+	 *
+	 * @param context
+	 *            æ¥æ”¶å¤–éƒ¨ä¼ è¿›æ¥çš„context
+	 */
+	public static void install(Context context,String storePath) {
+		try {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(Uri.fromFile(new File(storePath)),
+					"application/vnd.android.package-archive");
+			context.startActivity(intent);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * »ñÈ¡±¾µØapkÎÄ¼şµÄ°æ±¾ºÅ
-     * @param context
-     * @param storePath
-     * @return
-     */
-    public static int getApkVersionCode(Context context,String storePath){
-        int versionCode = 1;
-        PackageManager pm = context.getPackageManager();
-        PackageInfo info = pm.getPackageArchiveInfo(storePath, PackageManager.GET_ACTIVITIES);
-        ApplicationInfo appInfo = null;
-        if (info != null) {
-            appInfo = info.applicationInfo;
-            versionCode = info.versionCode;
-        }
-        return versionCode;
-    }
+	/**
+	 * è·å–æœ¬åœ°apkæ–‡ä»¶çš„ç‰ˆæœ¬å·
+	 * @param context
+	 * @param storePath
+	 * @return
+	 */
+	public static int getApkVersionCode(Context context,String storePath){
+		int versionCode = 1;
+		PackageManager pm = context.getPackageManager();
+		PackageInfo info = pm.getPackageArchiveInfo(storePath, PackageManager.GET_ACTIVITIES);
+		ApplicationInfo appInfo = null;
+		if (info != null) {
+			appInfo = info.applicationInfo;
+			versionCode = info.versionCode;
+		}
+		return versionCode;
+	}
 
 }

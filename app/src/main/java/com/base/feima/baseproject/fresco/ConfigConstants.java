@@ -42,20 +42,20 @@ import java.io.File;
 
 public class ConfigConstants {
 
-    private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();//·ÖÅäµÄ¿ÉÓÃÄÚ´æ
-    public static final int MAX_MEMORY_CACHE_SIZE = MAX_HEAP_SIZE / 4;//Ê¹ÓÃµÄ»º´æÊıÁ¿
+    private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();//åˆ†é…çš„å¯ç”¨å†…å­˜
+    public static final int MAX_MEMORY_CACHE_SIZE = MAX_HEAP_SIZE / 4;//ä½¿ç”¨çš„ç¼“å­˜æ•°é‡
 
-    public static final int MAX_SMALL_DISK_VERYLOW_CACHE_SIZE = 5 * ByteConstants.MB;//Ğ¡Í¼¼«µÍ´ÅÅÌ¿Õ¼ä»º´æµÄ×î´óÖµ£¨ÌØĞÔ£º¿É½«´óÁ¿µÄĞ¡Í¼·Åµ½¶îÍâ·ÅÔÚÁíÒ»¸ö´ÅÅÌ¿Õ¼ä·ÀÖ¹´óÍ¼Õ¼ÓÃ´ÅÅÌ¿Õ¼ä¶øÉ¾³ıÁË´óÁ¿µÄĞ¡Í¼£©
-    public static final int MAX_SMALL_DISK_LOW_CACHE_SIZE = 10 * ByteConstants.MB;//Ğ¡Í¼µÍ´ÅÅÌ¿Õ¼ä»º´æµÄ×î´óÖµ£¨ÌØĞÔ£º¿É½«´óÁ¿µÄĞ¡Í¼·Åµ½¶îÍâ·ÅÔÚÁíÒ»¸ö´ÅÅÌ¿Õ¼ä·ÀÖ¹´óÍ¼Õ¼ÓÃ´ÅÅÌ¿Õ¼ä¶øÉ¾³ıÁË´óÁ¿µÄĞ¡Í¼£©
-    public static final int MAX_SMALL_DISK_CACHE_SIZE = 20 * ByteConstants.MB;//Ğ¡Í¼´ÅÅÌ»º´æµÄ×î´óÖµ£¨ÌØĞÔ£º¿É½«´óÁ¿µÄĞ¡Í¼·Åµ½¶îÍâ·ÅÔÚÁíÒ»¸ö´ÅÅÌ¿Õ¼ä·ÀÖ¹´óÍ¼Õ¼ÓÃ´ÅÅÌ¿Õ¼ä¶øÉ¾³ıÁË´óÁ¿µÄĞ¡Í¼£©
+    public static final int MAX_SMALL_DISK_VERYLOW_CACHE_SIZE = 5 * ByteConstants.MB;//å°å›¾æä½ç£ç›˜ç©ºé—´ç¼“å­˜çš„æœ€å¤§å€¼ï¼ˆç‰¹æ€§ï¼šå¯å°†å¤§é‡çš„å°å›¾æ”¾åˆ°é¢å¤–æ”¾åœ¨å¦ä¸€ä¸ªç£ç›˜ç©ºé—´é˜²æ­¢å¤§å›¾å ç”¨ç£ç›˜ç©ºé—´è€Œåˆ é™¤äº†å¤§é‡çš„å°å›¾ï¼‰
+    public static final int MAX_SMALL_DISK_LOW_CACHE_SIZE = 10 * ByteConstants.MB;//å°å›¾ä½ç£ç›˜ç©ºé—´ç¼“å­˜çš„æœ€å¤§å€¼ï¼ˆç‰¹æ€§ï¼šå¯å°†å¤§é‡çš„å°å›¾æ”¾åˆ°é¢å¤–æ”¾åœ¨å¦ä¸€ä¸ªç£ç›˜ç©ºé—´é˜²æ­¢å¤§å›¾å ç”¨ç£ç›˜ç©ºé—´è€Œåˆ é™¤äº†å¤§é‡çš„å°å›¾ï¼‰
+    public static final int MAX_SMALL_DISK_CACHE_SIZE = 20 * ByteConstants.MB;//å°å›¾ç£ç›˜ç¼“å­˜çš„æœ€å¤§å€¼ï¼ˆç‰¹æ€§ï¼šå¯å°†å¤§é‡çš„å°å›¾æ”¾åˆ°é¢å¤–æ”¾åœ¨å¦ä¸€ä¸ªç£ç›˜ç©ºé—´é˜²æ­¢å¤§å›¾å ç”¨ç£ç›˜ç©ºé—´è€Œåˆ é™¤äº†å¤§é‡çš„å°å›¾ï¼‰
 
-    public static final int MAX_DISK_CACHE_VERYLOW_SIZE = 10 * ByteConstants.MB;//Ä¬ÈÏÍ¼¼«µÍ´ÅÅÌ¿Õ¼ä»º´æµÄ×î´óÖµ
-    public static final int MAX_DISK_CACHE_LOW_SIZE = 30 * ByteConstants.MB;//Ä¬ÈÏÍ¼µÍ´ÅÅÌ¿Õ¼ä»º´æµÄ×î´óÖµ
-    public static final int MAX_DISK_CACHE_SIZE = 50 * ByteConstants.MB;//Ä¬ÈÏÍ¼´ÅÅÌ»º´æµÄ×î´óÖµ
+    public static final int MAX_DISK_CACHE_VERYLOW_SIZE = 10 * ByteConstants.MB;//é»˜è®¤å›¾æä½ç£ç›˜ç©ºé—´ç¼“å­˜çš„æœ€å¤§å€¼
+    public static final int MAX_DISK_CACHE_LOW_SIZE = 30 * ByteConstants.MB;//é»˜è®¤å›¾ä½ç£ç›˜ç©ºé—´ç¼“å­˜çš„æœ€å¤§å€¼
+    public static final int MAX_DISK_CACHE_SIZE = 50 * ByteConstants.MB;//é»˜è®¤å›¾ç£ç›˜ç¼“å­˜çš„æœ€å¤§å€¼
 
 
-    private static  String IMAGE_PIPELINE_SMALL_CACHE_DIR = "imagepipeline_cache";//Ğ¡Í¼Ëù·ÅÂ·¾¶µÄÎÄ¼ş¼ĞÃû
-    private static  String IMAGE_PIPELINE_CACHE_DIR = "imagepipeline_cache";//Ä¬ÈÏÍ¼Ëù·ÅÂ·¾¶µÄÎÄ¼ş¼ĞÃû
+    private static  String IMAGE_PIPELINE_SMALL_CACHE_DIR = "imagepipeline_cache";//å°å›¾æ‰€æ”¾è·¯å¾„çš„æ–‡ä»¶å¤¹å
+    private static  String IMAGE_PIPELINE_CACHE_DIR = "imagepipeline_cache";//é»˜è®¤å›¾æ‰€æ”¾è·¯å¾„çš„æ–‡ä»¶å¤¹å
 
     private static ImagePipelineConfig sImagePipelineConfig;
 
@@ -63,11 +63,11 @@ public class ConfigConstants {
 
     }
     /**
-     * ³õÊ¼»¯ÅäÖÃ£¬µ¥Àı
+     * åˆå§‹åŒ–é…ç½®ï¼Œå•ä¾‹
      */
     public static ImagePipelineConfig getImagePipelineConfig(Context context) {
         if (sImagePipelineConfig == null) {
-            //³õÊ¼»¯´æ´¢Í¼Æ¬Â·¾¶
+            //åˆå§‹åŒ–å­˜å‚¨å›¾ç‰‡è·¯å¾„
             BaseConstant.initImagePath(context);
             IMAGE_PIPELINE_SMALL_CACHE_DIR = BaseConstant.IMAGESAVEPATH;
             IMAGE_PIPELINE_CACHE_DIR = BaseConstant.IMAGESAVEPATH;
@@ -79,18 +79,18 @@ public class ConfigConstants {
 
 
     /**
-     * ³õÊ¼»¯ÅäÖÃ
+     * åˆå§‹åŒ–é…ç½®
      */
     private static ImagePipelineConfig configureCaches(Context context) {
-        //ÄÚ´æÅäÖÃ
+        //å†…å­˜é…ç½®
         final MemoryCacheParams bitmapCacheParams = new MemoryCacheParams(
-                ConfigConstants.MAX_MEMORY_CACHE_SIZE, // ÄÚ´æ»º´æÖĞ×ÜÍ¼Æ¬µÄ×î´ó´óĞ¡,ÒÔ×Ö½ÚÎªµ¥Î»¡£
-                Integer.MAX_VALUE,                     // ÄÚ´æ»º´æÖĞÍ¼Æ¬µÄ×î´óÊıÁ¿¡£
-                ConfigConstants.MAX_MEMORY_CACHE_SIZE, // ÄÚ´æ»º´æÖĞ×¼±¸Çå³ıµ«ÉĞÎ´±»É¾³ıµÄ×ÜÍ¼Æ¬µÄ×î´ó´óĞ¡,ÒÔ×Ö½ÚÎªµ¥Î»¡£
-                Integer.MAX_VALUE,                     // ÄÚ´æ»º´æÖĞ×¼±¸Çå³ıµÄ×ÜÍ¼Æ¬µÄ×î´óÊıÁ¿¡£
-                Integer.MAX_VALUE);                    // ÄÚ´æ»º´æÖĞµ¥¸öÍ¼Æ¬µÄ×î´ó´óĞ¡¡£
+                ConfigConstants.MAX_MEMORY_CACHE_SIZE, // å†…å­˜ç¼“å­˜ä¸­æ€»å›¾ç‰‡çš„æœ€å¤§å¤§å°,ä»¥å­—èŠ‚ä¸ºå•ä½ã€‚
+                Integer.MAX_VALUE,                     // å†…å­˜ç¼“å­˜ä¸­å›¾ç‰‡çš„æœ€å¤§æ•°é‡ã€‚
+                ConfigConstants.MAX_MEMORY_CACHE_SIZE, // å†…å­˜ç¼“å­˜ä¸­å‡†å¤‡æ¸…é™¤ä½†å°šæœªè¢«åˆ é™¤çš„æ€»å›¾ç‰‡çš„æœ€å¤§å¤§å°,ä»¥å­—èŠ‚ä¸ºå•ä½ã€‚
+                Integer.MAX_VALUE,                     // å†…å­˜ç¼“å­˜ä¸­å‡†å¤‡æ¸…é™¤çš„æ€»å›¾ç‰‡çš„æœ€å¤§æ•°é‡ã€‚
+                Integer.MAX_VALUE);                    // å†…å­˜ç¼“å­˜ä¸­å•ä¸ªå›¾ç‰‡çš„æœ€å¤§å¤§å°ã€‚
 
-        //ĞŞ¸ÄÄÚ´æÍ¼Æ¬»º´æÊıÁ¿£¬¿Õ¼ä²ßÂÔ£¨Õâ¸ö·½Ê½ÓĞµã¶ñĞÄ£©
+        //ä¿®æ”¹å†…å­˜å›¾ç‰‡ç¼“å­˜æ•°é‡ï¼Œç©ºé—´ç­–ç•¥ï¼ˆè¿™ä¸ªæ–¹å¼æœ‰ç‚¹æ¶å¿ƒï¼‰
         Supplier<MemoryCacheParams> mSupplierMemoryCacheParams= new Supplier<MemoryCacheParams>() {
             @Override
             public MemoryCacheParams get() {
@@ -98,104 +98,104 @@ public class ConfigConstants {
             }
         };
 
-        //Ğ¡Í¼Æ¬µÄ´ÅÅÌÅäÖÃ
+        //å°å›¾ç‰‡çš„ç£ç›˜é…ç½®
         DiskCacheConfig diskSmallCacheConfig =  DiskCacheConfig.newBuilder()
-                .setBaseDirectoryPath(context.getApplicationContext().getCacheDir())//»º´æÍ¼Æ¬»ùÂ·¾¶
-                .setBaseDirectoryName(BaseConstant.CACHENAME)//ÎÄ¼ş¼ĞÃû
-                .setBaseDirectoryPath(new File(IMAGE_PIPELINE_SMALL_CACHE_DIR))//Â·¾¶
-//            .setCacheErrorLogger(cacheErrorLogger)//ÈÕÖ¾¼ÇÂ¼Æ÷ÓÃÓÚÈÕÖ¾´íÎóµÄ»º´æ¡£
-//            .setCacheEventListener(cacheEventListener)//»º´æÊÂ¼şÕìÌıÆ÷¡£
-//            .setDiskTrimmableRegistry(diskTrimmableRegistry)//Àà½«°üº¬Ò»¸ö×¢²á±íµÄ»º´æ¼õÉÙ´ÅÅÌ¿Õ¼äµÄ»·¾³¡£
-                .setMaxCacheSize(ConfigConstants.MAX_DISK_CACHE_SIZE)//Ä¬ÈÏ»º´æµÄ×î´ó´óĞ¡¡£
-                .setMaxCacheSizeOnLowDiskSpace(MAX_SMALL_DISK_LOW_CACHE_SIZE)//»º´æµÄ×î´ó´óĞ¡,Ê¹ÓÃÉè±¸Ê±µÍ´ÅÅÌ¿Õ¼ä¡£
-                .setMaxCacheSizeOnVeryLowDiskSpace(MAX_SMALL_DISK_VERYLOW_CACHE_SIZE)//»º´æµÄ×î´ó´óĞ¡,µ±Éè±¸¼«µÍ´ÅÅÌ¿Õ¼ä
+                .setBaseDirectoryPath(context.getApplicationContext().getCacheDir())//ç¼“å­˜å›¾ç‰‡åŸºè·¯å¾„
+                .setBaseDirectoryName(BaseConstant.CACHENAME)//æ–‡ä»¶å¤¹å
+                .setBaseDirectoryPath(new File(IMAGE_PIPELINE_SMALL_CACHE_DIR))//è·¯å¾„
+//            .setCacheErrorLogger(cacheErrorLogger)//æ—¥å¿—è®°å½•å™¨ç”¨äºæ—¥å¿—é”™è¯¯çš„ç¼“å­˜ã€‚
+//            .setCacheEventListener(cacheEventListener)//ç¼“å­˜äº‹ä»¶ä¾¦å¬å™¨ã€‚
+//            .setDiskTrimmableRegistry(diskTrimmableRegistry)//ç±»å°†åŒ…å«ä¸€ä¸ªæ³¨å†Œè¡¨çš„ç¼“å­˜å‡å°‘ç£ç›˜ç©ºé—´çš„ç¯å¢ƒã€‚
+                .setMaxCacheSize(ConfigConstants.MAX_DISK_CACHE_SIZE)//é»˜è®¤ç¼“å­˜çš„æœ€å¤§å¤§å°ã€‚
+                .setMaxCacheSizeOnLowDiskSpace(MAX_SMALL_DISK_LOW_CACHE_SIZE)//ç¼“å­˜çš„æœ€å¤§å¤§å°,ä½¿ç”¨è®¾å¤‡æ—¶ä½ç£ç›˜ç©ºé—´ã€‚
+                .setMaxCacheSizeOnVeryLowDiskSpace(MAX_SMALL_DISK_VERYLOW_CACHE_SIZE)//ç¼“å­˜çš„æœ€å¤§å¤§å°,å½“è®¾å¤‡æä½ç£ç›˜ç©ºé—´
 //            .setVersion(version)
                 .build();
 
-        //Ä¬ÈÏÍ¼Æ¬µÄ´ÅÅÌÅäÖÃ
+        //é»˜è®¤å›¾ç‰‡çš„ç£ç›˜é…ç½®
         DiskCacheConfig diskCacheConfig =  DiskCacheConfig.newBuilder()
-                .setBaseDirectoryPath(Environment.getExternalStorageDirectory().getAbsoluteFile())//»º´æÍ¼Æ¬»ùÂ·¾¶
-                .setBaseDirectoryName(BaseConstant.CACHENAME)//ÎÄ¼ş¼ĞÃû
-                .setBaseDirectoryPath(new File(IMAGE_PIPELINE_SMALL_CACHE_DIR))//Â·¾¶
-//            .setCacheErrorLogger(cacheErrorLogger)//ÈÕÖ¾¼ÇÂ¼Æ÷ÓÃÓÚÈÕÖ¾´íÎóµÄ»º´æ¡£
-//            .setCacheEventListener(cacheEventListener)//»º´æÊÂ¼şÕìÌıÆ÷¡£
-//            .setDiskTrimmableRegistry(diskTrimmableRegistry)//Àà½«°üº¬Ò»¸ö×¢²á±íµÄ»º´æ¼õÉÙ´ÅÅÌ¿Õ¼äµÄ»·¾³¡£
-                .setMaxCacheSize(ConfigConstants.MAX_DISK_CACHE_SIZE)//Ä¬ÈÏ»º´æµÄ×î´ó´óĞ¡¡£
-                .setMaxCacheSizeOnLowDiskSpace(MAX_DISK_CACHE_LOW_SIZE)//»º´æµÄ×î´ó´óĞ¡,Ê¹ÓÃÉè±¸Ê±µÍ´ÅÅÌ¿Õ¼ä¡£
-                .setMaxCacheSizeOnVeryLowDiskSpace(MAX_DISK_CACHE_VERYLOW_SIZE)//»º´æµÄ×î´ó´óĞ¡,µ±Éè±¸¼«µÍ´ÅÅÌ¿Õ¼ä
+                .setBaseDirectoryPath(Environment.getExternalStorageDirectory().getAbsoluteFile())//ç¼“å­˜å›¾ç‰‡åŸºè·¯å¾„
+                .setBaseDirectoryName(BaseConstant.CACHENAME)//æ–‡ä»¶å¤¹å
+                .setBaseDirectoryPath(new File(IMAGE_PIPELINE_SMALL_CACHE_DIR))//è·¯å¾„
+//            .setCacheErrorLogger(cacheErrorLogger)//æ—¥å¿—è®°å½•å™¨ç”¨äºæ—¥å¿—é”™è¯¯çš„ç¼“å­˜ã€‚
+//            .setCacheEventListener(cacheEventListener)//ç¼“å­˜äº‹ä»¶ä¾¦å¬å™¨ã€‚
+//            .setDiskTrimmableRegistry(diskTrimmableRegistry)//ç±»å°†åŒ…å«ä¸€ä¸ªæ³¨å†Œè¡¨çš„ç¼“å­˜å‡å°‘ç£ç›˜ç©ºé—´çš„ç¯å¢ƒã€‚
+                .setMaxCacheSize(ConfigConstants.MAX_DISK_CACHE_SIZE)//é»˜è®¤ç¼“å­˜çš„æœ€å¤§å¤§å°ã€‚
+                .setMaxCacheSizeOnLowDiskSpace(MAX_DISK_CACHE_LOW_SIZE)//ç¼“å­˜çš„æœ€å¤§å¤§å°,ä½¿ç”¨è®¾å¤‡æ—¶ä½ç£ç›˜ç©ºé—´ã€‚
+                .setMaxCacheSizeOnVeryLowDiskSpace(MAX_DISK_CACHE_VERYLOW_SIZE)//ç¼“å­˜çš„æœ€å¤§å¤§å°,å½“è®¾å¤‡æä½ç£ç›˜ç©ºé—´
 //            .setVersion(version)
                 .build();
 
-        //»º´æÍ¼Æ¬ÅäÖÃ
+        //ç¼“å­˜å›¾ç‰‡é…ç½®
         ImagePipelineConfig.Builder configBuilder = ImagePipelineConfig.newBuilder(context)
-//            .setAnimatedImageFactory(AnimatedImageFactory animatedImageFactory)//Í¼Æ¬¼ÓÔØ¶¯»­
-                .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)//ÄÚ´æ»º´æÅäÖÃ£¨Ò»¼¶»º´æ£¬ÒÑ½âÂëµÄÍ¼Æ¬£©
-//            .setCacheKeyFactory(cacheKeyFactory)//»º´æKey¹¤³§
-//            .setEncodedMemoryCacheParamsSupplier(encodedCacheParamsSupplier)//ÄÚ´æ»º´æºÍÎ´½âÂëµÄÄÚ´æ»º´æµÄÅäÖÃ£¨¶ş¼¶»º´æ£©
-//            .setExecutorSupplier(executorSupplier)//Ïß³Ì³ØÅäÖÃ
-//            .setImageCacheStatsTracker(imageCacheStatsTracker)//Í³¼Æ»º´æµÄÃüÖĞÂÊ
-//            .setImageDecoder(ImageDecoder imageDecoder) //Í¼Æ¬½âÂëÆ÷ÅäÖÃ
-//            .setIsPrefetchEnabledSupplier(Supplier<Boolean> isPrefetchEnabledSupplier)//Í¼Æ¬Ô¤ÀÀ£¨ËõÂÔÍ¼£¬Ô¤¼ÓÔØÍ¼µÈ£©Ô¤¼ÓÔØµ½ÎÄ¼ş»º´æ
-                .setMainDiskCacheConfig(diskCacheConfig)//´ÅÅÌ»º´æÅäÖÃ£¨×Ü£¬Èı¼¶»º´æ£©
-//            .setMemoryTrimmableRegistry(memoryTrimmableRegistry) //ÄÚ´æÓÃÁ¿µÄËõ¼õ,ÓĞÊ±ÎÒÃÇ¿ÉÄÜ»áÏëËõĞ¡ÄÚ´æÓÃÁ¿¡£±ÈÈçÓ¦ÓÃÖĞÓĞÆäËûÊı¾İĞèÒªÕ¼ÓÃÄÚ´æ£¬²»µÃ²»°ÑÍ¼Æ¬»º´æÇå³ı»òÕß¼õĞ¡ »òÕßÎÒÃÇÏë¼ì²é¿´¿´ÊÖ»úÊÇ·ñÒÑ¾­ÄÚ´æ²»¹»ÁË¡£
-//            .setNetworkFetchProducer(networkFetchProducer)//×Ô¶¨µÄÍøÂç²ãÅäÖÃ£ºÈçOkHttp£¬Volley
-//            .setPoolFactory(poolFactory)//Ïß³Ì³Ø¹¤³§ÅäÖÃ
-//            .setProgressiveJpegConfig(progressiveJpegConfig)//½¥½øÊ½JPEGÍ¼
-//            .setRequestListeners(requestListeners)//Í¼Æ¬ÇëÇó¼àÌı
-//            .setResizeAndRotateEnabledForNetwork(boolean resizeAndRotateEnabledForNetwork)//µ÷ÕûºÍĞı×ªÊÇ·ñÖ§³ÖÍøÂçÍ¼Æ¬
-                .setSmallImageDiskCacheConfig(diskSmallCacheConfig)//´ÅÅÌ»º´æÅäÖÃ£¨Ğ¡Í¼Æ¬£¬¿ÉÑ¡¡«Èı¼¶»º´æµÄĞ¡Í¼ÓÅ»¯»º´æ£©
+//            .setAnimatedImageFactory(AnimatedImageFactory animatedImageFactory)//å›¾ç‰‡åŠ è½½åŠ¨ç”»
+                .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)//å†…å­˜ç¼“å­˜é…ç½®ï¼ˆä¸€çº§ç¼“å­˜ï¼Œå·²è§£ç çš„å›¾ç‰‡ï¼‰
+//            .setCacheKeyFactory(cacheKeyFactory)//ç¼“å­˜Keyå·¥å‚
+//            .setEncodedMemoryCacheParamsSupplier(encodedCacheParamsSupplier)//å†…å­˜ç¼“å­˜å’Œæœªè§£ç çš„å†…å­˜ç¼“å­˜çš„é…ç½®ï¼ˆäºŒçº§ç¼“å­˜ï¼‰
+//            .setExecutorSupplier(executorSupplier)//çº¿ç¨‹æ± é…ç½®
+//            .setImageCacheStatsTracker(imageCacheStatsTracker)//ç»Ÿè®¡ç¼“å­˜çš„å‘½ä¸­ç‡
+//            .setImageDecoder(ImageDecoder imageDecoder) //å›¾ç‰‡è§£ç å™¨é…ç½®
+//            .setIsPrefetchEnabledSupplier(Supplier<Boolean> isPrefetchEnabledSupplier)//å›¾ç‰‡é¢„è§ˆï¼ˆç¼©ç•¥å›¾ï¼Œé¢„åŠ è½½å›¾ç­‰ï¼‰é¢„åŠ è½½åˆ°æ–‡ä»¶ç¼“å­˜
+                .setMainDiskCacheConfig(diskCacheConfig)//ç£ç›˜ç¼“å­˜é…ç½®ï¼ˆæ€»ï¼Œä¸‰çº§ç¼“å­˜ï¼‰
+//            .setMemoryTrimmableRegistry(memoryTrimmableRegistry) //å†…å­˜ç”¨é‡çš„ç¼©å‡,æœ‰æ—¶æˆ‘ä»¬å¯èƒ½ä¼šæƒ³ç¼©å°å†…å­˜ç”¨é‡ã€‚æ¯”å¦‚åº”ç”¨ä¸­æœ‰å…¶ä»–æ•°æ®éœ€è¦å ç”¨å†…å­˜ï¼Œä¸å¾—ä¸æŠŠå›¾ç‰‡ç¼“å­˜æ¸…é™¤æˆ–è€…å‡å° æˆ–è€…æˆ‘ä»¬æƒ³æ£€æŸ¥çœ‹çœ‹æ‰‹æœºæ˜¯å¦å·²ç»å†…å­˜ä¸å¤Ÿäº†ã€‚
+//            .setNetworkFetchProducer(networkFetchProducer)//è‡ªå®šçš„ç½‘ç»œå±‚é…ç½®ï¼šå¦‚OkHttpï¼ŒVolley
+//            .setPoolFactory(poolFactory)//çº¿ç¨‹æ± å·¥å‚é…ç½®
+//            .setProgressiveJpegConfig(progressiveJpegConfig)//æ¸è¿›å¼JPEGå›¾
+//            .setRequestListeners(requestListeners)//å›¾ç‰‡è¯·æ±‚ç›‘å¬
+//            .setResizeAndRotateEnabledForNetwork(boolean resizeAndRotateEnabledForNetwork)//è°ƒæ•´å’Œæ—‹è½¬æ˜¯å¦æ”¯æŒç½‘ç»œå›¾ç‰‡
+                .setSmallImageDiskCacheConfig(diskSmallCacheConfig)//ç£ç›˜ç¼“å­˜é…ç½®ï¼ˆå°å›¾ç‰‡ï¼Œå¯é€‰ï½ä¸‰çº§ç¼“å­˜çš„å°å›¾ä¼˜åŒ–ç¼“å­˜ï¼‰
                 ;
         return configBuilder.build();
     }
-    //Ô²ĞÎ£¬Ô²½ÇÇĞÍ¼£¬¶Ô¶¯Í¼ÎŞĞ§
+    //åœ†å½¢ï¼Œåœ†è§’åˆ‡å›¾ï¼Œå¯¹åŠ¨å›¾æ— æ•ˆ
     public static RoundingParams getRoundingParams(){
         RoundingParams roundingParams = RoundingParams.fromCornersRadius(7f);
-//    roundingParams.asCircle();//Ô²ĞÎ
-//    roundingParams.setBorder(color, width);//fresco:roundingBorderWidth="2dp"±ß¿ò  fresco:roundingBorderColor="@color/border_color"
-//    roundingParams.setCornersRadii(radii);//°ë¾¶
+//    roundingParams.asCircle();//åœ†å½¢
+//    roundingParams.setBorder(color, width);//fresco:roundingBorderWidth="2dp"è¾¹æ¡†  fresco:roundingBorderColor="@color/border_color"
+//    roundingParams.setCornersRadii(radii);//åŠå¾„
 //    roundingParams.setCornersRadii(topLeft, topRight, bottomRight, bottomLeft)//fresco:roundTopLeft="true" fresco:roundTopRight="false" fresco:roundBottomLeft="false" fresco:roundBottomRight="true"
-//    roundingParams. setCornersRadius(radius);//fresco:roundedCornerRadius="1dp"Ô²½Ç
+//    roundingParams. setCornersRadius(radius);//fresco:roundedCornerRadius="1dp"åœ†è§’
 //    roundingParams.setOverlayColor(overlayColor);//fresco:roundWithOverlayColor="@color/corner_color"
-//    roundingParams.setRoundAsCircle(roundAsCircle);//Ô²
+//    roundingParams.setRoundAsCircle(roundAsCircle);//åœ†
 //    roundingParams.setRoundingMethod(roundingMethod);
-//    fresco:progressBarAutoRotateInterval="1000"×Ô¶¯Ğı×ª¼ä¸ô
-        // »òÓÃ fromCornersRadii ÒÔ¼° asCircle ·½·¨
+//    fresco:progressBarAutoRotateInterval="1000"è‡ªåŠ¨æ—‹è½¬é—´éš”
+        // æˆ–ç”¨ fromCornersRadii ä»¥åŠ asCircle æ–¹æ³•
         return roundingParams;
     }
 
-    //Drawees   DraweeHierarchy  ×éÖ¯
+    //Drawees   DraweeHierarchy  ç»„ç»‡
     public static GenericDraweeHierarchy getGenericDraweeHierarchy(Context context){
         GenericDraweeHierarchy gdh = new GenericDraweeHierarchyBuilder(context.getResources())
-//            .reset()//ÖØÖÃ
-//            .setActualImageColorFilter(colorFilter)//ÑÕÉ«¹ıÂË
-//            .setActualImageFocusPoint(focusPoint)//focusCrop, ĞèÒªÖ¸¶¨Ò»¸ö¾ÓÖĞµã
+//            .reset()//é‡ç½®
+//            .setActualImageColorFilter(colorFilter)//é¢œè‰²è¿‡æ»¤
+//            .setActualImageFocusPoint(focusPoint)//focusCrop, éœ€è¦æŒ‡å®šä¸€ä¸ªå±…ä¸­ç‚¹
 //            .setActualImageMatrix(actualImageMatrix)
-//            .setActualImageScaleType(actualImageScaleType)//fresco:actualImageScaleType="focusCrop"Ëõ·ÅÀàĞÍ
-//            .setBackground(background)//fresco:backgroundImage="@color/blue"±³¾°Í¼Æ¬
+//            .setActualImageScaleType(actualImageScaleType)//fresco:actualImageScaleType="focusCrop"ç¼©æ”¾ç±»å‹
+//            .setBackground(background)//fresco:backgroundImage="@color/blue"èƒŒæ™¯å›¾ç‰‡
 //            .setBackgrounds(backgrounds)
-//            .setFadeDuration(fadeDuration)//fresco:fadeDuration="300"¼ÓÔØÍ¼Æ¬¶¯»­Ê±¼ä
-                .setFailureImage(ConfigConstants.sErrorDrawable)//fresco:failureImage="@drawable/error"Ê§°ÜÍ¼
-//            .setFailureImage(failureDrawable, failureImageScaleType)//fresco:failureImageScaleType="centerInside"Ê§°ÜÍ¼Ëõ·ÅÀàĞÍ
-//            .setOverlay(overlay)//fresco:overlayImage="@drawable/watermark"µş¼ÓÍ¼
+//            .setFadeDuration(fadeDuration)//fresco:fadeDuration="300"åŠ è½½å›¾ç‰‡åŠ¨ç”»æ—¶é—´
+                .setFailureImage(ConfigConstants.sErrorDrawable)//fresco:failureImage="@drawable/error"å¤±è´¥å›¾
+//            .setFailureImage(failureDrawable, failureImageScaleType)//fresco:failureImageScaleType="centerInside"å¤±è´¥å›¾ç¼©æ”¾ç±»å‹
+//            .setOverlay(overlay)//fresco:overlayImage="@drawable/watermark"å åŠ å›¾
 //            .setOverlays(overlays)
-                .setPlaceholderImage(ConfigConstants.sPlaceholderDrawable)//fresco:placeholderImage="@color/wait_color"Õ¼Î»Í¼
-//            .setPlaceholderImage(placeholderDrawable, placeholderImageScaleType)//fresco:placeholderImageScaleType="fitCenter"Õ¼Î»Í¼Ëõ·ÅÀàĞÍ
-//            .setPressedStateOverlay(drawable)//fresco:pressedStateOverlayImage="@color/red"°´Ñ¹×´Ì¬ÏÂµÄµş¼ÓÍ¼
-                .setProgressBarImage(new ProgressBarDrawable())//½ø¶ÈÌõfresco:progressBarImage="@drawable/progress_bar"½ø¶ÈÌõ
-//            .setProgressBarImage(progressBarImage, progressBarImageScaleType)//fresco:progressBarImageScaleType="centerInside"½ø¶ÈÌõÀàĞÍ
-//            .setRetryImage(retryDrawable)//fresco:retryImage="@drawable/retrying"µã»÷ÖØĞÂ¼ÓÔØ
-//            .setRetryImage(retryDrawable, retryImageScaleType)//fresco:retryImageScaleType="centerCrop"µã»÷ÖØĞÂ¼ÓÔØËõ·ÅÀàĞÍ
-                .setRoundingParams(RoundingParams.asCircle())//Ô²ĞÎ/Ô²½Çfresco:roundAsCircle="true"Ô²ĞÎ
+                .setPlaceholderImage(ConfigConstants.sPlaceholderDrawable)//fresco:placeholderImage="@color/wait_color"å ä½å›¾
+//            .setPlaceholderImage(placeholderDrawable, placeholderImageScaleType)//fresco:placeholderImageScaleType="fitCenter"å ä½å›¾ç¼©æ”¾ç±»å‹
+//            .setPressedStateOverlay(drawable)//fresco:pressedStateOverlayImage="@color/red"æŒ‰å‹çŠ¶æ€ä¸‹çš„å åŠ å›¾
+                .setProgressBarImage(new ProgressBarDrawable())//è¿›åº¦æ¡fresco:progressBarImage="@drawable/progress_bar"è¿›åº¦æ¡
+//            .setProgressBarImage(progressBarImage, progressBarImageScaleType)//fresco:progressBarImageScaleType="centerInside"è¿›åº¦æ¡ç±»å‹
+//            .setRetryImage(retryDrawable)//fresco:retryImage="@drawable/retrying"ç‚¹å‡»é‡æ–°åŠ è½½
+//            .setRetryImage(retryDrawable, retryImageScaleType)//fresco:retryImageScaleType="centerCrop"ç‚¹å‡»é‡æ–°åŠ è½½ç¼©æ”¾ç±»å‹
+                .setRoundingParams(RoundingParams.asCircle())//åœ†å½¢/åœ†è§’fresco:roundAsCircle="true"åœ†å½¢
                 .build();
         return gdh;
     }
 
 
-//DraweeView¡«¡«¡«SimpleDraweeView¡ª¡ªUI×é¼ş
+//DraweeViewï½ï½ï½SimpleDraweeViewâ€”â€”UIç»„ä»¶
 //  public static SimpleDraweeView getSimpleDraweeView(Context context,Uri uri){
 //    SimpleDraweeView simpleDraweeView=new SimpleDraweeView(context);
 //    simpleDraweeView.setImageURI(uri);
-//    simpleDraweeView.setAspectRatio(1.33f);//¿í¸ßËõ·Å±È
+//    simpleDraweeView.setAspectRatio(1.33f);//å®½é«˜ç¼©æ”¾æ¯”
 //    return simpleDraweeView;
 //  }
 
@@ -204,59 +204,59 @@ public class ConfigConstants {
         SimpleDraweeControllerBuilder controllerBuilder = sdcb
                 .setUri(uri)
                 .setCallerContext(callerContext)
-//              .setAspectRatio(1.33f);//¿í¸ßËõ·Å±È
+//              .setAspectRatio(1.33f);//å®½é«˜ç¼©æ”¾æ¯”
                 .setOldController(draweeController);
         return controllerBuilder;
     }
 
-    //Í¼Æ¬½âÂë
+    //å›¾ç‰‡è§£ç 
     public static ImageDecodeOptions getImageDecodeOptions(){
         ImageDecodeOptions decodeOptions = ImageDecodeOptions.newBuilder()
-//            .setBackgroundColor(Color.TRANSPARENT)//Í¼Æ¬µÄ±³¾°ÑÕÉ«
-//            .setDecodeAllFrames(decodeAllFrames)//½âÂëËùÓĞÖ¡
-//            .setDecodePreviewFrame(decodePreviewFrame)//½âÂëÔ¤ÀÀ¿ò
-//            .setForceOldAnimationCode(forceOldAnimationCode)//Ê¹ÓÃÒÔÇ°¶¯»­
-//            .setFrom(options)//Ê¹ÓÃÒÑ¾­´æÔÚµÄÍ¼Ïñ½âÂë
-//            .setMinDecodeIntervalMs(intervalMs)//×îĞ¡½âÂë¼ä¸ô£¨·ÖÎ»µ¥Î»£©
-                .setUseLastFrameForPreview(true)//Ê¹ÓÃ×îºóÒ»Ö¡½øĞĞÔ¤ÀÀ
+//            .setBackgroundColor(Color.TRANSPARENT)//å›¾ç‰‡çš„èƒŒæ™¯é¢œè‰²
+//            .setDecodeAllFrames(decodeAllFrames)//è§£ç æ‰€æœ‰å¸§
+//            .setDecodePreviewFrame(decodePreviewFrame)//è§£ç é¢„è§ˆæ¡†
+//            .setForceOldAnimationCode(forceOldAnimationCode)//ä½¿ç”¨ä»¥å‰åŠ¨ç”»
+//            .setFrom(options)//ä½¿ç”¨å·²ç»å­˜åœ¨çš„å›¾åƒè§£ç 
+//            .setMinDecodeIntervalMs(intervalMs)//æœ€å°è§£ç é—´éš”ï¼ˆåˆ†ä½å•ä½ï¼‰
+                .setUseLastFrameForPreview(true)//ä½¿ç”¨æœ€åä¸€å¸§è¿›è¡Œé¢„è§ˆ
                 .build();
         return decodeOptions;
     }
 
-    //Í¼Æ¬ÏÔÊ¾
+    //å›¾ç‰‡æ˜¾ç¤º
     public static ImageRequest getImageRequest(InstrumentedDraweeView view,String uri){
         ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
-//            .setAutoRotateEnabled(true)//×Ô¶¯Ğı×ªÍ¼Æ¬·½Ïò
-//            .setImageDecodeOptions(getImageDecodeOptions())//  Í¼Æ¬½âÂë¿â
-//            .setImageType(ImageType.SMALL)//Í¼Æ¬ÀàĞÍ£¬ÉèÖÃºó¿Éµ÷ÕûÍ¼Æ¬·ÅÈëĞ¡Í¼´ÅÅÌ¿Õ¼ä»¹ÊÇÄ¬ÈÏÍ¼Æ¬´ÅÅÌ¿Õ¼ä
-//            .setLocalThumbnailPreviewsEnabled(true)//ËõÂÔÍ¼Ô¤ÀÀ£¬Ó°ÏìÍ¼Æ¬ÏÔÊ¾ËÙ¶È£¨ÇáÎ¢£©
-                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)//ÇëÇó¾­¹ı»º´æ¼¶±ğ  BITMAP_MEMORY_CACHE£¬ENCODED_MEMORY_CACHE£¬DISK_CACHE£¬FULL_FETCH
-//            .setPostprocessor(postprocessor)//ĞŞ¸ÄÍ¼Æ¬
-//            .setProgressiveRenderingEnabled(true)//½¥½ø¼ÓÔØ£¬Ö÷ÒªÓÃÓÚ½¥½øÊ½µÄJPEGÍ¼£¬Ó°ÏìÍ¼Æ¬ÏÔÊ¾ËÙ¶È£¨ÆÕÍ¨£©
-                .setResizeOptions(new ResizeOptions(view.getLayoutParams().width, view.getLayoutParams().height))//µ÷Õû´óĞ¡
-//            .setSource(Uri uri)//ÉèÖÃÍ¼Æ¬µØÖ·
+//            .setAutoRotateEnabled(true)//è‡ªåŠ¨æ—‹è½¬å›¾ç‰‡æ–¹å‘
+//            .setImageDecodeOptions(getImageDecodeOptions())//  å›¾ç‰‡è§£ç åº“
+//            .setImageType(ImageType.SMALL)//å›¾ç‰‡ç±»å‹ï¼Œè®¾ç½®åå¯è°ƒæ•´å›¾ç‰‡æ”¾å…¥å°å›¾ç£ç›˜ç©ºé—´è¿˜æ˜¯é»˜è®¤å›¾ç‰‡ç£ç›˜ç©ºé—´
+//            .setLocalThumbnailPreviewsEnabled(true)//ç¼©ç•¥å›¾é¢„è§ˆï¼Œå½±å“å›¾ç‰‡æ˜¾ç¤ºé€Ÿåº¦ï¼ˆè½»å¾®ï¼‰
+                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)//è¯·æ±‚ç»è¿‡ç¼“å­˜çº§åˆ«  BITMAP_MEMORY_CACHEï¼ŒENCODED_MEMORY_CACHEï¼ŒDISK_CACHEï¼ŒFULL_FETCH
+//            .setPostprocessor(postprocessor)//ä¿®æ”¹å›¾ç‰‡
+//            .setProgressiveRenderingEnabled(true)//æ¸è¿›åŠ è½½ï¼Œä¸»è¦ç”¨äºæ¸è¿›å¼çš„JPEGå›¾ï¼Œå½±å“å›¾ç‰‡æ˜¾ç¤ºé€Ÿåº¦ï¼ˆæ™®é€šï¼‰
+                .setResizeOptions(new ResizeOptions(view.getLayoutParams().width, view.getLayoutParams().height))//è°ƒæ•´å¤§å°
+//            .setSource(Uri uri)//è®¾ç½®å›¾ç‰‡åœ°å€
                 .build();
         return imageRequest;
     }
 
-    //DraweeController ¿ØÖÆ DraweeControllerBuilder
+    //DraweeController æ§åˆ¶ DraweeControllerBuilder
     public static DraweeController getDraweeController(ImageRequest imageRequest,InstrumentedDraweeView view){
         DraweeController draweeController = Fresco.newDraweeControllerBuilder()
-//            .reset()//ÖØÖÃ
-                .setAutoPlayAnimations(true)//×Ô¶¯²¥·ÅÍ¼Æ¬¶¯»­
-//            .setCallerContext(callerContext)//»Øµ÷
-                .setControllerListener(view.getListener())//¼àÌıÍ¼Æ¬ÏÂÔØÍê±ÏµÈ
-//            .setDataSourceSupplier(dataSourceSupplier)//Êı¾İÔ´
-//            .setFirstAvailableImageRequests(firstAvailableImageRequests)//±¾µØÍ¼Æ¬¸´ÓÃ£¬¿É¼ÓÈëImageRequestÊı×é
-                .setImageRequest(imageRequest)//ÉèÖÃµ¥¸öÍ¼Æ¬ÇëÇó¡«¡«¡«²»¿ÉÓësetFirstAvailableImageRequests¹²ÓÃ£¬ÅäºÏsetLowResImageRequestÎª¸ß·Ö±æÂÊµÄÍ¼
-//            .setLowResImageRequest(ImageRequest.fromUri(lowResUri))//ÏÈÏÂÔØÏÔÊ¾µÍ·Ö±æÂÊµÄÍ¼
-                .setOldController(view.getController())//DraweeController¸´ÓÃ
-                .setTapToRetryEnabled(true)//µã»÷ÖØĞÂ¼ÓÔØÍ¼
+//            .reset()//é‡ç½®
+                .setAutoPlayAnimations(true)//è‡ªåŠ¨æ’­æ”¾å›¾ç‰‡åŠ¨ç”»
+//            .setCallerContext(callerContext)//å›è°ƒ
+                .setControllerListener(view.getListener())//ç›‘å¬å›¾ç‰‡ä¸‹è½½å®Œæ¯•ç­‰
+//            .setDataSourceSupplier(dataSourceSupplier)//æ•°æ®æº
+//            .setFirstAvailableImageRequests(firstAvailableImageRequests)//æœ¬åœ°å›¾ç‰‡å¤ç”¨ï¼Œå¯åŠ å…¥ImageRequestæ•°ç»„
+                .setImageRequest(imageRequest)//è®¾ç½®å•ä¸ªå›¾ç‰‡è¯·æ±‚ï½ï½ï½ä¸å¯ä¸setFirstAvailableImageRequestså…±ç”¨ï¼Œé…åˆsetLowResImageRequestä¸ºé«˜åˆ†è¾¨ç‡çš„å›¾
+//            .setLowResImageRequest(ImageRequest.fromUri(lowResUri))//å…ˆä¸‹è½½æ˜¾ç¤ºä½åˆ†è¾¨ç‡çš„å›¾
+                .setOldController(view.getController())//DraweeControllerå¤ç”¨
+                .setTapToRetryEnabled(true)//ç‚¹å‡»é‡æ–°åŠ è½½å›¾
                 .build();
         return draweeController;
     }
 
-    //Ä¬ÈÏ¼ÓÔØÍ¼Æ¬ºÍÊ§°ÜÍ¼Æ¬
+    //é»˜è®¤åŠ è½½å›¾ç‰‡å’Œå¤±è´¥å›¾ç‰‡
     public static Drawable sPlaceholderDrawable;
     public static Drawable sErrorDrawable;
 
