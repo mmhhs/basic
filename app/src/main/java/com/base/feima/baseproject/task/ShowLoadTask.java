@@ -292,6 +292,22 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		this.iOnLoadResultListener = iOnLoadResultListener;
 	}
 
+	public String getResultsString() {
+		return resultsString;
+	}
+
+	public void setResultsString(String resultsString) {
+		this.resultsString = resultsString;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
 	/**
 	 * 判断登录失效
 	 */
