@@ -67,7 +67,7 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
     @Override
     public void initData(){
         VersionCheckUtils versionCheckUtils = new VersionCheckUtils(this,naviText0,taskTag);
-        versionCheckUtils.checkVersion();
+        versionCheckUtils.checkVersion(false);
     }
 
     @Override

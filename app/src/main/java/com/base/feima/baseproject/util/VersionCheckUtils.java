@@ -64,13 +64,13 @@ public class VersionCheckUtils {
     }
 
     
-    public void checkVersion(){
+    public void checkVersion(boolean showDialog){
         String httpUrl = BaseConstant.VERSION;
         Map<String,Object> argMap = EncryTools.getEncryMap();
         argMap.put("version",PublicTools.getVersionName(activity));
         argMap.put("versionCode",""+PublicTools.getVersionCode(activity));
         argMap.put("deviceType","android");
-        ShowDialogTask task = new ShowDialogTask(activity,taskTag,parentView, activity.getString(R.string.dialog_item6),false,httpUrl,argMap, TaskConstant.POST);
+        ShowDialogTask task = new ShowDialogTask(activity,taskTag,parentView, activity.getString(R.string.dialog_item6),showDialog,httpUrl,argMap, TaskConstant.POST);
         task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
             @Override
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
