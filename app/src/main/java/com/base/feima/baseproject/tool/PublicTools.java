@@ -19,6 +19,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.base.feima.baseproject.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -340,6 +342,26 @@ public class PublicTools{
 			versionCode = info.versionCode;
 		}
 		return versionCode;
+	}
+
+	/**
+	 * 获取本机号码
+	 * @param context
+	 * @return
+	 */
+	public static String getPhoneNumber(Context context){
+		String result = "";
+		try {
+			TelephonyManager mTelephonyMgr;
+			mTelephonyMgr = (TelephonyManager)  context.getSystemService(Context.TELEPHONY_SERVICE);
+			result = mTelephonyMgr.getLine1Number();
+			if (result.startsWith(context.getString(R.string.base_86))){
+				result = result.replace(context.getString(R.string.base_86),"");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
