@@ -1,5 +1,7 @@
 package com.base.feima.baseproject.util;
 
+import android.text.TextUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,14 +15,12 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.text.TextUtils;
-
 /**
  * File Utils
  * <ul>
  * Read or write file
- * <li>{@link #readFile(String)} read file</li>
- * <li>{@link #readFileToList(String)} read file to string list</li>
+ * <li>{@link #(String)} read file</li>
+ * <li>{@link #(String)} read file to string list</li>
  * <li>{@link #writeFile(String, String, boolean)} write file from String</li>
  * <li>{@link #writeFile(String, String)} write file from String</li>
  * <li>{@link #writeFile(String, java.util.List, boolean)} write file from String List</li>
@@ -206,8 +206,7 @@ public class FileUtils {
 
     /**
      * write file
-     * 
-     * @param file the file to be opened for writing.
+     *
      * @param stream the input stream
      * @param append if <code>true</code>, then bytes will be written to the end of the file rather than the beginning
      * @return return true
@@ -500,7 +499,7 @@ public class FileUtils {
      *         <ul>
      *         <li>if {@link com.base.feima.baseproject.util.FileUtils#getFolderName(String)} return null, return false</li>
      *         <li>if target directory already exists, return true</li>
-     *         <li>return {@link java.io.File#makeFolder}</li>
+     *         <li>return {@link java.io.File#}</li>
      *         </ul>
      */
     public static boolean makeDirs(String filePath) {

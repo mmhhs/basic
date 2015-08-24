@@ -1,11 +1,11 @@
 package com.base.feima.baseproject.util;
 
-import java.lang.reflect.Method;
-
 import android.app.DownloadManager.Request;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+
+import java.lang.reflect.Method;
 
 /**
  * DownloadManagerPro
@@ -258,7 +258,7 @@ public class DownloadUtils {
      * get failed error code
      * 
      * @param downloadId
-     * @return one of {@link android.app.DownloadManager#ERROR_*}
+     * @return one of {@link android.app.DownloadManager#*}
      */
     public int getErrorCode(long downloadId) {
         return getInt(downloadId, android.app.DownloadManager.COLUMN_REASON);

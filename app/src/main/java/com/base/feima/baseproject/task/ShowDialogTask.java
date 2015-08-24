@@ -186,6 +186,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 
 	private void init(){
 		popupwindowTool = new PopupwindowTool(activity);
+		Httpclient.setContext(activity);
 	}
 
 	@Override

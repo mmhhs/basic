@@ -98,6 +98,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public void onPreExecute()
 	{
 		try {
+			Httpclient.setContext(activity);
 			addTask();
 			if(StringUtils.isEmpty(loadString)){
 				loadString = activity.getResources().getString(R.string.pop_item1);

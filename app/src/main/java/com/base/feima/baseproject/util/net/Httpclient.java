@@ -1,22 +1,33 @@
 package com.base.feima.baseproject.util.net;
 
+import android.content.Context;
+
 import com.base.feima.baseproject.util.LogUtil;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -37,7 +48,7 @@ import java.util.Set;
 
 public class Httpclient {
     public static final String TAG = "Httpclient Result";
-
+    private static Context context;
 
 
     /**
@@ -49,7 +60,12 @@ public class Httpclient {
      */
     public static String POSTMethod(String url,Map<String, Object> argsMap) throws Exception{
         byte[] dataByte = null;
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient ;
+        if (url.startsWith("https")){
+            httpClient = getTrustAllClient();
+        }else {
+            httpClient = new DefaultHttpClient();
+        }
         HttpPost httpPost = new HttpPost(url);
         //设置参数
         UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(setHttpParams(argsMap), "UTF-8");
@@ -78,7 +94,12 @@ public class Httpclient {
      */
     public static String GETMethod(String url,Map<String, Object> argsMap) throws Exception{
         byte[] dataByte = null;
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient ;
+        if (url.startsWith("https")){
+            httpClient = getTrustAllClient();
+        }else {
+            httpClient = new DefaultHttpClient();
+        }
         //为GET请求链接构造参数
         url = formatGetParameter(url,argsMap);
         HttpGet httpGet = new HttpGet(url);
@@ -105,7 +126,12 @@ public class Httpclient {
      */
     public static String PUTMethod(String url,Map<String, Object> argsMap)throws Exception{
         byte[] dataByte = null;
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient ;
+        if (url.startsWith("https")){
+            httpClient = getTrustAllClient();
+        }else {
+            httpClient = new DefaultHttpClient();
+        }
         HttpPut httpPut = new HttpPut(url);
         //设置参数
         UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(setHttpParams(argsMap), "UTF-8");
@@ -234,7 +260,12 @@ public class Httpclient {
             entity.addPart(key, new FileBody(file));
         }
         post.setEntity(entity);
-        HttpClient httpClient = new DefaultHttpClient();//发送请求
+        HttpClient httpClient ;
+        if (url.startsWith("https")){
+            httpClient = getTrustAllClient();
+        }else {
+            httpClient = new DefaultHttpClient();
+        }
         HttpResponse response = httpClient.execute(post);
         int stateCode = response.getStatusLine().getStatusCode();
         StringBuffer sb = new StringBuffer();
@@ -287,7 +318,12 @@ public class Httpclient {
             }
         }
         post.setEntity(entity);
-        HttpClient httpClient = new DefaultHttpClient();//发送请求
+        HttpClient httpClient ;
+        if (url.startsWith("https")){
+            httpClient = getTrustAllClient();
+        }else {
+            httpClient = new DefaultHttpClient();
+        }
         HttpResponse response = httpClient.execute(post);
         int stateCode = response.getStatusLine().getStatusCode();
         StringBuffer sb = new StringBuffer();
@@ -399,6 +435,52 @@ public class Httpclient {
             sb.append(";");
         }
         request.addHeader("cookie", sb.toString());
+    }
+
+    /**
+     * https 使用内置证书
+     * @param context
+     * @return
+     */
+    public static HttpClient getSpecialKeyStoreClient(Context context) {
+        BasicHttpParams params = new BasicHttpParams();
+        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+        HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
+        HttpProtocolParams.setUseExpectContinue(params, true);
+
+        SchemeRegistry schReg = new SchemeRegistry();
+        schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        schReg.register(new Scheme("https", CustomerSocketFactory.getSocketFactory(context), 443));
+
+        ClientConnectionManager connMgr = new ThreadSafeClientConnManager(params, schReg);
+
+        return new DefaultHttpClient(connMgr, params);
+    }
+
+    /**
+     * 信任所有证书
+     * @return
+     */
+    public static HttpClient getTrustAllClient() {
+        BasicHttpParams params = new BasicHttpParams();
+        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+        HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
+        HttpProtocolParams.setUseExpectContinue(params, true);
+
+        SchemeRegistry schReg = new SchemeRegistry();
+        schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        schReg.register(new Scheme("https", SSLTrustAllSocketFactory.getSocketFactory(), 443));
+
+        ClientConnectionManager connMgr = new ThreadSafeClientConnManager(params, schReg);
+        return new DefaultHttpClient(connMgr, params);
+    }
+
+    public static Context getContext() {
+        return context;
+    }
+
+    public static void setContext(Context context) {
+        Httpclient.context = context;
     }
 
 }
