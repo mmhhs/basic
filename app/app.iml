@@ -98,26 +98,26 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="fbcore-0.5.0" level="project" />
-    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="httpmime-4.1.3" level="project" />
-    <orderEntry type="library" exported="" name="library-1.0.15" level="project" />
-    <orderEntry type="library" exported="" name="httpcore-4.1.4" level="project" />
+    <orderEntry type="library" exported="" name="drawee-volley-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-master" level="project" />
-    <orderEntry type="library" exported="" name="support-v13-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="httpcore-4.1.4" level="project" />
+    <orderEntry type="library" exported="" name="imagepipeline-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="ormlite-android-4.46" level="project" />
-    <orderEntry type="library" exported="" name="ormlite-core-4.46" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="httpmime-4.1.3" level="project" />
+    <orderEntry type="library" exported="" name="butterknife-6.1.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v13-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="library-1.0.15" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="fresco-0.5.0" level="project" />
-    <orderEntry type="library" exported="" name="butterknife-6.1.0" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="imagepipeline-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
-    <orderEntry type="library" exported="" name="httpclient-4.1.3" level="project" />
-    <orderEntry type="library" exported="" name="drawee-volley-0.5.0" level="project" />
+    <orderEntry type="library" exported="" name="fbcore-0.5.0" level="project" />
+    <orderEntry type="library" exported="" name="ormlite-core-4.46" level="project" />
     <orderEntry type="library" exported="" name="drawee-0.5.0" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-4.1.3" level="project" />
+    <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="ormlite-android-4.46" level="project" />
   </component>
 </module>

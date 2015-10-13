@@ -15,7 +15,7 @@ import com.base.feima.baseproject.fresco.FrescoUtils;
 import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
-import com.base.feima.baseproject.tool.image.ImageTools;
+import com.base.feima.baseproject.util.image.ImageUtil;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
     public ChooseImagesSampleAdapter(Context context, List<String> list,int screenWidth) {
         this.context = context;
         this.list = list;
-        itemWidth = (screenWidth- 2* ImageTools.dip2px(context, 1))/3;
+        itemWidth = (screenWidth- 2* ImageUtil.dip2px(context, 1))/3;
     }
 
     @Override

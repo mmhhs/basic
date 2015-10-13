@@ -14,7 +14,7 @@ import com.base.feima.baseproject.fresco.FrescoUtils;
 import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
-import com.base.feima.baseproject.tool.image.ImageTools;
+import com.base.feima.baseproject.util.image.ImageUtil;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class SelectItemAdapter extends BaseAdapter{
 //            imageLoader.displayImage(itemModel.getItemIcon(),viewHolder.icon, OptionTools.getBaseOptions(context));
             viewHolder.icon.setVisibility(View.VISIBLE);
             viewHolder.icon.initInstrumentation(itemModel.getItemIcon(), PerfListener.getInstance());
-            FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageTools.dip2px(context, 25), ImageTools.dip2px(context,25));
+            FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageUtil.dip2px(context, 25), ImageUtil.dip2px(context, 25));
         }
         if (itemModel.getItemIconId()>0){
             viewHolder.icon.setBackgroundResource(itemModel.getItemIconId());

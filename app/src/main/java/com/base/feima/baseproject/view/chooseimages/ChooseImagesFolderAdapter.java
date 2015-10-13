@@ -14,7 +14,7 @@ import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.fresco.FrescoUtils;
 import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
-import com.base.feima.baseproject.tool.image.ImageTools;
+import com.base.feima.baseproject.util.image.ImageUtil;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class ChooseImagesFolderAdapter extends BaseAdapter{
         viewHolder.countText.setText(imageBean.getImageCounts()+context.getString(R.string.choose_images_unit));
 //        imageLoader.displayImage("file://"+imageBean.getTopImagePath(),viewHolder.topImage, OptionTools.getNoDiscOptions(context));
         viewHolder.topImage.initInstrumentation(imageBean.getTopImagePath(), PerfListener.getInstance());
-        FrescoUtils.displayImage(viewHolder.topImage, "file://" +imageBean.getTopImagePath(), ImageTools.dip2px(context,80), ImageTools.dip2px(context,80));
+        FrescoUtils.displayImage(viewHolder.topImage, "file://" +imageBean.getTopImagePath(), ImageUtil.dip2px(context, 80), ImageUtil.dip2px(context, 80));
         if (imageBean.getSelected()){
             viewHolder.selectImage.setVisibility(View.VISIBLE);
         }else {

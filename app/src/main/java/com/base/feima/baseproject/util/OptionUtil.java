@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool;
+package com.base.feima.baseproject.util;
 
 import android.app.Activity;
 import android.app.Service;
@@ -24,7 +24,7 @@ import com.base.feima.baseproject.R;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class PublicTools{
+public class OptionUtil {
 	public static String tag = "PublicTools";
 
 

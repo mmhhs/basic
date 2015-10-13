@@ -21,8 +21,8 @@ import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseActivity;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
     private ChooseImagesSampleAdapter chooseImagesSampleAdapter;
     private int screenWidth = 0;
     private int maxSize = 9;
-    private PopupwindowTool popupwindowTool;
+    private PopupwindowUtil popupwindowTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,8 @@ public class ChooseImagesSampleActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        popupwindowTool = new PopupwindowTool(this);
-        screenWidth = PublicTools.getScreenWidth(this);
+        popupwindowTool = new PopupwindowUtil(this);
+        screenWidth = OptionUtil.getScreenWidth(this);
         registerBroadcast();
         chooseImagesSampleAdapter = new ChooseImagesSampleAdapter(this,chooseImageList,screenWidth);
         chooseImagesSampleAdapter.setiOnItemClickListener(iOnItemClickListener);
@@ -92,7 +92,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
             intent.putExtra(ChooseImagesActivity.BROADCASTFLAG,maxSize-chooseImageList.size());
             startActivity(intent);
         }else {
-            PublicTools.addToast(this,""+getString(R.string.choose_images_max)+maxSize);
+            OptionUtil.addToast(this, "" + getString(R.string.choose_images_max) + maxSize);
         }
 
     }
@@ -132,7 +132,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         final LinearLayout deleteLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_delete);
         final TextView indexText = (TextView) view.findViewById(R.id.base_choose_images_title_index);
-        containLayout.setPadding(0,PublicTools.getStatusBarHeight(ChooseImagesSampleActivity.this),0,0);
+        containLayout.setPadding(0, OptionUtil.getStatusBarHeight(ChooseImagesSampleActivity.this),0,0);
         chooseImagesPreviewAdapter = new ChooseImagesPreviewAdapter(context,chooseImageList);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener() {
             @Override

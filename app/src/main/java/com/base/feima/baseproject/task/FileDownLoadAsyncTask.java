@@ -7,7 +7,7 @@ import android.widget.PopupWindow;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnProgressListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
+import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
 import com.base.feima.baseproject.util.BaseConstant;
 
 import org.apache.http.HttpEntity;
@@ -36,7 +36,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
     private boolean silenceDownload = false;//静默下载
     private String windowTitle = "";//标题
     private View parentView;//父类视图
-    private PopupwindowTool popupwindowTool;
+    private PopupwindowUtil popupwindowTool;
     private PopupWindow popupWindow;
     //下载相关
     private HttpClient httpClient = new DefaultHttpClient();
@@ -50,7 +50,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
         this.silenceDownload = silenceDownload;
         this.windowTitle = windowTitle;
         this.parentView = parentView;
-        popupwindowTool = new PopupwindowTool(activity);
+        popupwindowTool = new PopupwindowUtil(activity);
         popupwindowTool.setiOnSureListener(new IOnSureListener() {
             @Override
             public void onSureClick() {

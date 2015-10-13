@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.listener.ISelectedListener;
-import com.base.feima.baseproject.util.LogUtil;
+import com.base.feima.baseproject.util.tool.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool.image;
+package com.base.feima.baseproject.util.image;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -26,7 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class ImageChooseFragmentTools{
+public class ImageChooseFragmentUtil {
 	public static final int PHOTO_WITH_CAMERA = 116;	
 	public static final int CHOOSE_PICTURE = 117;
 	public static final int PHOTO_PICKED_WITH_CROP = 118;
@@ -36,14 +36,14 @@ public class ImageChooseFragmentTools{
 	private static Uri imageUri;
 	private  String imageUrl = "";
 	
-	public ImageChooseFragmentTools(){
+	public ImageChooseFragmentUtil(){
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 	}
 
-	public ImageChooseFragmentTools(Fragment context){
+	public ImageChooseFragmentUtil(Fragment context){
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();

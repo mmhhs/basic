@@ -13,6 +13,7 @@ public class SharedUtil{
 	public final static String LONGITUDE = "LONGITUDE";
 
 	public final static String HELP = "HELP";
+	public final static String IGNOREVERSION = "IGNOREVERSION";//忽略版本
 
 	/**
 	 * 保存用户id
@@ -97,5 +98,25 @@ public class SharedUtil{
 		SharedPreferences sp = ctx.getSharedPreferences(HELP, 0);
 		int code = sp.getInt("code", 1);
 		return code;
+	}
+
+	/**
+	 * 保存忽略版本
+	 * @param context
+	 * @param version 忽略版本
+	 */
+	public static void saveIgnoreVersion(Context context, String version)
+	{
+		SharedPreferences sp = context.getSharedPreferences(IGNOREVERSION, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putString(IGNOREVERSION, version);
+		editor.commit();
+	}
+	public static String getIgnoreVersion(Context context){
+		Context ctx = context;
+		SharedPreferences sp = ctx.getSharedPreferences(IGNOREVERSION, 0);
+		String id = sp.getString(IGNOREVERSION, "");
+		return id;
 	}
 }

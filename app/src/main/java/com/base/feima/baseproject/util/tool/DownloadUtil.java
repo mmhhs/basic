@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.util;
+package com.base.feima.baseproject.util.tool;
 
 import android.app.DownloadManager.Request;
 import android.database.Cursor;
@@ -29,13 +29,13 @@ import java.lang.reflect.Method;
  * </ul>
  * <ul>
  * <strong>RequestPro</strong>
- * <li>{@link DownloadUtils.RequestPro#setNotiClass(String)} set noti class</li>
- * <li>{@link DownloadUtils.RequestPro#setNotiExtras(String)} set noti extras</li>
+ * <li>{@link DownloadUtil.RequestPro#setNotiClass(String)} set noti class</li>
+ * <li>{@link DownloadUtil.RequestPro#setNotiExtras(String)} set noti extras</li>
  * </ul>
  * 
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-5-4
  */
-public class DownloadUtils {
+public class DownloadUtil {
 
     public static final Uri    CONTENT_URI                 = Uri.parse("content://downloads/my_downloads");
     /** represents downloaded file above api 11 **/
@@ -54,7 +54,7 @@ public class DownloadUtils {
 
     private android.app.DownloadManager downloadManager;
 
-    public DownloadUtils(android.app.DownloadManager downloadManager) {
+    public DownloadUtil(android.app.DownloadManager downloadManager) {
         this.downloadManager = downloadManager;
     }
 

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.activity.welcome.WelcomeFragment.IntentOnClickListener;
 import com.base.feima.baseproject.base.BaseFragmentActivity;
-import com.base.feima.baseproject.tool.PublicTools;
+import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.SharedUtil;
 
 import java.util.Timer;
@@ -67,7 +67,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 		int versionHelp = SharedUtil.getHelpCode(getApplicationContext());
 		int versionCurrent = 1;
 		try {
-			versionCurrent = PublicTools.getVersionCode(getApplicationContext());
+			versionCurrent = OptionUtil.getVersionCode(getApplicationContext());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool.popupwindow;
+package com.base.feima.baseproject.util.popupwindow;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,24 +20,27 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.adapter.PopupwindowListAdapter;
+import com.base.feima.baseproject.listener.IOnIgnoreListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.tool.AnimTools;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.AnimUtil;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.tool.StringUtil;
 import com.base.feima.baseproject.view.PageIndicatorView;
 import com.base.feima.baseproject.view.chooseimages.ChooseImagesPreviewAdapter;
 
 import java.util.List;
 
-public class PopupwindowTool {
+public class PopupwindowUtil {
     private IOnItemClickListener iOnItemClickListener;
     private IOnSureListener iOnSureListener;
+    private IOnIgnoreListener iOnIgnoreListener;
     private Activity activity;
     private float showAlpha = 0.5f;
     private float hideAlpha = 1f;
 
-    public PopupwindowTool(Activity activity) {
+    public PopupwindowUtil(Activity activity) {
         this.activity = activity;
     }
 
@@ -69,6 +72,10 @@ public class PopupwindowTool {
         if(iOnSureListener !=null){
             this.iOnSureListener.onSureClick();
         }
+    }
+
+    public void setiOnIgnoreListener(IOnIgnoreListener iOnIgnoreListener) {
+        this.iOnIgnoreListener = iOnIgnoreListener;
     }
 
     /**
@@ -105,10 +112,10 @@ public class PopupwindowTool {
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_list_contain);
         PopupwindowListAdapter adapter = new PopupwindowListAdapter(context,itemArray);
         listView.setAdapter(adapter);
-        if(!StringUtils.isEmpty(title)){
+        if(!StringUtil.isEmpty(title)){
             titleText.setText(title);
         }
-        AnimTools.setBackgroundAlpha(activity, showAlpha);
+        AnimUtil.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -143,7 +150,7 @@ public class PopupwindowTool {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AnimTools.setBackgroundAlpha(activity,hideAlpha);
+                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
             }
         });
         return popupWindow;
@@ -183,19 +190,26 @@ public class PopupwindowTool {
         TextView messageText = (TextView) view.findViewById(R.id.base_pop_sure_content);
         TextView cancleText = (TextView) view.findViewById(R.id.base_pop_sure_item1);
         TextView sureText = (TextView) view.findViewById(R.id.base_pop_sure_item2);
-        View line = (View) view.findViewById(R.id.pop_sure_line);
+        View line = (View) view.findViewById(R.id.base_pop_sure_line);
+        TextView ignoreText = (TextView) view.findViewById(R.id.base_pop_sure_item3);
+        View line2 = (View) view.findViewById(R.id.base_pop_sure_line2);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_sure_contain);
-        if(!StringUtils.isEmpty(title)){
+        if(!StringUtil.isEmpty(title)){
             titleText.setText(title);
         }
-        if(!StringUtils.isEmpty(message)){
+        if(!StringUtil.isEmpty(message)){
             messageText.setText(message);
         }
         if(showOne){
             cancleText.setVisibility(View.GONE);
             line.setVisibility(View.GONE);
         }
-        AnimTools.setBackgroundAlpha(activity, showAlpha);
+        if (context.getString(R.string.tip5).equals(""+title)){
+            ignoreText.setVisibility(View.VISIBLE);
+            line2.setVisibility(View.VISIBLE);
+            messageText.setGravity(Gravity.CENTER_VERTICAL);
+        }
+        AnimUtil.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -235,10 +249,19 @@ public class PopupwindowTool {
             }
 
         });
+        ignoreText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                if (iOnIgnoreListener !=null){
+                    iOnIgnoreListener.onIgnoreClick();
+                }
+            }
+        });
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
             }
         });
         return popupWindow;
@@ -280,7 +303,7 @@ public class PopupwindowTool {
         if(!loadString.isEmpty()){
             loadText.setText(loadString);
         }
-        AnimTools.setBackgroundAlpha(activity, showAlpha);
+        AnimUtil.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -304,7 +327,7 @@ public class PopupwindowTool {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
             }
         });
         return popupWindow;
@@ -341,7 +364,7 @@ public class PopupwindowTool {
         if (canCancel){
             cancelLayout.setVisibility(View.VISIBLE);
         }
-        AnimTools.setBackgroundAlpha(activity, showAlpha);
+        AnimUtil.setBackgroundAlpha(activity, showAlpha);
         final PopupWindow popupWindow = new PopupWindow(view,LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -361,7 +384,7 @@ public class PopupwindowTool {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
             }
         });
 
@@ -374,7 +397,7 @@ public class PopupwindowTool {
                 long tran = Long.parseLong(transferedBytes);
                 int progress = (int)(100*tran/totalBytes);
                 progressBar.setProgress(progress);
-                contentText.setText(transferedBytes+"/"+totalBytes);
+                contentText.setText(progress + "/" + 100);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -411,7 +434,7 @@ public class PopupwindowTool {
             pageIndicatorView.setTotalPage(chooseImageList.size());
             viewPager.setCurrentItem(position);
         }
-        PublicTools.startFullScreen(activity);
+        OptionUtil.startFullScreen(activity);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -437,7 +460,7 @@ public class PopupwindowTool {
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener(){
             @Override
             public void onItemClick(int position) {
-                PublicTools.quitFullScreen(activity);
+                OptionUtil.quitFullScreen(activity);
                 new Handler().postDelayed(new Runnable()
                 {
                     public void run()
@@ -451,7 +474,7 @@ public class PopupwindowTool {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                AnimTools.setBackgroundAlpha(activity, hideAlpha);
+                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
             }
         });
         return popupWindow;

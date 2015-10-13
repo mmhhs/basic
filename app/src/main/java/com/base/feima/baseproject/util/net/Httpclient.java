@@ -2,7 +2,7 @@ package com.base.feima.baseproject.util.net;
 
 import android.content.Context;
 
-import com.base.feima.baseproject.util.LogUtil;
+import com.base.feima.baseproject.util.tool.LogUtil;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

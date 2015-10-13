@@ -1,20 +1,15 @@
-package com.base.feima.baseproject.tool;
+package com.base.feima.baseproject.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TimeTools {
+public class TimeUtil {
 
 
-	/**
-	 * 获取php服务器需要时间
-	 * @return
-	 */
 	public static String getStamp(){
 		long time = System.currentTimeMillis();
 		String stamp = ""+time;
-		stamp = stamp.substring(0,10);
 		return stamp;
 	}
 
@@ -51,17 +46,13 @@ public class TimeTools {
 		return str;
 	}
 
-	/**
-	 * 格式PHP服务器时间
-	 * @param time  php服务器返回时间缺少三位，需要乘以1000
-	 * @return
-	 */
+
 	public static String formatServiceTime1(String time) {
 		String result = "";
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			long loc_time = Long.valueOf(time);
-			result = sdf.format(new Date(loc_time*1000));
+			result = sdf.format(new Date(loc_time));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -69,17 +60,13 @@ public class TimeTools {
 			return result;
 		}
 	}
-	/**
-	 * 格式PHP服务器时间
-	 * @param time  php服务器返回时间缺少三位，需要乘以1000
-	 * @return
-	 */
+
 	public static String formatServiceTime2(String time) {
 		String result = "";
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			long loc_time = Long.valueOf(time);
-			result = sdf.format(new Date(loc_time*1000));
+			result = sdf.format(new Date(loc_time));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

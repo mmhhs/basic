@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool;
+package com.base.feima.baseproject.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class AnimTools {
+public class AnimUtil {
 
     public static void startAnim(Context context,LinearLayout linearLayout,int animId){
         try {

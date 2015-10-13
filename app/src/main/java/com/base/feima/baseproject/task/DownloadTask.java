@@ -5,8 +5,8 @@ import android.content.Context;
 import com.base.feima.baseproject.model.user.UserModel;
 import com.base.feima.baseproject.model.user.UserResult;
 import com.base.feima.baseproject.util.net.Httpclient;
-import com.base.feima.baseproject.tool.ResultTools;
-import com.base.feima.baseproject.util.JacksonUtil;
+import com.base.feima.baseproject.util.ResultUtil;
+import com.base.feima.baseproject.util.tool.JacksonUtil;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public class DownloadTask implements Runnable{
 			JacksonUtil json = JacksonUtil.getInstance();
 			UserResult res = json.readValue(result, UserResult.class);
 			if(res!=null){
-				if(ResultTools.judgeResult(context, "" + res.getCode())){
+				if(ResultUtil.judgeResult(context, "" + res.getCode())){
 					UserModel userModel = res.getData();
 
 					try {

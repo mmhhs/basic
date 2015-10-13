@@ -157,7 +157,7 @@ public class ScreenManager {
 				Activity activity = activityList.get(i);
 				if (activity != null&&activity.getClass().getSimpleName().equals(cls.getSimpleName())) {
 					closeActivity(activity);
-					activityList.remove(activity);
+//					activityList.remove(activity);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

@@ -13,7 +13,7 @@ import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseFragmentActivity;
 import com.base.feima.baseproject.fragment.DemoFragment;
 import com.base.feima.baseproject.util.BaseConstant;
-import com.base.feima.baseproject.util.VersionCheckUtils;
+import com.base.feima.baseproject.util.VersionCheckUtil;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -66,7 +66,7 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
 
     @Override
     public void initData(){
-        VersionCheckUtils versionCheckUtils = new VersionCheckUtils(this,naviText0,taskTag);
+        VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
         versionCheckUtils.checkVersion(false);
     }
 

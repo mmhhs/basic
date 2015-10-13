@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool.image;
+package com.base.feima.baseproject.util.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,11 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageTools {
+public class ImageUtil {
 	private static final String tag = "ImageTools";
 	private Context context;
 
-	public ImageTools() {
+	public ImageUtil() {
 
 	}
 

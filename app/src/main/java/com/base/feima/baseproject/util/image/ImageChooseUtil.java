@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool.image;
+package com.base.feima.baseproject.util.image;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
-public class ImageChooseTools implements Serializable{
+public class ImageChooseUtil implements Serializable{
 	private static final long serialVersionUID = 510488826187140949L;
 	public static final int PHOTO_WITH_CAMERA = 116;	
 	public static final int CHOOSE_PICTURE = 117;
@@ -37,14 +37,14 @@ public class ImageChooseTools implements Serializable{
 	private static Uri imageUri;
 	private  String imageUrl = "";
 	
-	public ImageChooseTools(){
+	public ImageChooseUtil(){
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 	}
 
-	public ImageChooseTools(Activity context){
+	public ImageChooseUtil(Activity context){
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();

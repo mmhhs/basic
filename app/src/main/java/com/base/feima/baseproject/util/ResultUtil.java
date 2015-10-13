@@ -1,11 +1,11 @@
-package com.base.feima.baseproject.tool;
+package com.base.feima.baseproject.util;
 
 import android.content.Context;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.util.BaseConstant;
 
-public class ResultTools {
+public class ResultUtil {
     /**
      * 获取图片正确路径
      * @return

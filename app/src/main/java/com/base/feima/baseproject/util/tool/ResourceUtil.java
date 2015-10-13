@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.util;
+package com.base.feima.baseproject.util.tool;
 
 import android.content.Context;
 
@@ -13,9 +13,9 @@ import java.util.List;
  * 
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2012-5-26
  */
-public class ResourceUtils {
+public class ResourceUtil {
 
-    private ResourceUtils() {
+    private ResourceUtil() {
         throw new AssertionError();
     }
 
@@ -28,7 +28,7 @@ public class ResourceUtils {
      * @return
      */
     public static String geFileFromAssets(Context context, String fileName) {
-        if (context == null || StringUtils.isEmpty(fileName)) {
+        if (context == null || StringUtil.isEmpty(fileName)) {
             return null;
         }
 
@@ -77,14 +77,14 @@ public class ResourceUtils {
     }
 
     /**
-     * same to {@link com.base.feima.baseproject.util.ResourceUtils#geFileFromAssets(android.content.Context, String)}, but return type is List<String>
+     * same to {@link ResourceUtil#geFileFromAssets(android.content.Context, String)}, but return type is List<String>
      * 
      * @param context
      * @param fileName
      * @return
      */
     public static List<String> geFileToListFromAssets(Context context, String fileName) {
-        if (context == null || StringUtils.isEmpty(fileName)) {
+        if (context == null || StringUtil.isEmpty(fileName)) {
             return null;
         }
 
@@ -105,7 +105,7 @@ public class ResourceUtils {
     }
 
     /**
-     * same to {@link com.base.feima.baseproject.util.ResourceUtils#geFileFromRaw(android.content.Context, int)}, but return type is List<String>
+     * same to {@link ResourceUtil#geFileFromRaw(android.content.Context, int)}, but return type is List<String>
      * 
      * @param context
      * @param resId

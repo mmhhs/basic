@@ -1,13 +1,13 @@
-package com.base.feima.baseproject.util;
+package com.base.feima.baseproject.util.tool;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils {
+public class StringUtil {
 
-    private StringUtils() {
+    private StringUtil() {
         throw new AssertionError();
     }
 
@@ -205,7 +205,7 @@ public class StringUtils {
      * @return
      */
     public static String htmlEscapeCharsToString(String source) {
-        return StringUtils.isEmpty(source) ? source : source.replaceAll("&lt;", "<").replaceAll("&gt;", ">")
+        return StringUtil.isEmpty(source) ? source : source.replaceAll("&lt;", "<").replaceAll("&gt;", ">")
                 .replaceAll("&amp;", "&").replaceAll("&quot;", "\"");
     }
 

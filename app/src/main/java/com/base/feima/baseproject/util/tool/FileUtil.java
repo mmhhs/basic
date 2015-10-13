@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.util;
+package com.base.feima.baseproject.util.tool;
 
 import android.text.TextUtils;
 
@@ -47,11 +47,11 @@ import java.util.List;
  * 
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2012-5-12
  */
-public class FileUtils {
+public class FileUtil {
 
     public final static String FILE_EXTENSION_SEPARATOR = ".";
 
-    private FileUtils() {
+    private FileUtil() {
         throw new AssertionError();
     }
 
@@ -106,7 +106,7 @@ public class FileUtils {
      * @throws RuntimeException if an error occurs while operator FileWriter
      */
     public static boolean writeFile(String filePath, String content, boolean append) {
-        if (StringUtils.isEmpty(content)) {
+        if (StringUtil.isEmpty(content)) {
             return false;
         }
 
@@ -371,7 +371,7 @@ public class FileUtils {
      * @see
      */
     public static String getFileNameWithoutExtension(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
 
@@ -408,7 +408,7 @@ public class FileUtils {
      * @return file name from path, include suffix
      */
     public static String getFileName(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
 
@@ -440,7 +440,7 @@ public class FileUtils {
      */
     public static String getFolderName(String filePath) {
 
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
 
@@ -471,7 +471,7 @@ public class FileUtils {
      * @return
      */
     public static String getFileExtension(String filePath) {
-        if (StringUtils.isBlank(filePath)) {
+        if (StringUtil.isBlank(filePath)) {
             return filePath;
         }
 
@@ -497,14 +497,14 @@ public class FileUtils {
      * @return true if the necessary directories have been created or the target directory already exists, false one of
      *         the directories can not be created.
      *         <ul>
-     *         <li>if {@link com.base.feima.baseproject.util.FileUtils#getFolderName(String)} return null, return false</li>
+     *         <li>if {@link FileUtil#getFolderName(String)} return null, return false</li>
      *         <li>if target directory already exists, return true</li>
      *         <li>return {@link java.io.File#}</li>
      *         </ul>
      */
     public static boolean makeDirs(String filePath) {
         String folderName = getFolderName(filePath);
-        if (StringUtils.isEmpty(folderName)) {
+        if (StringUtil.isEmpty(folderName)) {
             return false;
         }
 
@@ -528,7 +528,7 @@ public class FileUtils {
      * @return
      */
     public static boolean isFileExist(String filePath) {
-        if (StringUtils.isBlank(filePath)) {
+        if (StringUtil.isBlank(filePath)) {
             return false;
         }
 
@@ -543,7 +543,7 @@ public class FileUtils {
      * @return
      */
     public static boolean isFolderExist(String directoryPath) {
-        if (StringUtils.isBlank(directoryPath)) {
+        if (StringUtil.isBlank(directoryPath)) {
             return false;
         }
 
@@ -563,7 +563,7 @@ public class FileUtils {
      * @return
      */
     public static boolean deleteFile(String path) {
-        if (StringUtils.isBlank(path)) {
+        if (StringUtil.isBlank(path)) {
             return true;
         }
 
@@ -598,7 +598,7 @@ public class FileUtils {
      * @return returns the length of this file in bytes. returns -1 if the file does not exist.
      */
     public static long getFileSize(String path) {
-        if (StringUtils.isBlank(path)) {
+        if (StringUtil.isBlank(path)) {
             return -1;
         }
 

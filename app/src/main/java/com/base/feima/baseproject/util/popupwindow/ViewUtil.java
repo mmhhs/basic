@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.tool.popupwindow;
+package com.base.feima.baseproject.util.popupwindow;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnTryClickListener;
-import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.tool.StringUtil;
 
 
-public class ViewTool {
+public class ViewUtil {
 	private IOnTryClickListener onTryClickListener;
     private View loadView;
     private View errorView;
 
-    public ViewTool(){
+    public ViewUtil(){
 
     }
 
@@ -86,7 +86,7 @@ public class ViewTool {
 		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_error,null, false);
 	    TextView titleText = (TextView) view.findViewById(R.id.base_pop_error_item1);
         LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_error_contain);
-        if(!StringUtils.isEmpty(errorString)){
+        if(!StringUtil.isEmpty(errorString)){
         	titleText.setText(errorString);
         }
 		containLayout.setOnClickListener(new OnClickListener() {

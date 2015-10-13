@@ -29,8 +29,8 @@ import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
 import com.base.feima.baseproject.listener.IOnDialogResultListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.task.ShowDialogTask;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.tool.image.ImageChooseTools;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.image.ImageChooseUtil;
 import com.base.feima.baseproject.util.BaseConstant;
 
 import java.io.File;
@@ -71,7 +71,7 @@ public class ChooseImagesActivity extends BaseActivity {
     private ChooseImagesGridAdapter chooseImagesGridAdapter;
     private int maxSize = 9;//最多能选择的图片数
     private int folderShowIndex = 0;
-    private ImageChooseTools imageChooseTools = new ImageChooseTools();
+    private ImageChooseUtil imageChooseTools = new ImageChooseUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        screenWidth = PublicTools.getScreenWidth(this);
+        screenWidth = OptionUtil.getScreenWidth(this);
         maxSize = getIntent().getExtras().getInt(BROADCASTFLAG,9);
         queryData();
     }
@@ -171,7 +171,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
     private Boolean queryLocalImages(){
         if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            PublicTools.addToast(this, getString(R.string.choose_images_sd));
+            OptionUtil.addToast(this, getString(R.string.choose_images_sd));
             return false;
         }
         Uri mImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -347,7 +347,7 @@ public class ChooseImagesActivity extends BaseActivity {
         TextView folderText = (TextView) view.findViewById(R.id.base_choose_images_footer_folder);
         final TextView indexText = (TextView) view.findViewById(R.id.base_choose_images_title_index);
         final CheckBox checkBox = (CheckBox) view.findViewById(R.id.base_choose_images_footer_choose);
-        containLayout.setPadding(0,PublicTools.getStatusBarHeight(ChooseImagesActivity.this),0,0);
+        containLayout.setPadding(0, OptionUtil.getStatusBarHeight(ChooseImagesActivity.this),0,0);
         chooseImagesPreviewAdapter = new ChooseImagesPreviewAdapter(context,previewList);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener() {
             @Override
@@ -490,7 +490,7 @@ public class ChooseImagesActivity extends BaseActivity {
                 if (chooseImageList.size()<maxSize){
                     chooseImageList.add(path);
                 }else {
-                    PublicTools.addToast(this,""+getString(R.string.choose_images_max)+maxSize);
+                    OptionUtil.addToast(this, "" + getString(R.string.choose_images_max) + maxSize);
                 }
             }
         }else {
@@ -520,14 +520,14 @@ public class ChooseImagesActivity extends BaseActivity {
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case ImageChooseTools.PHOTO_WITH_CAMERA:
+                case ImageChooseUtil.PHOTO_WITH_CAMERA:
                     String path = imageChooseTools.getTakePhotoScaleUrl();//获取拍照压缩路径
                     List<String> pathList = new ArrayList<String>();
                     pathList.add(path);
                     PopupWindow popupWindow = getPreviewWindow(ChooseImagesActivity.this,CHOOSEIMAGESSCREENFLAG_PREVIEWTAKE,pathList,0);
                     popupWindow.showAtLocation(gridView, Gravity.CENTER, 0, 0);
                     break;
-                case ImageChooseTools.CHOOSE_PICTURE:
+                case ImageChooseUtil.CHOOSE_PICTURE:
                     break;
             }
 

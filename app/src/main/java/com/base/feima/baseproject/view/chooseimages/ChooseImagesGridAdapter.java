@@ -15,8 +15,8 @@ import com.base.feima.baseproject.fresco.FrescoUtils;
 import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.tool.image.ImageTools;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.image.ImageUtil;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class ChooseImagesGridAdapter extends BaseAdapter{
         this.context = context;
         this.list = list;
         this.chooseList = chooseList;
-        itemWidth = (screenWidth- 2* ImageTools.dip2px(context, 1))/3;
+        itemWidth = (screenWidth- 2* ImageUtil.dip2px(context, 1))/3;
         this.maxSize = maxSize;
         this.folderShowIndex = folderShowIndex;
     }
@@ -146,7 +146,7 @@ public class ChooseImagesGridAdapter extends BaseAdapter{
                 if (chooseList.size()<maxSize){
                     chooseList.add(path);
                 }else {
-                    PublicTools.addToast(context, "" + context.getString(R.string.choose_images_max) + maxSize);
+                    OptionUtil.addToast(context, "" + context.getString(R.string.choose_images_max) + maxSize);
                 }
             }
         }else {

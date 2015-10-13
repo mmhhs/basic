@@ -5,6 +5,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class HttpUtil
 {
@@ -63,6 +66,16 @@ public class HttpUtil
 			return 0;
 		}
 		return 0;
+	}
+
+	public static Map<String,Object> getEncryMap(){
+		Map<String, Object> arg = new HashMap<String, Object>();
+		return arg;
+	}
+
+	public static Map<String,Object> getEncryMap(Context context){
+		Map<String, Object> arg = new HashMap<String, Object>();
+		return arg;
 	}
 
 

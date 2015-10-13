@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.base.feima.baseproject.tool.image.ImageTools;
+import com.base.feima.baseproject.util.image.ImageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +81,11 @@ public class TitleBarTextView extends LinearLayout {
 		textView.setBackgroundResource(titleItem.getBackgroundResourseId());
 		textView.setText(titleItem.getName());
 		if(titleItem.getWidth()>0){
-			int w = ImageTools.dip2px(context, titleItem.getWidth());
+			int w = ImageUtil.dip2px(context, titleItem.getWidth());
 			textView.setWidth(w);
 		}
 		if(titleItem.getHeigh()>0){
-			int h = ImageTools.dip2px(context, titleItem.getHeigh());
+			int h = ImageUtil.dip2px(context, titleItem.getHeigh());
 			textView.setHeight(h);
 		}
 		textView.setGravity(Gravity.CENTER);

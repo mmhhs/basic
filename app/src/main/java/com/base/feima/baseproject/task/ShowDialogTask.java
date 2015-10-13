@@ -7,14 +7,15 @@ import android.widget.PopupWindow;
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
 import com.base.feima.baseproject.listener.IOnDialogResultListener;
+import com.base.feima.baseproject.listener.IOnEncryptListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.tool.ResultTools;
-import com.base.feima.baseproject.tool.popupwindow.PopupwindowTool;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.ResultUtil;
+import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
-import com.base.feima.baseproject.util.JacksonUtil;
-import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.tool.JacksonUtil;
+import com.base.feima.baseproject.util.tool.StringUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
 import com.base.feima.baseproject.util.net.Httpclient;
 
@@ -48,7 +49,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public String tagString="ShowDialogTask";
 	private IOnDialogResultListener iOnDialogResultListener;
 	private IOnDialogBackgroundListener iOnDialogBackgroundListener;
-	private PopupwindowTool popupwindowTool;
+	private IOnEncryptListener iOnEncryptListener;
+	private PopupwindowUtil popupwindowTool;
 
 	/**
 	 * 本地处理耗时线程
@@ -185,7 +187,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	}
 
 	private void init(){
-		popupwindowTool = new PopupwindowTool(activity);
+		popupwindowTool = new PopupwindowUtil(activity);
 		Httpclient.setContext(activity);
 	}
 
@@ -194,13 +196,13 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	{
 		try {
 			addTask();
-			if(StringUtils.isEmpty(loadString)){
+			if(StringUtil.isEmpty(loadString)){
 				loadString = activity.getResources().getString(R.string.task_item3);
 			}
 			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
 				if (showNetToast) {
-					PublicTools.addToast(activity, activity.getResources().getString(R.string.net_tip));
+					OptionUtil.addToast(activity, activity.getResources().getString(R.string.net_tip));
 				}
 			}else {
 				if (showDialog) {
@@ -220,12 +222,15 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
 		//不访问网络的情况
-		if(StringUtils.isEmpty(httpUrl)){
+		if(StringUtil.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
 		}
 		if (netFlag == NET_ERROR) {
 			return taskResult;
+		}
+		if (iOnEncryptListener!=null){
+			iOnEncryptListener.onEncrypt(argMap);
 		}
 		switch (accessType) {
 			case TaskConstant.POST:
@@ -271,7 +276,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			default:
 				break;
 		}
-		if(StringUtils.isEmpty(resultsString)){
+		if(StringUtil.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
 			if (iOnDialogBackgroundListener==null) {
@@ -306,13 +311,13 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				if(iOnDialogResultListener!=null){
 					this.iOnDialogResultListener.onError(this);
 				}
-				if (!StringUtils.isEmpty(httpUrl)){
-					PublicTools.addToast(activity, ""+errorMsg);
+				if (!StringUtil.isEmpty(httpUrl)){
+					OptionUtil.addToast(activity, "" + errorMsg);
 				}
 				dealLoginInvalid();
 				break;
 			case CANCELLED:
-				PublicTools.addToast(activity, activity.getString(R.string.task_item1));
+				OptionUtil.addToast(activity, activity.getString(R.string.task_item1));
 				break;
 			default:
 				break;
@@ -336,6 +341,10 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		this.iOnDialogBackgroundListener = iOnDialogBackgroundListener;
 	}
 
+	public void setiOnEncryptListener(IOnEncryptListener iOnEncryptListener) {
+		this.iOnEncryptListener = iOnEncryptListener;
+	}
+
 	private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
 		TaskResult taskResult = TaskResult.NOTHING;
 		if(iOnDialogBackgroundListener!=null){
@@ -357,7 +366,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(ResultTools.judgeResult(activity, "" + res.getCode())){
+				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{
 					taskResult = TaskResult.ERROR;
@@ -389,7 +398,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	 * 判断登录失效
 	 */
 	public void judgeLoginInvalid(String code){
-		if (ResultTools.judgeLoginInvalid(activity, "" + code)){
+		if (ResultUtil.judgeLoginInvalid(activity, "" + code)){
 			loginInvalid = true;
 		}else {
 			loginInvalid = false;

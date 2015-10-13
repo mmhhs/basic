@@ -1,9 +1,9 @@
-package com.base.feima.baseproject.tool;
+package com.base.feima.baseproject.util;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-public class DigitalTools{
+public class DigitalUtil {
     /**
      * 将每三个数字加上逗号处理（通常使用金额方面的编辑）
      */

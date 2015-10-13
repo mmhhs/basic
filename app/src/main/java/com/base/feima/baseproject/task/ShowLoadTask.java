@@ -10,12 +10,12 @@ import com.base.feima.baseproject.listener.IOnLoadResultListener;
 import com.base.feima.baseproject.listener.IOnTryClickListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultModel;
-import com.base.feima.baseproject.tool.PublicTools;
-import com.base.feima.baseproject.tool.ResultTools;
-import com.base.feima.baseproject.tool.popupwindow.ViewTool;
+import com.base.feima.baseproject.util.OptionUtil;
+import com.base.feima.baseproject.util.ResultUtil;
+import com.base.feima.baseproject.util.popupwindow.ViewUtil;
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
-import com.base.feima.baseproject.util.JacksonUtil;
-import com.base.feima.baseproject.util.StringUtils;
+import com.base.feima.baseproject.util.tool.JacksonUtil;
+import com.base.feima.baseproject.util.tool.StringUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
 import com.base.feima.baseproject.util.net.Httpclient;
 
@@ -28,7 +28,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public final static int NET_ERROR = 6;//没有网络
 	public int netFlag =0;//网络标识
 	public boolean showLoad = false;
-	public ViewTool viewTool;//视图管理
+	public ViewUtil viewTool;//视图管理
 	public Activity activity;//上下文
 	public View contentView;//内容界面
 	public LinearLayout loadView;//加载界面
@@ -66,7 +66,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		this.loadString = loadString;
 		this.showLoad = showLoad;
 		this.iOnTryClickListener = iOnTryClickListener;
-		viewTool = new ViewTool();
+		viewTool = new ViewUtil();
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		this.httpUrl = httpUrl;
 		this.argMap = argMap;
 		this.accessType = accessType;
-		viewTool = new ViewTool();
+		viewTool = new ViewUtil();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		try {
 			Httpclient.setContext(activity);
 			addTask();
-			if(StringUtils.isEmpty(loadString)){
+			if(StringUtil.isEmpty(loadString)){
 				loadString = activity.getResources().getString(R.string.pop_item1);
 			}
 			if(!HttpUtil.isnet(activity)){
@@ -112,7 +112,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 					viewTool.addErrorView(activity, activity.getString(R.string.pop_item2),
 							contentView, loadView, iOnTryClickListener);
 				}else {
-					PublicTools.addToast(activity, activity.getString(R.string.net_tip));
+					OptionUtil.addToast(activity, activity.getString(R.string.net_tip));
 				}
 			}else {
 				if (showLoad) {
@@ -131,7 +131,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		// TODO Auto-generated method stub
 		TaskResult taskResult = TaskResult.NOTHING;
 		//不访问网络的情况
-		if(StringUtils.isEmpty(httpUrl)){
+		if(StringUtil.isEmpty(httpUrl)){
 			taskResult = doOnBackgroundListener(this);
 			return taskResult;
 		}
@@ -183,7 +183,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			default:
 				break;
 		}
-		if(StringUtils.isEmpty(resultsString)){
+		if(StringUtil.isEmpty(resultsString)){
 			taskResult = TaskResult.CANCELLED;
 		}else{
 			if (iOnLoadBackgroundListener==null) {
@@ -267,7 +267,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultModel res = json.readValue(resultsString, ResultModel.class);
 			if(res!=null){
-				if(ResultTools.judgeResult(activity, "" + res.getCode())){
+				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{
 					taskResult = TaskResult.ERROR;
@@ -313,7 +313,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	 * 判断登录失效
 	 */
 	public void judgeLoginInvalid(String code){
-		if (ResultTools.judgeLoginInvalid(activity, "" + code)){
+		if (ResultUtil.judgeLoginInvalid(activity, "" + code)){
 			loginInvalid = true;
 		}else {
 			loginInvalid = false;
