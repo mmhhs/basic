@@ -63,12 +63,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 初始化视图相关操作
      */
-    public abstract void initView();
-
-    /**
-     * 初始化数据相关操作
-     */
-    public abstract void initData();
+    public abstract void init();
 
     /**
      * 添加线程到线程管理中

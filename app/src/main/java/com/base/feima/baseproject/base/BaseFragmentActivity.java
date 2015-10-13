@@ -27,8 +27,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	public void setContentView(int layoutResID) {
 		super.setContentView(layoutResID);
 		ButterKnife.inject(this);
-		initView();
-		initData();
+		init();
 	}
 
 	@Override
@@ -48,14 +47,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	}
 
 	/**
-	 * 初始化视图相关操作
+	 * 初始化相关操作
 	 */
-	public abstract void initView();
-
-	/**
-	 * 初始化数据相关操作
-	 */
-	public abstract void initData();
+	public abstract void init();
 
 	/**
 	 * 添加线程到线程管理中

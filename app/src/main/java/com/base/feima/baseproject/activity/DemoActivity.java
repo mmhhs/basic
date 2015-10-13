@@ -16,12 +16,8 @@ public class DemoActivity extends BaseActivity {
 	}
 
     @Override
-    public void initView() {
+    public void init() {
 
     }
 
-    @Override
-    public void initData() {
-
-    }
 }

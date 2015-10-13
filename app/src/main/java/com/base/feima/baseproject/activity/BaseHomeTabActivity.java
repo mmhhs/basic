@@ -52,7 +52,7 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
     }
 
     @Override
-    public void initView(){
+    public void init(){
         mTabHost.setup(this, getSupportFragmentManager(), R.id.base_ui_home_frame);
         int count = fragments.length;
         for (int i = 0; i < count; i++) {
@@ -62,10 +62,6 @@ public class BaseHomeTabActivity extends BaseFragmentActivity{
             mTabHost.addTab(tabSpec, fragments[i], null);
         }
         mTabHost.setCurrentTab(0);
-    }
-
-    @Override
-    public void initData(){
         VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
         versionCheckUtils.checkVersion(false);
     }
