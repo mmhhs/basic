@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.fresco.FrescoUtils;
-import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.fresco.instrumentation.PerfListener;
+import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
+import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.util.image.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 
 import java.util.List;

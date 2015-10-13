@@ -1,9 +1,9 @@
-package com.base.feima.baseproject.fresco;
+package com.base.feima.baseproject.util.image.fresco;
 
 import android.content.Context;
 import android.net.Uri;
 
-import com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView;
+import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
 import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;

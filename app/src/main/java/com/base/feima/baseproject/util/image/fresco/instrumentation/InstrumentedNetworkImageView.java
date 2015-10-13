@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.base.feima.baseproject.fresco.instrumentation;
+package com.base.feima.baseproject.util.image.fresco.instrumentation;
 
 import android.content.Context;
 import android.graphics.Bitmap;

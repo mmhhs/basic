@@ -3,7 +3,7 @@ package com.base.feima.baseproject.base;
 
 import android.app.Application;
 
-import com.base.feima.baseproject.fresco.FrescoUtils;
+import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
 
 public class BaseApplication extends Application {
 

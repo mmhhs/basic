@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.base.feima.baseproject.fresco.instrumentation;
+package com.base.feima.baseproject.util.image.fresco.instrumentation;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,7 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import com.base.feima.baseproject.fresco.Drawables;
+import com.base.feima.baseproject.util.image.fresco.Drawables;
 import com.facebook.common.internal.Preconditions;
 
 

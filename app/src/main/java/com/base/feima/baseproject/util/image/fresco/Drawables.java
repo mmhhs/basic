@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.base.feima.baseproject.fresco;
+package com.base.feima.baseproject.util.image.fresco;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;

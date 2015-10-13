@@ -4,7 +4,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.base.feima.baseproject.fresco.instrumentation.InstrumentedDraweeView
+    <com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView
         android:id="@+id/base_fresco_fitcenter_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
