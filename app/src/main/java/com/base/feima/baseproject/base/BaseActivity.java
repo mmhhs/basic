@@ -3,6 +3,9 @@ package com.base.feima.baseproject.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.manager.ScreenManager;
@@ -10,6 +13,7 @@ import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.task.BaseTask;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.Optional;
 
@@ -18,6 +22,18 @@ public abstract class BaseActivity extends Activity{
 	public String taskTag = "BaseActivity";//当前BaseActivity的线程标识
 	protected ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
+	@Optional
+	@InjectView(R.id.base_ui_title_back_layout)
+	public LinearLayout backLayout;
+	@Optional
+	@InjectView(R.id.base_ui_title_title)
+	public TextView titleText;
+	@Optional
+	@InjectView(R.id.base_view_contain_layout)
+	public LinearLayout containLayout;
+	@Optional
+	@InjectView(R.id.base_view_load_layout)
+	public LinearLayout loadLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,5 +121,31 @@ public abstract class BaseActivity extends Activity{
 	@OnClick(R.id.base_ui_title_back_layout)
 	public void onBack(){
 		finishSelf();
+	}
+
+	@Optional
+	@OnClick(R.id.base_ui_title_back_layout)
+	public void back(){
+		finishSelf();
+	}
+
+	public void setBackVisibility(boolean showBack){
+		if (showBack){
+			backLayout.setVisibility(View.VISIBLE);
+		}else {
+			backLayout.setVisibility(View.GONE);
+		}
+	}
+
+	public void setTitleVisibility(boolean showTitle){
+		if (showTitle){
+			titleText.setVisibility(View.VISIBLE);
+		}else {
+			titleText.setVisibility(View.GONE);
+		}
+	}
+
+	public void setTitleString(String title){
+		titleText.setText(title);
 	}
 }

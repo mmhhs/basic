@@ -10,7 +10,7 @@ import com.base.feima.baseproject.listener.IOnDialogResultListener;
 import com.base.feima.baseproject.listener.IOnIgnoreListener;
 import com.base.feima.baseproject.listener.IOnProgressListener;
 import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.model.version.VersionResult;
+import com.base.feima.baseproject.model.version.VersionResultEntity;
 import com.base.feima.baseproject.task.FileDownLoadAsyncTask;
 import com.base.feima.baseproject.task.ShowDialogTask;
 import com.base.feima.baseproject.task.TaskConstant;
@@ -25,7 +25,7 @@ public class VersionCheckUtil {
     private Activity activity;
     private View parentView;
     private String taskTag;
-    private VersionResult.VersionDataEntity versionDataEntity;
+    private VersionResultEntity.VersionDataEntity versionDataEntity;
     private boolean showToast = false;
 
     public VersionCheckUtil(Activity activity, View parentView, String taskTag) {
@@ -107,14 +107,14 @@ public class VersionCheckUtil {
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
                 BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
                 JacksonUtil json = JacksonUtil.getInstance();
-                VersionResult res = json.readValue(showDialogTask.getResultsString(), VersionResult.class);
+                VersionResultEntity res = json.readValue(showDialogTask.getResultsString(), VersionResultEntity.class);
                 if(res!=null){
+                    showDialogTask.setErrorMsg(res.getMsg());
                     if(ResultUtil.judgeResult(activity, res.getCode())){
                         taskResult = BaseConstant.TaskResult.OK;
                         versionDataEntity = res.getData();
                     }else{
                         taskResult = BaseConstant.TaskResult.ERROR;
-                        showDialogTask.setErrorMsg(res.getCode());
                     }
                 }else{
                     taskResult = BaseConstant.TaskResult.CANCELLED;

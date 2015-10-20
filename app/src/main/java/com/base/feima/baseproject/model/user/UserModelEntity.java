@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName="ZADUSERINFO")
-public class UserModel {
+public class UserModelEntity {
 	@DatabaseField(id=true)
 	public String user_id;
 	@DatabaseField

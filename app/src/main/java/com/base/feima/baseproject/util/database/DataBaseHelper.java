@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.model.user.UserModel;
+import com.base.feima.baseproject.model.user.UserModelEntity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -21,7 +21,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
   private static DataBaseHelper helper = null;
   private static final AtomicInteger usageCounter = new AtomicInteger(0);
 
-  private Dao<UserModel, String> userInfoDao;
+  private Dao<UserModelEntity, String> userInfoDao;
 
 
 
@@ -52,7 +52,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
     try
     {
 
-      TableUtils.createTableIfNotExists(paramConnectionSource, UserModel.class);
+      TableUtils.createTableIfNotExists(paramConnectionSource, UserModelEntity.class);
 
       return;
     }
@@ -68,7 +68,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
   {
     try {
       //当数据库版本变化时，更新数据库
-      TableUtils.dropTable(paramConnectionSource, UserModel.class, true);
+      TableUtils.dropTable(paramConnectionSource, UserModelEntity.class, true);
 
 
       onCreate(paramSQLiteDatabase, paramConnectionSource);
@@ -83,7 +83,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
   public void onDowngrade (SQLiteDatabase paramSQLiteDatabase, ConnectionSource paramConnectionSource, int oldVersion, int newVersion){
     if(newVersion<oldVersion){
       try {
-        TableUtils.dropTable(paramConnectionSource, UserModel.class, true);
+        TableUtils.dropTable(paramConnectionSource, UserModelEntity.class, true);
 
 
         onCreate(paramSQLiteDatabase, paramConnectionSource);
@@ -96,11 +96,11 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
   }
 
 
-  public Dao<UserModel, String> getUserInfoDao()
+  public Dao<UserModelEntity, String> getUserInfoDao()
           throws SQLException
   {
     if (this.userInfoDao == null)
-      this.userInfoDao = getDao(UserModel.class);
+      this.userInfoDao = getDao(UserModelEntity.class);
     return this.userInfoDao;
   }
 

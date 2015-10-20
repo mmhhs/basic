@@ -2,8 +2,8 @@ package com.base.feima.baseproject.task;
 
 import android.content.Context;
 
-import com.base.feima.baseproject.model.user.UserModel;
-import com.base.feima.baseproject.model.user.UserResult;
+import com.base.feima.baseproject.model.user.UserModelEntity;
+import com.base.feima.baseproject.model.user.UserResultEntity;
 import com.base.feima.baseproject.util.net.Httpclient;
 import com.base.feima.baseproject.util.ResultUtil;
 import com.base.feima.baseproject.util.tool.JacksonUtil;
@@ -17,9 +17,9 @@ public class DownloadTask implements Runnable{
 	private String httpUrl;
 	private Map<String, Object> argList;
 	private Context context;
-	private Dao<UserModel, String> userInfoDao;
+	private Dao<UserModelEntity, String> userInfoDao;
 	
-    public DownloadTask(Context context,String fieldId,String httpUrl,Map<String, Object> argList,Dao<UserModel, String> userInfoDao){
+    public DownloadTask(Context context,String fieldId,String httpUrl,Map<String, Object> argList,Dao<UserModelEntity, String> userInfoDao){
         this.context = context;
     	this.httpUrl=httpUrl;  
     	this.argList = argList;
@@ -40,10 +40,10 @@ public class DownloadTask implements Runnable{
 			
 		}else{
 			JacksonUtil json = JacksonUtil.getInstance();
-			UserResult res = json.readValue(result, UserResult.class);
+			UserResultEntity res = json.readValue(result, UserResultEntity.class);
 			if(res!=null){
 				if(ResultUtil.judgeResult(context, "" + res.getCode())){
-					UserModel userModel = res.getData();
+					UserModelEntity userModel = res.getData();
 
 					try {
 						userInfoDao.createOrUpdate(userModel);

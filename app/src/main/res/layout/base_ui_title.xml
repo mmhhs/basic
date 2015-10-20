@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="@dimen/navigation_bar_height_top"
+    android:background="@drawable/walk_bg1">
+    <LinearLayout
+        android:layout_width="@dimen/navigation_bar_height_top"
+        android:layout_height="@dimen/navigation_bar_height_top"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/base_ui_title_back_layout">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/base_choose_images_back"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:singleLine="true"
+        style="@style/base_style_textview_deep_16"
+        android:layout_marginLeft="@dimen/navigation_bar_height_top"
+        android:layout_marginRight="@dimen/navigation_bar_height_top"
+        android:visibility="gone"
+        android:id="@+id/base_ui_title_title"
+        />
+</FrameLayout>

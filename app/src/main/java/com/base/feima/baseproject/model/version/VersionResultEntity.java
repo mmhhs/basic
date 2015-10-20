@@ -1,9 +1,9 @@
 package com.base.feima.baseproject.model.version;
 
 
-import com.base.feima.baseproject.model.ResultModel;
+import com.base.feima.baseproject.model.ResultEntity;
 
-public class VersionResult extends ResultModel {
+public class VersionResultEntity extends ResultEntity {
 
 
     private VersionDataEntity data;

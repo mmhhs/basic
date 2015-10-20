@@ -2,7 +2,7 @@ package com.base.feima.baseproject.model;
 
 import java.io.Serializable;
 
-public class ResultModel implements Serializable{
+public class ResultEntity implements Serializable{
 
 	public String code;
     public String msg;

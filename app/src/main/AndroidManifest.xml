@@ -8,9 +8,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppBaseTheme2" >
         <activity
-            android:name="com.base.feima.baseproject.activity.BaseHomeTabActivity"
+            android:name=".activity.BaseHomeTabActivity"
+            android:theme="@style/AppBaseTheme"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -29,12 +30,17 @@
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             ></activity>
-        <activity android:name="com.base.feima.baseproject.view.chooseimages.ChooseImagesActivity"
+        <activity android:name=".view.chooseimages.ChooseImagesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             ></activity>
-        <activity android:name="com.base.feima.baseproject.view.chooseimages.ChooseImagesSampleActivity"
+        <activity android:name=".view.chooseimages.ChooseImagesSampleActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            ></activity>
+        <activity android:name=".activity.set.AboutActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"

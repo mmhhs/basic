@@ -69,4 +69,9 @@
     <string name="check_version">检查更新</string>
     <string name="check_version_fail">更新失败</string>
 
+    <string name="title1">关于我们</string>
+
+    <string name="about1">版本号：V</string>
+    <string name="about2">Copyright ©2014—2015\n北京学点科技有限公司</string>
+
 </resources>

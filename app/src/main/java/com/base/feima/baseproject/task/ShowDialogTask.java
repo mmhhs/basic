@@ -9,7 +9,7 @@ import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
 import com.base.feima.baseproject.listener.IOnDialogResultListener;
 import com.base.feima.baseproject.listener.IOnEncryptListener;
 import com.base.feima.baseproject.manager.TaskManager;
-import com.base.feima.baseproject.model.ResultModel;
+import com.base.feima.baseproject.model.ResultEntity;
 import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.ResultUtil;
 import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
@@ -364,13 +364,13 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			// TODO Auto-generated method stub
 			TaskResult taskResult = TaskResult.NOTHING;
 			JacksonUtil json = JacksonUtil.getInstance();
-			ResultModel res = json.readValue(resultsString, ResultModel.class);
+			ResultEntity res = json.readValue(resultsString, ResultEntity.class);
 			if(res!=null){
+				errorMsg = res.getMsg();
 				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{
 					taskResult = TaskResult.ERROR;
-					errorMsg = res.getMsg();
 					judgeLoginInvalid(res.getCode());
 				}
 			}else{
