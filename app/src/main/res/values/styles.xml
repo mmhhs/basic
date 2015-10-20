@@ -162,4 +162,18 @@
         <item name="android:layout_width">0.5dp</item>
     </style>
 
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dp</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+
+    <style name="SlideRight" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/base_slide_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/base_slide_out_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/base_slide_in_from_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/base_slide_out_to_right</item>
+    </style>
+
 </resources>
