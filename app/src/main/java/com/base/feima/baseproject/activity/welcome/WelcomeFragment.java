@@ -45,8 +45,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
         {
             rootView = inflater.inflate(R.layout.base_fragment_welcome,null);
             ButterKnife.inject(this, rootView);
-            initView();
-            initData();
+            init();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null)
@@ -57,12 +56,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData(){
+    public void init(){
 		imgList.add(R.drawable.base_shape_corner_white);
 		for(int i=0;i<imgList.size();i++){
 			View view = LayoutInflater.from(getActivity()).inflate(R.layout.base_adapter_viewpager_welcome, null);

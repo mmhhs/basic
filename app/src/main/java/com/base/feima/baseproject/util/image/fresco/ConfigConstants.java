@@ -19,7 +19,6 @@ import android.net.Uri;
 import android.os.Environment;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
 import com.base.feima.baseproject.util.BaseConstant;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;

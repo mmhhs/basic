@@ -11,12 +11,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.image.ImageUtil;
+import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
+import com.base.feima.baseproject.util.image.fresco.InstrumentedDraweeView;
 
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class ChooseImagesGridAdapter extends BaseAdapter{
             viewHolder.checkBox.setVisibility(View.GONE);
         }else {
 //            imageLoader.displayImage("file://"+path,viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
-            viewHolder.contentImage.initInstrumentation(path, PerfListener.getInstance());
+
             FrescoUtils.displayImage(viewHolder.contentImage, "file://" + path,itemWidth,itemWidth);
             viewHolder.checkBox.setVisibility(View.VISIBLE);
         }

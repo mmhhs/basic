@@ -56,12 +56,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	}
 
 	@Override
-	public void initView() {
-
-	}
-
-	@Override
-	public void initData(){
+	public void init(){
 		fMgr = getSupportFragmentManager();
 		Boolean isFirst = SharedUtil.getHelpStatus(getApplicationContext());
 		int versionHelp = SharedUtil.getHelpCode(getApplicationContext());

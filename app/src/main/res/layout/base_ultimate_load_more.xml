@@ -7,16 +7,8 @@
     tools:context="com.widget.sample.SampleUltimateActivity"
     >
 
-    <ProgressBar
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:indeterminateDrawable="@drawable/base_progress_rotate_loading_360"
-        android:indeterminateDuration="1000"
-        android:visibility="gone"
-        android:indeterminate="true"
-        />
 
-    <com.widget.spin.ProgressWheel5
+    <com.widget.spin.TransProgressWheel
         android:id="@+id/base_ultimate_load_more_progress_wheel"
         android:layout_width="40dp"
         android:layout_height="40dp"

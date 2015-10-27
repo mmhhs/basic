@@ -10,11 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.util.image.ImageUtil;
+import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
+import com.base.feima.baseproject.util.image.fresco.InstrumentedDraweeView;
 
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class SelectItemAdapter extends BaseAdapter{
         if (itemModel.getItemIcon()!=null&&!itemModel.getItemIcon().isEmpty()){
 //            imageLoader.displayImage(itemModel.getItemIcon(),viewHolder.icon, OptionTools.getBaseOptions(context));
             viewHolder.icon.setVisibility(View.VISIBLE);
-            viewHolder.icon.initInstrumentation(itemModel.getItemIcon(), PerfListener.getInstance());
+
             FrescoUtils.displayImage(viewHolder.icon,itemModel.getItemIcon(), ImageUtil.dip2px(context, 25), ImageUtil.dip2px(context, 25));
         }
         if (itemModel.getItemIconId()>0){

@@ -36,8 +36,7 @@ public class DemoFragment extends BaseFragment{
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
             rootView.setLayoutParams(params);
             ButterKnife.inject(this, rootView);
-            initView();
-            initData();
+            init();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null)
@@ -48,12 +47,7 @@ public class DemoFragment extends BaseFragment{
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
+    public void init() {
 
     }
 

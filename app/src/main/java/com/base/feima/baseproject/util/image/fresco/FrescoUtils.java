@@ -3,7 +3,6 @@ package com.base.feima.baseproject.util.image.fresco;
 import android.content.Context;
 import android.net.Uri;
 
-import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
 import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -16,8 +15,6 @@ public class FrescoUtils{
     public static void displayImage(final InstrumentedDraweeView view, String uri) {
         ImageRequest imageRequest =
                 ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
-//                        .setResizeOptions(
-//                new ResizeOptions(view.getLayoutParams().width, view.getLayoutParams().height))
                 .setProgressiveRenderingEnabled(true)
                 .setAutoRotateEnabled(true)
                 .build();

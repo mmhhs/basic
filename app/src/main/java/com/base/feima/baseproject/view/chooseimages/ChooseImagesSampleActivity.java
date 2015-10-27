@@ -53,12 +53,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
+    public void init() {
         popupwindowTool = new PopupwindowUtil(this);
         screenWidth = OptionUtil.getScreenWidth(this);
         registerBroadcast();

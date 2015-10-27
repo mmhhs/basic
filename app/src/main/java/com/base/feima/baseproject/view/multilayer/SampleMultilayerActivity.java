@@ -28,13 +28,9 @@ public class SampleMultilayerActivity extends BaseActivity {
         setContentView(R.layout.sample);
     }
 
-    @Override
-    public void initView() {
-
-    }
 
     @Override
-    public void initData() {
+    public void init() {
         initMenu();
         initMenu2();
         multilayerChooseView.init(selectMenuModelList);

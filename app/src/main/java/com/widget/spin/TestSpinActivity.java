@@ -26,7 +26,7 @@ import com.base.feima.baseproject.R;
 
 public class TestSpinActivity extends Activity {
 
-	private ProgressWheel4 pwOne, pwTwo;
+	private ProgressWheel pwOne, pwTwo;
 	private PieProgress mPieProgress1, mPieProgress2;
 	boolean wheelRunning, pieRunning;
 	int wheelProgress = 0, pieProgress = 0;
@@ -36,9 +36,9 @@ public class TestSpinActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.base_progress);
 
-		pwOne = (ProgressWheel4) findViewById(R.id.progress_bar_one);
+		pwOne = (ProgressWheel) findViewById(R.id.progress_bar_one);
 		pwOne.spin();
-		pwTwo = (ProgressWheel4) findViewById(R.id.progress_bar_two);
+		pwTwo = (ProgressWheel) findViewById(R.id.progress_bar_two);
 		new Thread(r).start();
 
 		mPieProgress1 = (PieProgress) findViewById(R.id.pie_progress1);

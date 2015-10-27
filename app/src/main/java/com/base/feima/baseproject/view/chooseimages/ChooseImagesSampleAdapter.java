@@ -11,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.InstrumentedDraweeView;
-import com.base.feima.baseproject.util.image.fresco.instrumentation.PerfListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
 import com.base.feima.baseproject.util.image.ImageUtil;
+import com.base.feima.baseproject.util.image.fresco.FrescoUtils;
+import com.base.feima.baseproject.util.image.fresco.InstrumentedDraweeView;
 
 import java.util.List;
 
@@ -72,7 +71,7 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
             viewHolder.contentImage.setImageResource(R.drawable.base_shape_choose_images);
         }else {
 //            imageLoader.displayImage("file://"+list.get(position),viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
-            viewHolder.contentImage.initInstrumentation(list.get(position), PerfListener.getInstance());
+
             FrescoUtils.displayImage(viewHolder.contentImage, "file://" + list.get(position));
         }
         final int p = position;

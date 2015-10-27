@@ -80,13 +80,9 @@ public class ChooseImagesActivity extends BaseActivity {
         setContentView(R.layout.base_choose_images);
     }
 
-    @Override
-    public void initView() {
-
-    }
 
     @Override
-    public void initData() {
+    public void init() {
         screenWidth = OptionUtil.getScreenWidth(this);
         maxSize = getIntent().getExtras().getInt(BROADCASTFLAG,9);
         queryData();

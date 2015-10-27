@@ -30,33 +30,9 @@
         <attr name="android:overScrollFooter"/>
     </declare-styleable>   
     
-    <declare-styleable name="SlidingMenu">
-        <attr name="mode">
-            <enum name="left" value="0" />
-            <enum name="right" value="1" />
-        </attr>
-        <attr name="viewAbove" format="reference" />
-        <attr name="viewBehind" format="reference" />
-        <attr name="behindOffset" format="dimension" />
-        <attr name="behindWidth" format="dimension" />
-        <attr name="behindScrollScale" format="float" />
-        <attr name="touchModeAbove">
-            <enum name="margin" value="0" />
-            <enum name="fullscreen" value="1" />
-        </attr>
-        <attr name="touchModeBehind">
-            <enum name="margin" value="0" />
-            <enum name="fullscreen" value="1" />
-        </attr>
-        <attr name="shadowDrawable" format="reference" />
-        <attr name="shadowWidth" format="dimension" />
-        <attr name="fadeEnabled" format="boolean" />
-        <attr name="fadeDegree" format="float" />
-        <attr name="selectorEnabled" format="boolean" />
-        <attr name="selectorDrawable" format="reference" />
-    </declare-styleable>
+
     
-    <declare-styleable name="ProgressWheel4">
+    <declare-styleable name="ProgressWheel">
         <attr name="text" format="string" />
         <attr name="textColor" format="color" />
         <attr name="textSize" format="dimension" />
@@ -75,7 +51,7 @@
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="ProgressWheel5">
+    <declare-styleable name="TransProgressWheel">
         <attr name="matProg_progressIndeterminate" format="boolean" />
         <attr name="matProg_barColor" format="color" />
         <attr name="matProg_rimColor" format="color" />
@@ -116,29 +92,6 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="RoundedImageView">
-        <attr name="riv_corner_radius" format="dimension" />
-        <attr name="riv_border_width" format="dimension" />
-        <attr name="riv_border_color" format="color" />
-        <attr name="riv_mutate_background" format="boolean" />
-        <attr name="riv_oval" format="boolean" />
-        <attr name="android:scaleType" />
-        <attr name="riv_tile_mode">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-        <attr name="riv_tile_mode_x">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-        <attr name="riv_tile_mode_y">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-    </declare-styleable>
 
     <declare-styleable name="SwipeBackLayout">
         <attr name="edge_size" format="dimension" />

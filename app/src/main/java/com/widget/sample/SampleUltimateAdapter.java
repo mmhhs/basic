@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
-import com.widget.ultimate.UltimateViewAdapter;
+import com.base.feima.baseproject.view.ultimate.UltimateViewAdapter;
 
 import java.util.List;
 
