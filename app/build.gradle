@@ -12,6 +12,10 @@ android {
         versionName "1.0.0"
         multiDexEnabled true
     }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "2g"
+    }
 //    signingConfigs {
 //        release {
 //            keyAlias 'toys'
@@ -34,6 +38,19 @@ android {
     packagingOptions {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE.txt'
+    }
+    afterEvaluate {
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx ->
+            if (dx.additionalParameters == null) {
+                dx.additionalParameters = []
+            }
+            dx.additionalParameters += '--multi-dex' // enable multidex
+
+            // optional
+            // dx.additionalParameters += --main-dex-list=$projectDir/<filename>.toString() // enable the main-dex-list
+        }
     }
 }
 
