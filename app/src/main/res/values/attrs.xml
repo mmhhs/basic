@@ -44,7 +44,7 @@
         <attr name="circleColor" format="color" />
         <attr name="radius" format="dimension" />
         <attr name="barWidth" format="dimension" />
-        <attr name="barLength" format="dimension" />
+        <attr name="barLengths" format="dimension" />
     </declare-styleable>
     <declare-styleable name="PieProgress">
         <attr name="foregroundColor" format="color" />

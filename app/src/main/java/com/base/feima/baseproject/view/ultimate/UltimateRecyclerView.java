@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.feima.baseproject.R;
@@ -18,6 +21,7 @@ import com.widget.spin.TransProgressWheel;
 public class UltimateRecyclerView extends FrameLayout {
     public RecyclerView mRecyclerView;
     public SwipeRefreshLayout mSwipeRefreshLayout;
+    private ImageView arrowImg;
     private OnHeadRefreshListener onHeadRefreshListener;
     private OnLoadMoreListener onLoadMoreListener;
     private int lastVisibleItemPosition;
@@ -38,7 +42,9 @@ public class UltimateRecyclerView extends FrameLayout {
     private boolean endLoadMore = false;
     private TransProgressWheel progressWheel;
     private LinearLayout endLayout;
+    private int lastVisibleItemPositionLimit = 15;
 
+    protected LAYOUT_MANAGER_TYPE layoutManagerType;
 
     public UltimateRecyclerView(Context context) {
         super(context);
@@ -57,10 +63,26 @@ public class UltimateRecyclerView extends FrameLayout {
         initViews();
     }
 
+    public static enum LAYOUT_MANAGER_TYPE {
+        LINEAR,
+        GRID,
+        STAGGERED_GRID
+    }
+
+    private int findMax(int[] lastPositions) {
+        int max = Integer.MIN_VALUE;
+        for (int value : lastPositions) {
+            if (value > max)
+                max = value;
+        }
+        return max;
+    }
+
     private void initViews() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.base_ultimate_recycler_view_layout, this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.ultimate_list);
+        arrowImg = (ImageView)view.findViewById(R.id.base_ultimate_view_layout_arrow);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -75,17 +97,35 @@ public class UltimateRecyclerView extends FrameLayout {
                 mRecyclerView.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
             }
         }
+        arrowImg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    mRecyclerView.smoothScrollToPosition(0);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
         setDefaultScrollListener();
     }
 
     void setDefaultScrollListener() {
         mOnScrollListener = new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-
+                try {
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    if(lastVisibleItemPosition>lastVisibleItemPositionLimit){
+                        showArrowImage();
+                    }else {
+                        hideArrowImage();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         };
         mRecyclerView.setOnScrollListener(mOnScrollListener);
@@ -118,12 +158,47 @@ public class UltimateRecyclerView extends FrameLayout {
 
         if (enable){
             mOnScrollListener = new RecyclerView.OnScrollListener() {
-
+                private int[] lastPositions;
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                    lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+//                    lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+
+                    if (layoutManagerType == null) {
+                        if (layoutManager instanceof LinearLayoutManager) {
+                            layoutManagerType = LAYOUT_MANAGER_TYPE.LINEAR;
+                        } else if (layoutManager instanceof GridLayoutManager) {
+                            layoutManagerType = LAYOUT_MANAGER_TYPE.GRID;
+                        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                            layoutManagerType = LAYOUT_MANAGER_TYPE.STAGGERED_GRID;
+                        } else {
+                            throw new RuntimeException("Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
+                        }
+                    }
+
+                    switch (layoutManagerType) {
+                        case LINEAR:
+                            lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                            break;
+                        case GRID:
+                            lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
+                            break;
+                        case STAGGERED_GRID:
+                            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                            if (lastPositions == null)
+                                lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+
+                            staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+                            lastVisibleItemPosition = findMax(lastPositions);
+                            break;
+                    }
+
+                    if(lastVisibleItemPosition>lastVisibleItemPositionLimit){
+                        showArrowImage();
+                    }else {
+                        hideArrowImage();
+                    }
                 }
 
                 @Override
@@ -143,7 +218,6 @@ public class UltimateRecyclerView extends FrameLayout {
                             }
                         }
                     }
-
                 }
             };
             mRecyclerView.setOnScrollListener(mOnScrollListener);
@@ -394,5 +468,13 @@ public class UltimateRecyclerView extends FrameLayout {
         if (mAdapter!=null){
             mAdapter.setCustomHeaderView(headView);
         }
+    }
+
+    public void showArrowImage(){
+        arrowImg.setVisibility(VISIBLE);
+    }
+
+    public void hideArrowImage(){
+        arrowImg.setVisibility(GONE);
     }
 }
