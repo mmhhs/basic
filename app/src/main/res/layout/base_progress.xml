@@ -31,7 +31,7 @@
             android:indeterminateDuration="1800" />
     </LinearLayout>
 
-    <com.widget.spin.CustomClipLoading
+    <com.base.feima.baseproject.view.widget.spin.CustomClipLoading
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -48,7 +48,7 @@
             android:layout_marginRight="20dp"
             android:text="start" />
 
-        <com.widget.spin.ProgressWheel
+        <com.base.feima.baseproject.view.widget.spin.ProgressWheel
             xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progress_bar_two"
             android:layout_width="80dp"
@@ -62,7 +62,7 @@
             ProgressWheel:textColor="#222222"
             ProgressWheel:textSize="14sp" />
 
-        <com.widget.spin.ProgressWheel
+        <com.base.feima.baseproject.view.widget.spin.ProgressWheel
             xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progress_bar_one"
             android:layout_width="80dp"
@@ -93,7 +93,7 @@
 
         <!-- default style -->
 
-        <com.widget.spin.PieProgress
+        <com.base.feima.baseproject.view.widget.spin.PieProgress
             xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pie_progress1"
             android:layout_width="80dp"
@@ -101,7 +101,7 @@
 
         <!-- custom style -->
 
-        <com.widget.spin.PieProgress
+        <com.base.feima.baseproject.view.widget.spin.PieProgress
             xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pie_progress2"
             android:layout_width="80dp"

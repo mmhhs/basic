@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.widget.swipeback;
+package com.base.feima.baseproject.view.widget.swipeback;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;

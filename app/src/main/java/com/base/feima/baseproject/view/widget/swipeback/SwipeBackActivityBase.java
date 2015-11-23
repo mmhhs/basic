@@ -1,4 +1,4 @@
-package com.widget.swipeback;
+package com.base.feima.baseproject.view.widget.swipeback;
 
 /**
  * @author Yrom

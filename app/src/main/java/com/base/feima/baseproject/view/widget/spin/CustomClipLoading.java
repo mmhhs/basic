@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.widget.spin;
+package com.base.feima.baseproject.view.widget.spin;
 
 import android.content.Context;
 import android.graphics.drawable.ClipDrawable;

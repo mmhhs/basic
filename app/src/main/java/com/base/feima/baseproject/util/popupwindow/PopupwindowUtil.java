@@ -397,7 +397,7 @@ public class PopupwindowUtil {
                 long tran = Long.parseLong(transferedBytes);
                 int progress = (int)(100*tran/totalBytes);
                 progressBar.setProgress(progress);
-                contentText.setText(progress + "/" + 100);
+                contentText.setText(progress + "%");
             }
         }catch (Exception e){
             e.printStackTrace();

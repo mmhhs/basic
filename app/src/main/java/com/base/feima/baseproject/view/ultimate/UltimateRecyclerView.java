@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.feima.baseproject.R;
-import com.widget.spin.TransProgressWheel;
+import com.base.feima.baseproject.view.widget.spin.TransProgressWheel;
 
 public class UltimateRecyclerView extends FrameLayout {
     public RecyclerView mRecyclerView;

@@ -1,4 +1,4 @@
-package com.widget.swipeback;
+package com.base.feima.baseproject.view.widget.swipeback;
 
 import android.os.Bundle;
 import android.view.View;

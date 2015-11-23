@@ -1,4 +1,4 @@
-package com.widget.pulltorefresh.pullable;
+package com.base.feima.baseproject.view.widget.pullview;
 
 public interface Pullable
 {

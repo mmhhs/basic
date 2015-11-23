@@ -1,9 +1,9 @@
-package com.widget.pulltorefresh.pullable;
+package com.base.feima.baseproject.view.widget.pullview;
 
 import android.os.Handler;
 import android.os.Message;
 
-import com.widget.pulltorefresh.pullable.PullToRefreshLayout.OnRefreshListener;
+import com.base.feima.baseproject.view.widget.pullview.PullToRefreshLayout.OnRefreshListener;
 
 public class TestListener implements OnRefreshListener
 {

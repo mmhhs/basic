@@ -1,4 +1,4 @@
-package com.widget.sample;
+package com.base.feima.baseproject.view.widget.sample;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

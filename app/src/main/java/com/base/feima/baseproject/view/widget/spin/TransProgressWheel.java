@@ -1,4 +1,4 @@
-package com.widget.spin;
+package com.base.feima.baseproject.view.widget.spin;
 
 import android.content.Context;
 import android.content.res.TypedArray;

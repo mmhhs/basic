@@ -1,4 +1,4 @@
-package com.widget.sample;
+package com.base.feima.baseproject.view.widget.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.base.feima.baseproject.R;
-import com.widget.pulltorefresh.pullable.PullToRefreshLayout;
-import com.widget.pulltorefresh.pullable.TestListener;
+import com.base.feima.baseproject.view.widget.pullview.PullToRefreshLayout;
+import com.base.feima.baseproject.view.widget.pullview.TestListener;
 
 import java.util.ArrayList;
 import java.util.List;

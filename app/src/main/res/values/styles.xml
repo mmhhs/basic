@@ -9,7 +9,7 @@
 
     </style>
 
-    <style name="AppBaseTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="TransparentTheme" parent="AppBaseTheme">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 

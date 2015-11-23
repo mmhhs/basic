@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -111,5 +112,18 @@ public class ViewUtil {
             this.onTryClickListener.onTry();
         }
     }
+
+	public void addEmptyView(Context context,String loadString,View contentView,ViewGroup loadLayout){
+		try {
+			contentView.setVisibility(View.GONE);
+			loadLayout.setVisibility(View.VISIBLE);
+			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			loadView = getLoadView(context, loadString);
+			loadLayout.removeAllViews();
+			loadLayout.addView(loadView, layoutParams);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

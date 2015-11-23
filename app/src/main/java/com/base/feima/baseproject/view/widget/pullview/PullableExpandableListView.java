@@ -1,23 +1,25 @@
-package com.widget.pulltorefresh.pullable;
+package com.base.feima.baseproject.view.widget.pullview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 
-public class PullableListView extends ListView implements Pullable
+public class PullableExpandableListView extends ExpandableListView implements
+		Pullable
 {
 
-	public PullableListView(Context context)
+	public PullableExpandableListView(Context context)
 	{
 		super(context);
 	}
 
-	public PullableListView(Context context, AttributeSet attrs)
+	public PullableExpandableListView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 	}
 
-	public PullableListView(Context context, AttributeSet attrs, int defStyle)
+	public PullableExpandableListView(Context context, AttributeSet attrs,
+									  int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}
@@ -32,7 +34,7 @@ public class PullableListView extends ListView implements Pullable
 		} else if (getFirstVisiblePosition() == 0
 				&& getChildAt(0).getTop() >= 0)
 		{
-			// 滑到ListView的顶部了
+			// 滑到顶部了
 			return true;
 		} else
 			return false;
@@ -56,4 +58,5 @@ public class PullableListView extends ListView implements Pullable
 		}
 		return false;
 	}
+
 }
