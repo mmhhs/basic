@@ -40,22 +40,22 @@ public class SampleMultilayerActivity extends BaseActivity {
         List<Integer> listViewBackgroundIdList = new ArrayList<Integer>();
         listViewBackgroundIdList.add(R.color.white);
         listViewBackgroundIdList.add(R.color.bg_grey);
-        SelectMenuModel selectMenuModel = new SelectMenuModel(0,R.drawable.base_style_selector,0,"item1","0",2,listViewBackgroundIdList);
+        SelectMenuModel selectMenuModel = new SelectMenuModel(0,R.drawable.base_selector_bg,0,"item1","0",2,listViewBackgroundIdList);
 
         List<SelectItemModel> selectItemModelList = new ArrayList<SelectItemModel>();
-        SelectItemModel selectItemModel = new SelectItemModel("123","11",false,"",0,R.drawable.base_style_selector);
+        SelectItemModel selectItemModel = new SelectItemModel("123","11",false,"",0,R.drawable.base_selector_bg);
 
         List<SelectItemModel> selectItemModelList11 = new ArrayList<SelectItemModel>();
-        SelectItemModel selectItemModel11 = new SelectItemModel("123","111",false,"",0,R.drawable.base_style_selector);
+        SelectItemModel selectItemModel11 = new SelectItemModel("123","111",false,"",0,R.drawable.base_selector_bg);
         selectItemModelList11.add(selectItemModel11);
         selectItemModel.setSelectItemModelList(selectItemModelList11);
 
         selectItemModelList.add(selectItemModel);
 
-        SelectItemModel selectItemModel2 = new SelectItemModel("123","21",false,"",0,R.drawable.base_style_selector);
+        SelectItemModel selectItemModel2 = new SelectItemModel("123","21",false,"",0,R.drawable.base_selector_bg);
 
         List<SelectItemModel> selectItemModelList21 = new ArrayList<SelectItemModel>();
-        SelectItemModel selectItemModel21 = new SelectItemModel("123","211",false,"",0,R.drawable.base_style_selector);
+        SelectItemModel selectItemModel21 = new SelectItemModel("123","211",false,"",0,R.drawable.base_selector_bg);
         selectItemModelList21.add(selectItemModel21);
         selectItemModel2.setSelectItemModelList(selectItemModelList21);
 
@@ -69,12 +69,12 @@ public class SampleMultilayerActivity extends BaseActivity {
         List<Integer> listViewBackgroundIdList = new ArrayList<Integer>();
         listViewBackgroundIdList.add(R.color.white);
         listViewBackgroundIdList.add(R.color.bg_grey);
-        SelectMenuModel selectMenuModel = new SelectMenuModel(0,R.drawable.base_style_selector,0,"item2","0",1,listViewBackgroundIdList);
+        SelectMenuModel selectMenuModel = new SelectMenuModel(0,R.drawable.base_selector_bg,0,"item2","0",1,listViewBackgroundIdList);
 
         List<SelectItemModel> selectItemModelList = new ArrayList<SelectItemModel>();
         for (int i=0;i<24;i++){
 
-            SelectItemModel selectItemModel = new SelectItemModel("123","1122222"+i,false,"",0,R.drawable.base_style_selector);
+            SelectItemModel selectItemModel = new SelectItemModel("123","1122222"+i,false,"",0,R.drawable.base_selector_bg);
             selectItemModelList.add(selectItemModel);
         }
 

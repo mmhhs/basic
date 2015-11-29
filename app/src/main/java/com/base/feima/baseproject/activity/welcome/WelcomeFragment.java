@@ -57,7 +57,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 
     @Override
     public void init(){
-		imgList.add(R.drawable.base_shape_corner_white);
+		imgList.add(R.drawable.base_round_white);
 		for(int i=0;i<imgList.size();i++){
 			View view = LayoutInflater.from(getActivity()).inflate(R.layout.base_adapter_viewpager_welcome, null);
 			ImageView img = (ImageView) view.findViewById(R.id.base_adapter_wel_imageView);

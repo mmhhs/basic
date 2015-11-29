@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_images_image"
-        style="@style/base_style_textview_white_18"
+        style="@style/base_text_grey_white_18"
         android:layout_marginLeft="15dp"
         android:id="@+id/base_choose_images_title_index" />
 
@@ -58,7 +58,7 @@
     </LinearLayout>
 
     <TextView
-        style="@style/base_style_textview_choose_images_text_14"
+        style="@style/base_text_choose_images_text_14"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:gravity="center"
@@ -66,6 +66,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/base_shape_choose_images"
+        android:background="@drawable/base_choose_images_button"
         android:id="@+id/base_choose_images_title_done" />
 </LinearLayout>

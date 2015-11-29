@@ -197,7 +197,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		try {
 			addTask();
 			if(StringUtil.isEmpty(loadString)){
-				loadString = activity.getResources().getString(R.string.task_item3);
+				loadString = activity.getResources().getString(R.string.task3);
 			}
 			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
@@ -317,7 +317,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				dealLoginInvalid();
 				break;
 			case CANCELLED:
-				OptionUtil.addToast(activity, activity.getString(R.string.task_item1));
+				OptionUtil.addToast(activity, activity.getString(R.string.task1));
 				break;
 			default:
 				break;

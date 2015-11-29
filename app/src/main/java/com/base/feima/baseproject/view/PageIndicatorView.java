@@ -22,18 +22,18 @@ public class PageIndicatorView extends View {
 
 	private float redius;
 
-	private int space;
+	private float space;
 
 	private int alpha;
 
 	/**
 	 * 选中颜色值
 	 */
-	private String selectedColorString = "#FF0000";
+	private String selectedColorString = "#f03b66";
 	/**
 	 * 未选中颜色值
 	 */
-	private String unselectedColorString = "#778899";
+	private String unselectedColorString = "#a0a0a0";
 	/**
 	 * 总页数
 	 */
@@ -41,11 +41,11 @@ public class PageIndicatorView extends View {
 	/**
 	 * 半径
 	 */
-	private int rediusSize = 5;
+	private int rediusSize = 10;
 	/**
 	 * 间距
 	 */
-	private int spaceSize = 20;
+	private int spaceSize = 25;
 
 
 	public PageIndicatorView(Context context) {
@@ -56,8 +56,8 @@ public class PageIndicatorView extends View {
 		super(context, attrs);
 		TypedArray customAttrs = context.obtainStyledAttributes(attrs,
 				R.styleable.PageIndicatorView);
-		redius = customAttrs.getFloat(R.styleable.PageIndicatorView_redius, rediusSize);
-		space = customAttrs.getInt(R.styleable.PageIndicatorView_space, spaceSize);
+		redius = customAttrs.getDimension(R.styleable.PageIndicatorView_redius, rediusSize);
+		space = customAttrs.getDimension(R.styleable.PageIndicatorView_space, spaceSize);
 		alpha = customAttrs.getInt(R.styleable.PageIndicatorView_alpha, 0x00);
 		selectedColor = customAttrs.getColor(
 				R.styleable.PageIndicatorView_selectedColor,

@@ -1,15 +1,14 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
-    
+    <!--popupwindow-->
     <dimen name="base_pop_width">280dp</dimen>
     <dimen name="base_pop_title_height">60dp</dimen>    
     <dimen name="base_pop_title_margin">15dp</dimen>
@@ -24,12 +23,6 @@
     <dimen name="base_pop_message_height">80dp</dimen>    
     <dimen name="base_pop_load_width">160dp</dimen>
     <dimen name="base_pop_load_height">120dp</dimen>
-    
-    <dimen name="navigation_bar_height_top">54dp</dimen>
-    <dimen name="navigation_bar_height_bottom">54dp</dimen>
-    <dimen name="navigation_text_bottom">12sp</dimen>
-    
-    <dimen name="actionbar_vertival_padding">8dp</dimen>
 
     <!-- ultimate -->
     <dimen name="base_ultimate_fab_size_normal">56dp</dimen>
@@ -45,4 +38,9 @@
     <dimen name="base_ultimate_fab_mini_shadow_size">6dp</dimen>
     <dimen name="base_ultimate_fab_min_significant_scroll">4dp</dimen>
 
+    <dimen name="navigation_bar_height_top">54dp</dimen>
+    <dimen name="navigation_bar_height_bottom">54dp</dimen>
+    <dimen name="navigation_text_bottom">12sp</dimen>
+
+    <dimen name="actionbar_vertival_padding">8dp</dimen>
 </resources>

@@ -20,7 +20,7 @@
         android:layout_marginTop="@dimen/base_pop_item_margin"
         android:gravity="center"
         android:textSize="@dimen/base_pop_text_item2"
-        android:textColor="@color/text_deepgrey"
+        android:textColor="@color/text_grey_deep"
         android:text="@string/pop_item1" />
     
     

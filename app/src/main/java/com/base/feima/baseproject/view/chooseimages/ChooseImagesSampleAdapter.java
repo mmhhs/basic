@@ -68,7 +68,7 @@ public class ChooseImagesSampleAdapter extends BaseAdapter{
         viewHolder.containLayout.getLayoutParams().height = itemWidth;
         viewHolder.checkBox.setVisibility(View.GONE);
         if (position==(list.size())){
-            viewHolder.contentImage.setImageResource(R.drawable.base_shape_choose_images);
+            viewHolder.contentImage.setImageResource(R.drawable.base_choose_images_button);
         }else {
 //            imageLoader.displayImage("file://"+list.get(position),viewHolder.contentImage, OptionTools.getNoDiscOptions(context));
 

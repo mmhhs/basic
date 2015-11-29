@@ -18,12 +18,12 @@
             android:layout_height="@dimen/base_pop_title_height"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/base_pop_title_margin"
-            android:text="@string/dialog_item0"
+            android:text="@string/pop6"
             android:textColor="@color/title_color"
             android:textSize="@dimen/base_pop_text_title" />
 
         <View
-            style="@style/base_style_line_grey_horizontal"
+            style="@style/base_line_grey_horizontal"
             android:layout_marginLeft="@dimen/base_pop_line_margin"
             android:layout_marginRight="@dimen/base_pop_line_margin" />
 
@@ -39,11 +39,11 @@
             android:paddingLeft="@dimen/base_pop_item_padding"
             android:paddingRight="@dimen/base_pop_item_padding"
             android:paddingTop="@dimen/base_pop_sureitem_padding"
-            android:text="@string/dialog_item0"
-            android:textColor="@color/text_deep"
+            android:text="@string/pop6"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/base_pop_text_item" />
 
-        <View style="@style/base_style_line_grey_horizontal" />
+        <View style="@style/base_line_grey_horizontal" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,14 +55,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/base_style_selector"
+                android:background="@drawable/base_selector_bg"
                 android:gravity="center"
-                android:text="@string/dialog_item2"
-                android:textColor="@color/text_deep"
+                android:text="@string/pop8"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/base_pop_text_item2" />
             <View
                 android:id="@+id/base_pop_sure_line"
-                style="@style/base_style_line_grey_vertical"
+                style="@style/base_line_grey_vertical"
                 />
             <TextView
                 android:id="@+id/base_pop_sure_item3"
@@ -70,15 +70,15 @@
                 android:layout_height="@dimen/base_pop_item_height"
                 android:layout_weight="1.3"
                 android:gravity="center"
-                android:background="@drawable/base_style_selector"
+                android:background="@drawable/base_selector_bg"
                 android:textSize="@dimen/base_pop_text_item2"
-                android:textColor="@color/text_deep"
-                android:text="@string/dialog_item3"
+                android:textColor="@color/text_black"
+                android:text="@string/pop9"
                 android:visibility="gone"
                 />
             <View
                 android:id="@+id/base_pop_sure_line2"
-                style="@style/base_style_line_grey_vertical"
+                style="@style/base_line_grey_vertical"
                 android:visibility="gone"
                 />
 
@@ -87,10 +87,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/base_style_selector"
+                android:background="@drawable/base_selector_bg"
                 android:gravity="center"
-                android:text="@string/dialog_item1"
-                android:textColor="@color/text_deep"
+                android:text="@string/pop7"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/base_pop_text_item2" />
 
         </LinearLayout>

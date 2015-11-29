@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    style="@style/base_background">
+    style="@style/base_background_grey">
     <include layout="@layout/base_ui_title"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/base_style_textview_deep_14"
+                style="@style/base_text_black_14"
                 android:text="@string/about1"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/base_style_textview_deepgrey_12"
+            style="@style/base_text_grey_deep_12"
             android:text="@string/about2"
             android:gravity="center_horizontal|bottom"
             android:lineSpacingExtra="4dp"

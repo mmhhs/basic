@@ -5,8 +5,8 @@
         <shape>
             <corners android:radius="20dip" />
             <size android:height="20dp"/>
-            <gradient android:startColor="@color/base_bar_bg"
-                android:endColor="@color/base_bar_bg" />
+            <gradient android:startColor="@color/progress_bar_bg"
+                android:endColor="@color/progress_bar_bg" />
         </shape>
     </item>
 
@@ -16,8 +16,8 @@
             <shape>
                 <corners android:radius="20dip" />
                 <size android:height="20dp"/>
-                <gradient  android:startColor="@color/base_bar_on1"
-                    android:endColor="@color/base_bar_on2" />
+                <gradient  android:startColor="@color/progress_bar_on1"
+                    android:endColor="@color/progress_bar_on2" />
             </shape>
         </clip>
     </item>

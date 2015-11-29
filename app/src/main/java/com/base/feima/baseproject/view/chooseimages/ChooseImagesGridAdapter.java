@@ -75,7 +75,7 @@ public class ChooseImagesGridAdapter extends BaseAdapter{
         viewHolder.containLayout.getLayoutParams().width = itemWidth;
         viewHolder.containLayout.getLayoutParams().height = itemWidth;
         if (position==0&&folderShowIndex==0){
-            viewHolder.contentImage.setImageResource(R.drawable.base_shape_choose_images);
+            viewHolder.contentImage.setImageResource(R.drawable.base_choose_images_button);
             viewHolder.checkBox.setVisibility(View.GONE);
         }else {
 //            imageLoader.displayImage("file://"+path,viewHolder.contentImage, OptionTools.getNoDiscOptions(context));

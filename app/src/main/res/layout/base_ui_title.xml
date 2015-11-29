@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:singleLine="true"
-        style="@style/base_style_textview_deep_16"
+        style="@style/base_text_black_16"
         android:layout_marginLeft="@dimen/navigation_bar_height_top"
         android:layout_marginRight="@dimen/navigation_bar_height_top"
         android:visibility="gone"

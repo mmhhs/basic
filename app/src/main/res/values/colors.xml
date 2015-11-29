@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>  
-     <color name="tools_box_bg">#ff333332</color>
-     <!-- 底部导航相关 -->
-     <color name="navi_bottom_text_on">#ff646f</color>
-     <color name="navi_bottom_text_off">#b4b4b4</color>
-     <color name="navi_bottom_line">#d4d46f</color>
-     <!-- 标题背景颜色 -->
-     <color name="title_color">#d5d46f</color>
-     <!-- 背景颜色 -->
-     <color name="bg_grey">#fafafa</color>
+<resources>
+    <!-- 底部导航相关 -->
+    <color name="navi_bottom_text_on">#ff1fc0</color>
+    <color name="navi_bottom_text_off">#b4b4b4</color>
+    <color name="navi_bottom_line">#4b92924d</color>
+    <!-- 标题背景颜色 -->
+    <color name="title_color">#d50db1</color>
+    <!-- 背景颜色 -->
+    <color name="bg_grey">#fafafa</color>
+    <color name="bg_white">#ffffff</color>
     <!-- 线条颜色 -->
     <color name="line_color">#e6e6e6</color>
-
-     
-     <!-- 文字颜色 -->
-     <color name="text_deep">#5a5a5a</color>
-     <color name="text_deepgrey">#969696</color>
-     <color name="text_lightgrey">#b8b8b8</color>
-     <!-- 编辑框颜色 -->
-     <color name="edit_bg">#f8f8f8</color>
-     
-
-     <!-- 普通颜色 -->
-     <color name="grey">#b4b4b4</color>
-     <color name="white">#ffffff</color>
-     <color name="light">#e6e5e5</color>
-     <color name="black">#000000</color>
-     <color name="clear">#00000000</color>
-     <color name="transparent">#40000000</color>
+    <!-- 文字颜色 -->
+    <color name="text_black">#5a5a5a</color>
+    <color name="text_grey_deep">#969696</color>
+    <color name="text_grey_light">#b8b8b8</color>
+    <color name="text_white">#ffffff</color>
+    <!-- 普通颜色 -->
+    <color name="grey">#52bababa</color>
+    <color name="white">#ffffff</color>
+    <color name="light">#e6e5e5</color>
+    <color name="black">#000000</color>
+    <color name="clear">#00000000</color>
+    <color name="transparent">#70000000</color>
     <!--pullable-->
-     <color name="base_pullable_bottom_gray">#aaaaaa</color>
-     <color name="base_pullable_top_light_blue">#6593cb</color>
+    <color name="base_pullable_bottom_gray">#ffffff</color>
+    <color name="base_pullable_top_light_blue">#ffffff</color>
     <!--ultimate-->
     <color name="green">#ff34a350</color>
     <color name="red">#ffc93437</color>
     <color name="yellow">#fff7d23e</color>
     <color name="blue">#ff375bf1</color>
     <!--put_effect-->
-     <color name="base_put_on">#00000000</color>
-     <color name="base_put_off">#40000000</color>
-
+    <color name="put_on">#00000000</color>
+    <color name="put_off">#40000000</color>
+    <!--selector-->
+    <color name="selector_on">#ffffff</color>
+    <color name="selector_off">#b4b4b4</color>
     <!-- 多图片选择 -->
     <color name="choose_images_transparent">#e0000000</color>
     <color name="choose_images_bg">#181818</color>
@@ -48,13 +45,10 @@
     <color name="choose_images_done_off">#337523</color>
     <color name="choose_images_text">#cfcfcf</color>
     <color name="choose_images_line">#14191a</color>
-
-    <color name="selector_on">#ffffff</color>
-    <color name="selector_off">#b4b4b4</color>
-
-    <color name="base_bar_bg">#d9d9d9</color>
-    <color name="base_bar_on1">#ef3d67</color>
-    <color name="base_bar_on2">#fc98b0</color>
+    <!-- progressbar -->
+    <color name="progress_bar_bg">#d9d9d9</color>
+    <color name="progress_bar_on1">#491cef</color>
+    <color name="progress_bar_on2">#648efc</color>
 
 
 </resources>

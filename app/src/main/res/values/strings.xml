@@ -1,42 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">BaseProject</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
-
     <string name="base_86">+86</string>
-    
-    <!-- 以下是base中用到的 -->
     <!-- net -->
     <string name="net_tip">网络不给力，查看下吧！</string>
     <!-- task -->
-    <string name="task_item1">连接服务器异常，请稍后再试！</string>
-    <string name="task_item2">正在加载</string>
-    <string name="task_item3">正在提交</string>
-    <string name="task_item4">更新成功</string>
-    <string name="task_item5">操作成功</string>
-    <string name="task_item6">提交</string>
+    <string name="task1">连接服务器异常，请稍后再试！</string>
+    <string name="task2">正在加载</string>
+    <string name="task3">正在提交</string>
+    <string name="task4">更新成功</string>
+    <string name="task5">操作成功</string>
+    <string name="task6">提交</string>
     <!-- popupwindow 相关 -->
 	<string name="pop_item1">正在加载</string>
 	<string name="pop_item2">网络不给力，查看下吧！</string>
 	<string name="pop_item3">未获取到内容</string>
 	<string name="pop_item4">请点击页面重试</string>
 	<string name="pop_item5">操作</string>
-	<!-- dialog -->
-    <string name="dialog_item0">提示</string>
-    <string name="dialog_item1">确定</string>
-    <string name="dialog_item2">取消</string>
-    <string name="dialog_item3">忽略此版本</string>
-
-    <!-- 提示 -->
-    <string name="tip1">新版本：</string>
-    <string name="tip2">\n</string>
-    <string name="tip3">已经是最新版本</string>
-    <string name="tip4">您还没有登录，请先登录吧</string>
-    <string name="tip5">检查更新</string>
-    <string name="tip6">您当前有新版本，是否更新？</string>
-
+    <string name="pop6">提示</string>
+    <string name="pop7">确定</string>
+    <string name="pop8">取消</string>
+    <string name="pop9">忽略此版本</string>
+    <!-- 版本更新 -->
+    <string name="check_version">检查更新</string>
+    <string name="check_version_fail">更新失败</string>
     <!-- pulltorefreshlayout -->
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="release_to_refresh">释放立即刷新</string>
@@ -48,12 +35,6 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
-    
-    <string name="navi_item1">首页1</string>
-    <string name="navi_item2">首页2</string>
-    <string name="navi_item3">首页3</string>
-    <string name="navi_item4">首页4</string>
-    <string name="navi_item5">首页5</string>
     <!-- 多图片选择 -->
     <string name="choose_images_all">所有图片</string>
     <string name="choose_images_query">查询图库</string>
@@ -65,13 +46,22 @@
     <string name="choose_images_done">完成</string>
     <string name="choose_images_preview">预览</string>
     <string name="choose_images_choose">选择</string>
-
-    <string name="check_version">检查更新</string>
-    <string name="check_version_fail">更新失败</string>
-
-    <string name="title1">关于我们</string>
-
+    <!-- 关于我们 -->
     <string name="about1">版本号：V</string>
     <string name="about2">Copyright ©2014—2015\n北京学点科技有限公司</string>
-
+    <!-- tab -->
+    <string name="navi_item1">首页1</string>
+    <string name="navi_item2">首页2</string>
+    <string name="navi_item3">首页3</string>
+    <string name="navi_item4">首页4</string>
+    <string name="navi_item5">首页5</string>
+    <!-- 提示 -->
+    <string name="tip1">新版本：</string>
+    <string name="tip2">\n</string>
+    <string name="tip3">已经是最新版本</string>
+    <string name="tip4">您还没有登录，请先登录吧</string>
+    <string name="tip5">检查更新</string>
+    <string name="tip6">您当前有新版本，是否更新？</string>
+    <!-- 标题 -->
+    <string name="title1">关于我们</string>
 </resources>

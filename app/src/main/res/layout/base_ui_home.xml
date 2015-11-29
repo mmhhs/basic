@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:id="@+id/base_ui_home_radiogroup"
-            style="@style/base_footbar_radiogroup"
+            style="@style/base_navi_bottom_contain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/base_ui_home_radio0"
-                style="@style/base_footbar_radio"
+                style="@style/base_navi_bottom_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/base_ui_home_radio1"
-                style="@style/base_footbar_radio"
+                style="@style/base_navi_bottom_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -52,7 +52,7 @@
 
             <TextView
                 android:id="@+id/base_ui_home_radio2"
-                style="@style/base_footbar_radio"
+                style="@style/base_navi_bottom_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"

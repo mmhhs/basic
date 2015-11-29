@@ -42,7 +42,7 @@
         android:divider="@color/line_color"
         android:dividerHeight="1dp"
         android:cacheColorHint="@android:color/transparent"
-        android:listSelector="@drawable/base_style_selector"
+        android:listSelector="@drawable/base_selector_bg"
             ></ListView>
         
     </LinearLayout>

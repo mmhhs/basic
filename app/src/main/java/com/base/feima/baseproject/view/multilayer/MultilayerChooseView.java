@@ -236,7 +236,7 @@ public class MultilayerChooseView extends LinearLayout {
 //        popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setAnimationStyle(R.style.base_anim_popupWindowAnimation);
+        popupWindow.setAnimationStyle(R.style.base_anim_hide);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {

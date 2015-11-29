@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:text="1/1"
-        style="@style/base_style_textview_choose_images_text_16"
+        style="@style/base_text_choose_images_text_16"
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="20dp"
@@ -37,7 +37,7 @@
         android:layout_marginRight="15dp"
         android:paddingLeft="40dp"
         android:button="@drawable/base_choose_images_folder_check"
-        style="@style/base_style_textview_choose_images_text_16"
+        style="@style/base_text_choose_images_text_16"
         android:id="@+id/base_choose_images_footer_choose" />
 
     <TextView
@@ -49,6 +49,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_marginRight="15dp"
-        style="@style/base_style_textview_choose_images_text_16"
+        style="@style/base_text_choose_images_text_16"
         android:id="@+id/base_choose_images_footer_preview" />
 </LinearLayout>

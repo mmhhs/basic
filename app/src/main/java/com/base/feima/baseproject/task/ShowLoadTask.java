@@ -228,7 +228,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				break;
 			case CANCELLED:
 				if (showLoad) {
-					viewTool.addErrorView(activity, activity.getString(R.string.task_item1),
+					viewTool.addErrorView(activity, activity.getString(R.string.task1),
 							contentView, loadView, iOnTryClickListener);
 				}
 				break;

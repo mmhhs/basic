@@ -16,9 +16,9 @@
             android:layout_height="@dimen/base_pop_item_height"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/base_pop_item_padding"
-            android:background="@drawable/base_style_selector"
+            android:background="@drawable/base_selector_bg"
             android:textSize="@dimen/base_pop_text_item"
-            android:textColor="@color/text_deepgrey"
+            android:textColor="@color/text_grey_deep"
          />
 
     </LinearLayout>

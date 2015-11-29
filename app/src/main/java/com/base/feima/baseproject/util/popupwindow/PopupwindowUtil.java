@@ -291,7 +291,7 @@ public class PopupwindowUtil {
      * @return
      */
     public PopupWindow showLoadWindow(Context context,View view){
-        PopupWindow loadPopupWindow = getLoadWindow(context, context.getString(R.string.task_item2), 0, true, true);
+        PopupWindow loadPopupWindow = getLoadWindow(context, context.getString(R.string.task2), 0, true, true);
         loadPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         return loadPopupWindow;
     }

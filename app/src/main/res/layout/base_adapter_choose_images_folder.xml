@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/base_style_textview_deep_16"
+                style="@style/base_text_black_16"
                 android:text="Large Text"
                 android:id="@+id/base_adapter_choose_images_folder_name"
 
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/base_style_textview_deepgrey_14"
+                style="@style/base_text_grey_deep_14"
                 android:text="2张"
                 android:id="@+id/base_adapter_choose_images_folder_count"
                 android:layout_marginTop="5dp" />
