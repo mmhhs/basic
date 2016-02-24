@@ -3,7 +3,6 @@ package com.base.feima.baseproject.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -126,7 +125,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	}
 
 	@Optional
-	@OnClick(R.id.base_ui_title_back_layout)
+	@OnClick(R.id.base_choose_images_title_back)
 	public void onBack(){
 		finishSelf();
 	}
@@ -137,23 +136,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		finishSelf();
 	}
 
-	public void setBackVisibility(boolean showBack){
-		if (showBack){
-			backLayout.setVisibility(View.VISIBLE);
-		}else {
-			backLayout.setVisibility(View.GONE);
-		}
+	public void setTitleText(String name) {
+		this.titleText.setText(name);
 	}
 
-	public void setTitleVisibility(boolean showTitle){
-		if (showTitle){
-			titleText.setVisibility(View.VISIBLE);
-		}else {
-			titleText.setVisibility(View.GONE);
-		}
+	public void setBackLayoutVisibility(int visible){
+		backLayout.setVisibility(visible);
 	}
 
-	public void setTitleString(String title){
-		titleText.setText(title);
+	public void setTitleTextVisibility(int visible){
+		titleText.setVisibility(visible);
 	}
+
 }

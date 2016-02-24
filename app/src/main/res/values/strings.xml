@@ -64,4 +64,6 @@
     <string name="tip6">您当前有新版本，是否更新？</string>
     <!-- 标题 -->
     <string name="title1">关于我们</string>
+
+    <string name="toy_day">天</string>
 </resources>

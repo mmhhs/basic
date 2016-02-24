@@ -119,4 +119,27 @@ public class SharedUtil{
 		String id = sp.getString(IGNOREVERSION, "");
 		return id;
 	}
+
+	/**
+	 * 设置页面引导已知道
+	 * @param context
+	 * @param className
+	 * @param first
+	 */
+	public static void saveFisrt(Context context, String className, boolean first)
+	{
+		SharedPreferences sp = context.getSharedPreferences(className, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putBoolean("first", first);
+		editor.commit();
+	}
+	public static boolean getFirst(Context context,String className){
+		Context ctx = context;
+		SharedPreferences sp = ctx.getSharedPreferences(className, 0);
+		boolean bool = sp.getBoolean("first", false);
+		return bool;
+	}
+
+
 }

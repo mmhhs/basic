@@ -47,6 +47,16 @@ public class DemoFragment extends BaseFragment{
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        try {
+            ButterKnife.inject(this, rootView);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void init() {
 
     }

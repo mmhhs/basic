@@ -73,6 +73,21 @@ public class ViewUtil {
 			e.printStackTrace();
 		}		
 	}
+
+	public void addEmptyView(Context context,String loadString,View contentView,LinearLayout loadLayout){
+		try {
+			contentView.setVisibility(View.GONE);
+			loadLayout.setVisibility(View.VISIBLE);
+			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			loadView = getLoadView(context, loadString);
+
+			loadLayout.removeAllViews();
+			loadLayout.addView(loadView, layoutParams);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	
 	public View getLoadView(Context context,String loadsString) {
 		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_load,null, false);

@@ -1,14 +1,18 @@
 package com.base.feima.baseproject.base;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.manager.ScreenManager;
+import com.base.feima.baseproject.manager.SystemBarTintManager;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.task.BaseTask;
 
@@ -45,6 +49,7 @@ public abstract class BaseActivity extends Activity{
 	public void setContentView(int layoutResID) {
 		super.setContentView(layoutResID);
 		ButterKnife.inject(this);
+		setKitKatTranslucency();
 		init();
 	}
 
@@ -60,8 +65,8 @@ public abstract class BaseActivity extends Activity{
 
 	@Override
 	protected void onDestroy(){
-		super.onDestroy();
 		cancelTasks();
+		super.onDestroy();
 	}
 
 	/**
@@ -98,7 +103,6 @@ public abstract class BaseActivity extends Activity{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -118,7 +122,7 @@ public abstract class BaseActivity extends Activity{
 	}
 
 	@Optional
-	@OnClick(R.id.base_ui_title_back_layout)
+	@OnClick(R.id.base_choose_images_title_back)
 	public void onBack(){
 		finishSelf();
 	}
@@ -129,23 +133,49 @@ public abstract class BaseActivity extends Activity{
 		finishSelf();
 	}
 
-	public void setBackVisibility(boolean showBack){
-		if (showBack){
-			backLayout.setVisibility(View.VISIBLE);
-		}else {
-			backLayout.setVisibility(View.GONE);
+	public void setBackLayoutVisibility(int visible){
+		backLayout.setVisibility(visible);
+	}
+
+	public void setTitleTextVisibility(int visible){
+		titleText.setVisibility(visible);
+	}
+
+	public void setTitleText(String name) {
+		this.titleText.setText(name);
+	}
+
+	public void setKitKatTranslucency() {
+		applyKitKatTranslucency(R.color.title_color);
+	}
+
+	/**
+	 * Apply KitKat specific translucency.
+	 */
+	public void applyKitKatTranslucency(int colorId) {
+		// KitKat translucent navigation/status bar.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(true);
+			SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+			mTintManager.setStatusBarTintEnabled(true);
+			mTintManager.setNavigationBarTintEnabled(true);
+			mTintManager.setTintResource(colorId);
+			mTintManager.setStatusBarTintResource(colorId);
+			mTintManager.setNavigationBarTintResource(colorId);
 		}
 	}
 
-	public void setTitleVisibility(boolean showTitle){
-		if (showTitle){
-			titleText.setVisibility(View.VISIBLE);
-		}else {
-			titleText.setVisibility(View.GONE);
+	@TargetApi(19)
+	private void setTranslucentStatus(boolean on) {
+		Window win = getWindow();
+		WindowManager.LayoutParams winParams = win.getAttributes();
+		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+		if (on) {
+			winParams.flags |= bits;
+		} else {
+			winParams.flags &= ~bits;
 		}
+		win.setAttributes(winParams);
 	}
 
-	public void setTitleString(String title){
-		titleText.setText(title);
-	}
 }

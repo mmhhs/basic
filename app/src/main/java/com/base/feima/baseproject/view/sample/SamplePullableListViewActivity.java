@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.view.widget.sample;
+package com.base.feima.baseproject.view.sample;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -9,7 +9,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/base_ui_title_back_layout"
+        android:id="@+id/base_choose_images_title_back"
         android:orientation="vertical"
         android:layout_width="@dimen/navigation_bar_height_top"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_images_image"
-        style="@style/base_text_grey_white_18"
+        style="@style/base_text_white_18"
         android:layout_marginLeft="15dp"
         android:id="@+id/base_choose_images_title_index" />
 

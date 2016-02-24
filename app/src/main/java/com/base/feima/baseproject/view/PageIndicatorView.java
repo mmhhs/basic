@@ -58,7 +58,7 @@ public class PageIndicatorView extends View {
 				R.styleable.PageIndicatorView);
 		redius = customAttrs.getDimension(R.styleable.PageIndicatorView_redius, rediusSize);
 		space = customAttrs.getDimension(R.styleable.PageIndicatorView_space, spaceSize);
-		alpha = customAttrs.getInt(R.styleable.PageIndicatorView_alpha, 0x00);
+		alpha = customAttrs.getInt(R.styleable.PageIndicatorView_alphas, 0x00);
 		selectedColor = customAttrs.getColor(
 				R.styleable.PageIndicatorView_selectedColor,
 				Color.parseColor(selectedColorString));

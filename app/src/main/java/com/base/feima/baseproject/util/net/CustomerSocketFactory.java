@@ -2,8 +2,6 @@ package com.base.feima.baseproject.util.net;
 
 import android.content.Context;
 
-import com.base.feima.baseproject.R;
-
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import java.io.IOException;
@@ -27,7 +25,7 @@ public class CustomerSocketFactory extends SSLSocketFactory {
     public static SSLSocketFactory getSocketFactory(Context context) {
         InputStream input = null;
         try {
-            input = context.getResources().openRawResource(R.raw.supertoys);//证书文件名
+//            input = context.getResources().openRawResource(R.raw.supertoys);//证书文件名
             KeyStore trustStore = KeyStore.getInstance("BKS");
             trustStore.load(input, PASSWD.toCharArray());
             SSLSocketFactory factory = new CustomerSocketFactory(trustStore);

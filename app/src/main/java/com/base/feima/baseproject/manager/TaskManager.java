@@ -1,5 +1,6 @@
 package com.base.feima.baseproject.manager;
 
+
 import com.base.feima.baseproject.task.BaseTask;
 
 import java.util.ArrayList;
@@ -29,7 +30,9 @@ public class TaskManager {
 			TaskModel taskModel = new TaskModel();
 			taskModel.tagString = tagString;
 			taskModel.task = task;
+			taskModel.creatTime = System.currentTimeMillis();
 			taskList.add(taskModel);
+//			LogUtil.e("******addTask*******"+ System.currentTimeMillis());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -64,8 +67,12 @@ public class TaskManager {
 			try {
 				TaskModel taskModel = taskList.get(i);
 				if(taskModel.tagString.equals(tagString)&&taskModel.task!=null){
-					taskModel.task.cancel(true);
-					taskModels.add(taskModel);
+					long time = System.currentTimeMillis()-taskModel.getCreatTime();
+					if (time>500){
+						taskModel.task.cancel(true);
+						taskModels.add(taskModel);
+//						LogUtil.e("******cancelLimitTasks*******"+ System.currentTimeMillis());
+					}
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -91,6 +98,26 @@ public class TaskManager {
 				if(taskModel.task!=null&&taskModel.task==task){
 					taskModel.task.cancel(true);
 					taskList.remove(taskModel);
+//					LogUtil.e("******cancelOneTasks*******"+ System.currentTimeMillis());
+					break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 移除task
+	 * @param task
+	 */
+	public void removeTask(BaseTask task){
+		for(int i=0;i<taskList.size();i++){
+			try {
+				TaskModel taskModel = taskList.get(i);
+				if(taskModel.task!=null&&taskModel.task==task){
+					taskList.remove(taskModel);
 					break;
 				}
 			} catch (Exception e) {
@@ -102,8 +129,33 @@ public class TaskManager {
 
 
 	public class TaskModel{
+		long creatTime;
 		String tagString;
 		BaseTask task;
+
+		public long getCreatTime() {
+			return creatTime;
+		}
+
+		public void setCreatTime(long creatTime) {
+			this.creatTime = creatTime;
+		}
+
+		public String getTagString() {
+			return tagString;
+		}
+
+		public void setTagString(String tagString) {
+			this.tagString = tagString;
+		}
+
+		public BaseTask getTask() {
+			return task;
+		}
+
+		public void setTask(BaseTask task) {
+			this.task = task;
+		}
 	}
 
 

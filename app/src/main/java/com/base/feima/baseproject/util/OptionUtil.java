@@ -25,7 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class OptionUtil {
-	public static String tag = "PublicTools";
+	public static String tag = "OptionUtil";
 
 
 	/**

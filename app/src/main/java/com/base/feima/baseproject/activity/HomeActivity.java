@@ -19,7 +19,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class BaseHomeTabActivity extends BaseFragmentActivity{
+public class HomeActivity extends BaseFragmentActivity{
     @InjectView(android.R.id.tabhost)
     public FragmentTabHost mTabHost;
     @InjectView(R.id.base_ui_home_radio0)

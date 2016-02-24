@@ -34,6 +34,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public boolean showNetToast = false;//显示网络问题toast
 	public PopupWindow loadPopupWindow;//加载框
 	public String loadString = "";//加载文字
+	public boolean showTipSuccess = false;//成功时显示提示信息
+	public boolean showTipError = true;//错误时显示提示信息
 	//访问相关
 	public int accessType;//访问方式
 	public String httpUrl = "";//网络路径
@@ -41,7 +43,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	public List<File> fileList;//上传文件列表
 	public String keyString = "Filedata";//上传文件键值
 	//返回值相关
-	public String errorMsg;//错误信息
+	public String resultMsg;//返回提示信息
 	public String resultsString = null;//返回值
 	public boolean loginInvalid = false;//登录失效
 
@@ -276,15 +278,16 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			default:
 				break;
 		}
-		if(StringUtil.isEmpty(resultsString)){
-			taskResult = TaskResult.CANCELLED;
-		}else{
-			if (iOnDialogBackgroundListener==null) {
-				iOnDialogBackgroundListener = defaultBackgroundListener;
+		if (!isCancelled()){
+			if(StringUtil.isEmpty(resultsString)){
+				taskResult = TaskResult.CANCELLED;
+			}else{
+				if (iOnDialogBackgroundListener==null) {
+					iOnDialogBackgroundListener = defaultBackgroundListener;
+				}
+				taskResult = doOnBackgroundListener(this);
 			}
-			taskResult = doOnBackgroundListener(this);
 		}
-
 		return taskResult;
 	}
 
@@ -306,13 +309,16 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				if(iOnDialogResultListener!=null){
 					this.iOnDialogResultListener.onOK(this);
 				}
+				if (!StringUtil.isEmpty(resultMsg)&&showTipSuccess){
+					OptionUtil.addToast(activity, resultMsg +"");
+				}
 				break;
 			case ERROR:
 				if(iOnDialogResultListener!=null){
 					this.iOnDialogResultListener.onError(this);
 				}
-				if (!StringUtil.isEmpty(httpUrl)){
-					OptionUtil.addToast(activity, "" + errorMsg);
+				if (!StringUtil.isEmpty(resultMsg)&&showTipError){
+					OptionUtil.addToast(activity, resultMsg +"");
 				}
 				dealLoginInvalid();
 				break;
@@ -322,15 +328,21 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			default:
 				break;
 		}
-		cancelTask();
+		removeTask();
+	}
+
+	@Override
+	public void onCancelled() {
+		removeTask();
+		super.onCancelled();
 	}
 
 	public void addTask(){
 		taskManager.addTask(tagString, this);
 	}
 
-	public void cancelTask(){
-		taskManager.cancelOneTasks(this);
+	public void removeTask(){
+		taskManager.removeTask(this);
 	}
 
 	public void setiOnDialogResultListener(IOnDialogResultListener iOnDialogResultListener) {
@@ -366,7 +378,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			JacksonUtil json = JacksonUtil.getInstance();
 			ResultEntity res = json.readValue(resultsString, ResultEntity.class);
 			if(res!=null){
-				errorMsg = res.getMsg();
+				resultMsg = res.getMsg();
 				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
 					taskResult = TaskResult.OK;
 				}else{
@@ -382,12 +394,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	};
 
 
-	public String getErrorMsg() {
-		return errorMsg;
+	public String getResultMsg() {
+		return resultMsg;
 	}
 
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
+	public void setResultMsg(String resultMsg) {
+		this.resultMsg = resultMsg;
 	}
 
 	public String getResultsString() {

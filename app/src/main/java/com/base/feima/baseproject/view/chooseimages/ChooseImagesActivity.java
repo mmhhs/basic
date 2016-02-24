@@ -91,7 +91,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
 
     public void queryData(){
-        ShowDialogTask task = new ShowDialogTask(this,taskTag,gridView,getString(R.string.choose_images_query),true);
+        ShowDialogTask task = new ShowDialogTask(this,taskTag,gridView,getString(R.string.choose_images_query),false);
         task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
             @Override
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
@@ -343,7 +343,7 @@ public class ChooseImagesActivity extends BaseActivity {
         TextView folderText = (TextView) view.findViewById(R.id.base_choose_images_footer_folder);
         final TextView indexText = (TextView) view.findViewById(R.id.base_choose_images_title_index);
         final CheckBox checkBox = (CheckBox) view.findViewById(R.id.base_choose_images_footer_choose);
-        containLayout.setPadding(0, OptionUtil.getStatusBarHeight(ChooseImagesActivity.this),0,0);
+//        containLayout.setPadding(0, OptionUtil.getStatusBarHeight(ChooseImagesActivity.this),0,0);
         chooseImagesPreviewAdapter = new ChooseImagesPreviewAdapter(context,previewList);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener() {
             @Override

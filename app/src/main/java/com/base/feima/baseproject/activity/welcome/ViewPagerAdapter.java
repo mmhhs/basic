@@ -1,7 +1,7 @@
 package com.base.feima.baseproject.activity.welcome;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -19,22 +19,22 @@ public class ViewPagerAdapter extends PagerAdapter {
 		return viewst;
 	}
 	@Override
-	public void destroyItem(View view, int position, Object object) {
+	public void destroyItem(ViewGroup container, int position, Object object) {
 		// TODO Auto-generated method stub
-		
-		((ViewPager) view).removeView((View) object);
+
+		container.removeView((View) object);
 	}
 
 	@Override
-	public void finishUpdate(View container) {
+	public void finishUpdate(ViewGroup container) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public Object instantiateItem(View view, int position) {
-		
-		
-		((ViewPager) view).addView(viewst.get(position), 0);
+	public Object instantiateItem(ViewGroup container, int position) {
+
+
+		container.addView(viewst.get(position), 0);
 		
 		return viewst.get(position);
 	}

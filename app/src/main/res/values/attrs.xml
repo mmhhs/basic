@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PageIndicatorView">
-        <attr format="color" name="selectedColor" />
-        <attr format="color" name="unselectedColor" />
-        <attr format="dimension" name="space" />
-        <attr format="integer" name="alpha" />
-        <attr format="dimension" name="redius" />
+        <attr name="selectedColor" format="color" />
+        <attr name="unselectedColor" format="color" />
+        <attr name="space" format="dimension" />
+        <attr name="alphas" format="integer" />
+        <attr name="redius" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="ProgressWheel">
@@ -65,5 +65,13 @@
 
     <attr name="SwipeBackLayoutStyle" format="reference" />
 
+    <declare-styleable name="CountDownView">
+        <attr name="timeTextColor" format="color" />
+        <attr name="timeUnitTextColor" format="color" />
+        <attr name="timeTextBackground" format="reference" />
+        <attr name="timeTextSize" format="dimension" />
+        <attr name="timeUnitTextSize" format="dimension" />
+
+    </declare-styleable>
 
 </resources>

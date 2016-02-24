@@ -3,6 +3,8 @@ package com.base.feima.baseproject.util;
 import android.content.Context;
 import android.os.Environment;
 
+import com.base.feima.baseproject.util.tool.LogUtil;
+
 import java.io.File;
 
 
@@ -17,12 +19,13 @@ public class BaseConstant
 		NOTHING
 	}
 	
-	public static String IMAGETAMPPATH = Environment.getExternalStorageDirectory() + "/company/tamp/";
-	public static String IMAGESAVEPATH = Environment.getExternalStorageDirectory() + "/company/";
-	public static String IMAGETAMPFOLDER = "/company/tamp/";
-    public static String IMAGESAVEFOLDER = "/company/";
+	public static String IMAGETAMPPATH = Environment.getExternalStorageDirectory() + "/cache/";
+	public static String IMAGESAVEPATH = Environment.getExternalStorageDirectory() + "/cache/";
+	public static String IMAGETAMPFOLDER = "/cache/smallimage/";
+    public static String IMAGESAVEFOLDER = "/cache/image/";
     public static String CACHENAME = "image";
     public static String APKPATH = "/supertoys.apk";
+    public static boolean DEBUGING								=   true;//调试
 
     public static String getSaveImageFolder(Context context){
         IMAGESAVEPATH = context.getExternalCacheDir()+IMAGESAVEFOLDER;
@@ -51,15 +54,16 @@ public class BaseConstant
     public static final int SCALE_WIDTH                                 = 360;
     public static final int SCALE_HEIGHT                                = 640;
 	public final static int PAGER_START									=  1;
-    public final static int PAGER_COUNT									=  15;
+    public final static int PAGER_COUNT									=  16;
 	
 	public final static int REQUEST_REFRESH									=  9999;
 	
 	
-	public static String INTENT_ID								=  "INTENT_ID";
+	public static String INTENT_ID								    =  "INTENT_ID";
 	public static String INTENT_TYPE								=  "INTENT_TYPE";
 	public static String INTENT_CONTENT								=  "INTENT_CONTENT";
 	public static String INTENT_CLASS								=  "INTENT_CLASS";
+    public static String INTENT_ARG								    =  "INTENT_ARG";
 
     //Extranet
     public final static String SERVICE_HOST_IP	 = "http://app.supertoys.com.cn:8080";
@@ -73,5 +77,7 @@ public class BaseConstant
 	public static String VERSION									=  SERVICE_HOST_IP_LAN+"Version/getVersion";
 	public static String LOGIN									    =  SERVICE_HOST_IP_LAN+"User/login";
 
-	
+    public static void initDebug(){
+        LogUtil.setShowLogEnabled(DEBUGING);
+    }
 }

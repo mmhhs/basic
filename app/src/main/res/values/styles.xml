@@ -97,19 +97,19 @@
         <item name="android:textColor">@color/text_grey_light</item>
         <item name="android:textSize">12sp</item>
     </style>
-    <style name="base_text_grey_white_18">
+    <style name="base_text_white_18">
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="base_text_grey_white_16">
+    <style name="base_text_white_16">
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="base_text_grey_white_14">
+    <style name="base_text_white_14">
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="base_text_grey_white_12">
+    <style name="base_text_white_12">
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">12sp</item>
     </style>

@@ -109,7 +109,7 @@ public class VersionCheckUtil {
                 JacksonUtil json = JacksonUtil.getInstance();
                 VersionResultEntity res = json.readValue(showDialogTask.getResultsString(), VersionResultEntity.class);
                 if(res!=null){
-                    showDialogTask.setErrorMsg(res.getMsg());
+                    showDialogTask.setResultMsg(res.getMsg());
                     if(ResultUtil.judgeResult(activity, res.getCode())){
                         taskResult = BaseConstant.TaskResult.OK;
                         versionDataEntity = res.getData();

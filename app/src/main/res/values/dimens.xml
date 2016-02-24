@@ -10,7 +10,7 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
     <!--popupwindow-->
     <dimen name="base_pop_width">280dp</dimen>
-    <dimen name="base_pop_title_height">60dp</dimen>    
+    <dimen name="base_pop_title_height">60dp</dimen>
     <dimen name="base_pop_title_margin">15dp</dimen>
     <dimen name="base_pop_item_margin">10dp</dimen>
     <dimen name="base_pop_item_padding">5dp</dimen>
@@ -20,27 +20,14 @@
     <dimen name="base_pop_text_item">18sp</dimen>
     <dimen name="base_pop_text_item2">16sp</dimen>
     <dimen name="base_pop_sureitem_padding">20dp</dimen>
-    <dimen name="base_pop_message_height">80dp</dimen>    
+    <dimen name="base_pop_message_height">80dp</dimen>
     <dimen name="base_pop_load_width">160dp</dimen>
     <dimen name="base_pop_load_height">120dp</dimen>
 
-    <!-- ultimate -->
-    <dimen name="base_ultimate_fab_size_normal">56dp</dimen>
-    <dimen name="base_ultimate_fab_size_mini">40dp</dimen>
-    <dimen name="base_ultimate_fab_icon_size">24dp</dimen>
-    <dimen name="base_ultimate_fab_plus_icon_size">14dp</dimen>
-    <dimen name="base_ultimate_fab_plus_icon_stroke">2dp</dimen>
-    <dimen name="base_ultimate_fab_shadow_offset">3dp</dimen>
-    <dimen name="base_ultimate_fab_shadow_radius">9dp</dimen>
-    <dimen name="base_ultimate_fab_stroke_width">0.5dp</dimen>
-    <dimen name="base_ultimate_fab_actions_spacing">16dp</dimen>
-    <dimen name="base_ultimate_fab_shadow_size">8dp</dimen>
-    <dimen name="base_ultimate_fab_mini_shadow_size">6dp</dimen>
-    <dimen name="base_ultimate_fab_min_significant_scroll">4dp</dimen>
 
     <dimen name="navigation_bar_height_top">54dp</dimen>
     <dimen name="navigation_bar_height_bottom">54dp</dimen>
     <dimen name="navigation_text_bottom">12sp</dimen>
 
-    <dimen name="actionbar_vertival_padding">8dp</dimen>
+    <dimen name="actionbar_vertival_padding">10dp</dimen>
 </resources>

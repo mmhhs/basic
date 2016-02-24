@@ -36,4 +36,8 @@ public class LogUtil {
 			Log.e(TAG, msg);
 	}
 
+	public static void setShowLogEnabled(boolean showLogEnabled) {
+		LogUtil.isDebug = showLogEnabled;
+	}
+
 }

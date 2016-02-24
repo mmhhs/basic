@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseFragment;
+import com.base.feima.baseproject.listener.IOnClickListener;
 import com.base.feima.baseproject.view.PageIndicatorView;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 	private ViewPagerAdapter adapter1;
 	private List<Integer> imgList = new ArrayList<Integer>();
 	private List<View> viewList = new ArrayList<View>();
-	public IntentOnClickListener intentOnClickListener;
+	public IOnClickListener iOnClickListener;
 	private boolean clickButton = false;
 	
 	public WelcomeFragment(){
@@ -71,10 +72,10 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 						@Override
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
-							doIntentOnClickListener();
-
+							if (iOnClickListener!=null){
+								iOnClickListener.onClick(0);
+							}
 						}
-						
 					});
 				}else{
 					view.setOnClickListener(new OnClickListener(){
@@ -82,8 +83,9 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 						@Override
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
-							doIntentOnClickListener();
-
+							if (iOnClickListener!=null){
+								iOnClickListener.onClick(0);
+							}
 						}
 						
 					});
@@ -122,18 +124,12 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 
 
 	}
-	
-	//
- 	public interface IntentOnClickListener {
- 		  public void   onClick();
- 	}
- 	public void doIntentOnClickListener() {
- 	    intentOnClickListener.onClick();
- 	  }
- 	 
-    public void setIntentOnClickListener(IntentOnClickListener callback) {
-        this.intentOnClickListener = callback;
-    }
-	
-	
+
+	public IOnClickListener getiOnClickListener() {
+		return iOnClickListener;
+	}
+
+	public void setiOnClickListener(IOnClickListener iOnClickListener) {
+		this.iOnClickListener = iOnClickListener;
+	}
 }

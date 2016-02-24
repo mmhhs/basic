@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 底部导航相关 -->
-    <color name="navi_bottom_text_on">#ff1fc0</color>
+    <color name="navi_bottom_text_on">#00a7f4</color>
     <color name="navi_bottom_text_off">#b4b4b4</color>
     <color name="navi_bottom_line">#4b92924d</color>
     <!-- 标题背景颜色 -->
-    <color name="title_color">#d50db1</color>
+    <color name="title_color">#00a7f4</color>
     <!-- 背景颜色 -->
     <color name="bg_grey">#fafafa</color>
     <color name="bg_white">#ffffff</color>
@@ -17,7 +17,7 @@
     <color name="text_grey_light">#b8b8b8</color>
     <color name="text_white">#ffffff</color>
     <!-- 普通颜色 -->
-    <color name="grey">#52bababa</color>
+    <color name="grey">#52c7c7c7</color>
     <color name="white">#ffffff</color>
     <color name="light">#e6e5e5</color>
     <color name="black">#000000</color>
@@ -36,7 +36,7 @@
     <color name="put_off">#40000000</color>
     <!--selector-->
     <color name="selector_on">#ffffff</color>
-    <color name="selector_off">#b4b4b4</color>
+    <color name="selector_off">#d9d7d7</color>
     <!-- 多图片选择 -->
     <color name="choose_images_transparent">#e0000000</color>
     <color name="choose_images_bg">#181818</color>

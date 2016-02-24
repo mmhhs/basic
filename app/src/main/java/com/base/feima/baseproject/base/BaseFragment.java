@@ -1,31 +1,43 @@
 package com.base.feima.baseproject.base;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.base.feima.baseproject.task.BaseTask;
-import com.base.feima.baseproject.manager.TaskManager;
+import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.manager.MFragmentsManager;
+import com.base.feima.baseproject.manager.ScreenManager;
+import com.base.feima.baseproject.manager.TaskManager;
+import com.base.feima.baseproject.task.BaseTask;
+
+import butterknife.InjectView;
+import butterknife.Optional;
 
 
 public abstract class BaseFragment extends Fragment {
     public String taskTag = "BaseFragment";//当前Fragment的线程标识
     public TaskManager taskManager = TaskManager.getTaskManagerInstance();
     public MFragmentsManager mFragmentsManager = MFragmentsManager.getFragmentManagerInstance();
-
-
-    @Override
-    public void onAttach(Activity activity){
-        super.onAttach(activity);
-    }
+    public ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
+    @Optional
+    @InjectView(R.id.base_view_contain_layout)
+    public LinearLayout containLayout;
+    @Optional
+    @InjectView(R.id.base_view_load_layout)
+    public LinearLayout loadLayout;
+    @Optional
+    @InjectView(R.id.base_ui_title_title)
+    public TextView titleText;
+    @Optional
+    @InjectView(R.id.base_ui_title_back_layout)
+    public LinearLayout backLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -56,8 +68,8 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroy(){
-        super.onDestroy();
         cancelTasks();
+        super.onDestroy();
     }
 
     /**
@@ -102,6 +114,17 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
+    public void setTitleText(String name) {
+        this.titleText.setText(name);
+    }
+
+    public void setBackLayoutVisibility(int visible){
+        backLayout.setVisibility(visible);
+    }
+
+    public void setTitleTextVisibility(int visible){
+        titleText.setVisibility(visible);
+    }
 
 
 

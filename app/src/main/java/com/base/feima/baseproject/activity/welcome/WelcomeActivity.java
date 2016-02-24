@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.activity.welcome.WelcomeFragment.IntentOnClickListener;
+import com.base.feima.baseproject.activity.HomeActivity;
 import com.base.feima.baseproject.base.BaseFragmentActivity;
+import com.base.feima.baseproject.listener.IOnClickListener;
 import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.SharedUtil;
 
@@ -87,14 +88,11 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	private void initFragment() {
 		FragmentTransaction ft = fMgr.beginTransaction();
 		WelcomeFragment welcomeFragment = new WelcomeFragment();
-		welcomeFragment.setIntentOnClickListener(new IntentOnClickListener(){
-
+		welcomeFragment.setiOnClickListener(new IOnClickListener() {
 			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
+			public void onClick(int index) {
 				setIntent();
 			}
-
 		});
 		ft.add(R.id.base_ui_welcome_fragmentRoot, welcomeFragment, tabTag1);
 		ft.commit();
@@ -132,9 +130,9 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	private void setIntent(){
 		try {
 			Intent intent = new Intent();
-			intent.setClass(WelcomeActivity.this, WelcomeActivity.class);
+			intent.setClass(WelcomeActivity.this, HomeActivity.class);
 			startActivity(intent);
-			finish();
+			finishSelf();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -147,7 +145,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	//点击返回按钮
 	@Override
 	public void onBackPressed() {
-		finish();
+		finishSelf();
 	}
 
 
