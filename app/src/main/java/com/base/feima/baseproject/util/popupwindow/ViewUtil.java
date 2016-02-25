@@ -99,12 +99,12 @@ public class ViewUtil {
 	 * @param loadLayout
 	 * @param onTryClickListener
      */
-	public void addEmptyView(Context context, String str, int imageResourceId, View contentView, LinearLayout loadLayout, IOnTryClickListener onTryClickListener){
+	public void addEmptyView(Context context, String title, String str, int imageResourceId, View contentView, LinearLayout loadLayout, IOnTryClickListener onTryClickListener){
 		try {
 			contentView.setVisibility(View.GONE);
 			loadLayout.setVisibility(View.VISIBLE);
 			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			emptyView = getEmptyView(context, str,imageResourceId);
+			emptyView = getEmptyView(context, title,str,imageResourceId);
 			loadLayout.removeAllViews();
 			loadLayout.addView(emptyView, layoutParams);
 			this.onTryClickListener = onTryClickListener;
@@ -154,11 +154,15 @@ public class ViewUtil {
 		return view;
 	}
 
-	public View getEmptyView(Context context,String str,int imageResourceId) {
+	public View getEmptyView(Context context,String title,String str,int imageResourceId) {
 		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_empty,null, false);
 		ImageView contentImage = (ImageView) view.findViewById(R.id.base_pop_empty_image);
+		TextView titleText = (TextView) view.findViewById(R.id.base_pop_empty_title);
 		TextView contentText = (TextView) view.findViewById(R.id.base_pop_empty_text);
 		LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_empty_contain);
+		if(!StringUtil.isEmpty(title)){
+			titleText.setText(title);
+		}
 		if(!StringUtil.isEmpty(str)){
 			contentText.setText(str);
 		}
@@ -187,6 +191,6 @@ public class ViewUtil {
             this.onTryClickListener.onTry();
         }
     }
-	
+
 	
 }

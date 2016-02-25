@@ -306,8 +306,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	 * @param str 描述文字
 	 * @param imageResourceId 图片资源
      */
-	public void addEmptyView(String str, int imageResourceId){
-		viewTool.addEmptyView(activity, str, imageResourceId, contentView, loadLayout, iOnTryClickListener);
+	public void addEmptyView(String title, String str, int imageResourceId){
+		viewTool.addEmptyView(activity, title, str, imageResourceId, contentView, loadLayout, iOnTryClickListener);
 	}
 
 	public void setiOnTryClickListener(IOnTryClickListener iOnTryClickListener) {
