@@ -17,9 +17,9 @@
         android:id="@+id/base_pop_load_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base_pop_item_margin"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:textSize="@dimen/base_pop_text_item2"
+        android:textSize="14sp"
         android:textColor="@color/text_grey_deep"
         android:text="@string/pop_item1" />
     

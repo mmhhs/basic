@@ -10,14 +10,14 @@ import com.base.feima.baseproject.listener.IOnLoadResultListener;
 import com.base.feima.baseproject.listener.IOnTryClickListener;
 import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultEntity;
+import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.ResultUtil;
-import com.base.feima.baseproject.util.popupwindow.ViewUtil;
-import com.base.feima.baseproject.util.BaseConstant.TaskResult;
-import com.base.feima.baseproject.util.tool.JacksonUtil;
-import com.base.feima.baseproject.util.tool.StringUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
 import com.base.feima.baseproject.util.net.Httpclient;
+import com.base.feima.baseproject.util.popupwindow.ViewUtil;
+import com.base.feima.baseproject.util.tool.JacksonUtil;
+import com.base.feima.baseproject.util.tool.StringUtil;
 
 import java.io.File;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public ViewUtil viewTool;//视图管理
 	public Activity activity;//上下文
 	public View contentView;//内容界面
-	public LinearLayout loadView;//加载界面
+	public LinearLayout loadLayout;//加载界面
 	public String loadString = "";//加载文字
 	public boolean showTipSuccess = false;//成功时显示提示信息
 	public boolean showTipError = false;//错误时显示提示信息
@@ -56,15 +56,15 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	 * 本地处理耗时线程
 	 * @param activity           上下文
 	 * @param contentView       内容视图
-	 * @param loadView          加载视图
+	 * @param loadLayout          加载视图
 	 * @param loadString        显示文字
 	 * @param showLoad          是否显示loadview 若显示，则contentView，loadView不能为空
 	 */
-	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener){
+	public ShowLoadTask(Activity activity, String tagString, View contentView, LinearLayout loadLayout, String loadString, boolean showLoad, IOnTryClickListener iOnTryClickListener){
 		this.activity = activity;
 		this.tagString = tagString;
 		this.contentView = contentView;
-		this.loadView = loadView;
+		this.loadLayout = loadLayout;
 		this.loadString = loadString;
 		this.showLoad = showLoad;
 		this.iOnTryClickListener = iOnTryClickListener;
@@ -75,18 +75,18 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	 * 网络加载线程
 	 * @param activity           上下文
 	 * @param contentView       内容视图
-	 * @param loadView          加载视图
+	 * @param loadLayout          加载视图
 	 * @param loadString        显示文字
 	 * @param showLoad          是否显示loadview 若显示，则contentView，loadView不能为空
 	 * @param httpUrl           访问路径
 	 * @param argMap            参数集合
 	 * @param accessType        访问方式
 	 */
-	public ShowLoadTask(Activity activity,String tagString,View contentView,LinearLayout loadView,String loadString,boolean showLoad,IOnTryClickListener iOnTryClickListener,String httpUrl, Map<String, Object> argMap,int accessType){
+	public ShowLoadTask(Activity activity, String tagString, View contentView, LinearLayout loadLayout, String loadString, boolean showLoad, IOnTryClickListener iOnTryClickListener, String httpUrl, Map<String, Object> argMap, int accessType){
 		this.activity = activity;
 		this.tagString = tagString;
 		this.contentView = contentView;
-		this.loadView = loadView;
+		this.loadLayout = loadLayout;
 		this.loadString = loadString;
 		this.showLoad = showLoad;
 		this.iOnTryClickListener = iOnTryClickListener;
@@ -112,20 +112,20 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
 				if (showLoad) {
-					if(contentView==null||loadView==null){
+					if(contentView==null|| loadLayout ==null){
 						return;
 					}
 					viewTool.addErrorView(activity, activity.getString(R.string.pop_item2),
-							contentView, loadView, iOnTryClickListener);
+							contentView, loadLayout, iOnTryClickListener);
 				}else {
 					OptionUtil.addToast(activity, activity.getString(R.string.net_tip));
 				}
 			}else {
 				if (showLoad) {
-					if(contentView==null||loadView==null){
+					if(contentView==null|| loadLayout ==null){
 						return;
 					}
-					viewTool.addLoadView(activity, loadString, contentView, loadView);
+					viewTool.addLoadView(activity, loadString, contentView, loadLayout);
 				}
 			}
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				return;
 			}
 			if(showLoad){
-				viewTool.removeLoadView(contentView, loadView);
+				viewTool.removeLoadView(contentView, loadLayout);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -230,7 +230,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			case ERROR:
 				if (showLoad) {
 					viewTool.addErrorView(activity, activity.getString(R.string.pop_item3),
-							contentView, loadView, iOnTryClickListener);
+							contentView, loadLayout, iOnTryClickListener);
 				}
 				if (iOnLoadResultListener!=null){
 					iOnLoadResultListener.onError(this);
@@ -243,7 +243,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			case CANCELLED:
 				if (showLoad) {
 					viewTool.addErrorView(activity, activity.getString(R.string.task1),
-							contentView, loadView, iOnTryClickListener);
+							contentView, loadLayout, iOnTryClickListener);
 				}
 				break;
 			default:
@@ -300,6 +300,15 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			return taskResult;
 		}
 	};
+
+	/**
+	 * 添加空视图
+	 * @param str 描述文字
+	 * @param imageResourceId 图片资源
+     */
+	public void addEmptyView(String str, int imageResourceId){
+		viewTool.addEmptyView(activity, str, imageResourceId, contentView, loadLayout, iOnTryClickListener);
+	}
 
 	public void setiOnTryClickListener(IOnTryClickListener iOnTryClickListener) {
 		this.iOnTryClickListener = iOnTryClickListener;

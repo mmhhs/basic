@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -18,11 +18,19 @@ public class ViewUtil {
 	private IOnTryClickListener onTryClickListener;
     private View loadView;
     private View errorView;
+	private View emptyView;
 
     public ViewUtil(){
 
     }
 
+	/**
+	 * 添加加载视图
+	 * @param context
+	 * @param loadString
+	 * @param contentView
+	 * @param loadLayout
+     */
 	public void addLoadView(Context context,String loadString,View contentView,LinearLayout loadLayout){
 		try {
 			contentView.setVisibility(View.GONE);
@@ -47,7 +55,15 @@ public class ViewUtil {
 			e.printStackTrace();
 		}		
 	}
-	
+
+	/**
+	 * 添加错误视图
+	 * @param context
+	 * @param errorString
+	 * @param contentView
+	 * @param loadLayout
+	 * @param onTryClickListener
+     */
 	public void addErrorView(Context context,String errorString,View contentView,LinearLayout loadLayout,IOnTryClickListener onTryClickListener){
 		try {
 			contentView.setVisibility(View.GONE);
@@ -74,15 +90,36 @@ public class ViewUtil {
 		}		
 	}
 
-	public void addEmptyView(Context context,String loadString,View contentView,LinearLayout loadLayout){
+	/**
+	 * 添加空视图
+	 * @param context
+	 * @param str
+	 * @param imageResourceId
+	 * @param contentView
+	 * @param loadLayout
+	 * @param onTryClickListener
+     */
+	public void addEmptyView(Context context, String str, int imageResourceId, View contentView, LinearLayout loadLayout, IOnTryClickListener onTryClickListener){
 		try {
 			contentView.setVisibility(View.GONE);
 			loadLayout.setVisibility(View.VISIBLE);
 			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			loadView = getLoadView(context, loadString);
-
+			emptyView = getEmptyView(context, str,imageResourceId);
 			loadLayout.removeAllViews();
-			loadLayout.addView(loadView, layoutParams);
+			loadLayout.addView(emptyView, layoutParams);
+			this.onTryClickListener = onTryClickListener;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeEmptyView(View contentView,LinearLayout loadLayout){
+		try {
+			contentView.setVisibility(View.VISIBLE);
+			loadLayout.setVisibility(View.GONE);
+			loadLayout.removeAllViews();
+			this.onTryClickListener = null;
+			emptyView = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,6 +154,29 @@ public class ViewUtil {
 		return view;
 	}
 
+	public View getEmptyView(Context context,String str,int imageResourceId) {
+		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_empty,null, false);
+		ImageView contentImage = (ImageView) view.findViewById(R.id.base_pop_empty_image);
+		TextView contentText = (TextView) view.findViewById(R.id.base_pop_empty_text);
+		LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_empty_contain);
+		if(!StringUtil.isEmpty(str)){
+			contentText.setText(str);
+		}
+		if (imageResourceId!=0){
+			contentImage.setImageResource(imageResourceId);
+		}
+		containLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				doOnTryClickListener();
+			}
+
+		});
+		return view;
+	}
+
     public void setOnTryClickListener(
             IOnTryClickListener onTryClickListener) {
         this.onTryClickListener = onTryClickListener;
@@ -127,18 +187,6 @@ public class ViewUtil {
             this.onTryClickListener.onTry();
         }
     }
-
-	public void addEmptyView(Context context,String loadString,View contentView,ViewGroup loadLayout){
-		try {
-			contentView.setVisibility(View.GONE);
-			loadLayout.setVisibility(View.VISIBLE);
-			LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			loadView = getLoadView(context, loadString);
-			loadLayout.removeAllViews();
-			loadLayout.addView(loadView, layoutParams);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 }
