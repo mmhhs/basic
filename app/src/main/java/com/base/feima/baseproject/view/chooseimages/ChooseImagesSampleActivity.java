@@ -5,24 +5,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.base.BaseActivity;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
-import com.base.feima.baseproject.listener.IOnSureListener;
 import com.base.feima.baseproject.util.OptionUtil;
-import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
+import com.base.feima.baseproject.view.dialog.DialogUtil;
+
 
 import java.util.ArrayList;
 
@@ -37,7 +30,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
     private ChooseImagesSampleAdapter chooseImagesSampleAdapter;
     private int screenWidth = 0;
     private int maxSize = 9;
-    private PopupwindowUtil popupwindowTool;
+    private DialogUtil dialogUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +47,7 @@ public class ChooseImagesSampleActivity extends BaseActivity {
 
     @Override
     public void init() {
-        popupwindowTool = new PopupwindowUtil(this);
+        dialogUtil = new DialogUtil(this);
         screenWidth = OptionUtil.getScreenWidth(this);
         registerBroadcast();
         chooseImagesSampleAdapter = new ChooseImagesSampleAdapter(this,chooseImageList,screenWidth);

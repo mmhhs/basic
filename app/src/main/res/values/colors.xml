@@ -12,10 +12,11 @@
     <!-- 线条颜色 -->
     <color name="line_color">#e6e6e6</color>
     <!-- 文字颜色 -->
-    <color name="text_black">#5a5a5a</color>
-    <color name="text_grey_deep">#969696</color>
+    <color name="text_black">#181818</color>
+    <color name="text_grey_deep">#484848</color>
     <color name="text_grey_light">#b8b8b8</color>
     <color name="text_white">#ffffff</color>
+    <color name="text_red">#e73706</color>
     <!-- 普通颜色 -->
     <color name="grey">#52c7c7c7</color>
     <color name="white">#ffffff</color>

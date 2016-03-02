@@ -25,6 +25,7 @@ public class VersionResultEntity extends ResultEntity {
         private String download;
         private String version;
         private String versionCode;
+        private int forceUpdate = 0;//0是不强制，1是强制
 
         public void setUpdateInfo(String updateInfo) {
             this.updateInfo = updateInfo;
@@ -57,5 +58,14 @@ public class VersionResultEntity extends ResultEntity {
         public void setVersionCode(String versionCode) {
             this.versionCode = versionCode;
         }
+
+        public int getForceUpdate() {
+            return forceUpdate;
+        }
+
+        public void setForceUpdate(int forceUpdate) {
+            this.forceUpdate = forceUpdate;
+        }
     }
+
 }

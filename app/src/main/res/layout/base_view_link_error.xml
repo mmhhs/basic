@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/base_pop_empty_contain"
+    android:id="@+id/base_view_link_error_container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
@@ -13,10 +13,10 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/base_pop_empty_image"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/base_pop_error" />
+            android:src="@drawable/base_view_link_error"
+            android:id="@+id/base_view_link_error_image"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/base_pop_empty_title"
+                android:id="@+id/base_view_link_error_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -34,15 +34,17 @@
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 
+
             <TextView
-                android:id="@+id/base_pop_empty_text"
+                android:id="@+id/base_view_link_error_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:text="@string/pop_item3"
+                android:text="@string/pop_item4"
                 android:textColor="@color/text_grey_deep"
                 android:textSize="14sp" />
+
         </LinearLayout>
 
     </LinearLayout>

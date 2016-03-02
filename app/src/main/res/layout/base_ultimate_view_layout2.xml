@@ -20,7 +20,7 @@
         android:layout_height="45dp"
         android:padding="10dp"
         android:src="@drawable/toy_pro_arrow"
-        android:background="@drawable/toy_arrow_bg"
+        android:background="@drawable/base_arrow_bg"
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"

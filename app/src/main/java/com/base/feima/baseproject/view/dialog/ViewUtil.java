@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.util.popupwindow;
+package com.base.feima.baseproject.view.dialog;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -127,8 +127,8 @@ public class ViewUtil {
 
 	
 	public View getLoadView(Context context,String loadsString) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_load,null, false);
-	    TextView loadText = (TextView) view.findViewById(R.id.base_pop_load_text);
+		View view = LayoutInflater.from(context).inflate(R.layout.base_view_link_load,null, false);
+	    TextView loadText = (TextView) view.findViewById(R.id.base_view_link_load_item_text);
         if(!loadsString.isEmpty()){
         	loadText.setText(loadsString);
         }
@@ -136,9 +136,9 @@ public class ViewUtil {
 	}
 	
 	public View getErrorView(Context context,String errorString) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_error,null, false);
-	    TextView titleText = (TextView) view.findViewById(R.id.base_pop_error_item1);
-        LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_error_contain);
+		View view = LayoutInflater.from(context).inflate(R.layout.base_view_link_error,null, false);
+	    TextView titleText = (TextView) view.findViewById(R.id.base_view_link_error_title);
+        LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_view_link_error_container);
         if(!StringUtil.isEmpty(errorString)){
         	titleText.setText(errorString);
         }
@@ -155,11 +155,11 @@ public class ViewUtil {
 	}
 
 	public View getEmptyView(Context context,String title,String str,int imageResourceId) {
-		View view = LayoutInflater.from(context).inflate(R.layout.base_pop_empty,null, false);
-		ImageView contentImage = (ImageView) view.findViewById(R.id.base_pop_empty_image);
-		TextView titleText = (TextView) view.findViewById(R.id.base_pop_empty_title);
-		TextView contentText = (TextView) view.findViewById(R.id.base_pop_empty_text);
-		LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_pop_empty_contain);
+		View view = LayoutInflater.from(context).inflate(R.layout.base_view_link_empty,null, false);
+		ImageView contentImage = (ImageView) view.findViewById(R.id.base_view_link_empty_image);
+		TextView titleText = (TextView) view.findViewById(R.id.base_view_link_empty_title);
+		TextView contentText = (TextView) view.findViewById(R.id.base_view_link_empty_content);
+		LinearLayout containLayout = (LinearLayout) view.findViewById(R.id.base_view_link_empty_container);
 		if(!StringUtil.isEmpty(title)){
 			titleText.setText(title);
 		}

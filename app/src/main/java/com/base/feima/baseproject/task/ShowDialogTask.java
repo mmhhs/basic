@@ -12,12 +12,13 @@ import com.base.feima.baseproject.manager.TaskManager;
 import com.base.feima.baseproject.model.ResultEntity;
 import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.ResultUtil;
-import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
+
 import com.base.feima.baseproject.util.BaseConstant.TaskResult;
 import com.base.feima.baseproject.util.tool.JacksonUtil;
 import com.base.feima.baseproject.util.tool.StringUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
 import com.base.feima.baseproject.util.net.Httpclient;
+import com.base.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
 import java.util.List;
@@ -52,7 +53,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	private IOnDialogResultListener iOnDialogResultListener;
 	private IOnDialogBackgroundListener iOnDialogBackgroundListener;
 	private IOnEncryptListener iOnEncryptListener;
-	private PopupwindowUtil popupwindowTool;
+	private DialogUtil dialogUtil;
 
 	/**
 	 * 本地处理耗时线程
@@ -189,7 +190,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	}
 
 	private void init(){
-		popupwindowTool = new PopupwindowUtil(activity);
+		dialogUtil = new DialogUtil(activity);
 		Httpclient.setContext(activity);
 	}
 
@@ -211,7 +212,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 					if(parentView==null){
 						return;
 					}
-					loadPopupWindow = popupwindowTool.showLoadWindow(activity, parentView, loadString,0, true,true);
+					loadPopupWindow = dialogUtil.showLoadDialog(parentView, loadString);
 				}
 
 			}

@@ -44,19 +44,15 @@ public class PopupwindowListAdapter extends BaseAdapter {
 		ViewHolder viewHolder ;
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
-			
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.base_pop_list_item, null);
-			
+					R.layout.base_view_dialog_list_item, null);
 			viewHolder.text = (TextView) convertView
-					.findViewById(R.id.base_pop_list_item_name);
+					.findViewById(R.id.base_view_dialog_list_item_name);
 			convertView.setTag(viewHolder);
 		} else {
 
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		
-		
 		try {
 			viewHolder.text.setText(list[position]);
 		} catch (Exception e) {

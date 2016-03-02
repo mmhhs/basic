@@ -2,9 +2,9 @@ package com.base.feima.baseproject.view.chooseimages;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
@@ -27,25 +27,22 @@ public class ChooseImagesPreviewAdapter extends PagerAdapter {
 
 
     @Override
-    public void destroyItem(View view, int position, Object object) {
+    public void destroyItem(ViewGroup view, int position, Object object) {
         // TODO Auto-generated method stub
 
-        ((ViewPager) view).removeView((View) object);
+        view.removeView((View) object);
     }
 
     @Override
-    public void finishUpdate(View container) {
+    public void finishUpdate(ViewGroup container) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public Object instantiateItem(View view, final int position) {
+    public Object instantiateItem(ViewGroup view, final int position) {
         View convertView = null;
         convertView = LayoutInflater.from(context).inflate(R.layout.base_adapter_choose_images_preview, null);
-//        ImageView imageView = (ImageView) convertView.findViewById(R.id.base_adapter_choose_images_preview_imageView);
-//        imageLoader.displayImage("file://"+list.get(position),imageView, OptionTools.getNoDiscOptions(context));
         InstrumentedDraweeView imageView = (InstrumentedDraweeView)convertView.findViewById(R.id.base_fresco_fitcenter_imageview);
-
         FrescoUtils.displayImage(imageView,"file://"+list.get(position),720,1280);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +52,7 @@ public class ChooseImagesPreviewAdapter extends PagerAdapter {
                 }
             }
         });
-        ((ViewPager) view).addView(convertView, 0);
+        view.addView(convertView, 0);
         return convertView;
     }
 

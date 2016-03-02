@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@color/transparent"
-            android:id="@+id/player_view_guide_img" />
+            android:id="@+id/base_view_guide_image" />
 
         <ImageView
             android:layout_width="0dp"

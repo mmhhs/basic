@@ -10,5 +10,5 @@
         android:id="@+id/imageView"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/base_pop_error" />
+        android:background="@drawable/base_view_link_error" />
 </LinearLayout>

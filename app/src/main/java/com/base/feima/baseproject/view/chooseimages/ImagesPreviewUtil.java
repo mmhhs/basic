@@ -12,10 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.listener.IOnDialogListener;
 import com.base.feima.baseproject.listener.IOnItemClickListener;
-import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.util.OptionUtil;
-import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
+import com.base.feima.baseproject.view.dialog.DialogUtil;
 
 import java.util.ArrayList;
 
@@ -40,12 +39,11 @@ public class ImagesPreviewUtil{
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.base_choose_images_pop_preview_viewPager);
         final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
         final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
-        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_ui_title_back_layout);
+        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_back);
         RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         final LinearLayout deleteLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_delete);
         final TextView indexText = (TextView) view.findViewById(R.id.base_choose_images_title_index);
-        containLayout.setPadding(0, OptionUtil.getStatusBarHeight(activity),0,0);
         chooseImagesPreviewAdapter = new ChooseImagesPreviewAdapter(context,chooseImageList);
         chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener() {
             @Override
@@ -91,9 +89,7 @@ public class ImagesPreviewUtil{
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
-        if(true){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //使按返回键能够消失
-        }
+        popupWindow.setBackgroundDrawable(new BitmapDrawable()); //使按返回键能够消失
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -103,11 +99,11 @@ public class ImagesPreviewUtil{
         deleteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupwindowUtil popupwindowTool = new PopupwindowUtil(activity);
-                popupwindowTool.showSureWindow(context,containView,"",context.getString(R.string.choose_images_delete));
-                popupwindowTool.setiOnSureListener(new IOnSureListener() {
+                DialogUtil dialogUtil = new DialogUtil(activity);
+                dialogUtil.showTipDialog(containView,context.getString(R.string.choose_images_delete));
+                dialogUtil.setiOnDialogListener(new IOnDialogListener() {
                     @Override
-                    public void onSureClick() {
+                    public void onConfirm() {
                         chooseImageList.remove(imageIndex);
                         chooseImagesSampleAdapter.notifyDataSetChanged();
                         chooseImagesPreviewAdapter.notifyDataSetChanged();
@@ -122,6 +118,15 @@ public class ImagesPreviewUtil{
                             indexText.setText("" + (imageIndex + 1) + "/" + chooseImageList.size());
                             viewPager.setCurrentItem(imageIndex);
                         }
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onOther() {
 
                     }
                 });

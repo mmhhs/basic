@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
 
-    <include layout="@layout/base_pop_load_item"/>
+    <include layout="@layout/base_view_link_load_item"/>
     
     
 

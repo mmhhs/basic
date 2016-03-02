@@ -2,11 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-
+    style="@style/base_background_white"
     >
-
     <include layout="@layout/base_choose_images_title" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

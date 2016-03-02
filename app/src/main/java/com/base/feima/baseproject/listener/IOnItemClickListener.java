@@ -1,5 +1,5 @@
 package com.base.feima.baseproject.listener;
 
 public interface IOnItemClickListener{
-    public void onItemClick(int position);
+    void onItemClick(int position);
 }

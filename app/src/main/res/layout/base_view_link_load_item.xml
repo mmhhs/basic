@@ -14,7 +14,7 @@
         />
 
     <TextView
-        android:id="@+id/base_pop_load_text"
+        android:id="@+id/base_view_link_load_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"

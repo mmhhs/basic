@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 import com.base.feima.baseproject.R;
+import com.base.feima.baseproject.listener.IOnDialogListener;
 import com.base.feima.baseproject.listener.IOnProgressListener;
-import com.base.feima.baseproject.listener.IOnSureListener;
-import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
 import com.base.feima.baseproject.util.BaseConstant;
+import com.base.feima.baseproject.view.dialog.DialogUtil;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -36,7 +36,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
     private boolean silenceDownload = false;//静默下载
     private String windowTitle = "";//标题
     private View parentView;//父类视图
-    private PopupwindowUtil popupwindowTool;
+    private DialogUtil dialogUtil;
     private PopupWindow popupWindow;
     //下载相关
     private HttpClient httpClient = new DefaultHttpClient();
@@ -50,15 +50,21 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
         this.silenceDownload = silenceDownload;
         this.windowTitle = windowTitle;
         this.parentView = parentView;
-        popupwindowTool = new PopupwindowUtil(activity);
-        popupwindowTool.setiOnSureListener(new IOnSureListener() {
+        dialogUtil = new DialogUtil(activity);
+        dialogUtil.setiOnDialogListener(new IOnDialogListener() {
             @Override
-            public void onSureClick() {
-                try {
-                    cancel(true);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+            public void onConfirm() {
+
+            }
+
+            @Override
+            public void onCancel() {
+                cancel(true);
+            }
+
+            @Override
+            public void onOther() {
+
             }
         });
 	}
@@ -70,7 +76,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
                 iOnProgressListener.start();
             }
             if (!silenceDownload){
-                popupWindow = popupwindowTool.showDownloadWindow(activity,parentView,windowTitle,false);
+                popupWindow = dialogUtil.showDownloadDialog(parentView,false);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -127,7 +133,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
                 iOnProgressListener.transferred(progress[0], totalSize);
             }
             if (!silenceDownload){
-                popupwindowTool.updateProgressInfo(progress[0], totalSize);
+                dialogUtil.updateProgressInfo(progress[0], totalSize);
             }
         }catch (Exception e){
             e.printStackTrace();

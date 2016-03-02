@@ -336,7 +336,7 @@ public class ChooseImagesActivity extends BaseActivity {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.base_choose_images_pop_preview_viewPager);
         final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
         final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
-        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_ui_title_back_layout);
+        LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_back);
         RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         TextView previewText = (TextView) view.findViewById(R.id.base_choose_images_footer_preview);

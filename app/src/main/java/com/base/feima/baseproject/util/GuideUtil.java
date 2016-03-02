@@ -40,8 +40,8 @@ public class GuideUtil {
             final FrameLayout frameLayout = (FrameLayout) rootLayout;
             int guideResourceId = getGuideResourceId(className, index);
             if (guideResourceId != 0) {//设置了引导图片
-                final View view = LayoutInflater.from(activity).inflate(R.layout.player_view_guide,null);
-                ImageView guideImage = (ImageView)view.findViewById(R.id.player_view_guide_img);
+                final View view = LayoutInflater.from(activity).inflate(R.layout.base_view_guide,null);
+                ImageView guideImage = (ImageView)view.findViewById(R.id.base_view_guide_image);
                 guideImage.getLayoutParams().width = (int)(screenHeight*rate)- DensityUtil.dip2px(activity,2);
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 view.setLayoutParams(params);

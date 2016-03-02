@@ -6,17 +6,17 @@ import android.view.View;
 
 import com.base.feima.baseproject.R;
 import com.base.feima.baseproject.listener.IOnDialogBackgroundListener;
+import com.base.feima.baseproject.listener.IOnDialogListener;
 import com.base.feima.baseproject.listener.IOnDialogResultListener;
-import com.base.feima.baseproject.listener.IOnIgnoreListener;
 import com.base.feima.baseproject.listener.IOnProgressListener;
-import com.base.feima.baseproject.listener.IOnSureListener;
+import com.base.feima.baseproject.manager.ScreenManager;
 import com.base.feima.baseproject.model.version.VersionResultEntity;
 import com.base.feima.baseproject.task.FileDownLoadAsyncTask;
 import com.base.feima.baseproject.task.ShowDialogTask;
 import com.base.feima.baseproject.task.TaskConstant;
-import com.base.feima.baseproject.util.tool.JacksonUtil;
-import com.base.feima.baseproject.util.popupwindow.PopupwindowUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
+import com.base.feima.baseproject.util.tool.JacksonUtil;
+import com.base.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
 import java.util.Map;
@@ -27,11 +27,13 @@ public class VersionCheckUtil {
     private String taskTag;
     private VersionResultEntity.VersionDataEntity versionDataEntity;
     private boolean showToast = false;
+    private ScreenManager screenManager;
 
     public VersionCheckUtil(Activity activity, View parentView, String taskTag) {
         this.activity = activity;
         this.parentView = parentView;
         this.taskTag = taskTag;
+        screenManager = ScreenManager.getScreenManagerInstance();
     }
 
     private void updateVersion(){
@@ -51,11 +53,11 @@ public class VersionCheckUtil {
                                 String message = ""+activity.getString(R.string.tip1)+versionDataEntity.getVersion();
                                 String info = (""+versionDataEntity.getUpdateInfo()).replace("#", activity.getString(R.string.tip2));
                                 message = message + activity.getString(R.string.tip2) + info;
-                                PopupwindowUtil popupwindowTool = new PopupwindowUtil(activity);
-                                popupwindowTool.showSureWindow(activity, parentView, activity.getString(R.string.tip5), message, true, true, false, 0);
-                                popupwindowTool.setiOnSureListener(new IOnSureListener() {
+                                DialogUtil dialogUtil = new DialogUtil(activity);
+                                dialogUtil.showTipDialog( parentView, message);
+                                dialogUtil.setiOnDialogListener(new IOnDialogListener() {
                                     @Override
-                                    public void onSureClick() {
+                                    public void onConfirm() {
                                         File apkFile = new File(BaseConstant.APKPATH);
                                         boolean needDownLoad = true;
                                         if (apkFile.exists()) {
@@ -70,11 +72,21 @@ public class VersionCheckUtil {
                                             OptionUtil.install(activity, BaseConstant.APKPATH);
                                         }
                                     }
-                                });
-                                popupwindowTool.setiOnIgnoreListener(new IOnIgnoreListener() {
+
                                     @Override
-                                    public void onIgnoreClick() {
-                                        SharedUtil.saveIgnoreVersion(activity, ""+versionDataEntity.getVersionCode());
+                                    public void onCancel() {
+                                        if (versionDataEntity.getForceUpdate()==1){
+                                            screenManager.closeAll();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onOther() {
+                                        if (versionDataEntity.getForceUpdate()==1){
+                                            screenManager.closeAll();
+                                        }else {
+                                            SharedUtil.saveIgnoreVersion(activity, ""+versionDataEntity.getVersionCode());
+                                        }
                                     }
                                 });
                             }

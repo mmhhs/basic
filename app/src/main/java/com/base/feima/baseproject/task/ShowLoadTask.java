@@ -15,7 +15,7 @@ import com.base.feima.baseproject.util.OptionUtil;
 import com.base.feima.baseproject.util.ResultUtil;
 import com.base.feima.baseproject.util.net.HttpUtil;
 import com.base.feima.baseproject.util.net.Httpclient;
-import com.base.feima.baseproject.util.popupwindow.ViewUtil;
+import com.base.feima.baseproject.view.dialog.ViewUtil;
 import com.base.feima.baseproject.util.tool.JacksonUtil;
 import com.base.feima.baseproject.util.tool.StringUtil;
 
