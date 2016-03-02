@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.view;
+package com.base.feima.baseproject.view.titlebar;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -10,51 +10,53 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.base.feima.baseproject.R;
-import com.base.feima.baseproject.util.tool.DensityUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TitleBarLineWeightView extends LinearLayout {
-	private final String TAGS = "TitleBarLineWeightView";
+public class TitleBarWeightView extends LinearLayout {
+	private final String TAGS = "TitleBarWeightView";
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
 	private ViewPager pager;
 	private List<TextView> textViewList = new ArrayList<TextView>();
 	private List<TitleItem> titleItemList;
-	private LayoutParams defaultTabLayoutParams,lineLayoutParams;
+	private LayoutParams defaultTabLayoutParams;
 	private Context context;
 	private boolean moveAble = true;
 	public OnChangeListener onChangeListener;
 
-	public TitleBarLineWeightView(Context context) {
+	public TitleBarWeightView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		this.context = context;
+		defaultTabLayoutParams = new LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		defaultTabLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+		defaultTabLayoutParams.weight = 1;
 	}
 
-	public TitleBarLineWeightView(Context context, AttributeSet attrs) {
+	public TitleBarWeightView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 		this.context = context;
+		defaultTabLayoutParams = new LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		defaultTabLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+		defaultTabLayoutParams.weight = 1;
 	}
 
-	public TitleBarLineWeightView(Context context, AttributeSet attrs, int defStyle) {
+	public TitleBarWeightView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 		this.context = context;
-
+		defaultTabLayoutParams = new LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		defaultTabLayoutParams.gravity = Gravity.CENTER_VERTICAL;
+		defaultTabLayoutParams.weight = 1;
 	}
 
 	public void init(Context context, List<TitleItem> titleItemList,
-					 ViewPager pager, int index) {
-        defaultTabLayoutParams = new LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-        defaultTabLayoutParams.gravity = Gravity.CENTER_VERTICAL;
-        defaultTabLayoutParams.weight = 1;
-		lineLayoutParams = new LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+			ViewPager pager, int index) {
 		this.context = context;
 		this.titleItemList = titleItemList;
 		setViewPager(pager);
@@ -76,11 +78,10 @@ public class TitleBarLineWeightView extends LinearLayout {
 	private void addItem(final int position) {
 		TitleItem titleItem = titleItemList.get(position);
 		TextView textView = new TextView(context);
-		textView.setGravity(Gravity.CENTER);
-		textView.setLineSpacing(DensityUtil.dip2px(context,2),1);
 		textView.setLayoutParams(defaultTabLayoutParams);
+		textView.setBackgroundResource(titleItem.getBackgroundResourseId());
 		textView.setText(titleItem.getName());
-        textView.setBackgroundResource(titleItem.getBackgroundResourseId());
+		textView.setGravity(Gravity.CENTER);
 		textView.setTextAppearance(context, titleItem.getTextStyle());
 		textView.setOnClickListener(new OnClickListener() {
 			@Override
@@ -90,22 +91,11 @@ public class TitleBarLineWeightView extends LinearLayout {
 					setItemStatus(position);
 					setPager(position);
 				}
-
 			}
 
 		});
 		textViewList.add(textView);
 		addView(textView);
-        if (position!=(titleItemList.size()-1)){
-            View lineView = LinearLayout.inflate(context, R.layout.toy_include_line,null);
-            addView(lineView,lineLayoutParams);
-        }
-	}
-
-	public void setTitles(List<TitleItem> list){
-		for (int i=0;i<textViewList.size();i++){
-			textViewList.get(i).setText(list.get(i).getName());
-		}
 	}
 
 	private void setItemStatus(int position) {
@@ -158,6 +148,7 @@ public class TitleBarLineWeightView extends LinearLayout {
 		@Override
 		public void onPageScrollStateChanged(int state) {
 			// TODO Auto-generated method stub
+
 		}
 
 		@Override
@@ -177,32 +168,31 @@ public class TitleBarLineWeightView extends LinearLayout {
 
 	}
 
-	public static int dip2px(Context context, float dpValue) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (dpValue * scale + 0.5f);
-	}
-	public static int px2dip(Context context, float pxValue) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (pxValue / scale + 0.5f);
-	}
+
 
 	public static class TitleItem {
-		public String name;
-		public int textStyle;
+        public String name;
+        public int textStyle;
         public int backgroundResourseId;
+
 		public TitleItem() {
 
 		}
 
-        public TitleItem(String name, int textStyle) {
-            this.name = name;
-            this.textStyle = textStyle;
+        public String getName() {
+            return name;
         }
 
-        public TitleItem(String name, int textStyle, int backgroundResourseId) {
+        public void setName(String name) {
             this.name = name;
+        }
+
+        public int getTextStyle() {
+            return textStyle;
+        }
+
+        public void setTextStyle(int textStyle) {
             this.textStyle = textStyle;
-            this.backgroundResourseId = backgroundResourseId;
         }
 
         public int getBackgroundResourseId() {
@@ -212,30 +202,7 @@ public class TitleBarLineWeightView extends LinearLayout {
         public void setBackgroundResourseId(int backgroundResourseId) {
             this.backgroundResourseId = backgroundResourseId;
         }
-
-
-
-        public int getTextStyle() {
-			return textStyle;
-		}
-
-
-		public void setTextStyle(int textStyle) {
-			this.textStyle = textStyle;
-		}
-
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-
-
-	}
+    }
 	
 	public interface OnChangeListener {
 		  public void   onClick(int position);

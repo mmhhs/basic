@@ -60,8 +60,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
 	@Override
 	protected void onDestroy(){
-		super.onDestroy();
 		cancelTasks();
+		super.onDestroy();
 	}
 
 	/**

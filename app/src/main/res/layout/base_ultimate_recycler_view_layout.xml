@@ -2,15 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto">
+    >
 
     <com.base.feima.baseproject.view.ultimate.VerticalSwipeRefreshLayout
         android:layout_width="fill_parent"
-        android:id="@+id/swipe_refresh_layout"
+        android:id="@+id/base_ultimate_view_layout_refreshlayout"
         android:layout_height="fill_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/ultimate_list"
+            android:id="@+id/base_ultimate_view_layout_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </com.base.feima.baseproject.view.ultimate.VerticalSwipeRefreshLayout>

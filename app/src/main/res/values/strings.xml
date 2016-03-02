@@ -8,19 +8,10 @@
     <string name="task1">连接服务器异常，请稍后再试！</string>
     <string name="task2">正在加载</string>
     <string name="task3">正在提交</string>
-    <string name="task4">更新成功</string>
-    <string name="task5">操作成功</string>
-    <string name="task6">提交</string>
-    <!-- popupwindow 相关 -->
-	<string name="pop_item1">正在加载</string>
-	<string name="pop_item2">网络不给力，查看下吧！</string>
+
 	<string name="pop_item3">未获取到内容</string>
 	<string name="pop_item4">请点击页面重试</string>
-	<string name="pop_item5">操作</string>
-    <string name="pop6">提示</string>
-    <string name="pop7">确定</string>
-    <string name="pop8">取消</string>
-    <string name="pop9">忽略此版本</string>
+
     <!-- 版本更新 -->
     <string name="check_version">检查更新</string>
     <string name="check_version_fail">更新失败</string>
@@ -65,5 +56,5 @@
     <!-- 标题 -->
     <string name="title1">关于我们</string>
 
-    <string name="toy_day">天</string>
+    <string name="day">天</string>
 </resources>

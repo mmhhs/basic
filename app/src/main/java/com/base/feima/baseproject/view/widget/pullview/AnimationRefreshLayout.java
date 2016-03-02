@@ -424,13 +424,13 @@ public class AnimationRefreshLayout extends RelativeLayout
 				}
 				if (state != REFRESHING){
 					if (pullDownY<=80+distance){
-						refreshImageView.setImageResource(R.drawable.toy_refresh_0);
+						refreshImageView.setImageResource(R.drawable.base_refresh_0);
 					}else if (pullDownY<=80+2*distance&&pullDownY>80+distance){
-						refreshImageView.setImageResource(R.drawable.toy_refresh_1);
+						refreshImageView.setImageResource(R.drawable.base_refresh_1);
 					}else if (pullDownY<=80+3*distance&&pullDownY>80+2*distance){
-						refreshImageView.setImageResource(R.drawable.toy_refresh_2);
+						refreshImageView.setImageResource(R.drawable.base_refresh_2);
 					}else {
-						refreshImageView.setImageResource(R.drawable.toy_refresh_3);
+						refreshImageView.setImageResource(R.drawable.base_refresh_3);
 					}
 				}
 				if (pullDownY >= refreshDist && state == INIT)

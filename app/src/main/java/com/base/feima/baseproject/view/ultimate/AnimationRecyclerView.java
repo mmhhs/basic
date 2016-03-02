@@ -82,10 +82,10 @@ public class AnimationRecyclerView extends FrameLayout{
 
     private void initViews() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.base_ultimate_view_layout2, this);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.ultimate_list);
+        View view = inflater.inflate(R.layout.base_ultimate_recycler_view_layout, this);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.base_ultimate_view_layout_recyclerview);
         arrowImg = (ImageView)view.findViewById(R.id.base_ultimate_view_layout_arrow);
-        refreshLayout = (AnimationRefreshLayout) view.findViewById(R.id.base_ultimate_view_layout2_refresh_layout);
+        refreshLayout = (AnimationRefreshLayout) view.findViewById(R.id.base_ultimate_view_layout_refreshlayout);
         if (mRecyclerView != null) {
             mRecyclerView.setClipToPadding(mClipToPadding);
             if (mPadding != -0.0f) {

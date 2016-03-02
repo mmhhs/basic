@@ -81,9 +81,9 @@ public class UltimateRecyclerView extends FrameLayout {
     private void initViews() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.base_ultimate_recycler_view_layout, this);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.ultimate_list);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.base_ultimate_view_layout_recyclerview);
         arrowImg = (ImageView)view.findViewById(R.id.base_ultimate_view_layout_arrow);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.base_ultimate_view_layout_refreshlayout);
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,

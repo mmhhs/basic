@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.view;
+package com.base.feima.baseproject.view.titlebar;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

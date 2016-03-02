@@ -107,7 +107,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	{
 		try {
 			if(StringUtil.isEmpty(loadString)){
-				loadString = activity.getResources().getString(R.string.pop_item1);
+				loadString = activity.getResources().getString(R.string.task2);
 			}
 			if(!HttpUtil.isnet(activity)){
 				netFlag = NET_ERROR;
@@ -115,7 +115,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 					if(contentView==null|| loadLayout ==null){
 						return;
 					}
-					viewTool.addErrorView(activity, activity.getString(R.string.pop_item2),
+					viewTool.addErrorView(activity, activity.getString(R.string.net_tip),
 							contentView, loadLayout, iOnTryClickListener);
 				}else {
 					OptionUtil.addToast(activity, activity.getString(R.string.net_tip));
