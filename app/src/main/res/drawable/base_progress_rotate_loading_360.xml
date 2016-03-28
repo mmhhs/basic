@@ -8,6 +8,6 @@
     <bitmap
         android:antialias="true"
         android:filter="true"
-        android:src="@drawable/base_pop_load" />
+        android:src="@mipmap/base_pop_load" />
 
 </rotate>

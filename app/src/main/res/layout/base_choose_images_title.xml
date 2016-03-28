@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/base_choose_images_back" />
+            android:src="@mipmap/base_choose_images_back" />
     </LinearLayout>
     <View
         android:layout_width="0.5dp"
@@ -54,7 +54,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/base_choose_images_delete" />
+            android:src="@mipmap/base_choose_images_delete" />
     </LinearLayout>
 
     <TextView

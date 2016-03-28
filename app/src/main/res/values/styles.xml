@@ -155,9 +155,9 @@
     <!-- SwipeBackLayout style -->
     <style name="SwipeBackLayout">
         <item name="edge_size">50dp</item>
-        <item name="shadow_left">@drawable/base_shadow_left</item>
-        <item name="shadow_right">@drawable/base_shadow_right</item>
-        <item name="shadow_bottom">@drawable/base_shadow_bottom</item>
+        <item name="shadow_left">@mipmap/base_shadow_left</item>
+        <item name="shadow_right">@mipmap/base_shadow_right</item>
+        <item name="shadow_bottom">@mipmap/base_shadow_bottom</item>
     </style>
     <style name="SlideRight" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/base_slide_in_from_right</item>

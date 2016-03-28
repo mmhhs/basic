@@ -12,7 +12,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/base_choose_images_back"/>
+            android:src="@mipmap/base_choose_images_back"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

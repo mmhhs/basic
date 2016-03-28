@@ -11,7 +11,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/base_black_bg"
+            android:background="@mipmap/base_black_bg"
             android:layout_weight="1" />
 
         <ImageView
@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/base_black_bg"
+            android:background="@mipmap/base_black_bg"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

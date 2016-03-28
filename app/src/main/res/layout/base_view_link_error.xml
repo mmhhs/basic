@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/base_view_link_error"
+            android:src="@mipmap/base_view_link_error"
             android:id="@+id/base_view_link_error_image"/>
 
         <LinearLayout

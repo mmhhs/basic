@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="60dp"
-                android:background="@drawable/base_pullable_pullup_icon_big" />
+                android:background="@mipmap/base_pullable_pullup_icon_big" />
 
             <ImageView
                 android:id="@+id/loading_icon"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="60dp"
-                android:background="@drawable/base_pullable_loading"
+                android:background="@mipmap/base_pullable_loading"
                 android:visibility="gone" />
 
             <TextView

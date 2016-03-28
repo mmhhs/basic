@@ -8,22 +8,6 @@
          https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
-    <!--popupwindow-->
-    <dimen name="base_pop_width">280dp</dimen>
-    <dimen name="base_pop_title_height">60dp</dimen>
-    <dimen name="base_pop_title_margin">15dp</dimen>
-    <dimen name="base_pop_item_margin">10dp</dimen>
-    <dimen name="base_pop_item_padding">5dp</dimen>
-    <dimen name="base_pop_line_margin">10dp</dimen>
-    <dimen name="base_pop_item_height">50dp</dimen>
-    <dimen name="base_pop_text_title">20sp</dimen>
-    <dimen name="base_pop_text_item">18sp</dimen>
-    <dimen name="base_pop_text_item2">16sp</dimen>
-    <dimen name="base_pop_sureitem_padding">20dp</dimen>
-    <dimen name="base_pop_message_height">80dp</dimen>
-    <dimen name="base_pop_load_width">160dp</dimen>
-    <dimen name="base_pop_load_height">120dp</dimen>
-
 
     <dimen name="navigation_bar_height_top">54dp</dimen>
     <dimen name="navigation_bar_height_bottom">54dp</dimen>

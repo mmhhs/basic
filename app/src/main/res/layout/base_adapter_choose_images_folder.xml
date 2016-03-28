@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/base_adapter_choose_images_folder_select"
-            android:background="@drawable/base_choose_images_folder_select"
+            android:background="@mipmap/base_choose_images_folder_select"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
         </LinearLayout>

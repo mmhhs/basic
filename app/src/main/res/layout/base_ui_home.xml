@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableTop="@drawable/base_tab0_on"
+                android:drawableTop="@mipmap/base_tab0_on"
                 android:text="@string/navi_item1" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableTop="@drawable/base_tab0_on"
+                android:drawableTop="@mipmap/base_tab0_on"
                 android:text="@string/navi_item2" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableTop="@drawable/base_tab0_on"
+                android:drawableTop="@mipmap/base_tab0_on"
                 android:text="@string/navi_item3" />
 
         </LinearLayout>

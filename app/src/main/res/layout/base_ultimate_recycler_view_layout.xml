@@ -19,7 +19,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:padding="10dp"
-        android:src="@drawable/base_arrow_up"
+        android:src="@mipmap/base_arrow_up"
         android:background="@drawable/base_arrow_bg"
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="25dp"
