@@ -16,14 +16,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
+import com.feima.baseproject.listener.IOnRefreshListener;
 import com.feima.baseproject.view.widget.spin.TransProgressWheel;
 
-public class UltimateRecyclerView extends FrameLayout {
+
+public class UltimateRecyclerView extends FrameLayout{
     public RecyclerView mRecyclerView;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     private ImageView arrowImg;
-    private OnHeadRefreshListener onHeadRefreshListener;
-    private OnLoadMoreListener onLoadMoreListener;
+    private IOnRefreshListener onRefreshListener;
     private int lastVisibleItemPosition;
     protected RecyclerView.OnScrollListener mOnScrollListener;
     private boolean isLoadingMore = false;
@@ -42,7 +43,7 @@ public class UltimateRecyclerView extends FrameLayout {
     private boolean endLoadMore = false;
     private TransProgressWheel progressWheel;
     private LinearLayout endLayout;
-    private int lastVisibleItemPositionLimit = 15;
+    private int lastVisibleItemPositionLimit = 17;
 
     protected LAYOUT_MANAGER_TYPE layoutManagerType;
 
@@ -210,11 +211,11 @@ public class UltimateRecyclerView extends FrameLayout {
                     int totalItemCount = layoutManager.getItemCount();
                     if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE &&
                             (lastVisibleItemPosition) >= totalItemCount - 1) && !isLoadingMore) {
-                        if (onLoadMoreListener != null) {
+                        if (onRefreshListener != null) {
                             if (enableLoadingMore&&canRefresh()){
                                 isLoadingMore = true;
                                 mAdapter.getCustomLoadMoreView().setVisibility(View.VISIBLE);
-                                onLoadMoreListener.loadMore(mRecyclerView.getAdapter().getItemCount(), lastVisibleItemPosition);
+                                onRefreshListener.onLoadMore();
                             }
                         }
                     }
@@ -232,19 +233,11 @@ public class UltimateRecyclerView extends FrameLayout {
         mSwipeRefreshLayout.setEnabled(isSwipeRefresh);
     }
 
-    public interface  OnHeadRefreshListener{
-        public void refresh();
-    }
-
-    public void setOnHeadRefreshListener(OnHeadRefreshListener onHeadRefreshListener){
-        this.onHeadRefreshListener = onHeadRefreshListener;
+    public void setOnRefreshListener(IOnRefreshListener onRefreshListener) {
+        this.onRefreshListener = onRefreshListener;
         setOnRefreshListener();
     }
 
-    public interface  OnLoadMoreListener{
-
-        public void loadMore(int itemsCount, int maxLastVisiblePosition);
-    }
 
     public void setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener listener) {
         mSwipeRefreshLayout.setEnabled(true);
@@ -255,19 +248,15 @@ public class UltimateRecyclerView extends FrameLayout {
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (onHeadRefreshListener!=null){
+                if (onRefreshListener!=null){
                     if (refreshStart()){
-                        onHeadRefreshListener.refresh();
+                        onRefreshListener.onRefresh();
                     }
                 }
             }
         };
         mSwipeRefreshLayout.setEnabled(true);
         mSwipeRefreshLayout.setOnRefreshListener(listener);
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
-        this.onLoadMoreListener = onLoadMoreListener;
     }
 
 

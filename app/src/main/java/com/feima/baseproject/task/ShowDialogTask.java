@@ -262,7 +262,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				break;
 			case TaskConstant.UPLOAD:
 				try {
-					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+					resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -270,7 +270,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				break;
 			case TaskConstant.UPLOADS:
 				try {
-					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+					resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

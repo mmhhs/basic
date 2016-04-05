@@ -10,7 +10,6 @@ import com.feima.baseproject.listener.IOnLoadResultListener;
 import com.feima.baseproject.listener.IOnTryClickListener;
 import com.feima.baseproject.manager.TaskManager;
 import com.feima.baseproject.model.ResultEntity;
-import com.feima.baseproject.util.BaseConstant;
 import com.feima.baseproject.util.BaseConstant.TaskResult;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.ResultUtil;
@@ -173,7 +172,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				break;
 			case TaskConstant.UPLOAD:
 				try {
-					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
+					resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -181,7 +180,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				break;
 			case TaskConstant.UPLOADS:
 				try {
-					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
+					resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

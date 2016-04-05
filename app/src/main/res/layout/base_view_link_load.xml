@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center" 
-    android:id="@+id/base_pop_load_contain"
+    android:id="@+id/base_view_link_load"
     android:orientation="vertical" >
 
 

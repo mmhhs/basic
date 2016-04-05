@@ -32,7 +32,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	@InjectView(R.id.base_view_contain_layout)
 	public LinearLayout containLayout;
 	@Optional
-	@InjectView(R.id.base_view_load_layout)
+	@InjectView(R.id.base_view_link_load)
 	public LinearLayout loadLayout;
 
 	@Override

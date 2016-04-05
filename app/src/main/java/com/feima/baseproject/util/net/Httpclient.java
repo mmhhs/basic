@@ -1,7 +1,6 @@
 package com.feima.baseproject.util.net;
 
 import android.content.Context;
-
 import com.feima.baseproject.util.tool.LogUtil;
 
 import org.apache.http.Header;
@@ -26,6 +25,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
@@ -45,9 +45,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 public class Httpclient {
     public static final String TAG = "Httpclient Result";
     private static Context context;
+    private static final int REQUEST_TIMEOUT = 10*1000;//设置请求超时10秒钟
+    private static final int SO_TIMEOUT = 10*1000;  //设置等待数据超时时间10秒钟
 
 
     /**
@@ -63,7 +66,7 @@ public class Httpclient {
         if (url.startsWith("https")){
             httpClient = getTrustAllClient();
         }else {
-            httpClient = new DefaultHttpClient();
+            httpClient = getHttpClient();
         }
         HttpPost httpPost = new HttpPost(url);
         //设置参数
@@ -71,17 +74,34 @@ public class Httpclient {
         httpPost.setEntity(encodedFormEntity);
         // 执行请求
         HttpResponse httpResponse = httpClient.execute(httpPost);
-        // 获取返回的数据
-        HttpEntity httpEntity = httpResponse.getEntity();
-        if (httpEntity != null) {
-            byte[] responseBytes = getData(httpEntity);
-            dataByte = responseBytes;
-            httpPost.abort();
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        LogUtil.e("statusCode= "+statusCode);
+        if (statusCode==HttpStatus.SC_OK){
+            //获取返回值
+            HttpEntity httpEntity = httpResponse.getEntity();
+            if (httpEntity != null) {
+                byte[] responseBytes = getData(httpEntity);
+                dataByte = responseBytes;
+                try {
+                    httpPost.abort();
+                    httpClient.getConnectionManager().shutdown();// 释放连接
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            try {
+                httpPost.abort();
+                httpClient.getConnectionManager().shutdown();// 释放连接
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
+
         //将字节数组转换成为字符串
         String result = bytesToString(dataByte);
-        LogUtil.d("arg= " + new JSONObject(argsMap).toString());
-        LogUtil.d("" + url + "= " + result);
+        LogUtil.e("arg= " + new JSONObject(argsMap).toString());
+        LogUtil.e("" + url + "= " + result);
         return result;
     }
 
@@ -97,7 +117,7 @@ public class Httpclient {
         if (url.startsWith("https")){
             httpClient = getTrustAllClient();
         }else {
-            httpClient = new DefaultHttpClient();
+            httpClient = getHttpClient();
         }
         //为GET请求链接构造参数
         url = formatGetParameter(url,argsMap);
@@ -129,7 +149,7 @@ public class Httpclient {
         if (url.startsWith("https")){
             httpClient = getTrustAllClient();
         }else {
-            httpClient = new DefaultHttpClient();
+            httpClient = getHttpClient();
         }
         HttpPut httpPut = new HttpPut(url);
         //设置参数
@@ -220,14 +240,14 @@ public class Httpclient {
      * 将字节数组转换成字符串
      * @param bytes
      * @return
-     * @throws java.io.UnsupportedEncodingException
+     * @throws UnsupportedEncodingException
      */
     private static String bytesToString(byte[] bytes) throws UnsupportedEncodingException{
         if (bytes!=null) {
             String returnStr = new String(bytes,"utf-8");
             return returnStr;
         }
-        return null;
+        return "";
     }
 
     /**
@@ -241,8 +261,8 @@ public class Httpclient {
      * @return 服务器返回结果
      * @throws Exception
      */
-    public static String uploadSubmitFile(String url, Map<String, Object> param,
-                                          File file, String key) throws Exception {
+    public static String uploadSubmitFile2(String url, Map<String, Object> param,
+                                           File file,String key) throws Exception {
         HttpPost post = new HttpPost(url);
         MultipartEntity entity = new MultipartEntity();
         if (param != null && !param.isEmpty()) {
@@ -263,7 +283,7 @@ public class Httpclient {
         if (url.startsWith("https")){
             httpClient = getTrustAllClient();
         }else {
-            httpClient = new DefaultHttpClient();
+            httpClient = getHttpClient();
         }
         HttpResponse response = httpClient.execute(post);
         int stateCode = response.getStatusLine().getStatusCode();
@@ -296,8 +316,8 @@ public class Httpclient {
      * @return 服务器返回结果
      * @throws Exception
      */
-    public static String uploadSubmitFiles(String url, Map<String, Object> param,
-                                           List<File> files, String key) throws Exception {
+    public static String uploadSubmitFiles2(String url, Map<String, Object> param,
+                                            List<File> files,String key) throws Exception {
         HttpPost post = new HttpPost(url);
         MultipartEntity entity = new MultipartEntity();
         if (param != null && !param.isEmpty()) {
@@ -321,7 +341,7 @@ public class Httpclient {
         if (url.startsWith("https")){
             httpClient = getTrustAllClient();
         }else {
-            httpClient = new DefaultHttpClient();
+            httpClient = getHttpClient();
         }
         HttpResponse response = httpClient.execute(post);
         int stateCode = response.getStatusLine().getStatusCode();
@@ -385,7 +405,7 @@ public class Httpclient {
         StringBuilder sb = new StringBuilder();
         Iterator iter = cookieContiner.entrySet().iterator();
         while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
+            Entry entry = (Entry) iter.next();
             String key = entry.getKey().toString();
             String val = entry.getValue().toString();
             sb.append(key);
@@ -405,7 +425,7 @@ public class Httpclient {
         StringBuilder sb = new StringBuilder();
         Iterator iter = cookieContiner.entrySet().iterator();
         while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
+            Entry entry = (Entry) iter.next();
             String key = entry.getKey().toString();
             String val = entry.getValue().toString();
             sb.append(key);
@@ -425,7 +445,7 @@ public class Httpclient {
         StringBuilder sb = new StringBuilder();
         Iterator iter = cookieContiner.entrySet().iterator();
         while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
+            Entry entry = (Entry) iter.next();
             String key = entry.getKey().toString();
             String val = entry.getValue().toString();
             sb.append(key);
@@ -466,12 +486,23 @@ public class Httpclient {
         HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
         HttpProtocolParams.setUseExpectContinue(params, true);
 
+        HttpConnectionParams.setConnectionTimeout(params, REQUEST_TIMEOUT); //设置连接超时
+        HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT); //设置请求超时
+
         SchemeRegistry schReg = new SchemeRegistry();
         schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         schReg.register(new Scheme("https", SSLTrustAllSocketFactory.getSocketFactory(), 443));
 
         ClientConnectionManager connMgr = new ThreadSafeClientConnManager(params, schReg);
         return new DefaultHttpClient(connMgr, params);
+    }
+
+    public static HttpClient getHttpClient(){
+        BasicHttpParams httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpParams, REQUEST_TIMEOUT);
+        HttpConnectionParams.setSoTimeout(httpParams, SO_TIMEOUT);
+        HttpClient client = new DefaultHttpClient(httpParams);
+        return client;
     }
 
     public static Context getContext() {
@@ -481,5 +512,4 @@ public class Httpclient {
     public static void setContext(Context context) {
         Httpclient.context = context;
     }
-
 }
