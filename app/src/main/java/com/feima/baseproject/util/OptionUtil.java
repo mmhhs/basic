@@ -17,6 +17,7 @@ import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.feima.baseproject.R;
@@ -363,6 +364,14 @@ public class OptionUtil {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	/**
+	 * 设置输入框光标位置最后
+	 * @param editText
+	 */
+	public static void setCursor2Last(EditText editText){
+		editText.setSelection(editText.getText().length());
 	}
 
 }
