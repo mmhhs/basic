@@ -25,9 +25,10 @@ import android.widget.TextView;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseActivity;
-import com.feima.baseproject.listener.IOnDialogBackgroundListener;
-import com.feima.baseproject.listener.IOnDialogResultListener;
+import com.feima.baseproject.listener.IOnBackgroundListener;
+import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
+import com.feima.baseproject.task.BaseTask;
 import com.feima.baseproject.task.ShowDialogTask;
 import com.feima.baseproject.util.BaseConstant;
 import com.feima.baseproject.util.OptionUtil;
@@ -92,7 +93,7 @@ public class ChooseImagesActivity extends BaseActivity {
 
     public void queryData(){
         ShowDialogTask task = new ShowDialogTask(this,taskTag,gridView,getString(R.string.choose_images_query),false);
-        task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
+        task.setiOnBackgroundListener(new IOnBackgroundListener() {
             @Override
             public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
                 BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
@@ -105,20 +106,20 @@ public class ChooseImagesActivity extends BaseActivity {
                 return taskResult;
             }
         });
-        task.setiOnDialogResultListener(new IOnDialogResultListener() {
+        task.setiOnResultListener(new IOnResultListener() {
             @Override
-            public void onOK(ShowDialogTask showDialogTask) {
+            public void onOK(BaseTask task) {
                 folderImageBeanList = subGroupOfImage(mGruopMap);
                 setFolderShow(0);
             }
 
             @Override
-            public void onError(ShowDialogTask showDialogTask) {
+            public void onError(BaseTask task) {
 
             }
 
             @Override
-            public void onDone(ShowDialogTask showDialogTask) {
+            public void onDone(BaseTask task) {
 
             }
         });

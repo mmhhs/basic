@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
-import com.feima.baseproject.listener.IOnLoadBackgroundListener;
-import com.feima.baseproject.listener.IOnLoadResultListener;
+import com.feima.baseproject.listener.IOnBackgroundListener;
+import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.listener.IOnTryClickListener;
 import com.feima.baseproject.manager.TaskManager;
 import com.feima.baseproject.model.ResultEntity;
@@ -49,8 +49,10 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowLoadTask";
 	public IOnTryClickListener iOnTryClickListener;//重试监听
-	private IOnLoadBackgroundListener iOnLoadBackgroundListener;
-	private IOnLoadResultListener iOnLoadResultListener;
+	private IOnBackgroundListener iOnBackgroundListener;
+	private IOnResultListener iOnResultListener;
+	public ResultEntity resultEntity;//返回值解析结果父类 向上转型
+	private Class parseClass;//用于解析的实体类
 
 	/**
 	 * 本地处理耗时线程
@@ -97,6 +99,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	}
 
 	private void init(){
+		parseClass = ResultEntity.class;
 		viewTool = new ViewUtil();
 		Httpclient.setContext(activity);
 		addTask();
@@ -172,7 +175,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				break;
 			case TaskConstant.UPLOAD:
 				try {
-					resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
+					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -180,7 +183,7 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 				break;
 			case TaskConstant.UPLOADS:
 				try {
-					resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString);
+					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -193,8 +196,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 			if(StringUtil.isEmpty(resultsString)){
 				taskResult = TaskResult.CANCELLED;
 			}else{
-				if (iOnLoadBackgroundListener==null) {
-					iOnLoadBackgroundListener = defaultBackgroundListener;
+				if (iOnBackgroundListener==null) {
+					iOnBackgroundListener = defaultBackgroundListener;
 				}
 				taskResult = doOnBackgroundListener(this);
 			}
@@ -215,13 +218,13 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		if (iOnLoadResultListener!=null){
-			iOnLoadResultListener.onDone(this);
+		if (iOnResultListener!=null){
+			iOnResultListener.onDone(this);
 		}
 		switch(result){
 			case OK:
-				if (iOnLoadResultListener!=null){
-					iOnLoadResultListener.onOK(this);
+				if (iOnResultListener!=null){
+					iOnResultListener.onOK(this);
 				}
 				if (!StringUtil.isEmpty(resultMsg)&&showTipSuccess){
 					OptionUtil.addToast(activity, resultMsg +"");
@@ -232,8 +235,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 					viewTool.addErrorView(activity, activity.getString(R.string.pop_item3),
 							contentView, loadLayout, iOnTryClickListener);
 				}
-				if (iOnLoadResultListener!=null){
-					iOnLoadResultListener.onError(this);
+				if (iOnResultListener!=null){
+					iOnResultListener.onError(this);
 				}
 				if (!StringUtil.isEmpty(resultMsg)&&showTipError){
 					OptionUtil.addToast(activity, resultMsg +"");
@@ -269,8 +272,8 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 
 	private TaskResult doOnBackgroundListener(ShowLoadTask showLoadTask){
 		TaskResult taskResult = TaskResult.NOTHING;
-		if(iOnLoadBackgroundListener!=null){
-			taskResult = this.iOnLoadBackgroundListener.onBackground(showLoadTask);
+		if(iOnBackgroundListener!=null){
+			taskResult = this.iOnBackgroundListener.onBackground(showLoadTask);
 		}
 		return taskResult;
 	}
@@ -278,21 +281,21 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 	/**
 	 * 默认后台解析返回结果
 	 */
-	private IOnLoadBackgroundListener defaultBackgroundListener = new IOnLoadBackgroundListener(){
+	private IOnBackgroundListener defaultBackgroundListener = new IOnBackgroundListener(){
 
 		@Override
-		public TaskResult onBackground(ShowLoadTask showLoadTask) {
+		public TaskResult onBackground(BaseTask task) {
 			// TODO Auto-generated method stub
 			TaskResult taskResult = TaskResult.NOTHING;
 			JacksonUtil json = JacksonUtil.getInstance();
-			ResultEntity res = json.readValue(resultsString, ResultEntity.class);
-			if(res!=null){
-				resultMsg = res.getMsg();
-				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
+			resultEntity = (ResultEntity)json.readValue(resultsString, parseClass);
+			if(resultEntity !=null){
+				resultMsg = resultEntity.getMsg();
+				if(ResultUtil.judgeResult(activity, "" + resultEntity.getCode())){
 					taskResult = TaskResult.OK;
 				}else{
 					taskResult = TaskResult.ERROR;
-					judgeLoginInvalid(""+res.getCode());
+					judgeLoginInvalid(""+ resultEntity.getCode());
 				}
 			}else{
 				taskResult = TaskResult.CANCELLED;
@@ -314,12 +317,12 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 		this.iOnTryClickListener = iOnTryClickListener;
 	}
 
-	public void setiOnLoadBackgroundListener(IOnLoadBackgroundListener iOnLoadBackgroundListener) {
-		this.iOnLoadBackgroundListener = iOnLoadBackgroundListener;
+	public void setiOnBackgroundListener(IOnBackgroundListener iOnBackgroundListener) {
+		this.iOnBackgroundListener = iOnBackgroundListener;
 	}
 
-	public void setiOnLoadResultListener(IOnLoadResultListener iOnLoadResultListener) {
-		this.iOnLoadResultListener = iOnLoadResultListener;
+	public void setiOnResultListener(IOnResultListener iOnResultListener) {
+		this.iOnResultListener = iOnResultListener;
 	}
 
 	public String getResultsString() {
@@ -336,6 +339,18 @@ public class ShowLoadTask extends BaseTask<Void, String, TaskResult> {
 
 	public void setResultMsg(String resultMsg) {
 		this.resultMsg = resultMsg;
+	}
+
+	public Class getParseClass() {
+		return parseClass;
+	}
+
+	/**
+	 * 设置解析实体类
+	 * @param parseClass
+     */
+	public void setParseClass(Class parseClass) {
+		this.parseClass = parseClass;
 	}
 
 	/**

@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 import com.feima.baseproject.R;
-import com.feima.baseproject.listener.IOnDialogBackgroundListener;
-import com.feima.baseproject.listener.IOnDialogResultListener;
+import com.feima.baseproject.listener.IOnBackgroundListener;
+import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.listener.IOnEncryptListener;
 import com.feima.baseproject.manager.TaskManager;
 import com.feima.baseproject.model.ResultEntity;
@@ -22,7 +22,6 @@ import com.feima.baseproject.view.dialog.DialogUtil;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-
 
 
 public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
@@ -50,10 +49,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public String tagString="ShowDialogTask";
-	private IOnDialogResultListener iOnDialogResultListener;
-	private IOnDialogBackgroundListener iOnDialogBackgroundListener;
+	private IOnResultListener iOnResultListener;
+	private IOnBackgroundListener iOnBackgroundListener;
 	private IOnEncryptListener iOnEncryptListener;
 	private DialogUtil dialogUtil;
+	public ResultEntity resultEntity;//返回值解析结果父类 向上转型
+	private Class parseClass;//用于解析的实体类
 
 	/**
 	 * 本地处理耗时线程
@@ -190,6 +191,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	}
 
 	private void init(){
+		parseClass = ResultEntity.class;
 		dialogUtil = new DialogUtil(activity);
 		Httpclient.setContext(activity);
 	}
@@ -262,7 +264,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				break;
 			case TaskConstant.UPLOAD:
 				try {
-					resultsString = Httpclient.uploadSubmitFile2(httpUrl, argMap, fileList.get(0), keyString);
+					resultsString = Httpclient.uploadSubmitFile(httpUrl, argMap, fileList.get(0), keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -270,7 +272,7 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 				break;
 			case TaskConstant.UPLOADS:
 				try {
-					resultsString = Httpclient.uploadSubmitFiles2(httpUrl, argMap, fileList, keyString);
+					resultsString = Httpclient.uploadSubmitFiles(httpUrl, argMap, fileList, keyString);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -283,8 +285,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 			if(StringUtil.isEmpty(resultsString)){
 				taskResult = TaskResult.CANCELLED;
 			}else{
-				if (iOnDialogBackgroundListener==null) {
-					iOnDialogBackgroundListener = defaultBackgroundListener;
+				if (iOnBackgroundListener ==null) {
+					iOnBackgroundListener = defaultBackgroundListener;
 				}
 				taskResult = doOnBackgroundListener(this);
 			}
@@ -302,21 +304,21 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		if(iOnDialogResultListener!=null){
-			this.iOnDialogResultListener.onDone(this);
+		if(iOnResultListener !=null){
+			this.iOnResultListener.onDone(this);
 		}
 		switch(result){
 			case OK:
-				if(iOnDialogResultListener!=null){
-					this.iOnDialogResultListener.onOK(this);
+				if(iOnResultListener !=null){
+					this.iOnResultListener.onOK(this);
 				}
 				if (!StringUtil.isEmpty(resultMsg)&&showTipSuccess){
 					OptionUtil.addToast(activity, resultMsg +"");
 				}
 				break;
 			case ERROR:
-				if(iOnDialogResultListener!=null){
-					this.iOnDialogResultListener.onError(this);
+				if(iOnResultListener !=null){
+					this.iOnResultListener.onError(this);
 				}
 				if (!StringUtil.isEmpty(resultMsg)&&showTipError){
 					OptionUtil.addToast(activity, resultMsg +"");
@@ -346,12 +348,12 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 		taskManager.removeTask(this);
 	}
 
-	public void setiOnDialogResultListener(IOnDialogResultListener iOnDialogResultListener) {
-		this.iOnDialogResultListener = iOnDialogResultListener;
+	public void setiOnResultListener(IOnResultListener iOnResultListener) {
+		this.iOnResultListener = iOnResultListener;
 	}
 
-	public void setiOnDialogBackgroundListener(IOnDialogBackgroundListener iOnDialogBackgroundListener) {
-		this.iOnDialogBackgroundListener = iOnDialogBackgroundListener;
+	public void setiOnBackgroundListener(IOnBackgroundListener iOnBackgroundListener) {
+		this.iOnBackgroundListener = iOnBackgroundListener;
 	}
 
 	public void setiOnEncryptListener(IOnEncryptListener iOnEncryptListener) {
@@ -360,8 +362,8 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 
 	private TaskResult doOnBackgroundListener(ShowDialogTask showDialogTask){
 		TaskResult taskResult = TaskResult.NOTHING;
-		if(iOnDialogBackgroundListener!=null){
-			taskResult = this.iOnDialogBackgroundListener.onBackground(showDialogTask);
+		if(iOnBackgroundListener !=null){
+			taskResult = this.iOnBackgroundListener.onBackground(showDialogTask);
 		}
 		return taskResult;
 	}
@@ -370,24 +372,28 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 	/**
 	 * 默认后台解析返回结果
 	 */
-	private IOnDialogBackgroundListener defaultBackgroundListener = new IOnDialogBackgroundListener(){
+	private IOnBackgroundListener defaultBackgroundListener = new IOnBackgroundListener(){
 
 		@Override
-		public TaskResult onBackground(ShowDialogTask showDialogTask) {
+		public TaskResult onBackground(BaseTask task) {
 			// TODO Auto-generated method stub
 			TaskResult taskResult = TaskResult.NOTHING;
-			JacksonUtil json = JacksonUtil.getInstance();
-			ResultEntity res = json.readValue(resultsString, ResultEntity.class);
-			if(res!=null){
-				resultMsg = res.getMsg();
-				if(ResultUtil.judgeResult(activity, "" + res.getCode())){
-					taskResult = TaskResult.OK;
+			try {
+				JacksonUtil json = JacksonUtil.getInstance();
+				resultEntity = (ResultEntity)json.readValue(resultsString, parseClass);
+				if(resultEntity !=null){
+					resultMsg = resultEntity.getMsg();
+					if(ResultUtil.judgeResult(activity, "" + resultEntity.getCode())){
+						taskResult = TaskResult.OK;
+					}else{
+						taskResult = TaskResult.ERROR;
+						judgeLoginInvalid(resultEntity.getCode());
+					}
 				}else{
-					taskResult = TaskResult.ERROR;
-					judgeLoginInvalid(res.getCode());
+					taskResult = TaskResult.CANCELLED;
 				}
-			}else{
-				taskResult = TaskResult.CANCELLED;
+			}catch (Exception e){
+				e.printStackTrace();
 			}
 			return taskResult;
 		}
@@ -405,6 +411,18 @@ public class ShowDialogTask extends BaseTask<Void, String, TaskResult>{
 
 	public String getResultsString() {
 		return resultsString;
+	}
+
+	public Class getParseClass() {
+		return parseClass;
+	}
+
+	/**
+	 * 设置解析实体类
+	 * @param parseClass
+	 */
+	public void setParseClass(Class parseClass) {
+		this.parseClass = parseClass;
 	}
 
 	/**

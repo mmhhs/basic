@@ -5,17 +5,16 @@ import android.os.Handler;
 import android.view.View;
 
 import com.feima.baseproject.R;
-import com.feima.baseproject.listener.IOnDialogBackgroundListener;
 import com.feima.baseproject.listener.IOnDialogListener;
-import com.feima.baseproject.listener.IOnDialogResultListener;
 import com.feima.baseproject.listener.IOnProgressListener;
+import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.manager.ScreenManager;
 import com.feima.baseproject.model.version.VersionResultEntity;
+import com.feima.baseproject.task.BaseTask;
 import com.feima.baseproject.task.FileDownLoadAsyncTask;
 import com.feima.baseproject.task.ShowDialogTask;
 import com.feima.baseproject.task.TaskConstant;
 import com.feima.baseproject.util.net.HttpUtil;
-import com.feima.baseproject.util.tool.JacksonUtil;
 import com.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
@@ -114,39 +113,25 @@ public class VersionCheckUtil {
         argMap.put("versionCode",""+ OptionUtil.getVersionCode(activity));
         argMap.put("deviceType","android");
         ShowDialogTask task = new ShowDialogTask(activity,taskTag,parentView, activity.getString(R.string.tip5),showDialog,httpUrl,argMap, TaskConstant.POST);
-        task.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
+        task.setParseClass(VersionResultEntity.class);
+        task.setiOnResultListener(new IOnResultListener() {
             @Override
-            public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
-                BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
-                JacksonUtil json = JacksonUtil.getInstance();
-                VersionResultEntity res = json.readValue(showDialogTask.getResultsString(), VersionResultEntity.class);
-                if(res!=null){
-                    showDialogTask.setResultMsg(res.getMsg());
-                    if(ResultUtil.judgeResult(activity, res.getCode())){
-                        taskResult = BaseConstant.TaskResult.OK;
-                        versionDataEntity = res.getData();
-                    }else{
-                        taskResult = BaseConstant.TaskResult.ERROR;
-                    }
-                }else{
-                    taskResult = BaseConstant.TaskResult.CANCELLED;
+            public void onOK(BaseTask task) {
+                ShowDialogTask showDialogTask = (ShowDialogTask)task;
+                if(showDialogTask.resultEntity instanceof VersionResultEntity){
+                    VersionResultEntity res = (VersionResultEntity)showDialogTask.resultEntity;
+                    versionDataEntity = res.getData();
                 }
-                return taskResult;
-            }
-        });
-        task.setiOnDialogResultListener(new IOnDialogResultListener() {
-            @Override
-            public void onOK(ShowDialogTask showDialogTask) {
                 updateVersion();
             }
 
             @Override
-            public void onError(ShowDialogTask showDialogTask) {
+            public void onError(BaseTask task) {
 
             }
 
             @Override
-            public void onDone(ShowDialogTask showDialogTask) {
+            public void onDone(BaseTask task) {
 
             }
         });

@@ -261,8 +261,8 @@ public class Httpclient {
      * @return 服务器返回结果
      * @throws Exception
      */
-    public static String uploadSubmitFile2(String url, Map<String, Object> param,
-                                           File file,String key) throws Exception {
+    public static String uploadSubmitFile(String url, Map<String, Object> param,
+                                          File file, String key) throws Exception {
         HttpPost post = new HttpPost(url);
         MultipartEntity entity = new MultipartEntity();
         if (param != null && !param.isEmpty()) {
@@ -316,8 +316,8 @@ public class Httpclient {
      * @return 服务器返回结果
      * @throws Exception
      */
-    public static String uploadSubmitFiles2(String url, Map<String, Object> param,
-                                            List<File> files,String key) throws Exception {
+    public static String uploadSubmitFiles(String url, Map<String, Object> param,
+                                           List<File> files, String key) throws Exception {
         HttpPost post = new HttpPost(url);
         MultipartEntity entity = new MultipartEntity();
         if (param != null && !param.isEmpty()) {

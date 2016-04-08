@@ -5,7 +5,7 @@ package com.feima.baseproject.util.tool;
 import android.app.Activity;
 import android.os.Environment;
 
-import com.feima.baseproject.listener.IOnDialogBackgroundListener;
+import com.feima.baseproject.listener.IOnBackgroundListener;
 import com.feima.baseproject.task.ShowDialogTask;
 import com.feima.baseproject.util.BaseConstant;
 
@@ -159,7 +159,7 @@ public class DataCleanManager {
     private static void deleteFilesByDirectory(Activity activity, final File directory) {
         if (directory != null && directory.exists()) {
             ShowDialogTask showDialogTask = new ShowDialogTask(activity,tagStr,null,"",false);
-            showDialogTask.setiOnDialogBackgroundListener(new IOnDialogBackgroundListener() {
+            showDialogTask.setiOnBackgroundListener(new IOnBackgroundListener() {
                 @Override
                 public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
                     BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
