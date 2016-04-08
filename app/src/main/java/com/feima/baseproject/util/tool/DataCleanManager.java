@@ -6,8 +6,9 @@ import android.app.Activity;
 import android.os.Environment;
 
 import com.feima.baseproject.listener.IOnBackgroundListener;
+import com.feima.baseproject.task.DispatchTask;
 import com.feima.baseproject.task.ShowDialogTask;
-import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.task.TaskConstant.TaskResult;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -161,8 +162,8 @@ public class DataCleanManager {
             ShowDialogTask showDialogTask = new ShowDialogTask(activity,tagStr,null,"",false);
             showDialogTask.setiOnBackgroundListener(new IOnBackgroundListener() {
                 @Override
-                public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
-                    BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
+                public TaskResult onBackground(DispatchTask task) {
+                    TaskResult taskResult = TaskResult.NOTHING;
                     DeleteFile(directory);
                     return taskResult;
                 }

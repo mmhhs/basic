@@ -9,14 +9,14 @@ import java.io.File;
 
 public class BaseConstant
 {
-	public enum TaskResult 
-	{
-		OK, 
-		ERROR, 
-		CANCELLED,
-		NETERROR,
-		NOTHING
-	}
+//	public enum TaskResult
+//	{
+//		OK,
+//		ERROR,
+//		CANCELLED,
+//		NETERROR,
+//		NOTHING
+//	}
 	
 	public static String IMAGETAMPPATH = Environment.getExternalStorageDirectory() + "/cache/";
 	public static String IMAGESAVEPATH = Environment.getExternalStorageDirectory() + "/cache/";

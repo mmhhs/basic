@@ -6,4 +6,13 @@ public class TaskConstant {
     public final static int PUT = 3;
     public final static int UPLOAD = 4;//上传单个文件
     public final static int UPLOADS = 5;//上传多个文件
+
+    public enum TaskResult
+    {
+        OK,
+        ERROR,
+        CANCELLED,
+        NETERROR,
+        NOTHING
+    }
 }

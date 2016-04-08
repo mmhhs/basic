@@ -26,11 +26,11 @@ import android.widget.TextView;
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseActivity;
 import com.feima.baseproject.listener.IOnBackgroundListener;
-import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
-import com.feima.baseproject.task.BaseTask;
+import com.feima.baseproject.listener.IOnResultListener;
+import com.feima.baseproject.task.DispatchTask;
 import com.feima.baseproject.task.ShowDialogTask;
-import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.task.TaskConstant.TaskResult;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.image.ImageChooseUtil;
 
@@ -95,31 +95,31 @@ public class ChooseImagesActivity extends BaseActivity {
         ShowDialogTask task = new ShowDialogTask(this,taskTag,gridView,getString(R.string.choose_images_query),false);
         task.setiOnBackgroundListener(new IOnBackgroundListener() {
             @Override
-            public BaseConstant.TaskResult onBackground(ShowDialogTask showDialogTask) {
-                BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
+            public TaskResult onBackground(DispatchTask task) {
+                TaskResult taskResult = TaskResult.NOTHING;
                 Boolean res = queryLocalImages();
                 if(res){
-                    taskResult = BaseConstant.TaskResult.OK;
+                    taskResult = TaskResult.OK;
                 }else{
-                    taskResult = BaseConstant.TaskResult.ERROR;
+                    taskResult = TaskResult.ERROR;
                 }
                 return taskResult;
             }
         });
         task.setiOnResultListener(new IOnResultListener() {
             @Override
-            public void onOK(BaseTask task) {
+            public void onOK(DispatchTask task) {
                 folderImageBeanList = subGroupOfImage(mGruopMap);
                 setFolderShow(0);
             }
 
             @Override
-            public void onError(BaseTask task) {
+            public void onError(DispatchTask task) {
 
             }
 
             @Override
-            public void onDone(BaseTask task) {
+            public void onDone(DispatchTask task) {
 
             }
         });

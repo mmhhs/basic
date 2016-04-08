@@ -7,7 +7,7 @@ import android.widget.PopupWindow;
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnDialogListener;
 import com.feima.baseproject.listener.IOnProgressListener;
-import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.task.TaskConstant.TaskResult;
 import com.feima.baseproject.view.dialog.DialogUtil;
 
 import org.apache.http.HttpEntity;
@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.TaskResult> {
+public class FileDownLoadAsyncTask extends DispatchTask {
 	private String url = "";// 文件下载地址
 	private Activity activity;//上下文
     private IOnProgressListener iOnProgressListener;//进度监听
@@ -85,8 +85,8 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
 	}
 
 	@Override
-    public BaseConstant.TaskResult doInBackground(Void... params) {
-		BaseConstant.TaskResult taskResult = BaseConstant.TaskResult.NOTHING;
+    public TaskResult doInBackground(Void... params) {
+		TaskResult taskResult = TaskResult.NOTHING;
 		try {
 			httpClient.getParams().setParameter(
 					CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
@@ -110,17 +110,17 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
                 fileOutputStream = new FileOutputStream(loadFile);
                 fileOutputStream.write(byteIn); //记得关闭输入流
 
-                taskResult = BaseConstant.TaskResult.OK;
+                taskResult = TaskResult.OK;
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-            taskResult = BaseConstant.TaskResult.ERROR;
+            taskResult = TaskResult.ERROR;
 		} catch (ConnectTimeoutException e) {
 			e.printStackTrace();
-            taskResult = BaseConstant.TaskResult.ERROR;
+            taskResult = TaskResult.ERROR;
 		} catch (Exception e) {
 			e.printStackTrace();
-            taskResult = BaseConstant.TaskResult.ERROR;
+            taskResult = TaskResult.ERROR;
 		} finally {
             stopDownload();
 		}
@@ -142,7 +142,7 @@ public class FileDownLoadAsyncTask extends BaseTask<Void, String, BaseConstant.T
 	}
 
 	@Override
-    public void onPostExecute(BaseConstant.TaskResult result) {
+    public void onPostExecute(TaskResult result) {
         if (iOnProgressListener!=null){
             iOnProgressListener.done();
         }

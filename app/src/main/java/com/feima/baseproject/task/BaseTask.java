@@ -67,7 +67,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     }
  *
  *     public void onPostExecute(Long result) {
- *         showDialog("Downloaded " + result + " bytes");
+ *         showLoad("Downloaded " + result + " bytes");
  *     }
  * }
  * </pre>

@@ -10,7 +10,7 @@ import com.feima.baseproject.listener.IOnProgressListener;
 import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.manager.ScreenManager;
 import com.feima.baseproject.model.version.VersionResultEntity;
-import com.feima.baseproject.task.BaseTask;
+import com.feima.baseproject.task.DispatchTask;
 import com.feima.baseproject.task.FileDownLoadAsyncTask;
 import com.feima.baseproject.task.ShowDialogTask;
 import com.feima.baseproject.task.TaskConstant;
@@ -116,22 +116,21 @@ public class VersionCheckUtil {
         task.setParseClass(VersionResultEntity.class);
         task.setiOnResultListener(new IOnResultListener() {
             @Override
-            public void onOK(BaseTask task) {
-                ShowDialogTask showDialogTask = (ShowDialogTask)task;
-                if(showDialogTask.resultEntity instanceof VersionResultEntity){
-                    VersionResultEntity res = (VersionResultEntity)showDialogTask.resultEntity;
+            public void onOK(DispatchTask task) {
+                if(task.resultEntity instanceof VersionResultEntity){
+                    VersionResultEntity res = (VersionResultEntity)task.resultEntity;
                     versionDataEntity = res.getData();
                 }
                 updateVersion();
             }
 
             @Override
-            public void onError(BaseTask task) {
+            public void onError(DispatchTask task) {
 
             }
 
             @Override
-            public void onDone(BaseTask task) {
+            public void onDone(DispatchTask task) {
 
             }
         });

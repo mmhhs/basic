@@ -1,9 +1,9 @@
 package com.feima.baseproject.listener;
 
 
-import com.feima.baseproject.task.BaseTask;
-import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.task.DispatchTask;
+import com.feima.baseproject.task.TaskConstant;
 
 public interface IOnBackgroundListener {
-    BaseConstant.TaskResult onBackground(BaseTask task);
+    TaskConstant.TaskResult onBackground(DispatchTask task);
 }

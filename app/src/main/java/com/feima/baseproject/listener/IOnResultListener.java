@@ -1,10 +1,10 @@
 package com.feima.baseproject.listener;
 
 
-import com.feima.baseproject.task.BaseTask;
+import com.feima.baseproject.task.DispatchTask;
 
 public interface IOnResultListener {
-    void onOK(BaseTask task);
-    void onError(BaseTask task);
-    void onDone(BaseTask task);
+    void onOK(DispatchTask task);
+    void onError(DispatchTask task);
+    void onDone(DispatchTask task);
 }
