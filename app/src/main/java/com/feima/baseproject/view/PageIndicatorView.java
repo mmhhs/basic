@@ -82,7 +82,7 @@ public class PageIndicatorView extends View {
 		if (nPageIndex < 0 || nPageIndex >= mTotalPage)
 			return;
 
-		if (mCurrentPage != nPageIndex) {
+		if (mCurrentPage != nPageIndex||nPageIndex==0) {
 			mCurrentPage = nPageIndex;
 			this.invalidate();
 		}

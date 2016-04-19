@@ -2,7 +2,6 @@ package com.feima.baseproject.activity.set;
 
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.feima.baseproject.R;
@@ -24,9 +23,6 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void init() {
-        setTitleText(getString(R.string.title1));
-        setBackLayoutVisibility(View.VISIBLE);
-        setTitleTextVisibility(View.VISIBLE);
         versionText.setText(getString(R.string.about1) + OptionUtil.getVersionName(this));
     }
 

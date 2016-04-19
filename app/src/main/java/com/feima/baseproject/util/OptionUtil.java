@@ -8,19 +8,26 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.feima.baseproject.R;
+import com.feima.baseproject.listener.IOnDialogListener;
+import com.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +43,7 @@ public class OptionUtil {
 	 */
 	public static void call(final Context context,final String tel){
 		try {
-			Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));
+			Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+tel));
 			context.startActivity(intent);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -294,14 +301,6 @@ public class OptionUtil {
 		context.startActivity(intent);
 	}
 
-	/**
-	 * 设置刷新颜色
-	 * @param swipeRefreshLayout
-	 */
-	public static void setSwipeRefreshColor(SwipeRefreshLayout swipeRefreshLayout){
-		swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-				android.R.color.holo_orange_light, android.R.color.holo_red_light);
-	}
 
 	/**
 	 * 结束刷新
@@ -373,5 +372,91 @@ public class OptionUtil {
 	public static void setCursor2Last(EditText editText){
 		editText.setSelection(editText.getText().length());
 	}
+
+	public static void setWebsettingBase(WebView webView){
+		WebSettings webSettings = webView.getSettings();
+		//如果webView中需要用户手动输入用户名、密码或其他，则webview必须设置支持获取手势焦点
+		webView.requestFocusFromTouch();
+		webView.requestFocus();
+		//打开页面时， 自适应屏幕
+		webSettings.setUseWideViewPort(true);//关键点 设置此属性，可任意比例缩放
+		webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+		webSettings.setLoadsImagesAutomatically(true);  //支持自动加载图片
+		//支持通过JS打开新窗口
+		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+		webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本
+		//其他
+		webSettings.setNeedInitialFocus(true); //当webview调用requestFocus时为webview设置节点
+		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);//支持内容重新布局
+		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);  //webview中缓存
+		webSettings.setAllowFileAccess(true); // 允许访问文件
+		webSettings.supportMultipleWindows();  //多窗口
+		// 开启 DOM storage API 功能?
+		webSettings.setDomStorageEnabled(true);
+		//开启 database storage API 功能?
+		webSettings.setDatabaseEnabled(true);
+		String cacheDirPath = BaseConstant.IMAGETAMPPATH;
+		//设置? Application Caches 缓存目录?
+		webSettings.setAppCachePath(cacheDirPath);
+		//开启 Application Caches 功能?
+		webSettings.setAppCacheEnabled(true);
+	}
+
+	/**
+	 * 设置webview 不支持缩放
+	 * @param webView
+	 */
+	public static void setWebsetting(WebView webView){
+		setWebsettingBase(webView);
+		WebSettings webSettings = webView.getSettings();
+		//页面支持缩放
+		webSettings.setBuiltInZoomControls(false); // 设置显示缩放按钮
+		webSettings.setSupportZoom(false); // 支持缩放
+
+	}
+
+	/**
+	 * 设置webview 支持缩放
+	 * @param webView
+	 */
+	public static void setWebsetting2(WebView webView){
+		setWebsettingBase(webView);
+		WebSettings webSettings = webView.getSettings();
+		//页面支持缩放
+		webSettings.setBuiltInZoomControls(true); // 设置显示缩放按钮
+		webSettings.setSupportZoom(true); // 支持缩放
+	}
+
+	public static boolean isGpsOpen(final Activity activity, View view){
+		LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+		if (locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
+			return true;
+		} else {
+			DialogUtil dialogUtil = new DialogUtil(activity);
+			dialogUtil.setDismissKeyback(true);
+			dialogUtil.setDismissOutside(true);
+			dialogUtil.setTitle("GPS模块没有打开,是否现在打开？");
+			dialogUtil.showTipDialog(view,"");
+			dialogUtil.setiOnDialogListener(new IOnDialogListener() {
+				@Override
+				public void onConfirm() {
+					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					activity.startActivity(intent);
+				}
+
+				@Override
+				public void onCancel() {
+
+				}
+
+				@Override
+				public void onOther() {
+
+				}
+			});
+		}
+		return false;
+	}
+
 
 }
