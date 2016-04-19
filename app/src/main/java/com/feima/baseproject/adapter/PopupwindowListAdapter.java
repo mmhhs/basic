@@ -10,27 +10,29 @@ import android.widget.TextView;
 
 import com.feima.baseproject.R;
 
+import java.util.List;
+
 
 public class PopupwindowListAdapter extends BaseAdapter {
 	public Context context;
-	public String[] list;
+	public List<String> list;
 
-	public PopupwindowListAdapter(Context context, String[] list) {
+	public PopupwindowListAdapter(Context context, List<String> list) {
 		this.context = context;
 		this.list = list;
-		
+
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list.length;
+		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return list[position];
+		return list.get(position);
 	}
 
 	@Override
@@ -54,16 +56,16 @@ public class PopupwindowListAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		try {
-			viewHolder.text.setText(list[position]);
+			viewHolder.text.setText(list.get(position));
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		
+
 		return convertView;
 	}
 
 	public final static class ViewHolder {
 		TextView text;
-		
+
 	}
 }

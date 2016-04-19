@@ -2,8 +2,6 @@ package com.feima.baseproject.view.dialog;
 
 import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +18,15 @@ import com.feima.baseproject.adapter.PopupwindowListAdapter;
 import com.feima.baseproject.listener.IOnDialogListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
 import com.feima.baseproject.util.AnimUtil;
-import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.tool.StringUtil;
-import com.feima.baseproject.view.PageIndicatorView;
-import com.feima.baseproject.view.chooseimages.ChooseImagesPreviewAdapter;
 
 import java.util.List;
 
-public class DialogUtil{
+public class DialogUtil {
     private Activity activity;
     private float showAlpha = 0.5f;//显示对话框时界面半透明度
     private float hideAlpha = 1f;//对话框关闭后界面恢复
+    private int   alphaType = 0;//弹框半透明两种实现，0采用设置界面透明度，1采用半透明背景色
 
     private boolean dismissOutside = false;//点击界面关闭
     private boolean dismissKeyback = false;//点击返回键关闭
@@ -54,24 +50,37 @@ public class DialogUtil{
         this.activity = activity;
     }
 
+
+    void setAlpha(View containerView){
+        if (alphaType==0){
+            AnimUtil.setBackgroundAlpha(activity, showAlpha);
+        }else {
+            containerView.setBackgroundResource(R.color.transparent);
+        }
+    }
+
+    public void setAlphaType(int alphaType) {
+        this.alphaType = alphaType;
+    }
+
     /**
      * 显示列表对话框
      * @param view 父视图
      * @param itemArray 数据
      */
-    public PopupWindow showListDialog(View view, String[] itemArray){
+    public PopupWindow showListDialog(View view, List<String> itemArray){
         PopupWindow popupWindow = getListDialog(itemArray);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         return popupWindow;
     }
 
-    public PopupWindow getListDialog(String[] itemArray){
+    public PopupWindow getListDialog(List<String> itemArray){
         View view = LayoutInflater.from(activity).inflate(R.layout.base_view_dialog_list,null, false);
         ListView listView = (ListView) view.findViewById(R.id.base_view_dialog_list_listview);
         LinearLayout containerLayout = (LinearLayout) view.findViewById(R.id.base_view_dialog_list_container);
         PopupwindowListAdapter adapter = new PopupwindowListAdapter(activity,itemArray);
         listView.setAdapter(adapter);
-        AnimUtil.setBackgroundAlpha(activity, showAlpha);
+        setAlpha(containerLayout);
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -173,7 +182,7 @@ public class DialogUtil{
                 otherText.setVisibility(View.VISIBLE);
                 break;
         }
-        AnimUtil.setBackgroundAlpha(activity, showAlpha);
+        setAlpha(containerLayout);
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -259,7 +268,7 @@ public class DialogUtil{
         if(!StringUtil.isEmpty(loadStr)){
             loadText.setText(loadStr);
         }
-        AnimUtil.setBackgroundAlpha(activity, showAlpha);
+        setAlpha(containerLayout);
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -319,7 +328,7 @@ public class DialogUtil{
         }else {
             cancelLayout.setVisibility(View.GONE);
         }
-        AnimUtil.setBackgroundAlpha(activity, showAlpha);
+        setAlpha(containerLayout);
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
@@ -375,84 +384,7 @@ public class DialogUtil{
         }
     }
 
-    /**
-     * 显示预览大图
-     * @param view 父视图
-     * @param imageList 图片路径
-     * @param position 位置
-     * @return
-     */
-    public PopupWindow showPreviewDialog(View view,List<String> imageList, int position){
-        PopupWindow popupWindow = getPreviewDialog(imageList, position);
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-        return popupWindow;
-    }
 
-    public PopupWindow getPreviewDialog(final List<String> imageList, int position) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.base_choose_images_pop_preview,null, false);
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.base_choose_images_pop_preview_viewPager);
-        final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
-        final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
-        final PageIndicatorView pageIndicatorView  = (PageIndicatorView) view.findViewById(R.id.base_choose_images_pop_preview_pageIndicatorView);
-        ChooseImagesPreviewAdapter chooseImagesPreviewAdapter = new ChooseImagesPreviewAdapter(activity,imageList);
-        viewPager.setAdapter(chooseImagesPreviewAdapter);
-        titleLayout.setVisibility(View.GONE);
-        footerLayout.setVisibility(View.GONE);
-        pageIndicatorView.setVisibility(View.VISIBLE);
-        if (imageList.size()>position){
-            pageIndicatorView.setTotalPage(imageList.size());
-            viewPager.setCurrentItem(position);
-        }
-        OptionUtil.startFullScreen(activity);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                pageIndicatorView.setCurrentPage(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        if(animStyle>0){
-            popupWindow.setAnimationStyle(animStyle);
-        }
-        if(dismissKeyback){
-            popupWindow.setBackgroundDrawable(new BitmapDrawable()); //使按返回键能够消失
-        }
-//        popupWindow.setAnimationStyle(R.style.base_anim_alpha);
-        chooseImagesPreviewAdapter.setiOnItemClickListener(new IOnItemClickListener(){
-            @Override
-            public void onItemClick(int position) {
-                OptionUtil.quitFullScreen(activity);
-                new Handler().postDelayed(new Runnable()
-                {
-                    public void run()
-                    {
-                        popupWindow.dismiss();
-                    }
-                }, 500);
-
-            }
-        });
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                AnimUtil.setBackgroundAlpha(activity, hideAlpha);
-            }
-        });
-        return popupWindow;
-    }
 
     public void setDismissKeyback(boolean dismissKeyback) {
         this.dismissKeyback = dismissKeyback;
