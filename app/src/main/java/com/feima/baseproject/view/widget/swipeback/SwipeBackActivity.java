@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.feima.baseproject.base.BaseFragmentActivity;
 
+import permissions.dispatcher.PermissionRequest;
+
 
 public class SwipeBackActivity extends BaseFragmentActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
@@ -47,5 +49,25 @@ public class SwipeBackActivity extends BaseFragmentActivity implements SwipeBack
     @Override
     public void scrollToFinishActivity() {
         getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    @Override
+    public void doACacheNeedsPermission() {
+
+    }
+
+    @Override
+    public void ACacheShowRationale(PermissionRequest request) {
+
+    }
+
+    @Override
+    public void ACacheOnPermissionDenied() {
+
+    }
+
+    @Override
+    public void ACacheOnNeverAskAgain() {
+
     }
 }

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
+import com.feima.baseproject.listener.IOnPermissionListener;
 import com.feima.baseproject.manager.MFragmentsManager;
 import com.feima.baseproject.manager.ScreenManager;
 import com.feima.baseproject.manager.TaskManager;
@@ -16,7 +17,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.Optional;
 
-public abstract class BaseFragmentActivity extends FragmentActivity {
+public abstract class BaseFragmentActivity extends FragmentActivity implements IOnPermissionListener{
 	public String taskTag = "BaseFragmentActivity";//当前BaseFragmentActivity的线程标识
 	protected ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();

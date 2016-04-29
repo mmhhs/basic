@@ -458,5 +458,18 @@ public class OptionUtil {
 		return false;
 	}
 
+	/**
+	 * 打开应用设置
+	 * @param context
+	 */
+	public static void setting(Context context){
+		try {
+			Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+			intent.setData(Uri.parse("package:" + context.getPackageName()));
+			context.startActivity(intent);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
 }

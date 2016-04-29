@@ -46,6 +46,9 @@
     <color name="choose_images_done_off">#337523</color>
     <color name="choose_images_text">#cfcfcf</color>
     <color name="choose_images_line">#14191a</color>
+    <!-- pickerview -->
+    <color name="btn_cancel_color">#999999</color>
+    <color name="btn_confirm_color">#303F9F</color>
     <!-- progressbar -->
     <color name="progress_bar_bg">#d9d9d9</color>
     <color name="progress_bar_on1">#491cef</color>

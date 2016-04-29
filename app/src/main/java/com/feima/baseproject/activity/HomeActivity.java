@@ -1,6 +1,7 @@
 package com.feima.baseproject.activity;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,10 +14,17 @@ import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseFragmentActivity;
 import com.feima.baseproject.fragment.DemoFragment;
 import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.util.OptionUtil;
+import com.feima.baseproject.util.PermissionUtil;
 import com.feima.baseproject.util.VersionCheckUtil;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
 
 
 public class HomeActivity extends BaseFragmentActivity {
@@ -29,7 +37,6 @@ public class HomeActivity extends BaseFragmentActivity {
     @InjectView(R.id.base_ui_home_radio2)
     public TextView naviText2;
     public int tabFlag = 0;
-    public String updateUrl = "";
 
     private final Class[] fragments = { DemoFragment.class, DemoFragment.class,
             DemoFragment.class };
@@ -113,7 +120,46 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
+    @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+    @Override
+    public void doACacheNeedsPermission() {
 
+    }
 
+    @OnShowRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+    @Override
+    public void ACacheShowRationale(PermissionRequest request) {
+        request.proceed(); // 提示用户权限使用的对话框
+    }
 
+    @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
+    @Override
+    public void ACacheOnPermissionDenied() {
+        PermissionUtil.showPermissionDialog(this,naviText0);
+    }
+
+    @OnNeverAskAgain(Manifest.permission.ACCESS_FINE_LOCATION)
+    @Override
+    public void ACacheOnNeverAskAgain() {
+        PermissionUtil.showPermissionDialog(this, naviText0);
+    }
+
+    long firstTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        try {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                OptionUtil.addToast(this, getString(R.string.quit));
+                firstTime = secondTime;
+            } else {
+                finishSelf();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -58,7 +58,7 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 
     @Override
     public void init(){
-		imgList.add(R.drawable.base_round_white);
+		imgList.add(R.color.title_color);
 		for(int i=0;i<imgList.size();i++){
 			View view = LayoutInflater.from(getActivity()).inflate(R.layout.base_adapter_viewpager_welcome, null);
 			ImageView img = (ImageView) view.findViewById(R.id.base_adapter_wel_imageView);
@@ -123,10 +123,6 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 		// TODO Auto-generated method stub
 
 
-	}
-
-	public IOnClickListener getiOnClickListener() {
-		return iOnClickListener;
 	}
 
 	public void setiOnClickListener(IOnClickListener iOnClickListener) {

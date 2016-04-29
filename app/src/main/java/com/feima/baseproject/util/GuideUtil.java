@@ -17,7 +17,7 @@ public class GuideUtil {
     private Activity activity;
     private String[] classNames = {"PlayerHomeFragment0", "AccountActivity0",
             "PlayerServiceActivity0", "PlayerServiceActivity1"};
-    private int[] guideResourceIds = {R.drawable.base_welcome};
+    private int[] guideResourceIds = {R.color.transparent};
     private IOnClickListener iOnClickListener;
     private float rate = 0.562f;
     private int screenHeight;

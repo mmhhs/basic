@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BaseProject</string>
+    <string name="quit">再按一次退出应用</string>
     <string name="base_86">+86</string>
     <!-- net -->
     <string name="net_tip">网络不给力，查看下吧！</string>
@@ -9,8 +10,8 @@
     <string name="task2">正在加载</string>
     <string name="task3">正在提交</string>
 
-	<string name="pop_item3">未获取到内容</string>
-	<string name="pop_item4">请点击页面重试</string>
+	<string name="nothing">未获取到内容</string>
+	<string name="retry">请点击页面重试</string>
 
     <!-- 版本更新 -->
     <string name="check_version">检查更新</string>
@@ -37,6 +38,8 @@
     <string name="choose_images_done">完成</string>
     <string name="choose_images_preview">预览</string>
     <string name="choose_images_choose">选择</string>
+    <!-- pickerview -->
+    <string name="hour">时</string>
     <!-- 关于我们 -->
     <string name="about1">版本号：V</string>
     <string name="about2">Copyright ©2014—2015\n北京学点科技有限公司</string>
@@ -57,4 +60,9 @@
     <string name="title1">关于我们</string>
 
     <string name="day">天</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="confirm">确定</string>
+    <string name="submit">提交</string>
+    <string name="login">登录</string>
 </resources>

@@ -129,7 +129,7 @@ public class ShowLoadTask extends DispatchTask {
 				break;
 			case ERROR:
 				if (showLoad) {
-					viewUtil.addErrorView(activity, activity.getString(R.string.pop_item3),
+					viewUtil.addErrorView(activity, activity.getString(R.string.nothing),
 							contentView, loadLayout, iOnTryClickListener);
 				}
 				if (iOnResultListener!=null){

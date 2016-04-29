@@ -1,4 +1,4 @@
-package com.base.feima.baseproject.activity.welcome;
+package com.feima.baseproject.activity.welcome;
 
 
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.activity.HomeActivity;
-import com.feima.baseproject.activity.welcome.WelcomeFragment;
 import com.feima.baseproject.base.BaseFragmentActivity;
 import com.feima.baseproject.listener.IOnClickListener;
 import com.feima.baseproject.util.OptionUtil;
@@ -22,6 +21,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.InjectView;
+import permissions.dispatcher.PermissionRequest;
 
 public class WelcomeActivity extends BaseFragmentActivity {
 	@InjectView(R.id.base_ui_welcome_imageView)
@@ -149,5 +149,24 @@ public class WelcomeActivity extends BaseFragmentActivity {
 		finishSelf();
 	}
 
+	@Override
+	public void doACacheNeedsPermission() {
+
+	}
+
+	@Override
+	public void ACacheShowRationale(PermissionRequest request) {
+
+	}
+
+	@Override
+	public void ACacheOnPermissionDenied() {
+
+	}
+
+	@Override
+	public void ACacheOnNeverAskAgain() {
+
+	}
 
 }
