@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnDialogListener;
+import com.feima.baseproject.listener.IOnDismissListener;
 import com.feima.baseproject.listener.IOnProgressListener;
 import com.feima.baseproject.listener.IOnResultListener;
 import com.feima.baseproject.manager.ScreenManager;
@@ -85,6 +86,14 @@ public class VersionCheckUtil {
                                             screenManager.closeAll();
                                         }else {
                                             SharedUtil.saveIgnoreVersion(activity, ""+versionDataEntity.getVersionCode());
+                                        }
+                                    }
+                                });
+                                dialogUtil.setiOnDismissListener(new IOnDismissListener() {
+                                    @Override
+                                    public void onDismiss() {
+                                        if (versionDataEntity.getForceUpdate()==1){
+                                            screenManager.closeAll();
                                         }
                                     }
                                 });

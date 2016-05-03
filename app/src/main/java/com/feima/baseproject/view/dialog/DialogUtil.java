@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.feima.baseproject.R;
 import com.feima.baseproject.adapter.PopupwindowListAdapter;
 import com.feima.baseproject.listener.IOnDialogListener;
+import com.feima.baseproject.listener.IOnDismissListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
 import com.feima.baseproject.util.AnimUtil;
 import com.feima.baseproject.util.tool.StringUtil;
@@ -45,6 +46,7 @@ public class DialogUtil {
 
     private IOnItemClickListener iOnItemClickListener;
     private IOnDialogListener iOnDialogListener;
+    private IOnDismissListener iOnDismissListener;
 
     public DialogUtil(Activity activity) {
         this.activity = activity;
@@ -118,6 +120,9 @@ public class DialogUtil {
             @Override
             public void onDismiss() {
                 AnimUtil.setBackgroundAlpha(activity, hideAlpha);
+                if (iOnDismissListener!=null){
+                    iOnDismissListener.onDismiss();
+                }
             }
         });
         return popupWindow;
@@ -243,6 +248,9 @@ public class DialogUtil {
             @Override
             public void onDismiss() {
                 AnimUtil.setBackgroundAlpha(activity, hideAlpha);
+                if (iOnDismissListener!=null){
+                    iOnDismissListener.onDismiss();
+                }
             }
         });
         return popupWindow;
@@ -292,6 +300,9 @@ public class DialogUtil {
             @Override
             public void onDismiss() {
                 AnimUtil.setBackgroundAlpha(activity, hideAlpha);
+                if (iOnDismissListener!=null){
+                    iOnDismissListener.onDismiss();
+                }
             }
         });
         return popupWindow;
@@ -365,6 +376,9 @@ public class DialogUtil {
             @Override
             public void onDismiss() {
                 AnimUtil.setBackgroundAlpha(activity, hideAlpha);
+                if (iOnDismissListener!=null){
+                    iOnDismissListener.onDismiss();
+                }
             }
         });
 
@@ -424,5 +438,9 @@ public class DialogUtil {
 
     public void setiOnDialogListener(IOnDialogListener iOnDialogListener) {
         this.iOnDialogListener = iOnDialogListener;
+    }
+
+    public void setiOnDismissListener(IOnDismissListener iOnDismissListener) {
+        this.iOnDismissListener = iOnDismissListener;
     }
 }
