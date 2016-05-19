@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseActivity;
+import com.feima.baseproject.listener.IOnDeleteListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.view.dialog.DialogUtil;
@@ -62,9 +64,19 @@ public class ChooseImagesSampleActivity extends BaseActivity {
                     setChooseImagesIntent();
                 }else {
                     if (chooseImageList.size()>0){
-                        ImagesPreviewUtil imagesPreviewUtil = new ImagesPreviewUtil(ChooseImagesSampleActivity.this,chooseImageList,gridView,chooseImagesSampleAdapter);
+                        ImagesPreviewUtil imagesPreviewUtil = new ImagesPreviewUtil(ChooseImagesSampleActivity.this,chooseImageList,gridView);
                         PopupWindow popupWindow = imagesPreviewUtil.getPreviewWindow(ChooseImagesSampleActivity.this,position);
                         popupWindow.showAtLocation(gridView, Gravity.CENTER, 0, 0);
+                        imagesPreviewUtil.setiOnDeleteListener(new IOnDeleteListener() {
+                            @Override
+                            public void onDelete(int position) {
+                                new Handler().postDelayed(new Runnable(){
+                                    public void run() {
+                                        chooseImagesSampleAdapter.notifyDataSetChanged();
+                                    }
+                                }, 500);
+                            }
+                        });
                     }
                 }
             }catch (Exception e){

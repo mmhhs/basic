@@ -3,6 +3,7 @@ package com.feima.baseproject.view.chooseimages;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.feima.baseproject.R;
+import com.feima.baseproject.listener.IOnDeleteListener;
 import com.feima.baseproject.listener.IOnDialogListener;
 import com.feima.baseproject.listener.IOnItemClickListener;
 import com.feima.baseproject.view.dialog.DialogUtil;
@@ -25,14 +27,15 @@ public class ImagesPreviewUtil{
     private View containView;
     private int  imageIndex = 0;
     private boolean showPreviewTitle = true;
+    private boolean showDelete = true;
     private ChooseImagesPreviewAdapter chooseImagesPreviewAdapter;
-    private ChooseImagesSampleAdapter chooseImagesSampleAdapter;
+    private IOnDeleteListener iOnDeleteListener;
+    private int statusBarHeight;
 
-    public ImagesPreviewUtil(Activity activity, ArrayList<String> chooseImageList, View view, ChooseImagesSampleAdapter chooseImagesSampleAdapter) {
+    public ImagesPreviewUtil(Activity activity, ArrayList<String> chooseImageList, View view) {
         this.activity = activity;
         this.chooseImageList = chooseImageList;
         this.containView = view;
-        this.chooseImagesSampleAdapter = chooseImagesSampleAdapter;
     }
 
     public PopupWindow getPreviewWindow(final Context context,int position) {
@@ -41,7 +44,7 @@ public class ImagesPreviewUtil{
         final LinearLayout titleLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_layout);
         final LinearLayout footerLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_footer_layout);
         LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_back);
-        RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
+        final RelativeLayout containLayout = (RelativeLayout) view.findViewById(R.id.base_choose_images_pop_preview_layout);
         final TextView doneText = (TextView) view.findViewById(R.id.base_choose_images_title_done);
         final LinearLayout deleteLayout = (LinearLayout) view.findViewById(R.id.base_choose_images_title_delete);
         final TextView indexText = (TextView) view.findViewById(R.id.base_choose_images_title_index);
@@ -61,7 +64,11 @@ public class ImagesPreviewUtil{
             }
         });
         viewPager.setAdapter(chooseImagesPreviewAdapter);
-        deleteLayout.setVisibility(View.VISIBLE);
+        if (showDelete){
+            deleteLayout.setVisibility(View.VISIBLE);
+        }else {
+            deleteLayout.setVisibility(View.GONE);
+        }
         footerLayout.setVisibility(View.GONE);
         doneText.setVisibility(View.GONE);
         if (chooseImageList.size()>position){
@@ -86,7 +93,20 @@ public class ImagesPreviewUtil{
 
             }
         });
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int[] xy = {1,1};
+                    containLayout.getLocationOnScreen(xy);
+                    if (xy[1]<statusBarHeight){
+                        containLayout.setPadding(0,statusBarHeight-xy[1],0,0);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, 100);
         final PopupWindow popupWindow = new PopupWindow(view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
@@ -106,7 +126,6 @@ public class ImagesPreviewUtil{
                     @Override
                     public void onConfirm() {
                         chooseImageList.remove(imageIndex);
-                        chooseImagesSampleAdapter.notifyDataSetChanged();
                         chooseImagesPreviewAdapter.notifyDataSetChanged();
                         if (chooseImageList.size() == 0) {
                             popupWindow.dismiss();
@@ -118,6 +137,9 @@ public class ImagesPreviewUtil{
                             }
                             indexText.setText("" + (imageIndex + 1) + "/" + chooseImageList.size());
                             viewPager.setCurrentItem(imageIndex);
+                        }
+                        if (iOnDeleteListener!=null){
+                            iOnDeleteListener.onDelete(imageIndex);
                         }
                     }
 
@@ -140,5 +162,17 @@ public class ImagesPreviewUtil{
             }
         });
         return popupWindow;
+    }
+
+    public void setShowDelete(boolean showDelete) {
+        this.showDelete = showDelete;
+    }
+
+    public void setiOnDeleteListener(IOnDeleteListener iOnDeleteListener) {
+        this.iOnDeleteListener = iOnDeleteListener;
+    }
+
+    public void setStatusBarHeight(int statusBarHeight) {
+        this.statusBarHeight = statusBarHeight;
     }
 }
