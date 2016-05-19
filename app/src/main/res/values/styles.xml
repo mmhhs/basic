@@ -171,5 +171,37 @@
         <item name="android:activityCloseEnterAnimation">@anim/base_slide_in_from_right</item>
         <item name="android:activityCloseExitAnimation">@anim/base_slide_out_to_right</item>
     </style>
+    <!-- fresco -->
+    <style name="fresco_centerCrop">
+        <item name="fadeDuration">30</item>
+        <item name="actualImageScaleType">centerCrop</item>
+        <item name="placeholderImage">@color/grey</item>
+        <item name="placeholderImageScaleType">fitXY</item>
+        <item name="failureImage">@color/grey</item>
+        <item name="failureImageScaleType">fitXY</item>
+        <item name="retryImage">@color/grey</item>
+        <item name="retryImageScaleType">fitXY</item>
+    </style>
+    <style name="fresco_fitCenter">
+        <item name="fadeDuration">30</item>
+        <item name="actualImageScaleType">fitCenter</item>
+        <item name="placeholderImage">@color/grey</item>
+        <item name="placeholderImageScaleType">fitXY</item>
+        <item name="failureImage">@color/grey</item>
+        <item name="failureImageScaleType">fitXY</item>
+        <item name="retryImage">@color/grey</item>
+        <item name="retryImageScaleType">fitXY</item>
+    </style>
+    <style name="fresco_oval">
+        <item name="fadeDuration">30</item>
+        <item name="actualImageScaleType">fitCenter</item>
+        <item name="roundAsCircle">true</item>
+        <item name="placeholderImage">@mipmap/grzx_tx</item>
+        <item name="placeholderImageScaleType">fitCenter</item>
+        <item name="failureImage">@mipmap/grzx_tx</item>
+        <item name="failureImageScaleType">fitCenter</item>
+        <item name="retryImage">@mipmap/grzx_tx</item>
+        <item name="retryImageScaleType">fitCenter</item>
+    </style>
 
 </resources>

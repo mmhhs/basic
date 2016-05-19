@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.feima.baseproject.util.image.fresco.InstrumentedDraweeView
-        android:id="@+id/base_fresco_fitcenter_imageview"
+    <com.foton.almighty.util.image.fresco.InstrumentedDraweeView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/fresco_centerCrop"
+        android:id="@+id/base_fresco_oval_draweeView"
+        style="@style/fresco_oval"
         />
     </LinearLayout>
 

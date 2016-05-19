@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.base.feima.baseproject.util.image.fresco.InstrumentedDraweeView
         android:id="@+id/base_fresco_fitcenter_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fresco:fadeDuration="30"
-        fresco:actualImageScaleType="fitCenter"
-        fresco:placeholderImage="@color/grey"
-        fresco:placeholderImageScaleType="fitCenter"
-        fresco:failureImage="@color/red"
-        fresco:failureImageScaleType="centerInside"
-        fresco:retryImage="@color/green"
-        fresco:retryImageScaleType="centerCrop"
-
+        style="@style/fresco_fitCenter"
         />
     </LinearLayout>
 

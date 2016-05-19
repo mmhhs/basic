@@ -14,6 +14,7 @@ public class SharedUtil{
 
 	public final static String HELP = "HELP";
 	public final static String IGNOREVERSION = "IGNOREVERSION";//忽略版本
+	public final static String ADIMAGEPATH = "ADIMAGEPATH";
 
 	/**
 	 * 保存用户id
@@ -140,6 +141,27 @@ public class SharedUtil{
 		boolean bool = sp.getBoolean("first", false);
 		return bool;
 	}
+
+	/**
+	 * 保存广告图片路径
+	 * @param context
+	 * @param url
+	 */
+	public static void saveAdImage(Context context, String url)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ADIMAGEPATH, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putString(ADIMAGEPATH, url);
+		editor.commit();
+	}
+	public static String getAdImage(Context context){
+		Context ctx = context;
+		SharedPreferences sp = ctx.getSharedPreferences(ADIMAGEPATH, 0);
+		String id = sp.getString(ADIMAGEPATH, "");
+		return id;
+	}
+
 
 
 }

@@ -13,10 +13,14 @@ import android.widget.TextView;
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseFragmentActivity;
 import com.feima.baseproject.fragment.DemoFragment;
+import com.feima.baseproject.listener.IOnResultListener;
+import com.feima.baseproject.task.DispatchTask;
 import com.feima.baseproject.util.BaseConstant;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.PermissionUtil;
+import com.feima.baseproject.util.SharedUtil;
 import com.feima.baseproject.util.VersionCheckUtil;
+import com.feima.baseproject.util.image.fresco.FrescoUtils;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -71,6 +75,23 @@ public class HomeActivity extends BaseFragmentActivity {
         mTabHost.setCurrentTab(0);
         VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
         versionCheckUtils.checkVersion(false);
+        versionCheckUtils.setiOnResultListener(new IOnResultListener() {
+            @Override
+            public void onOK(DispatchTask task) {
+                //adPreDraweeView 广告图片预加载
+                FrescoUtils.displayImage(null, SharedUtil.getAdImage(HomeActivity.this), 10, 10);
+            }
+
+            @Override
+            public void onError(DispatchTask task) {
+
+            }
+
+            @Override
+            public void onDone(DispatchTask task) {
+
+            }
+        });
     }
 
     @Override

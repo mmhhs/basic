@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -14,18 +15,28 @@ import com.feima.baseproject.R;
 import com.feima.baseproject.activity.HomeActivity;
 import com.feima.baseproject.base.BaseFragmentActivity;
 import com.feima.baseproject.listener.IOnClickListener;
+import com.feima.baseproject.util.BaseConstant;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.SharedUtil;
+import com.feima.baseproject.util.image.fresco.FrescoUtils;
+import com.feima.baseproject.util.image.fresco.InstrumentedDraweeView;
+import com.feima.baseproject.util.tool.StringUtil;
+import com.feima.baseproject.view.widget.spin.RoundProgressBar;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 import permissions.dispatcher.PermissionRequest;
 
 public class WelcomeActivity extends BaseFragmentActivity {
 	@InjectView(R.id.base_ui_welcome_imageView)
 	public ImageView imageView ;
+	@InjectView(R.id.base_ui_welcome_ad)
+	public InstrumentedDraweeView adView ;
+	@InjectView(R.id.base_ui_welcome_progressBar)
+	public RoundProgressBar progressBar;
 	@InjectView(R.id.base_ui_welcome_fragmentRoot)
 	public LinearLayout proLinear;
 	private Handler handler;
@@ -47,14 +58,8 @@ public class WelcomeActivity extends BaseFragmentActivity {
 
 	@Override
 	protected void onDestroy(){
+		stop();
 		super.onDestroy();
-		try {
-			if(timer!=null){
-				timer.cancel();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -77,6 +82,13 @@ public class WelcomeActivity extends BaseFragmentActivity {
 				SharedUtil.saveHelpStatus(getApplicationContext(), false, versionCurrent);
 				initFragment();
 			}else{
+				if (!StringUtil.isEmpty(SharedUtil.getAdImage(this))){
+					progressBar.startCountdown();
+					progressBar.setVisibility(View.VISIBLE);
+					FrescoUtils.displayImage(adView, SharedUtil.getAdImage(this), BaseConstant.SCALE_WIDTH, BaseConstant.SCALE_HEIGHT);
+				}else {
+					progressBar.setVisibility(View.GONE);
+				}
 				initTimerTask();
 			}
 		}
@@ -112,7 +124,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 
 		};
 		timer = new Timer(true);
-		timer.schedule(task, 2000);
+		timer.schedule(task, 3000);
 		handler = new Handler(){
 			public void handleMessage(Message msg) {
 				//activity
@@ -128,17 +140,34 @@ public class WelcomeActivity extends BaseFragmentActivity {
 		};
 	}
 
+	@OnClick(R.id.base_ui_welcome_progressBar)
 	private void setIntent(){
 		try {
 			Intent intent = new Intent();
 			intent.setClass(WelcomeActivity.this, HomeActivity.class);
 			startActivity(intent);
+			stop();
 			finishSelf();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
+	}
+
+	boolean isStop = false;
+	private void stop(){
+		try {
+			if (!isStop){
+				if(timer!=null){
+					timer.cancel();
+				}
+				progressBar.stopCountdown();
+				isStop = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 

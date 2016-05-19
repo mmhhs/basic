@@ -28,6 +28,7 @@ public class VersionCheckUtil {
     private VersionResultEntity.VersionDataEntity versionDataEntity;
     private boolean showToast = false;
     private ScreenManager screenManager;
+    private IOnResultListener iOnResultListener;
 
     public VersionCheckUtil(Activity activity, View parentView, String taskTag) {
         this.activity = activity;
@@ -131,16 +132,23 @@ public class VersionCheckUtil {
                     versionDataEntity = res.getData();
                 }
                 updateVersion();
+                if (iOnResultListener!=null){
+                    iOnResultListener.onOK(task);
+                }
             }
 
             @Override
             public void onError(DispatchTask task) {
-
+                if (iOnResultListener!=null){
+                    iOnResultListener.onError(task);
+                }
             }
 
             @Override
             public void onDone(DispatchTask task) {
-
+                if (iOnResultListener!=null){
+                    iOnResultListener.onDone(task);
+                }
             }
         });
         task.execute();
@@ -174,5 +182,9 @@ public class VersionCheckUtil {
             }
         });
         fileDownLoadAsyncTask.execute();
+    }
+
+    public void setiOnResultListener(IOnResultListener iOnResultListener) {
+        this.iOnResultListener = iOnResultListener;
     }
 }
