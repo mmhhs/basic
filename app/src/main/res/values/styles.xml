@@ -5,6 +5,7 @@
     </style>
     <!-- Transparent theme. -->
     <style name="TransparentTheme" parent="AppBaseTheme">
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">@android:color/white</item>

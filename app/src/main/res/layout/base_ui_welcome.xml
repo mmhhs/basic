@@ -31,18 +31,21 @@
                 app:retryImageScaleType="centerCrop"
                 />
             <ImageView
+                android:id="@+id/base_ui_welcome_progressBar_bg"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/base_circle_tran"
                 android:padding="2dp"
                 android:layout_gravity="right"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp"
+                android:visibility="gone"/>
             <com.feima.baseproject.view.widget.spin.RoundProgressBar
                 android:id="@+id/base_ui_welcome_progressBar"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="right"
                 android:layout_margin="15dp"
+                android:visibility="gone"
                 app:roundColor="@color/grey"
                 app:roundProgressColor="@color/text_red"
                 app:textColor="@color/text_white"

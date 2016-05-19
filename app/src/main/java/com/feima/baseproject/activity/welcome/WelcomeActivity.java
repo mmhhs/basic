@@ -35,6 +35,8 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	public ImageView imageView ;
 	@InjectView(R.id.base_ui_welcome_ad)
 	public InstrumentedDraweeView adView ;
+	@InjectView(R.id.base_ui_welcome_progressBar_bg)
+	public ImageView progressBg;
 	@InjectView(R.id.base_ui_welcome_progressBar)
 	public RoundProgressBar progressBar;
 	@InjectView(R.id.base_ui_welcome_fragmentRoot)
@@ -85,9 +87,11 @@ public class WelcomeActivity extends BaseFragmentActivity {
 				if (!StringUtil.isEmpty(SharedUtil.getAdImage(this))){
 					progressBar.startCountdown();
 					progressBar.setVisibility(View.VISIBLE);
+					progressBg.setVisibility(View.VISIBLE);
 					FrescoUtils.displayImage(adView, SharedUtil.getAdImage(this), BaseConstant.SCALE_WIDTH, BaseConstant.SCALE_HEIGHT);
 				}else {
 					progressBar.setVisibility(View.GONE);
+					progressBg.setVisibility(View.GONE);
 				}
 				initTimerTask();
 			}
@@ -141,7 +145,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 	}
 
 	@OnClick(R.id.base_ui_welcome_progressBar)
-	private void setIntent(){
+	public void setIntent(){
 		try {
 			Intent intent = new Intent();
 			intent.setClass(WelcomeActivity.this, HomeActivity.class);
