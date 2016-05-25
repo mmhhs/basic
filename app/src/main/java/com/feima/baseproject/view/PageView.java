@@ -21,7 +21,8 @@ import java.util.TimerTask;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class PageView extends LinearLayout{
+
+public class PageView extends LinearLayout {
 	private final String TAGS = "PageView";
 	private LayoutParams defaultTabLayoutParams;
 	private Context context;
@@ -31,6 +32,7 @@ public class PageView extends LinearLayout{
 	private int pagePosition = 0;
 	private int totalPage = 0;
 	private int intervalTime = 4000;
+	private boolean isPause = false;
 
 	public PageView(Context context) {
 		super(context);
@@ -128,15 +130,18 @@ public class PageView extends LinearLayout{
 		autoHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 1) {
-					try {
-						if (totalPage > 0) {
-							int current = pagePosition % totalPage;
-							pageViewHolder.viewPager.setCurrentItem(current, true);
+					if (!isPause){
+						try {
+							if (totalPage > 0) {
+								int current = pagePosition % totalPage;
+								pageViewHolder.viewPager.setCurrentItem(current, true);
+							}
+							pagePosition++;
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-						pagePosition++;
-					} catch (Exception e) {
-						e.printStackTrace();
 					}
+
 				}
 			}
 		};
@@ -153,7 +158,8 @@ public class PageView extends LinearLayout{
 		public void onPageSelected(int position) {
 			try {
 				pagePosition = position;
-				pageViewHolder.pageIndicatorView.setCurrentPage(position);
+				setIndicatorCurrent(position);
+//				pageViewHolder.pageIndicatorView.setCurrentPage(position);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -164,6 +170,10 @@ public class PageView extends LinearLayout{
 
 		}
 	};
+
+	public void setIsPause(boolean isPause) {
+		this.isPause = isPause;
+	}
 
 	public PageViewHolder getPageViewHolder() {
 		return pageViewHolder;
