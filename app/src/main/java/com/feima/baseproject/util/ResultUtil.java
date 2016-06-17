@@ -79,5 +79,23 @@ public class ResultUtil {
 
     }
 
-
+    /**
+     * 修正网页路径
+     * @param webUrl
+     * @return
+     */
+    public static String judgeWebUrl(String webUrl) {
+        String resultString = "";
+        try {
+            if (webUrl.startsWith("http")||webUrl.startsWith("file://")) {
+                resultString = webUrl;
+            } else {
+                resultString = BaseConstant.SERVICE_HOST_IP_LAN_IMG+webUrl;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            return resultString;
+        }
+    }
 }

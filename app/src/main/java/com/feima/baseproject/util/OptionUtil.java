@@ -393,13 +393,17 @@ public class OptionUtil {
 		webSettings.supportMultipleWindows();  //多窗口
 		// 开启 DOM storage API 功能?
 		webSettings.setDomStorageEnabled(true);
+		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP) {
+			webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);//http https混合运用
+		}
+		webSettings.setDefaultTextEncodingName("UTF-8");// 设置默认编码
 		//开启 database storage API 功能?
 		webSettings.setDatabaseEnabled(true);
-		String cacheDirPath = BaseConstant.IMAGETAMPPATH;
-		//设置? Application Caches 缓存目录?
-		webSettings.setAppCachePath(cacheDirPath);
-		//开启 Application Caches 功能?
-		webSettings.setAppCacheEnabled(true);
+//		String cacheDirPath = BaseConstant.IMAGETAMPPATH;
+//		//设置? Application Caches 缓存目录?
+//		webSettings.setAppCachePath(cacheDirPath);
+//		//开启 Application Caches 功能?
+//		webSettings.setAppCacheEnabled(true);
 	}
 
 	/**
