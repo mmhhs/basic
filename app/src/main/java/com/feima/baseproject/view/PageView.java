@@ -122,7 +122,13 @@ public class PageView extends LinearLayout {
 				// TODO Auto-generated method stub
 				Message message = new Message();
 				message.what = 1;
-				autoHandler.sendMessage(message);
+				try {
+					if (autoHandler!=null){
+						autoHandler.sendMessage(message);
+					}
+				}catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 		};
 		autoTimer = new Timer(true);

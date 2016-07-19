@@ -39,7 +39,7 @@ public class MFragmentsManager {
         try {
             FragmentTransaction ft = fm.beginTransaction();
             ft.remove(fragment);
-            ft.commit();
+            ft.commitAllowingStateLoss();
             ft=null;
             fm.executePendingTransactions();
         }catch (Exception e){
