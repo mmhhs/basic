@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseFragment;
-import com.feima.baseproject.util.OptionUtil;
-import com.feima.baseproject.util.TimeUtil;
 import com.feima.baseproject.view.chooseimages.ChooseImagesSampleActivity;
 import com.feima.baseproject.view.pickerview.popwindow.DatePickerPopWin;
 
@@ -64,6 +62,20 @@ public class DemoFragment extends BaseFragment {
 
     @Override
     public void init() {
+
+        //延迟加载
+        isPrepared = true;
+        lazyLoad();
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible){
+            return;
+        }
+        //判断是否加载过数据
+
+        //网络加载
 
     }
 

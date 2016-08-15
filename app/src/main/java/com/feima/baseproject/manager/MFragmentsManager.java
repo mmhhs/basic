@@ -57,7 +57,7 @@ public class MFragmentsManager {
             for(Fragment f:fragmentList){
                 ft.remove(f);
             }
-            ft.commit();
+            ft.commitAllowingStateLoss();
             ft=null;
             fm.executePendingTransactions();
         }catch (Exception e){

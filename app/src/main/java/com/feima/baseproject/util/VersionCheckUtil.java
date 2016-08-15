@@ -29,6 +29,7 @@ public class VersionCheckUtil {
     private boolean showToast = false;
     private ScreenManager screenManager;
     private IOnResultListener iOnResultListener;
+    private boolean needDownLoad;
 
     public VersionCheckUtil(Activity activity, View parentView, String taskTag) {
         this.activity = activity;
@@ -60,7 +61,7 @@ public class VersionCheckUtil {
                                     @Override
                                     public void onConfirm() {
                                         File apkFile = new File(BaseConstant.APKPATH);
-                                        boolean needDownLoad = true;
+                                        needDownLoad = true;
                                         if (apkFile.exists()) {
                                             int versionCode = OptionUtil.getApkVersionCode(activity, BaseConstant.APKPATH);
                                             if (versionDataEntity.getVersionCode().equals("" + versionCode)) {
@@ -93,7 +94,7 @@ public class VersionCheckUtil {
                                 dialogUtil.setiOnDismissListener(new IOnDismissListener() {
                                     @Override
                                     public void onDismiss() {
-                                        if (versionDataEntity.getForceUpdate()==1){
+                                        if (versionDataEntity.getForceUpdate()==1&&!needDownLoad){
                                             screenManager.closeAll();
                                         }
                                     }
