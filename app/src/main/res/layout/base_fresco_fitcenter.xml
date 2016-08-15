@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.base.feima.baseproject.util.image.fresco.InstrumentedDraweeView
+    <com.feima.baseproject.util.image.fresco.InstrumentedDraweeView
         android:id="@+id/base_fresco_fitcenter_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

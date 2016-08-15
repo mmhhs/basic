@@ -1,6 +1,7 @@
 package com.feima.baseproject.util.image;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 import com.feima.baseproject.util.BaseConstant;
+import com.feima.baseproject.util.tool.LogUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,15 +38,19 @@ public class ImageChooseUtil implements Serializable{
 	private static  String imagePathFolder = BaseConstant.IMAGETAMPPATH;
 	private static Uri imageUri;
 	private  String imageUrl = "";
-	
-	public ImageChooseUtil(){
+	private Activity mActivity;
+	private Fragment mFragment;
+
+	public ImageChooseUtil(Activity activity){
+		mActivity = activity;
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 	}
 
-	public ImageChooseUtil(Activity context){
+	public ImageChooseUtil(Fragment fragment){
+		mFragment = fragment;
 		File dir = new File(imagePathFolder);
 		if(!dir.exists()){
 			dir.mkdirs();
@@ -79,17 +86,23 @@ public class ImageChooseUtil implements Serializable{
 	}
 	
 	/** 拍照获取相片 **/
-	public  void doTakePhoto(Activity context) {
+	public  void doTakePhoto() {
 		try {
 			Intent intent = new Intent();
 			intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE); //  MediaStore.ACTION_IMAGE_CAPTURE
 			intent.putExtra("return-data", true); // 有返回值
-			imageUrl = imagePathFolder +""+"image2.jpg";
+			imageUrl = imagePathFolder +""+"image.jpg";
 			imageUri = Uri.fromFile(new File(imageUrl));
 			// 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 			// 直接使用，没有缩小
-			context.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+			if (mActivity!=null){
+				mActivity.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+			}else {
+				if (mFragment!=null){
+					mFragment.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -98,17 +111,23 @@ public class ImageChooseUtil implements Serializable{
 	}
 	
 	/** 拍照获取多张相片 **/
-	public  void doTakePhotos(Activity context) {	
+	public  void doTakePhotos() {
 		try {
 			Intent intent = new Intent();
 			intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE); 
 			intent.putExtra("return-data", true); // 有返回值
-			imageUrl = imagePathFolder +""+System.currentTimeMillis()+"image2.jpg";
+			imageUrl = imagePathFolder +""+System.currentTimeMillis()+".jpg";
 			imageUri = Uri.fromFile(new File(imageUrl));
 			// 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 			// 直接使用，没有缩小
-			context.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+			if (mActivity!=null){
+				mActivity.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+			}else {
+				if (mFragment!=null){
+					mFragment.startActivityForResult(intent, PHOTO_WITH_CAMERA); // 用户点击了从相机获取
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -118,11 +137,17 @@ public class ImageChooseUtil implements Serializable{
 	}
 
 	/** 从相册获取图片 **/
-	public static void doGalleryPhoto(Activity context) {
+	public void doGalleryPhoto(Activity context) {
 		try {
 			Intent openAlbumIntent = doPickPhotoFromGallery();
 			// openAlbumIntent.setType("image/*");
-			context.startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
+			if (mActivity!=null){
+				mActivity.startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
+			}else {
+				if (mFragment!=null){
+					mFragment.startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -151,10 +176,16 @@ public class ImageChooseUtil implements Serializable{
      * 裁剪图片
      * @param data
      */
-	public static void doCropPhoto(Activity context,Uri data,Boolean isRate){
+	public void doCropPhoto(Uri data,Boolean isRate){
 		try {
 			Intent intent = getCropImageIntent(data,isRate);
-	        context.startActivityForResult(intent, PHOTO_PICKED_WITH_CROP);
+			if (mActivity!=null){
+				mActivity.startActivityForResult(intent, PHOTO_PICKED_WITH_CROP);
+			}else {
+				if (mFragment!=null){
+					mFragment.startActivityForResult(intent, PHOTO_PICKED_WITH_CROP);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -183,15 +214,21 @@ public class ImageChooseUtil implements Serializable{
     
     /**
      * 获取相册图片的Uri
-     * @param context
      * @param data
      * @return
      */
-    public static Uri getGalleryUri(Activity context, Intent data){
+    public Uri getGalleryUri(Intent data){
     	Uri originalUri = null;
     	try {
     		
-			ContentResolver resolver = context.getContentResolver();
+			ContentResolver resolver = null;
+			if (mActivity!=null){
+				mActivity.getContentResolver();
+			}else {
+				if (mFragment!=null){
+					mFragment.getActivity().getContentResolver();
+				}
+			}
     		originalUri = data.getData();
 //    		if(PublicTools.getSystemVersion()>=19){
 //    			File file = new File(getPath(context, originalUri));
@@ -210,14 +247,20 @@ public class ImageChooseUtil implements Serializable{
     
     /**
      * 获取相册图片的原始资源地址
-     * @param context
      * @param data
      * @return
      */
-	public static String getGalleryUrl(Activity context, Intent data){
+	public String getGalleryUrl(Intent data){
     	String result = "";
     	try {    		
-        	ContentResolver resolver = context.getContentResolver();
+        	ContentResolver resolver = null;
+			if (mActivity!=null){
+				mActivity.getContentResolver();
+			}else {
+				if (mFragment!=null){
+					mFragment.getActivity().getContentResolver();
+				}
+			}
     		if(data==null){
     			return "";
     		}
@@ -423,7 +466,65 @@ public class ImageChooseUtil implements Serializable{
 			return result;
 		}
 		
-	}  
+	}
+
+
+	MediaScannerConnection msc;
+
+	public void save2DCIM(final Context context,File file,String fileName){
+		// 其次把文件插入到系统图库
+		try {
+			final String result = MediaStore.Images.Media.insertImage(context.getContentResolver(),
+					file.getAbsolutePath(), fileName, null);
+			LogUtil.e("save2DCIM back= " + result);
+			// 最后通知图库更新
+//			context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getAbsolutePath())));
+			msc = new MediaScannerConnection(context, new MediaScannerConnection.MediaScannerConnectionClient() {
+
+				public void onMediaScannerConnected() {
+					if (msc!=null)
+						msc.scanFile(getFilePathByContentResolver(context,Uri.parse(result)), "image/jpeg");
+				}
+
+				public void onScanCompleted(String path, Uri uri) {
+					if (msc!=null)
+						msc.disconnect();
+				}
+			});
+			msc.connect();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 根据Uri获取图片路径
+	 * @param context
+	 * @param uri
+	 * @return
+	 */
+	public static String getFilePathByContentResolver(Context context, Uri uri) {
+		if (null == uri) {
+			return null;
+		}
+		Cursor c = context.getContentResolver().query(uri, null, null, null, null);
+		String filePath  = null;
+		if (null == c) {
+			throw new IllegalArgumentException(
+					"Query on " + uri + " returns null result.");
+		}
+		try {
+			if ((c.getCount() != 1) || !c.moveToFirst()) {
+			} else {
+				filePath = c.getString(
+						c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA));
+			}
+		} finally {
+			c.close();
+		}
+		return filePath;
+	}
 	
 	/**
 	 * 获取sd卡路径
@@ -525,7 +626,7 @@ public class ImageChooseUtil implements Serializable{
 	    final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
 	    // DocumentProvider
-	    if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, uri)) {
 	        // ExternalStorageProvider
 	        if (isExternalStorageDocument(uri)) {
 	            final String docId = DocumentsContract.getDocumentId(uri);

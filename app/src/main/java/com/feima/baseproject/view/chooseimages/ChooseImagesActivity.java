@@ -72,7 +72,7 @@ public class ChooseImagesActivity extends BaseActivity {
     private ChooseImagesGridAdapter chooseImagesGridAdapter;
     private int maxSize = 9;//最多能选择的图片数
     private int folderShowIndex = 0;
-    private ImageChooseUtil imageChooseTools = new ImageChooseUtil();
+    private ImageChooseUtil imageChooseTools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class ChooseImagesActivity extends BaseActivity {
     public void init() {
         screenWidth = OptionUtil.getScreenWidth(this);
         maxSize = getIntent().getExtras().getInt(BROADCASTFLAG,9);
+        imageChooseTools = new ImageChooseUtil(this);
         queryData();
     }
 
@@ -245,7 +246,7 @@ public class ChooseImagesActivity extends BaseActivity {
         public void onItemClick(int position) {
             try{
                 if (position==0&&folderShowIndex==0){
-                    imageChooseTools.doTakePhoto(ChooseImagesActivity.this);
+                    imageChooseTools.doTakePhoto();
                 }else {
                     if (folderImageBeanList.get(folderShowIndex).getImagePathList().size()>0){
                         PopupWindow popupWindow = getPreviewWindow(ChooseImagesActivity.this,CHOOSEIMAGESSCREENFLAG_PREVIEWFOLDER,folderImageBeanList.get(folderShowIndex).getImagePathList(),position);
