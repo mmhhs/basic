@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnDialogListener;
+import com.feima.baseproject.util.toast.MIUIToast;
 import com.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
@@ -227,7 +228,11 @@ public class OptionUtil {
 	 */
 	public static void addToast(Context context,String value){
 		try {
-			Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+				MIUIToast.makeText(context.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+			}else {
+				Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
