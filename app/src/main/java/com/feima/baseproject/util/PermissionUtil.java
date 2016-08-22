@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
@@ -28,11 +29,14 @@ public class PermissionUtil {
     //读写文件
     public final static int CHECK_FILE_PERMISSION_CODE = 3;
     public final static String CHECK_FILE_PERMISSION_NAME = "android.permission.WRITE_EXTERNAL_STORAGE";
+    //系统弹窗
+    public final static int CHECK_WINDOW_PERMISSION_CODE = 4;
+    public final static String CHECK_WINDOW_PERMISSION_NAME = "android.permission.SYSTEM_ALERT_WINDOW";
 
     //定义的权限编码,当PERMISSION_DOACACHENEEDSPERMISSION有N个权限，那么REQUEST_DOACACHENEEDSPERMISSION就会有多少值
     private static final int REQUEST_DOACACHENEEDSPERMISSION = 1;
     //需要请求的权限名称
-    private static final String[] PERMISSION_DOACACHENEEDSPERMISSION = new String[]{CHECK_LOCTION_PERMISSION_NAME};
+    private static String[] PERMISSION_DOACACHENEEDSPERMISSION = new String[]{CHECK_LOCTION_PERMISSION_NAME,CHECK_FILE_PERMISSION_NAME};
 
 
     private PermissionUtil() {
@@ -44,6 +48,10 @@ public class PermissionUtil {
      * @param activity
      */
     public static void doACacheNeedsPermissionWithCheck(BaseFragmentActivity activity) {
+        boolean isM = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1;
+        if (isM){
+            PERMISSION_DOACACHENEEDSPERMISSION = new String[]{CHECK_LOCTION_PERMISSION_NAME,CHECK_FILE_PERMISSION_NAME,CHECK_WINDOW_PERMISSION_NAME};
+        }
         // 如果拥有该权限，那么调用用户注解为：@NeedsPermission的方法
         if (PermissionUtils.hasSelfPermissions(activity, PERMISSION_DOACACHENEEDSPERMISSION)) {
             activity.doACacheNeedsPermission();
@@ -113,7 +121,7 @@ public class PermissionUtil {
         dialogUtil.setTitle("帮助");
         dialogUtil.setConfirmStr("设置");
         dialogUtil.setCancelStr("退出应用");
-        dialogUtil.showTipDialog(view, "当前应用缺少定位权限\n" +
+        dialogUtil.showTipDialog(view, "当前应用缺少定位、读写文件、弹窗权限\n" +
                 "请点击“设置”-“权限”-打开所需权限");
         dialogUtil.setiOnDialogListener(new IOnDialogListener() {
             @Override

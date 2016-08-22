@@ -5,6 +5,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
 import android.widget.TabHost.TabSpec;
@@ -156,13 +158,32 @@ public class HomeActivity extends BaseFragmentActivity {
     @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
     @Override
     public void ACacheOnPermissionDenied() {
-        PermissionUtil.showPermissionDialog(this,naviText0);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                PermissionUtil.showPermissionDialog(HomeActivity.this, naviText0);
+            }
+        }, 1000);
     }
 
     @OnNeverAskAgain(Manifest.permission.ACCESS_FINE_LOCATION)
     @Override
     public void ACacheOnNeverAskAgain() {
-        PermissionUtil.showPermissionDialog(this, naviText0);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                PermissionUtil.showPermissionDialog(HomeActivity.this, naviText0);
+            }
+        }, 1000);
+    }
+
+    /**
+     * 权限请求回调，提示用户之后，用户点击“允许”或者“拒绝”之后调用此方法
+     * @param requestCode  定义的权限编码
+     * @param permissions 权限名称
+     * @param grantResults 允许/拒绝
+     */
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     long firstTime = 0;
