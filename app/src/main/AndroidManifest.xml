@@ -7,6 +7,8 @@
         android:name=".base.BaseApplication"
         android:installLocation="auto"
         android:allowBackup="true"
+        android:supportsRtl="true"
+        android:persistent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -48,6 +50,65 @@
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+
+        <!-- 保活策略 -->
+        <activity android:name=".activity.daemon.KeepLiveActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:process=":live"
+            android:theme="@style/LiveActivityStyle"
+            />
+        <service android:name=".daemon.KeepLiveService" android:process=":live"/>
+        <service android:name=".daemon.KeepLiveService$InnerService" android:process=":live"/>
+        <!--<receiver android:name=".daemon.KeepLiveReceiver" android:process=":live" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+                <!--&lt;!&ndash; 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 &ndash;&gt;-->
+                <!--<action android:name="android.intent.action.MEDIA_MOUNTED" />-->
+                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />-->
+                <!--<action android:name="android.intent.action.SCREEN_OFF" />-->
+                <!--<action android:name="android.intent.action.SCREEN_ON" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!-- 同步账户 -->
+        <provider
+            android:name=".daemon.KeepLiveAccountProvider"
+            android:authorities="@string/account_auth_provider"
+            android:exported="false"
+            android:syncable="true"/>
+        <service
+            android:name=".daemon.KeepLiveSyncService"
+            android:exported="true"
+            android:process=":live">
+            <intent-filter>
+                <action
+                    android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter"/>
+        </service>
+        <service
+            android:name=".daemon.KeepAuthService"
+            android:exported="true"
+            android:process=":live">
+            <intent-filter>
+                <action
+                    android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
+
     </application>
 
 
@@ -63,7 +124,10 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
     //6.0需要申请 必要权限
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />

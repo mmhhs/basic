@@ -48,6 +48,8 @@ public class BaseConstant
     public final static int PAGER_COUNT									=  16;
 	
 	public final static int REQUEST_REFRESH									=  9999;
+
+    public final static String ACTION_HOME                                    = "ACTION_HOME";
 	
 	
 	public static String INTENT_ID								    =  "INTENT_ID";

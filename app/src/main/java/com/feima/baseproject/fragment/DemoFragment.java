@@ -73,9 +73,9 @@ public class DemoFragment extends BaseFragment {
         if (!isPrepared || !isVisible){
             return;
         }
-        //判断是否加载过数据
+        //TODO 判断是否加载过数据
 
-        //网络加载
+        //TODO 网络加载
 
     }
 

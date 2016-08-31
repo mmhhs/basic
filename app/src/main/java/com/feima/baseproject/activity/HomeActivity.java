@@ -2,7 +2,10 @@ package com.feima.baseproject.activity;
 
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +18,9 @@ import android.widget.TextView;
 import com.feima.baseproject.R;
 import com.feima.baseproject.base.BaseFragmentActivity;
 import com.feima.baseproject.fragment.DemoFragment;
-import com.feima.baseproject.listener.IOnResultListener;
-import com.feima.baseproject.task.DispatchTask;
 import com.feima.baseproject.util.BaseConstant;
 import com.feima.baseproject.util.OptionUtil;
 import com.feima.baseproject.util.PermissionUtil;
-import com.feima.baseproject.util.SharedUtil;
-import com.feima.baseproject.util.VersionCheckUtil;
-import com.feima.baseproject.util.image.fresco.FrescoUtils;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -43,6 +41,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @InjectView(R.id.base_ui_home_radio2)
     public TextView naviText2;
     public int tabFlag = 0;
+    private ReceiveBroadcast receiveBroadcast;
 
     private final Class[] fragments = { DemoFragment.class, DemoFragment.class,
             DemoFragment.class };
@@ -56,12 +55,28 @@ public class HomeActivity extends BaseFragmentActivity {
         }
         setTaskTag(getClass().getSimpleName());
         setContentView(R.layout.base_ui_home);
+        //启动守护服务
+//        startService(new Intent(HomeActivity.this, Service1.class));
+//        startService(new Intent(HomeActivity.this, Service2.class));
+//        startService(new Intent(HomeActivity.this, KeepLiveService.class));
+//        BaseApplication.self().startKeepLiveService();
     }
 
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onDestroy(){
+        try {
+            unregisterReceiver(receiveBroadcast);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        super.onDestroy();
+
     }
 
     @Override
@@ -75,25 +90,26 @@ public class HomeActivity extends BaseFragmentActivity {
             mTabHost.addTab(tabSpec, fragments[i], null);
         }
         mTabHost.setCurrentTab(0);
-        VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
-        versionCheckUtils.checkVersion(false);
-        versionCheckUtils.setiOnResultListener(new IOnResultListener() {
-            @Override
-            public void onOK(DispatchTask task) {
-                //adPreDraweeView 广告图片预加载
-                FrescoUtils.displayImage(null, SharedUtil.getAdImage(HomeActivity.this), 10, 10);
-            }
+//        VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
+//        versionCheckUtils.checkVersion(false);
+//        versionCheckUtils.setiOnResultListener(new IOnResultListener() {
+//            @Override
+//            public void onOK(DispatchTask task) {
+//                //adPreDraweeView 广告图片预加载
+//                FrescoUtils.displayImage(null, SharedUtil.getAdImage(HomeActivity.this), 10, 10);
+//            }
+//
+//            @Override
+//            public void onError(DispatchTask task) {
+//
+//            }
+//
+//            @Override
+//            public void onDone(DispatchTask task) {
+//
+//            }
+//        });
 
-            @Override
-            public void onError(DispatchTask task) {
-
-            }
-
-            @Override
-            public void onDone(DispatchTask task) {
-
-            }
-        });
     }
 
     @Override
@@ -140,6 +156,39 @@ public class HomeActivity extends BaseFragmentActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void registerBroad(){
+        if (receiveBroadcast ==null){
+            receiveBroadcast = new ReceiveBroadcast();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(BaseConstant.ACTION_HOME);
+            registerReceiver(receiveBroadcast, filter);
+        }
+    }
+
+    public class ReceiveBroadcast extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            try {
+                String action = intent.getAction();
+                if (action.equals(BaseConstant.ACTION_HOME)){
+                    final int type = intent.getExtras().getInt(BaseConstant.INTENT_TYPE);
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        public void run()
+                        {
+                            setCurrentScreen(type);
+                        }
+                    }, 50);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
     }
 

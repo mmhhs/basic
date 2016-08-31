@@ -107,6 +107,17 @@ public class WelcomeFragment extends BaseFragment implements OnPageChangeListene
 	}
 
 	@Override
+	protected void lazyLoad() {
+		if (!isPrepared || !isVisible){
+			return;
+		}
+		//TODO 判断是否加载过数据
+
+		//TODO 网络加载
+
+	}
+
+	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		// TODO Auto-generated method stub
         mPageIndicatorView.setCurrentPage(arg0);

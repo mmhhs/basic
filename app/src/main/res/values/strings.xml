@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BaseProject</string>
+    <string name="app_name">FTS</string>
     <string name="quit">再按一次退出应用</string>
     <string name="base_86">+86</string>
+    <string name="account">FTS</string>
+    <string name="account_auth_provider">com.feima.baseproject.provider</string>
+    <string name="account_auth_type">com.feima.baseproject</string>
+    <string name="account_auth_provide">com.feima.baseproject.provider</string>
+    <string name="account_token_type">com.feima.baseproject</string>
     <!-- net -->
     <string name="net_tip">网络不给力，查看下吧！</string>
     <!-- task -->

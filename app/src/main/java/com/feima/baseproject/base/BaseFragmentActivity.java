@@ -1,14 +1,19 @@
 package com.feima.baseproject.base;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnPermissionListener;
 import com.feima.baseproject.manager.MFragmentsManager;
 import com.feima.baseproject.manager.ScreenManager;
+import com.feima.baseproject.manager.SystemBarTintManager;
 import com.feima.baseproject.manager.TaskManager;
 import com.feima.baseproject.task.BaseTask;
 
@@ -45,6 +50,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
 	public void setContentView(int layoutResID) {
 		super.setContentView(layoutResID);
 		ButterKnife.inject(this);
+		setKitKatTranslucency();
 		init();
 	}
 
@@ -147,5 +153,38 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
 //	public void setTitleTextVisibility(int visible){
 //		titleText.setVisibility(visible);
 //	}
+
+	public void setKitKatTranslucency() {
+		applyKitKatTranslucency(R.color.title_color);
+	}
+
+	/**
+	 * Apply KitKat specific translucency.
+	 */
+	public void applyKitKatTranslucency(int colorId) {
+		// KitKat translucent navigation/status bar.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(true);
+			SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+			mTintManager.setStatusBarTintEnabled(true);
+			mTintManager.setNavigationBarTintEnabled(true);
+			mTintManager.setTintResource(colorId);
+			mTintManager.setStatusBarTintResource(colorId);
+			mTintManager.setNavigationBarTintResource(colorId);
+		}
+	}
+
+	@TargetApi(19)
+	private void setTranslucentStatus(boolean on) {
+		Window win = getWindow();
+		WindowManager.LayoutParams winParams = win.getAttributes();
+		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+		if (on) {
+			winParams.flags |= bits;
+		} else {
+			winParams.flags &= ~bits;
+		}
+		win.setAttributes(winParams);
+	}
 
 }

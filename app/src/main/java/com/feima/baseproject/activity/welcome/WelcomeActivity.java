@@ -150,7 +150,6 @@ public class WelcomeActivity extends BaseFragmentActivity {
 			Intent intent = new Intent();
 			intent.setClass(WelcomeActivity.this, HomeActivity.class);
 			startActivity(intent);
-			stop();
 			finishSelf();
 		} catch (Exception e) {
 			// TODO: handle exception
