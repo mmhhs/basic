@@ -1,6 +1,7 @@
 package com.feima.baseproject.util;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -26,12 +27,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.feima.baseproject.R;
+import com.feima.baseproject.base.BaseApplication;
 import com.feima.baseproject.listener.IOnDialogListener;
 import com.feima.baseproject.util.toast.MIUIToast;
 import com.feima.baseproject.view.dialog.DialogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 
 public class OptionUtil {
@@ -219,7 +222,22 @@ public class OptionUtil {
 	}
 
 
-
+	/**
+	 * 弹出toast
+	 * @param value
+	 */
+	public static void addToast(String value){
+		try {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+				MIUIToast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();
+			}else {
+				Toast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 弹出toast
@@ -229,9 +247,9 @@ public class OptionUtil {
 	public static void addToast(Context context,String value){
 		try {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-				MIUIToast.makeText(context.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+				MIUIToast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();
 			}else {
-				Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
+				Toast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -479,6 +497,26 @@ public class OptionUtil {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 获取进程名字
+	 * @param cxt
+	 * @param pid
+	 * @return
+	 */
+	public static String getProcessName(Context cxt, int pid) {
+		ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);
+		List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+		if (runningApps == null) {
+			return null;
+		}
+		for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
+			if (procInfo.pid == pid) {
+				return procInfo.processName;
+			}
+		}
+		return null;
 	}
 
 }

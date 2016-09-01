@@ -1,14 +1,15 @@
 package com.feima.baseproject.daemon;
 
 import android.app.Service;
+import android.app.job.JobParameters;
+import android.app.job.JobService;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
 import com.feima.baseproject.util.tool.LogUtil;
 
-
-public class KeepLiveService extends Service {
+public class KeepLiveFor5Service extends JobService {
     private static Service mKeepLiveService;
     private KeepLiveReceiver keepLiveReceiver;
 
@@ -17,10 +18,10 @@ public class KeepLiveService extends Service {
         super.onCreate();
     }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+//    @Override
+//    public IBinder onBind(Intent intent) {
+//        return null;
+//    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -28,8 +29,19 @@ public class KeepLiveService extends Service {
         startService(new Intent(this, InnerService.class));
         registerBroadcast();
         KeepLiveManager.getInstance().addAccount();
-        LogUtil.e("--------------KeepLiveService startService--------------");
+        KeepLiveManager.getInstance().startJobScheduler();
+        LogUtil.e("--------------KeepLiveFor5Service startService--------------");
         return Service.START_STICKY;
+    }
+
+    @Override
+    public boolean onStartJob(JobParameters params) {
+        return false;
+    }
+
+    @Override
+    public boolean onStopJob(JobParameters params) {
+        return false;
     }
 
     public static class InnerService extends Service{
@@ -41,7 +53,6 @@ public class KeepLiveService extends Service {
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            LogUtil.e("--------------InnerService startService--------------");
             KeepLiveManager.getInstance().setForeground(mKeepLiveService,this);
             return super.onStartCommand(intent,flags,startId);
         }

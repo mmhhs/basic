@@ -52,6 +52,7 @@
             />
 
         <!-- 保活策略 -->
+        <!--android:process=":live"-->
         <activity android:name=".activity.daemon.KeepLiveActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
@@ -60,24 +61,13 @@
             android:exported="false"
             android:finishOnTaskLaunch="false"
             android:launchMode="singleInstance"
-            android:process=":live"
+
             android:theme="@style/LiveActivityStyle"
             />
-        <service android:name=".daemon.KeepLiveService" android:process=":live"/>
-        <service android:name=".daemon.KeepLiveService$InnerService" android:process=":live"/>
-        <!--<receiver android:name=".daemon.KeepLiveReceiver" android:process=":live" >-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
-                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
-                <!--&lt;!&ndash; 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 &ndash;&gt;-->
-                <!--<action android:name="android.intent.action.MEDIA_MOUNTED" />-->
-                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
-                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />-->
-                <!--<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />-->
-                <!--<action android:name="android.intent.action.SCREEN_OFF" />-->
-                <!--<action android:name="android.intent.action.SCREEN_ON" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+        <service android:name=".daemon.KeepLiveService"/>
+        <service android:name=".daemon.KeepLiveService$InnerService"/>
+        <service android:name=".daemon.KeepLiveFor5Service"/>
+        <service android:name=".daemon.KeepLiveFor5Service$InnerService"/>
         <!-- 同步账户 -->
         <provider
             android:name=".daemon.KeepLiveAccountProvider"
@@ -87,7 +77,7 @@
         <service
             android:name=".daemon.KeepLiveSyncService"
             android:exported="true"
-            android:process=":live">
+            >
             <intent-filter>
                 <action
                     android:name="android.content.SyncAdapter"/>
@@ -99,7 +89,7 @@
         <service
             android:name=".daemon.KeepAuthService"
             android:exported="true"
-            android:process=":live">
+            >
             <intent-filter>
                 <action
                     android:name="android.accounts.AccountAuthenticator"/>
