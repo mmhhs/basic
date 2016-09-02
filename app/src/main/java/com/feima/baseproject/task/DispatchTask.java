@@ -1,6 +1,7 @@
 package com.feima.baseproject.task;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.feima.baseproject.listener.IOnBackgroundListener;
 import com.feima.baseproject.listener.IOnEncryptListener;
@@ -44,7 +45,7 @@ public class DispatchTask extends BaseTask<Void, String, TaskResult> {
 	public IOnEncryptListener iOnEncryptListener;
 	public ResultEntity resultEntity;//返回值解析结果父类 向上转型
 	public Class parseClass;//用于解析的实体类
-
+	public View view;//子类继承需设置
 
 
 

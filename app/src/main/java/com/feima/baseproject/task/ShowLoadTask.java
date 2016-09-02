@@ -69,6 +69,7 @@ public class ShowLoadTask extends DispatchTask {
 		super.init();
 		viewUtil = new ViewUtil();
 		Httpclient.setContext(activity);
+		view = contentView;
 	}
 
 	@Override

@@ -161,6 +161,7 @@ public class ShowDialogTask extends DispatchTask{
 		super.init();
 		dialogUtil = new DialogUtil(activity);
 		Httpclient.setContext(activity);
+		view = parentView;
 	}
 
 	@Override
