@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@color/text_grey_deep"
-                android:text="内容\n内容"
+                android:text=""
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,6 +37,12 @@ public class ImagesPreviewUtil{
         this.activity = activity;
         this.chooseImageList = chooseImageList;
         this.containView = view;
+    }
+
+    public PopupWindow showImagesPreview(int index){
+        PopupWindow popupWindow = getPreviewWindow(activity, index);
+        popupWindow.showAtLocation(containView, Gravity.CENTER, 0, 0);
+        return popupWindow;
     }
 
     public PopupWindow getPreviewWindow(final Context context,int position) {

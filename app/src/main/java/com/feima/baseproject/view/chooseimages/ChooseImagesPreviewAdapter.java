@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnItemClickListener;
+import com.feima.baseproject.util.ResultUtil;
 import com.feima.baseproject.util.image.fresco.FrescoUtils;
 import com.feima.baseproject.util.image.fresco.InstrumentedDraweeView;
 
@@ -42,11 +43,11 @@ public class ChooseImagesPreviewAdapter extends PagerAdapter {
         View convertView = null;
         convertView = LayoutInflater.from(context).inflate(R.layout.base_adapter_choose_images_preview, null);
         InstrumentedDraweeView imageView = (InstrumentedDraweeView)convertView.findViewById(R.id.base_fresco_fitcenter_imageview);
-        FrescoUtils.displayImage(imageView, "file://" + list.get(position), 720, 1280);
+        FrescoUtils.displayImage(imageView, ResultUtil.judgeImagePath(list.get(position)), 720, 1280);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (iOnItemClickListener!=null){
+                if (iOnItemClickListener != null) {
                     iOnItemClickListener.onItemClick(position);
                 }
             }

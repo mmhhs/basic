@@ -4,6 +4,7 @@ package com.feima.baseproject.base;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.manager.MFragmentsManager;
@@ -29,12 +30,12 @@ public abstract class BaseFragment extends Fragment {
     @Optional
     @InjectView(R.id.base_view_link_load)
     public LinearLayout loadLayout;
-//    @Optional
-//    @InjectView(R.id.base_ui_title_title)
-//    public TextView titleText;
-//    @Optional
-//    @InjectView(R.id.base_ui_title_back_layout)
-//    public LinearLayout backLayout;
+    @Optional
+    @InjectView(R.id.base_ui_title_title)
+    public TextView titleText;
+    @Optional
+    @InjectView(R.id.base_ui_title_back_layout)
+    public LinearLayout backLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,17 +154,17 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-//    public void setTitleText(String name) {
-//        this.titleText.setText(name);
-//    }
-//
-//    public void setBackLayoutVisibility(int visible){
-//        backLayout.setVisibility(visible);
-//    }
-//
-//    public void setTitleTextVisibility(int visible){
-//        titleText.setVisibility(visible);
-//    }
+    public void setTitleText(String name) {
+        this.titleText.setText(name);
+    }
+
+    public void setBackLayoutVisibility(int visible){
+        backLayout.setVisibility(visible);
+    }
+
+    public void setTitleTextVisibility(int visible){
+        titleText.setVisibility(visible);
+    }
 
 
 

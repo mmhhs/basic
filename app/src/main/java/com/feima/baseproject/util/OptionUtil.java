@@ -228,7 +228,7 @@ public class OptionUtil {
 	 */
 	public static void addToast(String value){
 		try {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+			if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) && MIUIUtil.isMIUI(BaseApplication.self())){
 				MIUIToast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();
 			}else {
 				Toast.makeText(BaseApplication.self(), value, Toast.LENGTH_SHORT).show();

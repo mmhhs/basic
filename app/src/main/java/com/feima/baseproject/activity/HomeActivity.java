@@ -90,6 +90,7 @@ public class HomeActivity extends BaseFragmentActivity {
             mTabHost.addTab(tabSpec, fragments[i], null);
         }
         mTabHost.setCurrentTab(0);
+        registerBroadcast();
 //        VersionCheckUtil versionCheckUtils = new VersionCheckUtil(this,naviText0,taskTag);
 //        versionCheckUtils.checkVersion(false);
 //        versionCheckUtils.setiOnResultListener(new IOnResultListener() {
@@ -159,7 +160,7 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
-    private void registerBroad(){
+    private void registerBroadcast(){
         if (receiveBroadcast ==null){
             receiveBroadcast = new ReceiveBroadcast();
             IntentFilter filter = new IntentFilter();

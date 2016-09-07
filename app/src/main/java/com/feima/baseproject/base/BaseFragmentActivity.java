@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.listener.IOnPermissionListener;
@@ -27,12 +28,12 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
 	protected ScreenManager screenManager = ScreenManager.getScreenManagerInstance();
 	public TaskManager taskManager = TaskManager.getTaskManagerInstance();
 	public MFragmentsManager mFragmentsManager = MFragmentsManager.getFragmentManagerInstance();
-//	@Optional
-//	@InjectView(R.id.base_ui_title_back_layout)
-//	public LinearLayout backLayout;
-//	@Optional
-//	@InjectView(R.id.base_ui_title_title)
-//	public TextView titleText;
+	@Optional
+	@InjectView(R.id.base_ui_title_back_layout)
+	public LinearLayout backLayout;
+	@Optional
+	@InjectView(R.id.base_ui_title_title)
+	public TextView titleText;
 	@Optional
 	@InjectView(R.id.base_view_contain_layout)
 	public LinearLayout containLayout;
@@ -136,23 +137,23 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
 		finishSelf();
 	}
 
-//	@Optional
-//	@OnClick(R.id.base_ui_title_back_layout)
-//	public void back(){
-//		finishSelf();
-//	}
-//
-//	public void setTitleText(String name) {
-//		this.titleText.setText(name);
-//	}
-//
-//	public void setBackLayoutVisibility(int visible){
-//		backLayout.setVisibility(visible);
-//	}
-//
-//	public void setTitleTextVisibility(int visible){
-//		titleText.setVisibility(visible);
-//	}
+	@Optional
+	@OnClick(R.id.base_ui_title_back_layout)
+	public void back(){
+		finishSelf();
+	}
+
+	public void setTitleText(String name) {
+		this.titleText.setText(name);
+	}
+
+	public void setBackLayoutVisibility(int visible){
+		backLayout.setVisibility(visible);
+	}
+
+	public void setTitleTextVisibility(int visible){
+		titleText.setVisibility(visible);
+	}
 
 	public void setKitKatTranslucency() {
 		applyKitKatTranslucency(R.color.title_color);

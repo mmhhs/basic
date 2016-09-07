@@ -15,6 +15,7 @@ public class SharedUtil{
 	public final static String HELP = "HELP";
 	public final static String IGNOREVERSION = "IGNOREVERSION";//忽略版本
 	public final static String ADIMAGEPATH = "ADIMAGEPATH";
+	public final static String MIUI = "MIUI";
 
 	/**
 	 * 保存用户id
@@ -30,8 +31,8 @@ public class SharedUtil{
 		editor.commit();
 	}
 	public static String getUserId(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(USER_ID, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(USER_ID, 0);
 		String id = sp.getString(USER_ID, "");
 		return id;
 	}
@@ -57,8 +58,8 @@ public class SharedUtil{
 	 * @return
 	 */
 	public static String getLat(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(LOCATION, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(LOCATION, 0);
 		String lat = sp.getString(LATITUDE, "");
 		return lat;
 	}
@@ -68,8 +69,8 @@ public class SharedUtil{
 	 * @return
 	 */
 	public static String getLng(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(LOCATION, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(LOCATION, 0);
 		String lng = sp.getString(LONGITUDE, "");
 		return lng;
 	}
@@ -89,14 +90,14 @@ public class SharedUtil{
 		editor.commit();
 	}
 	public static boolean getHelpStatus(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(HELP, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(HELP, 0);
 		boolean status = sp.getBoolean(HELP, true);
 		return status;
 	}
 	public static int getHelpCode(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(HELP, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(HELP, 0);
 		int code = sp.getInt("code", 1);
 		return code;
 	}
@@ -115,8 +116,8 @@ public class SharedUtil{
 		editor.commit();
 	}
 	public static String getIgnoreVersion(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(IGNOREVERSION, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(IGNOREVERSION, 0);
 		String id = sp.getString(IGNOREVERSION, "");
 		return id;
 	}
@@ -136,8 +137,8 @@ public class SharedUtil{
 		editor.commit();
 	}
 	public static boolean getFirst(Context context,String className){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(className, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(className, 0);
 		boolean bool = sp.getBoolean("first", false);
 		return bool;
 	}
@@ -156,12 +157,36 @@ public class SharedUtil{
 		editor.commit();
 	}
 	public static String getAdImage(Context context){
-		Context ctx = context;
-		SharedPreferences sp = ctx.getSharedPreferences(ADIMAGEPATH, 0);
+		
+		SharedPreferences sp = context.getSharedPreferences(ADIMAGEPATH, 0);
 		String id = sp.getString(ADIMAGEPATH, "");
 		return id;
 	}
 
+	/**
+	 * 保存是否是miui系统
+	 * @param context
+	 * @param isMIUI
+	 */
+	public static void saveMIUI(Context context, boolean isMIUI, boolean isChecked)
+	{
+		SharedPreferences sp = context.getSharedPreferences(MIUI, 0);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.putBoolean(MIUI, isMIUI);
+		editor.putBoolean("isChecked", isChecked);
+		editor.commit();
+	}
+	public static boolean getMIUI(Context context){
+		SharedPreferences sp = context.getSharedPreferences(MIUI, 0);
+		boolean isMIUI = sp.getBoolean(MIUI, false);
+		return isMIUI;
+	}
 
+	public static boolean getMIUIChecked(Context context){
+		SharedPreferences sp = context.getSharedPreferences("isChecked", 0);
+		boolean isChecked = sp.getBoolean("isChecked", false);
+		return isChecked;
+	}
 
 }

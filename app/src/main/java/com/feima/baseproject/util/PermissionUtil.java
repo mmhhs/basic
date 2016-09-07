@@ -49,7 +49,7 @@ public class PermissionUtil {
      */
     public static void doACacheNeedsPermissionWithCheck(BaseFragmentActivity activity) {
         boolean isM = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1;
-        if (isM){
+        if (isM&&MIUIUtil.isMIUI(activity)){
             PERMISSION_DOACACHENEEDSPERMISSION = new String[]{CHECK_LOCTION_PERMISSION_NAME,CHECK_FILE_PERMISSION_NAME,CHECK_WINDOW_PERMISSION_NAME};
         }
         // 如果拥有该权限，那么调用用户注解为：@NeedsPermission的方法
