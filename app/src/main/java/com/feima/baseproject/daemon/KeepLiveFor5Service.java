@@ -30,7 +30,6 @@ public class KeepLiveFor5Service extends JobService {
         registerBroadcast();
         KeepLiveManager.getInstance().addAccount();
         KeepLiveManager.getInstance().startJobScheduler();
-        LogUtil.e("--------------KeepLiveFor5Service startService--------------");
         return Service.START_STICKY;
     }
 

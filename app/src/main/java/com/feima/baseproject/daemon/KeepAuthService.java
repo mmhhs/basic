@@ -57,7 +57,7 @@ public class KeepAuthService extends Service {
         public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options)
                 throws NetworkErrorException {
             // 认证 示例代码
-            String authToken = accountManager.peekAuthToken(account, getString(R.string.account_token_type));
+            String authToken = accountManager.peekAuthToken(account, getString(R.string.account_auth_type));
             //if not, might be expired, register again
             if (TextUtils.isEmpty(authToken)) {
                 final String password = accountManager.getPassword(account);

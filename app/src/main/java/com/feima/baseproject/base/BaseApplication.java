@@ -18,9 +18,11 @@ import com.feima.baseproject.util.image.fresco.FrescoUtils;
 public class BaseApplication extends MultiDexApplication {
     private static BaseApplication baseApplication;
     private String processName = "";
+    public static String PACKAGE_NAME;
     @Override
     public void onCreate() {
         super.onCreate();
+        PACKAGE_NAME = getPackageName();
         baseApplication = this;
         BaseConstant.initDebug();
         init();

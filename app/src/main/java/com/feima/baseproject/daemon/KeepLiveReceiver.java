@@ -14,11 +14,10 @@ public class KeepLiveReceiver extends BroadcastReceiver {
         if (action.equals(Intent.ACTION_SCREEN_OFF)){
             LogUtil.e("--------------startKeepLiveActivity--------------");
             KeepLiveManager.getInstance().startKeepLiveActivity();
-        }else if (action.equals(Intent.ACTION_USER_PRESENT)){
+        }else if (action.equals(Intent.ACTION_USER_PRESENT)||action.equals(Intent.ACTION_SCREEN_ON)){
             LogUtil.e("--------------finishKeepLiveActivity--------------");
             KeepLiveManager.getInstance().finishKeepLiveActivity();
         }
-        LogUtil.e("--------------startKeepLiveService--------------");
         KeepLiveManager.getInstance().startKeepLiveService();
     }
 }

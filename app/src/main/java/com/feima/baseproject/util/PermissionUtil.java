@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
@@ -51,6 +52,13 @@ public class PermissionUtil {
         boolean isM = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1;
         if (isM&&MIUIUtil.isMIUI(activity)){
             PERMISSION_DOACACHENEEDSPERMISSION = new String[]{CHECK_LOCTION_PERMISSION_NAME,CHECK_FILE_PERMISSION_NAME,CHECK_WINDOW_PERMISSION_NAME};
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if (! Settings.canDrawOverlays(activity)) {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                            Uri.parse("package:" + activity.getPackageName()));
+                    activity.startActivityForResult(intent,10);
+                }
+            }
         }
         // 如果拥有该权限，那么调用用户注解为：@NeedsPermission的方法
         if (PermissionUtils.hasSelfPermissions(activity, PERMISSION_DOACACHENEEDSPERMISSION)) {

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
-import com.feima.baseproject.util.tool.LogUtil;
-
 
 public class KeepLiveService extends Service {
     private static Service mKeepLiveService;
@@ -28,7 +26,6 @@ public class KeepLiveService extends Service {
         startService(new Intent(this, InnerService.class));
         registerBroadcast();
         KeepLiveManager.getInstance().addAccount();
-        LogUtil.e("--------------KeepLiveService startService--------------");
         return Service.START_STICKY;
     }
 
@@ -41,7 +38,6 @@ public class KeepLiveService extends Service {
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            LogUtil.e("--------------InnerService startService--------------");
             KeepLiveManager.getInstance().setForeground(mKeepLiveService,this);
             return super.onStartCommand(intent,flags,startId);
         }

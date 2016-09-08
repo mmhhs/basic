@@ -26,7 +26,7 @@ public class DispatchTask extends BaseTask<Void, String, TaskResult> {
 	public Activity activity;//上下文
 	public String loadString = "";//加载文字
 	public boolean showTipSuccess = false;//成功时显示提示信息
-	public boolean showTipError = false;//错误时显示提示信息
+	public boolean showTipError = true;//错误时显示提示信息
 	//访问相关
 	public int accessType;//访问方式
 	public String httpUrl = "";//网络路径

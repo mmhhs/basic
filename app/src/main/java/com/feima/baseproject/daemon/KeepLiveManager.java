@@ -20,8 +20,8 @@ import com.feima.baseproject.util.tool.LogUtil;
 
 public class KeepLiveManager{
     private static KeepLiveManager instance;
-    private final String ACCOUNT_TYPE = "com.feima.baseproject";
-    private final String CONTENT_AUTHORITY = "com.feima.baseproject.provider";
+    private final String ACCOUNT_TYPE = BaseApplication.PACKAGE_NAME;
+    private final String CONTENT_AUTHORITY = BaseApplication.PACKAGE_NAME+"provider";
     private final long SYNC_FREQUENCY = 30;
     private Account account = null;
 

@@ -6,8 +6,6 @@
     <string name="account">FTS</string>
     <string name="account_auth_provider">com.feima.baseproject.provider</string>
     <string name="account_auth_type">com.feima.baseproject</string>
-    <string name="account_auth_provide">com.feima.baseproject.provider</string>
-    <string name="account_token_type">com.feima.baseproject</string>
     <!-- net -->
     <string name="net_tip">网络不给力，查看下吧！</string>
     <!-- task -->
