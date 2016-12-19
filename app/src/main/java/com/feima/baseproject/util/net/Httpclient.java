@@ -49,8 +49,8 @@ import java.util.Set;
 public class Httpclient {
     public static final String TAG = "Httpclient Result";
     private static Context context;
-    private static final int REQUEST_TIMEOUT = 10*1000;//设置请求超时10秒钟
-    private static final int SO_TIMEOUT = 10*1000;  //设置等待数据超时时间10秒钟
+    private static final int REQUEST_TIMEOUT = 60*1000;//设置请求超时60秒钟
+    private static final int SO_TIMEOUT = 60*1000;  //设置等待数据超时时间60秒钟
 
 
     /**
@@ -131,8 +131,8 @@ public class Httpclient {
         }
         //将字节数组转换成为字符串
         String result = bytesToString(dataByte);
-        LogUtil.d("arg= " + new JSONObject(argsMap).toString());
-        LogUtil.d("" + url + "= " + result);
+        LogUtil.e("arg= " + new JSONObject(argsMap).toString());
+        LogUtil.e("" + url + "= " + result);
         return result;
     }
 
@@ -166,8 +166,8 @@ public class Httpclient {
         }
         //将字节数组转换成为字符串
         String result = bytesToString(dataByte);
-        LogUtil.d("arg= " + new JSONObject(argsMap).toString());
-        LogUtil.d("" + url + "= " + result);
+        LogUtil.e("arg= " + new JSONObject(argsMap).toString());
+        LogUtil.e("" + url + "= " + result);
         return result;
     }
 
@@ -301,8 +301,8 @@ public class Httpclient {
             }
         }
         post.abort();
-        LogUtil.d("arg= " + new JSONObject(param).toString());
-        LogUtil.d("" + url + "= " + sb.toString());
+        LogUtil.e("arg= " + new JSONObject(param).toString());
+        LogUtil.e("" + url + "= " + sb.toString());
         return sb.toString();
     }
     /**
@@ -359,8 +359,8 @@ public class Httpclient {
             }
         }
         post.abort();
-        LogUtil.d("arg= " + new JSONObject(param).toString());
-        LogUtil.d("" + url + "= " + sb.toString());
+        LogUtil.e("arg= " + new JSONObject(param).toString());
+        LogUtil.e("" + url + "= " + sb.toString());
         return sb.toString();
     }
 
