@@ -1,4 +1,4 @@
-package com.feima.baseproject.activity.daemon;
+package com.feima.baseproject.daemon;
 
 
 import android.os.Bundle;
@@ -24,7 +24,6 @@ public class KeepLiveActivity extends BaseActivity {
         params.width = 1;
         params.height = 1;
         window.setAttributes(params);
-        LogUtil.e("--------------KeepLiveActivity setAttributes--------------");
 	}
 
     @Override

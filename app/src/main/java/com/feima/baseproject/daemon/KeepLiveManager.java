@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.feima.baseproject.R;
-import com.feima.baseproject.activity.daemon.KeepLiveActivity;
 import com.feima.baseproject.base.BaseApplication;
 import com.feima.baseproject.manager.ScreenManager;
 import com.feima.baseproject.util.tool.LogUtil;
@@ -21,7 +20,7 @@ import com.feima.baseproject.util.tool.LogUtil;
 public class KeepLiveManager{
     private static KeepLiveManager instance;
     private final String ACCOUNT_TYPE = BaseApplication.PACKAGE_NAME;
-    private final String CONTENT_AUTHORITY = BaseApplication.PACKAGE_NAME+"provider";
+    private final String CONTENT_AUTHORITY = BaseApplication.PACKAGE_NAME+".provider";
     private final long SYNC_FREQUENCY = 30;
     private Account account = null;
 

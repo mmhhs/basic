@@ -7,7 +7,7 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import com.feima.baseproject.activity.daemon.KeepLiveActivity;
+import com.feima.baseproject.daemon.KeepLiveActivity;
 import com.feima.baseproject.daemon.KeepLiveFor5Service;
 import com.feima.baseproject.daemon.KeepLiveService;
 import com.feima.baseproject.util.BaseConstant;

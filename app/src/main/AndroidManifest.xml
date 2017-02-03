@@ -53,7 +53,7 @@
 
         <!-- 保活策略 -->
         <!--android:process=":live"-->
-        <activity android:name=".activity.daemon.KeepLiveActivity"
+        <activity android:name=".daemon.KeepLiveActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize|navigation|keyboard"
@@ -64,9 +64,9 @@
 
             android:theme="@style/LiveActivityStyle"
             />
-        <service android:name=".daemon.KeepLiveService"/>
+        <service android:name=".daemon.KeepLiveService" android:permission="android.permission.BIND_JOB_SERVICE"/>
         <service android:name=".daemon.KeepLiveService$InnerService"/>
-        <service android:name=".daemon.KeepLiveFor5Service"/>
+        <service android:name=".daemon.KeepLiveFor5Service" android:permission="android.permission.BIND_JOB_SERVICE"/>
         <service android:name=".daemon.KeepLiveFor5Service$InnerService"/>
         <!-- 同步账户 -->
         <provider
