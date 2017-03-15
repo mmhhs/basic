@@ -8,41 +8,36 @@ import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
-	private List<View> viewst;
+	private List<View> viewList;
 	
 	
 	public ViewPagerAdapter(List<View> imageViewList){
-		this.viewst = imageViewList;
+		this.viewList = imageViewList;
 	}
 	
 	public List<View> getViews() {
-		return viewst;
+		return viewList;
 	}
+
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
-		// TODO Auto-generated method stub
-
 		container.removeView((View) object);
 	}
 
 	@Override
 	public void finishUpdate(ViewGroup container) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-
-
-		container.addView(viewst.get(position), 0);
-		
-		return viewst.get(position);
+		container.addView(viewList.get(position), 0);
+		return viewList.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		if(viewst != null){
-			return viewst.size();
+		if(viewList != null){
+			return viewList.size();
 		}
 		return 0;
 	}
@@ -50,27 +45,20 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		return (arg0 == arg1);
 	}
+
 	@Override 
-	public int getItemPosition(Object object) {  
-
-		   
-
-		    return POSITION_NONE;  
-
+	public int getItemPosition(Object object) {
+		return POSITION_NONE;
 	 } 
 
 
 	public void clear() {
-		// TODO Auto-generated method stub
-		
-		viewst.clear();
-		
-		
+		viewList.clear();
 	}
+
 	public void addView(ImageView view){
-		viewst.add(view);
+		viewList.add(view);
 	}
 }

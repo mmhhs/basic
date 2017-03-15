@@ -123,12 +123,12 @@ public class SharedUtil{
 	}
 
 	/**
-	 * 设置页面引导已知道
+	 * 设置页面引导
 	 * @param context
 	 * @param className
 	 * @param first
 	 */
-	public static void saveFisrt(Context context, String className, boolean first)
+	public static void saveFirst(Context context, String className, boolean first)
 	{
 		SharedPreferences sp = context.getSharedPreferences(className, 0);
 		SharedPreferences.Editor editor = sp.edit();

@@ -51,7 +51,7 @@ public class GuideUtil {
                     @Override
                     public void onClick(View v) {
                         frameLayout.removeView(view);
-                        SharedUtil.saveFisrt(activity, "" + className + index, true);//设为已引导
+                        SharedUtil.saveFirst(activity, "" + className + index, true);//设为已引导
                         if (iOnClickListener != null) {
                             iOnClickListener.onClick(index);
                         }

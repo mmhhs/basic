@@ -1,6 +1,6 @@
 package com.feima.baseproject.util;
 
-import android.app.Activity;
+import android.content.Context;
 
 import com.feima.baseproject.R;
 import com.feima.baseproject.view.ultimate.UltimateRecyclerView;
@@ -11,13 +11,13 @@ public class RecyclerUtil {
     /**
      * 添加分割线
      * @param ultimateRecyclerView
-     * @param activity
+     * @param context
      */
-    public static void addItemDecoration(UltimateRecyclerView ultimateRecyclerView, Activity activity){
+    public static void addItemDecoration(UltimateRecyclerView ultimateRecyclerView, Context context){
         ultimateRecyclerView.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(activity)
-                        .color(activity.getResources().getColor(R.color.line_color))
-                        .size(activity.getResources().getDimensionPixelSize(R.dimen.line_h))
+                new HorizontalDividerItemDecoration.Builder(context)
+                        .color(context.getResources().getColor(R.color.line_color))
+                        .size(context.getResources().getDimensionPixelSize(R.dimen.line_h))
                         .build());
     }
 

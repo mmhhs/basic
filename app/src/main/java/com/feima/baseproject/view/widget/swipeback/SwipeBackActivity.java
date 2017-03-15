@@ -41,6 +41,7 @@ public class SwipeBackActivity extends BaseFragmentActivity implements SwipeBack
     public SwipeBackLayout getSwipeBackLayout() {
         return mHelper.getSwipeBackLayout();
     }
+
     @Override
     public void setSwipeBackEnable(boolean enable) {
         getSwipeBackLayout().setEnableGesture(enable);
